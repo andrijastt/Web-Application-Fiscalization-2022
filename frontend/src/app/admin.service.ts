@@ -4,20 +4,19 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AdminService {
 
   constructor(private http: HttpClient) { }
 
   uri = 'http://localhost:4000'
 
-  login(usernameFromForm, passwordFromForm){
+  loginAdmin(usernameFromForm, passwordFromForm){
     const data = {
       username: usernameFromForm,
       password: passwordFromForm
     }
 
-    return this.http.post(`${this.uri}/users/login`, data)
+    return this.http.post(`${this.uri}/admin/loginAdmin`, data)
     // return this.http.post('http://localhost:4000/users/login', data)
   }
-
 }
