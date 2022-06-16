@@ -1,1 +1,79 @@
-<p>register-company works!</p>
+<header>
+    Company registration
+</header>
+<table>
+    <tr>
+        <td>Firstname:</td>
+        <input type="text" name="firstname" required>
+    </tr>
+    <tr>
+        <td>Lastname:</td>
+        <input type="text" name="lastname" required>
+    </tr>
+    <tr>
+        <td>Username:</td>
+        <input type="text" name="username" required>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <input type="password" name="password" required minlength="8" maxlength="12"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,12}">
+    </tr>
+    <tr>
+        <td>Confirm Password:</td>
+        <input type="password" name="confirmPassword" required minlength="8" maxlength="12"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,12}">
+    </tr>
+    <tr>
+        <td>Contact-number:</td>
+        <input type="text" name="number" required>
+    </tr>
+    <tr>
+        <td>E-mail:</td>
+        <input type="text" name="email" required pattern=".*@.*\..+[a-z]">
+    </tr>
+    <tr>
+        <td>Name of company:</td>
+        <input type="text" name="companyName" required>
+    </tr>
+    <tr>
+        <td>Country:</td>
+        <input type="text" name="country" required>
+    </tr>
+    <tr>
+        <td>City:</td>
+        <input type="text" name="city" required>
+    </tr>
+    <tr>
+        <td>PostNumber:</td>
+        <input type="number" name="postNumber" required min="10000" max="99999">
+    </tr>
+    <tr>
+        <td>Street name:</td>
+        <input type="text" name="street" required>
+    </tr>
+    <tr>
+        <td>Street number:</td>
+        <input type="number" name="streetNumber" required>
+    </tr>
+    <tr>
+        <td>PIB:</td>
+        <input type="number" name="PIB" required min="100000001" max="999999999">
+    </tr>
+    <tr>
+        <td>Unique number of company:</td>
+        <input type="number" name="JMBP" required min="10000001" max="99999999">
+    </tr>
+    <tr>
+        <td>Logo of company:</td>
+        <input type="file" id="file" name="logo" required accept="image/png, image/jpg"
+        (change)="onFileSelected($event)">
+    </tr>
+</table>
+<button (click)="register()">Register</button>
+<button (click)="upload()">Upload image</button>
+<br>
+{{message}}
+<footer>
+Click here to <a routerLink="">return</a> to login.
+</footer>

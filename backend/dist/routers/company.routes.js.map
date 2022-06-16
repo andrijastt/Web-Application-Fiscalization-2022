@@ -1,1 +1,1 @@
-{"version":3,"file":"company.routes.js","sourceRoot":"","sources":["../../src/routers/company.routes.ts"],"names":[],"mappings":";;;;;AAAA,sDAA8B;AAE9B,MAAM,aAAa,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAEvC,kBAAe,aAAa,CAAC"}
+{"version":3,"file":"company.routes.js","sourceRoot":"","sources":["../../src/routers/company.routes.ts"],"names":[],"mappings":";;;;;AAAA,sDAA8B;AAE9B,MAAM,aAAa,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAGvC,kBAAe,aAAa,CAAC"}
