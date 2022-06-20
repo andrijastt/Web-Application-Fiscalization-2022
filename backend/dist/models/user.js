@@ -17,4 +17,7 @@ let User = new Schema({
     }
 });
 exports.default = mongoose_1.default.model('UserModel', User, 'users');
+// 0 - kupac
+// 1 - preduzece
+// 2 - admin
 //# sourceMappingURL=user.js.map

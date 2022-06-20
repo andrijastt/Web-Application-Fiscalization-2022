@@ -1,3 +1,35 @@
-<p>admin works!</p>
-<br/>
+<h1>Hello Admin {{user.username}}</h1>
+
+<h2>Company registrations phase one</h2>
+<table>
+    <tr>
+        <td colspan="2">Firstname and lastname</td>
+        <td>Username</td>
+        <td>Telephone number</td>
+        <td>Email</td>
+        <td>Comapny Name</td>
+        <td colspan="4">Address</td>
+        <td>PIB</td>
+        <td>JMBP</td>
+        <td>Status</td>
+    </tr>
+    <tr *ngFor="let n of registerCompanys">
+        <td colspan="2">{{n.firstname}} {{n.lastname}}</td>
+        <td>{{n.username}}</td>
+        <td>{{n.telephoneNumber}}</td>
+        <td>{{n.email}}</td>
+        <td>{{n.name}}</td>
+        <td colspan="4">{{n.country}} {{n.city}} {{n.streetName}} {{n.streetNumber}}</td>
+        <td>{{n.PIB}}</td>
+        <td>{{n.JMBP}}</td>
+        <td>{{n.status}}</td>
+        <td *ngIf="n.status == 'new'">
+            <button (click)="accept(n.username, n.password)">Accept</button>
+        </td>
+        <td *ngIf="n.status == 'new'">
+            <button (click)="decline(n.username)">Decline</button>
+        </td>
+    </tr>
+</table>
+
 <button (click)="logout()">LogOut</button>

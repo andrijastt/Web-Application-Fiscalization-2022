@@ -28,11 +28,33 @@ export class RegisterCompanyService {
       PIB: PIBForm,
       JMBP: JMBPForm,
       imageData: imageDataForm,
-      status: "novo",
+      status: "new",
       firstTime: true
     }
-    
-
+  
     return this.http.post(`${this.uri}/company/Register`, data)
+  }
+
+  checkFirstTime(usernameForm){
+    const data = { username: usernameForm }
+    return this.http.post(`${this.uri}/company/checkFirstTime`, data)
+  }
+
+  getAllRegisterCompany(){
+    return this.http.get(`${this.uri}/company/getAllRegisterCompany`)
+  }
+
+  accept(usernameForm, passwordForm){
+    const data = { 
+      username: usernameForm,
+      password: passwordForm,
+      type: 1
+    }
+    return this.http.post(`${this.uri}/company/accept`, data)
+  }
+
+  decline(usernameForm){
+    const data = { username: usernameForm}
+    return this.http.post(`${this.uri}/company/decline`, data)
   }
 }

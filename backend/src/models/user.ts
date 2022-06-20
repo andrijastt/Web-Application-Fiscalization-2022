@@ -15,3 +15,6 @@ let User = new Schema({
 })
 
 export default mongoose.model('UserModel', User, 'users')
+// 0 - kupac
+// 1 - preduzece
+// 2 - admin
