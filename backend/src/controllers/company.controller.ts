@@ -57,10 +57,7 @@ export class CompanyController{
         RegisterCompanyModel.updateOne({"username": username}, {$set: {"status": 'accepted'}}, (err, resp)=>{
             if(err) console.log(err)
             else {
-                let password = req.body.password
                 let user = new UserModel(req.body)
-                
-                console.log(user)
 
                 UserModel.collection.insertOne(user, (err, resp) => {
                     if(err) console.log(err)

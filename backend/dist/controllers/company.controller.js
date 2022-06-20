@@ -63,9 +63,7 @@ class CompanyController {
                 if (err)
                     console.log(err);
                 else {
-                    let password = req.body.password;
                     let user = new user_1.default(req.body);
-                    console.log(user);
                     user_1.default.collection.insertOne(user, (err, resp) => {
                         if (err)
                             console.log(err);
