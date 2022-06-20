@@ -17,22 +17,22 @@
     <tr>
         <td>Password:</td>
         <input type="password" name="password" [(ngModel)]="password" (ngModelChange)="checkPassword()">
-        <td>{{passwordCheck}}</td>
+        <td class="error">{{passwordCheck}}</td>
     </tr>
     <tr>
         <td>Confirm Password:</td>
         <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" (ngModelChange)="checkConfirmPassword()">
-        <td>{{confirmPasswordCheck}}</td>
+        <td class="error">{{confirmPasswordCheck}}</td>
     </tr>
     <tr>
         <td>Telephone number:</td>
         <input type="text" name="number" [(ngModel)]="telephoneNumber" (ngModelChange)="checkTelephoneNumber()">
-        <td>{{telephoneNumberCheck}}</td>
+        <td class="error">{{telephoneNumberCheck}}</td>
     </tr>
     <tr>
         <td>E-mail:</td>
         <input type="text" name="email" [(ngModel)]="email" (ngModelChange)="checkEmail()">
-        <td>{{emailCheck}}</td>
+        <td class="error">{{emailCheck}}</td>
     </tr>
     <tr>
         <td>Name of company:</td>
@@ -49,7 +49,7 @@
     <tr>
         <td>PostNumber:</td>
         <input type="number" name="postNumber" [(ngModel)]="postNumber" (ngModelChange)="checkPostNumber()">
-        <td>{{checkMailNumber}}</td>
+        <td class="error">{{checkMailNumber}}</td>
     </tr>
     <tr>
         <td>Street name:</td>
@@ -58,17 +58,17 @@
     <tr>
         <td>Street number:</td>
         <input type="number" name="streetNumber" [(ngModel)]="streetNumber" (ngModelChange)="checkStreetNumber()">
-        <td>{{streetNumberCheck}}</td>
+        <td class="error">{{streetNumberCheck}}</td>
     </tr>
     <tr>
         <td>PIB:</td>
         <input type="number" name="PIB" [(ngModel)]="PIB" (ngModelChange)="checkPIB()">
-        <td>{{PIBCheck}}</td>
+        <td class="error">{{PIBCheck}}</td>
     </tr>
     <tr>
         <td>Unique number of company:</td>
         <input type="text" name="JMBP" [(ngModel)]="JMBP" (ngModelChange)="checkJMBP()">
-        <td>{{JMBPCheck}}</td>
+        <td class="error">{{JMBPCheck}}</td>
     </tr>
     <tr>
         <td>Logo of company:</td>
@@ -82,7 +82,7 @@
 </table>
 <button (click)="register()">Register</button>
 <br>
-{{message}}
+<div class="error">{{message}}</div>
 <footer>
 Click here to <a routerLink="">return</a> to login.
 </footer>

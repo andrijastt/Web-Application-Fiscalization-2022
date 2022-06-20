@@ -93,37 +93,37 @@ export class RegisterCompanyComponent implements OnInit {
     let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,12}$/
     if(!passwordRegex.test(this.password)){
       this.passwordCheck = "Password must contain at least 1 number, 1 small letter, 1 capital letter, 1 special charater and 8 to 12 characters"
-    } else { this.passwordCheck = "Password is good!" }
+    } else { this.passwordCheck = "" }
     if(this.password != this.confirmPassword){
       this.confirmPasswordCheck = "Passwords don't match"
-    } else { this.confirmPasswordCheck = "Passwords match!" }
+    } else { this.confirmPasswordCheck = "" }
   }
 
   checkConfirmPassword(){
     if(this.password != this.confirmPassword){
       this.confirmPasswordCheck = "Passwords don't match"
-    } else { this.confirmPasswordCheck = "Passwords match!" }
+    } else { this.confirmPasswordCheck = "" }
   }
 
   checkTelephoneNumber(){
     let telephoneNumberRegex = /^\d{9,10}$/
     if(!telephoneNumberRegex.test(this.telephoneNumber)){
       this.telephoneNumberCheck = "Bad telephone number, must contain only numbers and has 9 to 10 characters"
-    } else this.telephoneNumberCheck = "Good telephone number"
+    } else this.telephoneNumberCheck = ""
   }
 
   checkEmail(){
     let emailRegex = /^.*@.*\..*[a-z]$/
     if(!emailRegex.test(this.email)){
       this.emailCheck = "Bad email format"
-    } else { this.emailCheck = "Good email format" }
+    } else { this.emailCheck = "" }
   }
 
   checkPostNumber(){
     if(this.postNumber < 10000 || this.postNumber > 99999){
       this.checkMailNumber = "Bad post number"
     } else {
-      this.checkMailNumber = "Good post number"
+      this.checkMailNumber = ""
     }
   }
 
@@ -131,21 +131,21 @@ export class RegisterCompanyComponent implements OnInit {
     if(this.streetNumber < 0){
       this.streetNumberCheck = "Street number can't be less than 0 (0 is no number)"
     } else {
-      this.streetNumberCheck = "Good street number"
+      this.streetNumberCheck = ""
     }
   }
 
   checkPIB(){
     if(this.PIB < 100000001 || this.PIB  > 999999999){
       this.PIBCheck = "Wrong PIB format"
-    } else this.PIBCheck = "Good PIB format"
+    } else this.PIBCheck = ""
   }
 
   checkJMBP(){
     let JMBPRegex = /^\d{8}$/
     if(!JMBPRegex.test(this.JMBP)){
       this.JMBPCheck = "Wrong JMBP format"
-    } else this.JMBPCheck = "Good JMBP format"
+    } else this.JMBPCheck = ""
   }
 
   register(){
