@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         else {
           if(userFromDB.type == 1){
             this.registerCompanyService.checkFirstTime(userFromDB.username).subscribe((registerCompany: RegisterCompany) =>{
-              if(registerCompany.firstTime) this.router.navigate(['comapnyFirst'])
+              if(registerCompany.firstTime) this.router.navigate(['companyFirst'])
               else this.router.navigate(['company'])
             })   
           } 
