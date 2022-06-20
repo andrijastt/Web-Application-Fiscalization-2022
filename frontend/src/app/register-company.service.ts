@@ -8,14 +8,16 @@ export class RegisterCompanyService {
 
   constructor(private http: HttpClient) { }
 
-  register(firstnameForm, lastnameForm, usernameForm, passwordFrom, numberForm, emailForm, nameForm, countryForm,
-    cityFrom, postNumberForm, streetNameForm, streetNumberFrom, PIBForm, JMBPForm){
+  uri = 'http://localhost:4000'
+
+  register(firstnameForm, lastnameForm, usernameForm, passwordFrom, telephoneNumberForm, emailForm, nameForm, countryForm,
+    cityFrom, postNumberForm, streetNameForm, streetNumberFrom, PIBForm, JMBPForm, imageDataForm){
     const data = {
       firstname: firstnameForm,
       lastname: lastnameForm,
       username: usernameForm,
       password: passwordFrom,
-      number: numberForm,
+      telephoneNumber: telephoneNumberForm,
       email: emailForm,
       name: nameForm,
       country: countryForm,
@@ -24,8 +26,12 @@ export class RegisterCompanyService {
       streetName: streetNameForm,
       streetNumber: streetNumberFrom,
       PIB: PIBForm,
-      JMBP: JMBPForm
+      JMBP: JMBPForm,
+      imageData: imageDataForm,
+      status: "novo"
     }
     
+
+    return this.http.post(`${this.uri}/company/Register`, data)
   }
 }

@@ -5,6 +5,8 @@ import userRouter from './routers/user.routes'
 import adminRouter from './routers/admin.routes'
 import companyRouter from './routers/company.routes'
 
+// const bodyParser = require("body-parser")
+// const multer = require("multer")
 const app = express();
 app.use(cors())
 app.use(express.json())

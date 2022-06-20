@@ -17,11 +17,6 @@ export class UserService {
     }
 
     return this.http.post(`${this.uri}/users/login`, data)
-    // return this.http.post('http://localhost:4000/users/login', data)
   }
 
 }
-
-// На усменој одбрани кандидат мора самостално да инсталира све програме неопходне за
-// исправан рад приложеног решења (уколико не постоје у рачунарској лабораторији).
-// ovo znači da mogu da skinem pakete ko

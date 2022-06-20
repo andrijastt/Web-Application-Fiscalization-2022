@@ -9,6 +9,8 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const user_routes_1 = __importDefault(require("./routers/user.routes"));
 const admin_routes_1 = __importDefault(require("./routers/admin.routes"));
 const company_routes_1 = __importDefault(require("./routers/company.routes"));
+// const bodyParser = require("body-parser")
+// const multer = require("multer")
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());

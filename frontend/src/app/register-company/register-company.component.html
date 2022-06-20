@@ -4,74 +4,83 @@
 <table>
     <tr>
         <td>Firstname:</td>
-        <input type="text" name="firstname" required>
+        <input type="text" name="firstname" [(ngModel)]="firstname">
     </tr>
     <tr>
         <td>Lastname:</td>
-        <input type="text" name="lastname" required>
+        <input type="text" name="lastname" [(ngModel)]="lastname">
     </tr>
     <tr>
         <td>Username:</td>
-        <input type="text" name="username" required>
+        <input type="text" name="username" [(ngModel)]="username">
     </tr>
     <tr>
         <td>Password:</td>
-        <input type="password" name="password" required minlength="8" maxlength="12"
-        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,12}">
+        <input type="password" name="password" [(ngModel)]="password" (ngModelChange)="checkPassword()">
+        <td>{{passwordCheck}}</td>
     </tr>
     <tr>
         <td>Confirm Password:</td>
-        <input type="password" name="confirmPassword" required minlength="8" maxlength="12"
-        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,12}">
+        <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" (ngModelChange)="checkConfirmPassword()">
+        <td>{{confirmPasswordCheck}}</td>
     </tr>
     <tr>
-        <td>Contact-number:</td>
-        <input type="text" name="number" required>
+        <td>Telephone number:</td>
+        <input type="text" name="number" [(ngModel)]="telephoneNumber" (ngModelChange)="checkTelephoneNumber()">
+        <td>{{telephoneNumberCheck}}</td>
     </tr>
     <tr>
         <td>E-mail:</td>
-        <input type="text" name="email" required pattern=".*@.*\..+[a-z]">
+        <input type="text" name="email" [(ngModel)]="email" (ngModelChange)="checkEmail()">
+        <td>{{emailCheck}}</td>
     </tr>
     <tr>
         <td>Name of company:</td>
-        <input type="text" name="companyName" required>
+        <input type="text" name="companyName" [(ngModel)]="name">
     </tr>
     <tr>
         <td>Country:</td>
-        <input type="text" name="country" required>
+        <input type="text" name="country" [(ngModel)]="country">
     </tr>
     <tr>
         <td>City:</td>
-        <input type="text" name="city" required>
+        <input type="text" name="city" [(ngModel)]="city">
     </tr>
     <tr>
         <td>PostNumber:</td>
-        <input type="number" name="postNumber" required min="10000" max="99999">
+        <input type="number" name="postNumber" [(ngModel)]="postNumber" (ngModelChange)="checkPostNumber()">
+        <td>{{checkMailNumber}}</td>
     </tr>
     <tr>
         <td>Street name:</td>
-        <input type="text" name="street" required>
+        <input type="text" name="street" [(ngModel)]="streetName">
     </tr>
     <tr>
         <td>Street number:</td>
-        <input type="number" name="streetNumber" required>
+        <input type="number" name="streetNumber" [(ngModel)]="streetNumber" (ngModelChange)="checkStreetNumber()">
+        <td>{{streetNumberCheck}}</td>
     </tr>
     <tr>
         <td>PIB:</td>
-        <input type="number" name="PIB" required min="100000001" max="999999999">
+        <input type="number" name="PIB" [(ngModel)]="PIB" (ngModelChange)="checkPIB()">
+        <td>{{PIBCheck}}</td>
     </tr>
     <tr>
         <td>Unique number of company:</td>
-        <input type="number" name="JMBP" required min="10000001" max="99999999">
+        <input type="text" name="JMBP" [(ngModel)]="JMBP" (ngModelChange)="checkJMBP()">
+        <td>{{JMBPCheck}}</td>
     </tr>
     <tr>
         <td>Logo of company:</td>
-        <input type="file" id="file" name="logo" required accept="image/png, image/jpg"
-        (change)="onFileSelected($event)">
+        <input type="file" id="file" name="logo" (change)="onFileSelected($event)">
+    </tr>
+    <tr>
+        <td>
+            <img src="{{image}}">
+        </td>
     </tr>
 </table>
 <button (click)="register()">Register</button>
-<button (click)="upload()">Upload image</button>
 <br>
 {{message}}
 <footer>
