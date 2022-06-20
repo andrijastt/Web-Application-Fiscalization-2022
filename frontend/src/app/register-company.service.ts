@@ -28,7 +28,8 @@ export class RegisterCompanyService {
       PIB: PIBForm,
       JMBP: JMBPForm,
       imageData: imageDataForm,
-      status: "novo"
+      status: "novo",
+      firstTime: true
     }
     
 

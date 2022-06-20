@@ -53,6 +53,9 @@ let RegisterCompany = new Schema({
     },
     status: {
         type: String
+    },
+    firstTime: {
+        type: Boolean
     }
 });
 exports.default = mongoose_1.default.model('RegisterCompanyModel', RegisterCompany, 'registerCompany');

@@ -50,6 +50,9 @@ let RegisterCompany = new Schema({
     }, 
     status: {
         type: String
+    },
+    firstTime: {
+        type: Boolean
     }
 })
 
