@@ -16,15 +16,32 @@
     <tr>
         <td>In system for PDV</td>
         <td>
-            <option>
-                <input type="radio">Yes
-                <input type="radio">No
+            <option class="PDV" name="PDV">
+                <input type="radio" name="PDV">Yes
+                <input type="radio" name="PDV">No
             </option>
         </td>
     </tr>
     <tr>
         <td>Bank accounts</td>
-        <td></td>
+        <td>
+            <button (click)="onAddBankAccount()">Add account</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Bank account</td>
+        <td>Bank</td>
+    </tr>
+    <tr *ngFor="let bankAccount of bankAccountsModel; let i = index">
+        <td>
+            <input type="text" [(ngModel)]="bankAcc[i]">
+        </td>
+        <td>
+            <input type="text" [(ngModel)]="bank[i]">
+        </td>
+        <td>
+            <button (click)="remove(i)">Remove</button>
+        </td>
     </tr>
     <tr>
         <td>Number of storage units</td>
@@ -39,6 +56,10 @@
         </td>
     </tr>
 </table>
+<button (click)="provera()">Provera</button>
+<br>
+<button (click)="provera2()">Provera 2</button>
 <footer>
     <button (click)="logout()">LogOut</button>
 </footer>
+
