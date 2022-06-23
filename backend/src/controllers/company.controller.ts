@@ -1,6 +1,8 @@
 import express from 'express'
 import RegisterCompanyModel from '../models/registerCompany'
 import UserModel from '../models/user'
+import ActivityCodesModel from '../models/activityCodes'
+import RegisterModel from '../models/register'
 
 export class CompanyController{
 
@@ -73,6 +75,34 @@ export class CompanyController{
         RegisterCompanyModel.collection.deleteOne({"username": username}, (err, resp)=>{
             if(err) console.log(err)
             else res.json({'message': 'Registration declined'})
+        })
+    }
+
+    getAllActivityCodes = (req: express.Request, res: express.Response) => {
+        ActivityCodesModel.find({}, (err, activityCodes)=>{
+            if(err) console.log(err)
+            else res.json(activityCodes)
+        })
+    }
+
+    getStoreCodes = (req: express.Request, res: express.Response) => {
+        ActivityCodesModel.find({"code": {$lt: 5000}}, (err, activityCodes)=>{
+            if(err) console.log(err)
+            else res.json(activityCodes)
+        })
+    }
+
+    getCatererCodes = (req: express.Request, res: express.Response) => {
+        ActivityCodesModel.find({"code": {$gt: 5000}}, (err, activityCodes)=>{
+            if(err) console.log(err)
+            else res.json(activityCodes)
+        })
+    }
+
+    getRegisterModels = (req: express.Request, res: express.Response) => {
+        RegisterModel.find({}, (err, registers)=>{
+            if(err) console.log(err)
+            else res.json(registers)
         })
     }
 }

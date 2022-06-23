@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyController = void 0;
 const registerCompany_1 = __importDefault(require("../models/registerCompany"));
 const user_1 = __importDefault(require("../models/user"));
+const activityCodes_1 = __importDefault(require("../models/activityCodes"));
+const register_1 = __importDefault(require("../models/register"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -80,6 +82,38 @@ class CompanyController {
                     console.log(err);
                 else
                     res.json({ 'message': 'Registration declined' });
+            });
+        };
+        this.getAllActivityCodes = (req, res) => {
+            activityCodes_1.default.find({}, (err, activityCodes) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(activityCodes);
+            });
+        };
+        this.getStoreCodes = (req, res) => {
+            activityCodes_1.default.find({ "code": { $lt: 5000 } }, (err, activityCodes) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(activityCodes);
+            });
+        };
+        this.getCatererCodes = (req, res) => {
+            activityCodes_1.default.find({ "code": { $gt: 5000 } }, (err, activityCodes) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(activityCodes);
+            });
+        };
+        this.getRegisterModels = (req, res) => {
+            register_1.default.find({}, (err, registers) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(registers);
             });
         };
     }

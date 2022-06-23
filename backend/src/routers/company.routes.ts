@@ -23,4 +23,20 @@ companyRouter.route('/decline').post(
     (req, res) => new CompanyController().decline(req, res)
 )
 
+companyRouter.route('/getAllActivityCodes').get(
+    (req, res) => new CompanyController().getAllActivityCodes(req, res)
+)
+
+companyRouter.route('/getCatererCodes').get(
+    (req, res) => new CompanyController().getCatererCodes(req, res)
+)
+
+companyRouter.route('/getStoreCodes').get(
+    (req, res) => new CompanyController().getStoreCodes(req, res)
+)
+
+companyRouter.route('/getRegisterModels').get(
+    (req, res) => new CompanyController().getRegisterModels(req, res)
+)
+
 export default companyRouter;

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CompanyService } from '../company.service';
+import { ActivityCode } from '../model/activityCode';
 import { BankAccount } from '../model/bankAccount';
+import { Register } from '../model/register';
+import { RegisterModel } from '../model/registerModel';
 
 @Component({
   selector: 'app-company-first',
@@ -10,27 +13,39 @@ import { BankAccount } from '../model/bankAccount';
 })
 export class CompanyFirstComponent implements OnInit {
 
-  constructor(private router: Router, private fb: FormBuilder) { }
+  constructor(private router: Router, private companyService: CompanyService) { }
 
-  bankAccounts: FormArray = new FormArray([])
+  category: string
+
   bankAccountsModel: BankAccount[] = []
-
   bankAcc: string[] = []
   bank: string[] = []
 
-  ngOnInit(): void {}
+  activityCodes: ActivityCode[] = []
+  selectedActivityCodes: ActivityCode[] = []
+
+  registerNumber: number = 1
+  registerModels: RegisterModel[] = []
+  
+  registers: Register[] = []
+  registersLocation: string[] = []
+  registersType: string[] = []
+
+  ngOnInit(): void {
+    let reg = new Register
+    this.registers.push(reg)
+    this.registersLocation.push("")
+    this.registersType.push("")
+    this.companyService.getRegisterModels().subscribe((data: RegisterModel[])=>{
+      this.registerModels = data
+    })
+  }
 
   logout(){
     this.router.navigate([''])
   }
 
   onAddBankAccount(){
-    // this.bankAccounts.push(this.fb.group({
-    //   bankAcc: [''],
-    //   bank: ['']
-    // }))
-    // const control = new FormControl(null)
-    // this.bankAccounts.push(control)
     const BA = new BankAccount()
     this.bankAcc.push('')
     this.bank.push('')
@@ -43,17 +58,33 @@ export class CompanyFirstComponent implements OnInit {
     this.bank.splice(i, 1)
   }
 
-  provera(){
-    console.log(this.bankAcc)
-    console.log(this.bank)
+  getActivityCodes(){
+    this.companyService.getActivityCodes(this.category).subscribe((data: ActivityCode[])=>{
+      this.activityCodes = data
+    })
   }
-  
-  provera2(){
-    for(let i = 0; i < this.bankAcc.length; i++){
-      this.bankAccountsModel[i].bankAccount = this.bankAcc[i]
-      this.bankAccountsModel[i].bank = this.bank[i]
+
+  changeRegisterNumber(){  
+    if(this.registerNumber > this.registers.length){
+      let reg = new Register
+      this.registers.push(reg)
+    } else {
+      this.registers.pop()
     }
-    console.log(this.bankAccountsModel)
   }
-  // sifre delatnosti su 4 cifre
+
+  removeRegister(i){
+    this.registers.splice(i, 1)
+  }
+
+  addActivityCode(ac: ActivityCode){
+    if(this.selectedActivityCodes.indexOf(ac) == -1) this.selectedActivityCodes.push(ac)
+    else this.selectedActivityCodes.splice(this.selectedActivityCodes.indexOf(ac), 1)
+    console.log(this.selectedActivityCodes)
+  }
+
+  provera(){
+    console.log(this.registersType)
+  }
+
 }

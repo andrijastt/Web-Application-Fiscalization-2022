@@ -3,15 +3,17 @@
     <tr>
         <td>Category</td>
         <td>
-            <select>
-                <option>Store</option>
-                <option>Caterer</option>
+            <select [(ngModel)]="category" (ngModelChange)="getActivityCodes()">
+                <option value="store">Store</option>
+                <option value="caterer">Caterer</option>
             </select>
         </td>
     </tr>
     <tr>
         <td>Activity code</td>
-        <td></td>
+        <td *ngFor="let n of activityCodes; let i=index">
+            <input type="checkbox" value="{{n.code}}" (change)="addActivityCode(n)">{{n.code}}
+        </td>
     </tr>
     <tr>
         <td>In system for PDV</td>
@@ -52,13 +54,32 @@
     <tr>
         <td>Number of registers</td>
         <td>
-            <input type="number">
+            <input type="number" [(ngModel)]="registerNumber" (ngModelChange)="changeRegisterNumber()" min="1">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Location
+        </td>
+        <td>
+            Register Type
+        </td>
+    </tr>
+    <tr *ngFor="let n of registers; let i = index">
+        <td>
+            <input type="text" [(ngModel)]="registersLocation[i]">
+        </td>
+        <td>
+            <select [(ngModel)]="registersType[i]">
+                <option *ngFor="let n of registerModels" value="{{n.name}}">{{n.name}}</option>
+            </select>
+        </td>
+        <td>
+            <button (click)="removeRegister(i)">Remove register</button>
         </td>
     </tr>
 </table>
 <button (click)="provera()">Provera</button>
-<br>
-<button (click)="provera2()">Provera 2</button>
 <footer>
     <button (click)="logout()">LogOut</button>
 </footer>
