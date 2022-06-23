@@ -29,7 +29,14 @@ export class RegisterCompanyService {
       JMBP: JMBPForm,
       imageData: imageDataForm,
       status: "new",
-      firstTime: true
+      firstTime: true,
+      active: true,
+      category: null,
+      activityCodes: null,
+      PDV: null,
+      bankAccounts: null,
+      storageUnits: null,
+      registers: null,
     }
   
     return this.http.post(`${this.uri}/company/Register`, data)

@@ -1,4 +1,8 @@
-export class RegisterCompany{
+import { ActivityCode } from "./activityCode"
+import { BankAccount } from "./bankAccount"
+import { Register } from "./register"
+
+export class Company{
     firstname: string
     lastname: string
     username: string
@@ -16,4 +20,11 @@ export class RegisterCompany{
     imageData: string
     status: string
     firstTime: boolean
+    active: boolean
+    category: string
+    activityCodes: Array<ActivityCode>
+    PDV: Boolean
+    bankAccounts: Array<BankAccount>
+    storageUnits: number
+    registers: Array<Register>
 }

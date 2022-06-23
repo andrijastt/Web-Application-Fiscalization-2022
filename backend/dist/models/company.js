@@ -80,4 +80,4 @@ let Company = new Schema({
     }
 });
 exports.default = mongoose_1.default.model('CompanyModel', Company, 'companies');
-//# sourceMappingURL=registerCompany.js.map
+//# sourceMappingURL=company.js.map

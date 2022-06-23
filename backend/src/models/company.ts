@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-let RegisterCompany = new Schema({
+let Company = new Schema({
     firstname: {
         type: String
     },
@@ -53,7 +53,28 @@ let RegisterCompany = new Schema({
     },
     firstTime: {
         type: Boolean
+    },
+    active: {
+        type: Boolean
+    },
+    category: {
+        type: String
+    },
+    activityCodes: {
+        type: Array
+    },
+    PDV: {
+        type: Boolean
+    },
+    bankAccounts: {
+        type: Array
+    },
+    storageUnits: {
+        type: Number
+    },
+    registers: {
+        type: Array
     }
 })
 
-export default mongoose.model('RegisterCompanyModel', RegisterCompany, 'registerCompany')
+export default mongoose.model('CompanyModel', Company, 'companies')

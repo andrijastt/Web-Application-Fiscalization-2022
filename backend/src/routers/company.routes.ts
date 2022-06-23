@@ -39,4 +39,8 @@ companyRouter.route('/getRegisterModels').get(
     (req, res) => new CompanyController().getRegisterModels(req, res)
 )
 
+companyRouter.route('/insertData').post(
+    (req, res) => new CompanyController().insertData(req, res)
+)
+
 export default companyRouter;

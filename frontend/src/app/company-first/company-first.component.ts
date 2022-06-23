@@ -5,6 +5,7 @@ import { ActivityCode } from '../model/activityCode';
 import { BankAccount } from '../model/bankAccount';
 import { Register } from '../model/register';
 import { RegisterModel } from '../model/registerModel';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-company-first',
@@ -15,11 +16,16 @@ export class CompanyFirstComponent implements OnInit {
 
   constructor(private router: Router, private companyService: CompanyService) { }
 
+  user: User
+
   category: string
+  PDV: boolean
+  storage: number = 1
 
   bankAccountsModel: BankAccount[] = []
   bankAcc: string[] = []
   bank: string[] = []
+  bankErrors: string[] = []
 
   activityCodes: ActivityCode[] = []
   selectedActivityCodes: ActivityCode[] = []
@@ -32,6 +38,7 @@ export class CompanyFirstComponent implements OnInit {
   registersType: string[] = []
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user'))
     let reg = new Register
     this.registers.push(reg)
     this.registersLocation.push("")
@@ -39,6 +46,11 @@ export class CompanyFirstComponent implements OnInit {
     this.companyService.getRegisterModels().subscribe((data: RegisterModel[])=>{
       this.registerModels = data
     })
+    const BA = new BankAccount()
+    this.bankAcc.push('')
+    this.bank.push('')
+    this.bankErrors.push('')
+    this.bankAccountsModel.push(BA)
   }
 
   logout(){
@@ -49,6 +61,7 @@ export class CompanyFirstComponent implements OnInit {
     const BA = new BankAccount()
     this.bankAcc.push('')
     this.bank.push('')
+    this.bankErrors.push('')
     this.bankAccountsModel.push(BA)
   }
 
@@ -81,11 +94,45 @@ export class CompanyFirstComponent implements OnInit {
   addActivityCode(ac: ActivityCode){
     if(this.selectedActivityCodes.indexOf(ac) == -1) this.selectedActivityCodes.push(ac)
     else this.selectedActivityCodes.splice(this.selectedActivityCodes.indexOf(ac), 1)
-    console.log(this.selectedActivityCodes)
   }
 
-  provera(){
-    console.log(this.registersType)
+  checkBankAccount(bankAcc, index){
+    let bankAccountRegex = /^\d{3}-\d{12}-\d{2}$/
+    if(!bankAccountRegex.test(bankAcc)){
+      this.bankErrors[index] = "Bad format"
+    } else{
+      this.bankErrors[index] = ""
+    }
+  }
+
+  send: boolean = true
+
+  insert(){
+    for(let i = 0; i < this.bankAccountsModel.length; i++){
+      this.bankAccountsModel[i].bank = this.bank[i]
+      this.bankAccountsModel[i].bankAccount = this.bankAcc[i]
+
+      if(!this.bank[i] || !this.bankAcc[i]) this.send = false
+    }
+
+    for(let i = 0; i < this.registers.length; i++){
+      if(!this.registers[i].location || this.registers[i].type){
+        this.send = false
+        break
+      }
+    }
+
+    if(!this.category || !this.selectedActivityCodes || !this.PDV) this.send = false
+
+    if(this.send){
+      this.companyService.insertData(this.category, this.selectedActivityCodes, this.PDV, this.bankAccountsModel, 
+        this.storage, this.registers, this.user.username).subscribe((resp =>{
+          alert(resp['message'])
+        }))
+    } else {
+      alert('Not all data if filled')
+    }
+
   }
 
 }

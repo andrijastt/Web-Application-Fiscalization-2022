@@ -11,7 +11,7 @@ let ActivityCodes = new Schema({
     },
     name: {
         type: String
-    },
+    }
 });
 exports.default = mongoose_1.default.model('ActivityCodesModel', ActivityCodes, 'activityCodes');
 //# sourceMappingURL=activityCodes.js.map

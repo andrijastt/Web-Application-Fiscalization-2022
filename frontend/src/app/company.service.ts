@@ -27,4 +27,18 @@ export class CompanyService {
   getRegisterModels(){
     return this.http.get(`${this.uri}/company/getRegisterModels`)
   }
+
+  insertData(categoryForm, activityCodesForm, PDVForm, bankAccountsForm, storageUnitsForm, registersForm, usernameForm){
+    const data  = {
+      category: categoryForm,
+      activityCodes: activityCodesForm,
+      PDV: PDVForm,
+      bankAccounts: bankAccountsForm,
+      storageUnits: storageUnitsForm,
+      registers: registersForm,
+      username: usernameForm
+    }
+
+    return this.http.post(`${this.uri}/company/insertData`, data)
+  }
 }

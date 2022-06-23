@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterCompany } from '../model/registerCompany';
+import { Company } from '../model/company';
 import { User } from '../model/user';
 import { RegisterCompanyService } from '../register-company.service';
 
@@ -15,13 +15,13 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'))
-    this.registerCompanyService.getAllRegisterCompany().subscribe((data: RegisterCompany[])=>{
+    this.registerCompanyService.getAllRegisterCompany().subscribe((data: Company[])=>{
       this.registerCompanys = data
     })
   }
 
   user: User
-  registerCompanys: RegisterCompany[] = []
+  registerCompanys: Company[] = []
 
   logout(){
     this.router.navigate([''])

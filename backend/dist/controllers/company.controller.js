@@ -4,16 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyController = void 0;
-const registerCompany_1 = __importDefault(require("../models/registerCompany"));
 const user_1 = __importDefault(require("../models/user"));
 const activityCodes_1 = __importDefault(require("../models/activityCodes"));
 const register_1 = __importDefault(require("../models/register"));
+const company_1 = __importDefault(require("../models/company"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
             let username = req.body.username;
             let email = req.body.email;
-            registerCompany_1.default.findOne({ "username": username }, (err, registerCompany) => {
+            company_1.default.findOne({ "username": username }, (err, registerCompany) => {
                 if (err)
                     console.log(err);
                 else {
@@ -21,7 +21,7 @@ class CompanyController {
                         res.json({ 'message': 'Username is taken' });
                     }
                     else {
-                        registerCompany_1.default.findOne({ "email": email }, (err, registerCompany1) => {
+                        company_1.default.findOne({ "email": email }, (err, registerCompany1) => {
                             if (err)
                                 console.log(err);
                             else {
@@ -29,7 +29,7 @@ class CompanyController {
                                     res.json({ 'message': 'Email is taken' });
                                 }
                                 else {
-                                    registerCompany_1.default.collection.insertOne(req.body, (err, resp) => {
+                                    company_1.default.collection.insertOne(req.body, (err, resp) => {
                                         if (err)
                                             console.log(err);
                                         else
@@ -44,7 +44,7 @@ class CompanyController {
         };
         this.checkFirstTime = (req, res) => {
             let username = req.body.username;
-            registerCompany_1.default.findOne({ "username": username }, (err, registerCompany) => {
+            company_1.default.findOne({ "username": username }, (err, registerCompany) => {
                 if (err)
                     console.log(err);
                 else
@@ -52,7 +52,7 @@ class CompanyController {
             });
         };
         this.getAllRegisterCompany = (req, res) => {
-            registerCompany_1.default.find({}, (err, registerCompanys) => {
+            company_1.default.find({}, (err, registerCompanys) => {
                 if (err)
                     console.log(err);
                 else
@@ -61,7 +61,7 @@ class CompanyController {
         };
         this.accept = (req, res) => {
             let username = req.body.username;
-            registerCompany_1.default.updateOne({ "username": username }, { $set: { "status": 'accepted' } }, (err, resp) => {
+            company_1.default.updateOne({ "username": username }, { $set: { "status": 'accepted' } }, (err, resp) => {
                 if (err)
                     console.log(err);
                 else {
@@ -77,7 +77,7 @@ class CompanyController {
         };
         this.decline = (req, res) => {
             let username = req.body.username;
-            registerCompany_1.default.collection.deleteOne({ "username": username }, (err, resp) => {
+            company_1.default.collection.deleteOne({ "username": username }, (err, resp) => {
                 if (err)
                     console.log(err);
                 else
@@ -114,6 +114,22 @@ class CompanyController {
                     console.log(err);
                 else
                     res.json(registers);
+            });
+        };
+        this.insertData = (req, res) => {
+            let category = req.body.category;
+            let activityCodes = req.body.activityCodes;
+            let PDV = req.body.PDV;
+            let bankAccounts = req.body.bankAccounts;
+            let storageUnits = req.body.storageUnits;
+            let registers = req.body.registers;
+            let username = req.body.username;
+            company_1.default.updateOne({ "username": username }, { $set: { "category": category, "activityCodes": activityCodes, "PDV": PDV,
+                    "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ 'message': 'Successfully added data' });
             });
         };
     }

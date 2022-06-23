@@ -15,5 +15,6 @@ companyRouter.route('/getAllActivityCodes').get((req, res) => new company_contro
 companyRouter.route('/getCatererCodes').get((req, res) => new company_controller_1.CompanyController().getCatererCodes(req, res));
 companyRouter.route('/getStoreCodes').get((req, res) => new company_controller_1.CompanyController().getStoreCodes(req, res));
 companyRouter.route('/getRegisterModels').get((req, res) => new company_controller_1.CompanyController().getRegisterModels(req, res));
+companyRouter.route('/insertData').post((req, res) => new company_controller_1.CompanyController().insertData(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map

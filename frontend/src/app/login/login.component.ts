@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterCompany } from '../model/registerCompany';
+import { Company } from '../model/company';
 import { User } from '../model/user';
 import { RegisterCompanyService } from '../register-company.service';
 import { UserService } from '../user.service';
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         } 
         else {
           if(userFromDB.type == 1){
-            this.registerCompanyService.checkFirstTime(userFromDB.username).subscribe((registerCompany: RegisterCompany) =>{
+            this.registerCompanyService.checkFirstTime(userFromDB.username).subscribe((registerCompany: Company) =>{
               if(registerCompany.firstTime) this.router.navigate(['companyFirst'])
               else this.router.navigate(['company'])
             })   
