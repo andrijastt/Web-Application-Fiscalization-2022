@@ -62,6 +62,7 @@ export class CompanyFirstComponent implements OnInit {
     this.companyService.getActivityCodes(this.category).subscribe((data: ActivityCode[])=>{
       this.activityCodes = data
     })
+    while(this.selectedActivityCodes.length > 0) this.selectedActivityCodes.pop()
   }
 
   changeRegisterNumber(){  
