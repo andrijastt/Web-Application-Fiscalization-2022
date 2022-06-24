@@ -12,6 +12,7 @@ import { UserComponent } from './user/user.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { RegisterCompanyComponent } from './register-company/register-company.component';
 import { CompanyFirstComponent } from './company-first/company-first.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CompanyFirstComponent } from './company-first/company-first.component';
     UserComponent,
     LoginAdminComponent,
     RegisterCompanyComponent,
-    CompanyFirstComponent
+    CompanyFirstComponent,
+    PasswordChangeComponent
   ],
   imports: [
     BrowserModule,

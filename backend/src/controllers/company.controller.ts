@@ -118,7 +118,7 @@ export class CompanyController{
         let username = req.body.username
 
         CompanyModel.updateOne({"username": username}, {$set: {"category": category, "activityCodes": activityCodes, "PDV": PDV, 
-        "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers}}, (err, resp)=>{
+        "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers, "firstTime": false}}, (err, resp)=>{
                 if(err) console.log(err)
                 else res.json({'message': 'Successfully added data'})
             })

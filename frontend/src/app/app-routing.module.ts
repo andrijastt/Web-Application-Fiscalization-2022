@@ -5,6 +5,7 @@ import { CompanyFirstComponent } from './company-first/company-first.component';
 import { CompanyComponent } from './company/company.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { LoginComponent } from './login/login.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 import { RegisterCompanyComponent } from './register-company/register-company.component';
 import { UserComponent } from './user/user.component';
 
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: "company", component: CompanyComponent},
   {path: "registerCompany", component: RegisterCompanyComponent},
   {path: "loginAdmin", component: LoginAdminComponent},
-  {path: "companyFirst", component: CompanyFirstComponent}
+  {path: "companyFirst", component: CompanyFirstComponent},
+  {path: "passwordChange", component: PasswordChangeComponent}
 ];
 
 @NgModule({

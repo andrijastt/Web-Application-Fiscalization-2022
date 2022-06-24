@@ -69,6 +69,7 @@ export class CompanyFirstComponent implements OnInit {
     this.bankAccountsModel.splice(i, 1)
     this.bankAcc.splice(i, 1)
     this.bank.splice(i, 1)
+    this.bankErrors.splice(i, 1)
   }
 
   getActivityCodes(){
@@ -108,15 +109,21 @@ export class CompanyFirstComponent implements OnInit {
   send: boolean = true
 
   insert(){
+    this.send = true
     for(let i = 0; i < this.bankAccountsModel.length; i++){
       this.bankAccountsModel[i].bank = this.bank[i]
       this.bankAccountsModel[i].bankAccount = this.bankAcc[i]
 
-      if(!this.bank[i] || !this.bankAcc[i]) this.send = false
+      if(!this.bank[i] || !this.bankAcc[i]){
+        this.send = false
+      } 
     }
 
     for(let i = 0; i < this.registers.length; i++){
-      if(!this.registers[i].location || this.registers[i].type){
+      this.registers[i].location = this.registersLocation[i]
+      this.registers[i].type = this.registersType[i]
+
+      if(!this.registers[i].location || !this.registers[i].type){
         this.send = false
         break
       }
@@ -124,15 +131,21 @@ export class CompanyFirstComponent implements OnInit {
 
     if(!this.category || !this.selectedActivityCodes || !this.PDV) this.send = false
 
+    console.log(this.category)
+    console.log(this.selectedActivityCodes)
+    console.log(this.bankAccountsModel)
+    console.log(this.storage)
+    console.log(this.registerNumber)
+    console.log(this.registers)
+
     if(this.send){
       this.companyService.insertData(this.category, this.selectedActivityCodes, this.PDV, this.bankAccountsModel, 
         this.storage, this.registers, this.user.username).subscribe((resp =>{
           alert(resp['message'])
+          this.router.navigate(['company'])
         }))
     } else {
-      alert('Not all data if filled')
+      alert('Not all data is filled')
     }
-
   }
-
 }
