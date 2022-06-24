@@ -15,6 +15,8 @@ import { CompanyFirstComponent } from './company-first/company-first.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

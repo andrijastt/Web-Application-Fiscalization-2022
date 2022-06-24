@@ -136,8 +136,16 @@ class CompanyController {
             company_1.default.collection.insertOne(req.body, (err, resp) => {
                 if (err)
                     console.log(err);
-                else
-                    res.json({ 'message': 'Company succesfully added' });
+                else {
+                    let user = new user_1.default();
+                    user.username = req.body.username;
+                    user.password = req.body.password;
+                    user.type = 1;
+                    console.log(user);
+                    user_1.default.collection.insertOne(user, (err, resp) => {
+                        res.json({ 'message': 'Company succesfully added' });
+                    });
+                }
             });
         };
         this.activate = (req, res) => {

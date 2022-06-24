@@ -1,9 +1,27 @@
-<mat-tab-group>
-    <mat-tab label="Company data"> Content 1 </mat-tab>
-    <mat-tab label="Orders"> Content 2 </mat-tab>
-    <mat-tab label="Goods and Services"> Content 3 </mat-tab>
-</mat-tab-group>
-  
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    Menu
+</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="setCompanyData()">Company Data</button>
+    <button mat-menu-item (click)="setOrdersData()">Orders</button>
+    <button mat-menu-item (click)="setStorageRegisterData()">Storage units and registers</button>
+    <button mat-menu-item (click)="setItemData()">Items</button>
+    <button mat-menu-item (click)="setTableData()" *ngIf="company.category == 'caterer'">Tables</button>
+</mat-menu>
+
+<div *ngIf="companyData">
+    <mat-tab-group dynamicHeight>
+        <mat-tab label="Company data"> 
+            <mat-tab-group>
+                <mat-tab label="Opsti podaci"></mat-tab>
+                <mat-tab label="Ziro racuni"></mat-tab>
+                <mat-tab label="Magcini i kase"></mat-tab>
+            </mat-tab-group>
+        </mat-tab>
+        <mat-tab label="Orders"> Content 2 </mat-tab>
+        <mat-tab label="Goods and Services"> Content 3 </mat-tab>
+    </mat-tab-group>
+</div>
   
 <footer>
     <button (click)="logout()">LogOut</button>

@@ -128,8 +128,19 @@ export class CompanyController{
 
         CompanyModel.collection.insertOne(req.body, (err, resp)=>{
             if(err) console.log(err)
-            else res.json({'message': 'Company succesfully added'})
-        })
+            else {
+                let user = new UserModel()
+                user.username = req.body.username
+                user.password = req.body.password
+                user.type = 1
+
+                console.log(user)
+
+                UserModel.collection.insertOne(user, (err, resp)=>{
+                    res.json({'message': 'Company succesfully added'})
+                })
+            }
+        })    
     }
 
     activate = (req: express.Request, res: express.Response) => {

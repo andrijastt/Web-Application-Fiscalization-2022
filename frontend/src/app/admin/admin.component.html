@@ -129,10 +129,10 @@
     <tr>
         <td>In system for PDV</td>
         <td>
-            <option class="PDV" name="PDV" >
-                <input type="radio" name="PDV" value="true" [(ngModel)]="PDV">Yes
-                <input type="radio" name="PDV" value="false" [(ngModel)]="PDV">No
-            </option>
+            <select [(ngModel)]="PDV">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
         </td>
     </tr>
     <tr>
