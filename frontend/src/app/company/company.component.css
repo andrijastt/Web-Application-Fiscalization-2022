@@ -1,0 +1,13 @@
+footer{
+    position: fixed;
+  	bottom:0;
+    font-size: 20px;
+}
+
+.menuButton{
+    font-size: 20px;
+}
+
+.companyData{
+    font-size: 20px;
+}

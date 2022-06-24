@@ -3,7 +3,7 @@ import UserModel from '../models/user'
 import ActivityCodesModel from '../models/activityCodes'
 import RegisterModel from '../models/register'
 import CompanyModel from '../models/company'
-
+import StorageUnitModel from '../models/storageUnit'
 
 export class CompanyController{
 
@@ -120,12 +120,32 @@ export class CompanyController{
         CompanyModel.updateOne({"username": username}, {$set: {"category": category, "activityCodes": activityCodes, "PDV": PDV, 
         "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers, "firstTime": false}}, (err, resp)=>{
                 if(err) console.log(err)
-                else res.json({'message': 'Successfully added data'})
+                else {
+                    let num
+                    StorageUnitModel.find({}, (err, data)=>{
+                        if(err) console.log(err)
+                        else {
+                            num = data.length
+                            for(let i = 0; i < req.body.storageUnits; i++){
+                                let storageUnit = new StorageUnitModel()
+                                storageUnit.name = "Magacin " + (num + i + 1)
+                                storageUnit.id = num + i + 1
+                                storageUnit.companyPIB = req.body.PIB
+                    
+                                StorageUnitModel.collection.insertOne(storageUnit, (err, resp)=>{
+                                    if(err) console.log(err)
+                                })
+                            }
+                            res.json({'message': 'Company succesfully added'})
+                        }
+                    })
+                    res.json({'message': 'Successfully added data'})
+                }
             })
     }
 
     insertCompany = (req: express.Request, res: express.Response) => {
-
+        
         CompanyModel.collection.insertOne(req.body, (err, resp)=>{
             if(err) console.log(err)
             else {
@@ -134,11 +154,29 @@ export class CompanyController{
                 user.password = req.body.password
                 user.type = 1
 
-                console.log(user)
-
                 UserModel.collection.insertOne(user, (err, resp)=>{
-                    res.json({'message': 'Company succesfully added'})
-                })
+                    if(err) console.log(err)
+                    else {
+                        let num
+                        StorageUnitModel.find({}, (err, data)=>{
+                            if(err) console.log(err)
+                            else {                 
+                                num = data.length
+                                for(let i = 0; i < req.body.storageUnits; i++){
+                                    let storageUnit = new StorageUnitModel()
+                                    storageUnit.name = "Magacin " + (num + i + 1)
+                                    storageUnit.id = num + i + 1
+                                    storageUnit.companyPIB = req.body.PIB
+                        
+                                    StorageUnitModel.collection.insertOne(storageUnit, (err, resp)=>{
+                                        if(err) console.log(err)
+                                    })
+                                }
+                                res.json({'message': 'Company succesfully added'})
+                            }
+                        })
+                    }     
+                })           
             }
         })    
     }

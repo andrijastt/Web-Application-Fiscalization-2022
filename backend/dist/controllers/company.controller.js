@@ -8,6 +8,7 @@ const user_1 = __importDefault(require("../models/user"));
 const activityCodes_1 = __importDefault(require("../models/activityCodes"));
 const register_1 = __importDefault(require("../models/register"));
 const company_1 = __importDefault(require("../models/company"));
+const storageUnit_1 = __importDefault(require("../models/storageUnit"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -128,8 +129,28 @@ class CompanyController {
                     "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers, "firstTime": false } }, (err, resp) => {
                 if (err)
                     console.log(err);
-                else
+                else {
+                    let num;
+                    storageUnit_1.default.find({}, (err, data) => {
+                        if (err)
+                            console.log(err);
+                        else {
+                            num = data.length;
+                            for (let i = 0; i < req.body.storageUnits; i++) {
+                                let storageUnit = new storageUnit_1.default();
+                                storageUnit.name = "Magacin " + (num + i + 1);
+                                storageUnit.id = num + i + 1;
+                                storageUnit.companyPIB = req.body.PIB;
+                                storageUnit_1.default.collection.insertOne(storageUnit, (err, resp) => {
+                                    if (err)
+                                        console.log(err);
+                                });
+                            }
+                            res.json({ 'message': 'Company succesfully added' });
+                        }
+                    });
                     res.json({ 'message': 'Successfully added data' });
+                }
             });
         };
         this.insertCompany = (req, res) => {
@@ -141,9 +162,30 @@ class CompanyController {
                     user.username = req.body.username;
                     user.password = req.body.password;
                     user.type = 1;
-                    console.log(user);
                     user_1.default.collection.insertOne(user, (err, resp) => {
-                        res.json({ 'message': 'Company succesfully added' });
+                        if (err)
+                            console.log(err);
+                        else {
+                            let num;
+                            storageUnit_1.default.find({}, (err, data) => {
+                                if (err)
+                                    console.log(err);
+                                else {
+                                    num = data.length;
+                                    for (let i = 0; i < req.body.storageUnits; i++) {
+                                        let storageUnit = new storageUnit_1.default();
+                                        storageUnit.name = "Magacin " + (num + i + 1);
+                                        storageUnit.id = num + i + 1;
+                                        storageUnit.companyPIB = req.body.PIB;
+                                        storageUnit_1.default.collection.insertOne(storageUnit, (err, resp) => {
+                                            if (err)
+                                                console.log(err);
+                                        });
+                                    }
+                                    res.json({ 'message': 'Company succesfully added' });
+                                }
+                            });
+                        }
                     });
                 }
             });

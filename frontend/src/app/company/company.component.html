@@ -1,30 +1,117 @@
-<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+<button mat-icon-button [matMenuTriggerFor]="menu" class="menuButton">
     Menu
 </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="setCompanyData()">Company Data</button>
-    <button mat-menu-item (click)="setOrdersData()">Orders</button>
-    <button mat-menu-item (click)="setStorageRegisterData()">Storage units and registers</button>
-    <button mat-menu-item (click)="setItemData()">Items</button>
-    <button mat-menu-item (click)="setTableData()" *ngIf="company.category == 'caterer'">Tables</button>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="setCompanyData()" class="menuButton">
+        <mat-icon>account_circle</mat-icon>
+        Company Data
+    </button>
+    <button mat-menu-item (click)="setOrdersData()" class="menuButton">
+        <mat-icon>shop_two</mat-icon>
+        Orders
+    </button>
+    <button mat-menu-item (click)="setStorageRegisterData()" class="menuButton">
+        <mat-icon>storage</mat-icon>
+        Storage units and registers
+    </button>
+    <button mat-menu-item (click)="setItemData()" class="menuButton">
+        <mat-icon>label</mat-icon>
+        Items
+    </button>
+    <button mat-menu-item (click)="setTableData()" *ngIf="company.category == 'caterer'" class="menuButton">
+        <mat-icon>local_cafe</mat-icon>
+        Tables
+    </button>
 </mat-menu>
 
-<div *ngIf="companyData">
+<div *ngIf="companyData" class="companyData">    
     <mat-tab-group dynamicHeight>
-        <mat-tab label="Company data"> 
-            <mat-tab-group>
-                <mat-tab label="Opsti podaci"></mat-tab>
-                <mat-tab label="Ziro racuni"></mat-tab>
-                <mat-tab label="Magcini i kase"></mat-tab>
-            </mat-tab-group>
+        <mat-tab label="Opsti podaci">
+            <table>
+                <tr>
+                    <td>Firstname: </td>
+                    <td>{{company.firstname}}</td>
+                </tr>
+                <tr>
+                    <td>Lastname: </td>
+                    <td>{{company.lastname}}</td>
+                </tr>
+                <tr>
+                    <td>Telephone nummber: </td>
+                    <td>{{company.telephoneNumber}}</td>
+                </tr>
+                <tr>
+                    <td>E-mail: </td>
+                    <td>{{company.email}}</td>
+                </tr>
+                <tr>
+                    <td>Company name: </td>
+                    <td>{{company.name}}</td>
+                </tr>
+                <tr>
+                    <td>Country: </td>
+                    <td>{{company.country}}</td>
+                </tr>
+                <tr>
+                    <td>City: </td>
+                    <td>{{company.city}}</td>
+                </tr>
+                <tr>
+                    <td>Street: </td>
+                    <td>{{company.streetName}} {{company.streetNumber}}</td>
+                </tr>
+                <tr>
+                    <td>PIB: </td>
+                    <td>{{company.PIB}}</td>
+                </tr>
+                <tr>
+                    <td>JMBP: </td>
+                    <td>{{company.JMBP}}</td>
+                </tr>
+                <tr>
+                    <td>Category: </td>
+                    <td>{{company.category}}</td>
+                </tr>
+                <tr>
+                    <td>Activity codes: </td>
+                    <td *ngFor="let n of company.activityCodes">{{n.code}}</td>
+                </tr>
+                <tr>
+                    <td>In system for PDV: </td>
+                    <td>{{company.PDV}}</td>
+                </tr>
+            </table>
         </mat-tab>
-        <mat-tab label="Orders"> Content 2 </mat-tab>
-        <mat-tab label="Goods and Services"> Content 3 </mat-tab>
+        <mat-tab label="Ziro racuni">
+            <table>
+                <tr>
+                  <td>Bank account</td>  
+                  <td>Bank</td>
+                </tr>
+                <tr *ngFor="let n of company.bankAccounts">
+                    <td>{{n.bankAccount}}</td>
+                    <td>{{n.bank}}</td>
+                </tr>
+            </table>
+        </mat-tab>
+        <mat-tab label="Magcini i kase">
+            <table>
+                <tr>
+                    <td>Register Location</td>
+                    <td>Register Type</td>
+                </tr>
+                <tr *ngFor="let n of company.registers">
+                    <td>{{n.location}}</td>
+                    <td>{{n.type}}</td>
+                </tr>
+            </table>
+        </mat-tab>
     </mat-tab-group>
 </div>
-  
+
 <footer>
-    <button (click)="logout()">LogOut</button>
+    <button (click)="logout()" class="logOut">LogOut</button>
     <br>
     Click here to <a routerLink="/passwordChange">change password.</a>
 </footer>
