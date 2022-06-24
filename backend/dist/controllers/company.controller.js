@@ -208,6 +208,15 @@ class CompanyController {
                     res.json({ 'message': 'Company account deactivated' });
             });
         };
+        this.getMyStorageUntis = (req, res) => {
+            let CompanyPIB = req.body.PIB;
+            storageUnit_1.default.find({ "companyPIB": CompanyPIB }, (err, storageUnits) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(storageUnits);
+            });
+        };
     }
 }
 exports.CompanyController = CompanyController;

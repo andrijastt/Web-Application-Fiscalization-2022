@@ -198,4 +198,13 @@ export class CompanyController{
             else res.json({'message': 'Company account deactivated'})
         })
     }
+
+    getMyStorageUntis = (req: express.Request, res: express.Response) => {
+        let CompanyPIB = req.body.PIB
+        
+        StorageUnitModel.find({"companyPIB": CompanyPIB}, (err, storageUnits)=>{
+            if(err) console.log(err)
+            else res.json(storageUnits)
+        })
+    }
 }

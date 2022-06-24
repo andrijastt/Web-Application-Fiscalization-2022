@@ -55,4 +55,8 @@ companyRouter.route('/deactivate').post(
     (req, res) => new CompanyController().deactivate(req, res)
 )
 
+companyRouter.route('/getMyStorageUntis').post(
+    (req, res) => new CompanyController().getMyStorageUntis(req, res)
+)
+
 export default companyRouter;

@@ -106,6 +106,17 @@
                     <td>{{n.type}}</td>
                 </tr>
             </table>
+            <br>
+            <table>
+                <tr>
+                    <td>Storage unit ID</td>
+                    <td>Storage unit name</td>
+                </tr>
+                <tr *ngFor="let n of storageUnits">
+                    <td>{{n.id}}</td>
+                    <td>{{n.name}}</td>
+                </tr>
+            </table>
         </mat-tab>
     </mat-tab-group>
 </div>

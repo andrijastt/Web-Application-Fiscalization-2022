@@ -84,4 +84,9 @@ export class CompanyService {
     const data = {username: usernameForm}
     return this.http.post(`${this.uri}/company/deactivate`, data)
   }
+
+  getMyStorageUntis(PIBForm){
+    const data = { PIB: PIBForm }
+    return this.http.post(`${this.uri}/company/getMyStorageUntis`, data)
+  }
 }
