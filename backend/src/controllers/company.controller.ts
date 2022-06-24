@@ -123,4 +123,30 @@ export class CompanyController{
                 else res.json({'message': 'Successfully added data'})
             })
     }
+
+    insertCompany = (req: express.Request, res: express.Response) => {
+
+        CompanyModel.collection.insertOne(req.body, (err, resp)=>{
+            if(err) console.log(err)
+            else res.json({'message': 'Company succesfully added'})
+        })
+    }
+
+    activate = (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+
+        CompanyModel.updateOne({'username': username}, {$set: {'active': true}}, (err, resp) =>{
+            if(err) console.log(err)
+            else res.json({'message': 'Company account activated'})
+        })
+    }
+
+    deactivate = (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+
+        CompanyModel.updateOne({'username': username}, {$set: {'active': false}}, (err, resp) =>{
+            if(err) console.log(err)
+            else res.json({'message': 'Company account deactivated'})
+        })
+    }
 }

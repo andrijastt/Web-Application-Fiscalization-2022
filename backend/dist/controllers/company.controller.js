@@ -132,6 +132,32 @@ class CompanyController {
                     res.json({ 'message': 'Successfully added data' });
             });
         };
+        this.insertCompany = (req, res) => {
+            company_1.default.collection.insertOne(req.body, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ 'message': 'Company succesfully added' });
+            });
+        };
+        this.activate = (req, res) => {
+            let username = req.body.username;
+            company_1.default.updateOne({ 'username': username }, { $set: { 'active': true } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ 'message': 'Company account activated' });
+            });
+        };
+        this.deactivate = (req, res) => {
+            let username = req.body.username;
+            company_1.default.updateOne({ 'username': username }, { $set: { 'active': false } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json({ 'message': 'Company account deactivated' });
+            });
+        };
     }
 }
 exports.CompanyController = CompanyController;

@@ -43,4 +43,16 @@ companyRouter.route('/insertData').post(
     (req, res) => new CompanyController().insertData(req, res)
 )
 
+companyRouter.route('/insertCompany').post(
+    (req, res) => new CompanyController().insertCompany(req, res)
+)
+
+companyRouter.route('/activate').post(
+    (req, res) => new CompanyController().activate(req, res)
+)
+
+companyRouter.route('/deactivate').post(
+    (req, res) => new CompanyController().deactivate(req, res)
+)
+
 export default companyRouter;

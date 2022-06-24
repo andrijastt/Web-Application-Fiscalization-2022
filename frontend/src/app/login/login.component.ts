@@ -31,8 +31,13 @@ export class LoginComponent implements OnInit {
         else {
           if(userFromDB.type == 1){
             this.registerCompanyService.checkFirstTime(userFromDB.username).subscribe((registerCompany: Company) =>{
-              if(registerCompany.firstTime) this.router.navigate(['companyFirst'])
-              else this.router.navigate(['company'])
+              if(registerCompany.active){
+                if(registerCompany.firstTime) this.router.navigate(['companyFirst'])
+                else this.router.navigate(['company'])
+              } else {
+                alert('Account deactivated')
+                location.reload
+              }
             })   
           } 
           else {

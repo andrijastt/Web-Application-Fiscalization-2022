@@ -131,13 +131,6 @@ export class CompanyFirstComponent implements OnInit {
 
     if(!this.category || !this.selectedActivityCodes || !this.PDV) this.send = false
 
-    console.log(this.category)
-    console.log(this.selectedActivityCodes)
-    console.log(this.bankAccountsModel)
-    console.log(this.storage)
-    console.log(this.registerNumber)
-    console.log(this.registers)
-
     if(this.send){
       this.companyService.insertData(this.category, this.selectedActivityCodes, this.PDV, this.bankAccountsModel, 
         this.storage, this.registers, this.user.username).subscribe((resp =>{
