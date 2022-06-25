@@ -4,6 +4,8 @@ import { CompanyService } from '../company.service';
 import { Company } from '../model/company';
 import { Customer } from '../model/customer';
 import { StorageUnit } from '../model/storageUnit';
+import { RegisterCompanyService } from '../register-company.service';
+
 
 @Component({
   selector: 'app-company',
@@ -12,7 +14,7 @@ import { StorageUnit } from '../model/storageUnit';
 })
 export class CompanyComponent implements OnInit {
 
-  constructor(private router: Router, private companyService: CompanyService) { }
+  constructor(private router: Router, private companyService: CompanyService, private registerCompanyService: RegisterCompanyService) { }
 
   ngOnInit(): void {
     this.company = JSON.parse(localStorage.getItem('company'))
@@ -21,6 +23,11 @@ export class CompanyComponent implements OnInit {
     })
     this.companyService.getMyCustomers(this.company.PIB).subscribe((data: Customer[])=>{
       this.customers = data
+    })
+
+    this.registerCompanyService.getAllRegisterCompany().subscribe((data: Company[])=>{
+      this.user = data
+      this.userSlice = this.user.slice(0, 2)
     })
   }
 
@@ -39,14 +46,14 @@ export class CompanyComponent implements OnInit {
 
   companyData: boolean = true
   ordersData: boolean
-  storageRegisterData: boolean
+  goodsAndServices: boolean
   itemData: boolean
   tableData: boolean
 
   setCompanyData(){
     this.companyData = true
     this.ordersData = false
-    this.storageRegisterData = false
+    this.goodsAndServices = false
     this.itemData = false
     this.tableData = false
   }
@@ -54,15 +61,15 @@ export class CompanyComponent implements OnInit {
   setOrdersData(){
     this.companyData = false
     this.ordersData = true
-    this.storageRegisterData = false
+    this.goodsAndServices = false
     this.itemData = false
     this.tableData = false
   }
 
-  setStorageRegisterData(){
+  setGoodsAndServices(){
     this.companyData = false
     this.ordersData = false
-    this.storageRegisterData = true
+    this.goodsAndServices = true
     this.itemData = false
     this.tableData = false
   }
@@ -70,7 +77,7 @@ export class CompanyComponent implements OnInit {
   setItemData(){
     this.companyData = false
     this.ordersData = false
-    this.storageRegisterData = false
+    this.goodsAndServices = false
     this.itemData = true
     this.tableData = false
   }
@@ -78,10 +85,12 @@ export class CompanyComponent implements OnInit {
   setTableData(){
     this.companyData = false
     this.ordersData = false
-    this.storageRegisterData = false
+    this.goodsAndServices = false
     this.itemData = false
     this.tableData = true
   }
+
+  /************************************************************/
 
   firstname: string
   lastname: string
@@ -255,5 +264,20 @@ export class CompanyComponent implements OnInit {
     } else {
       alert('Data not filled')
     }
+  }
+
+  /************************************************************/
+
+  addGoods: boolean
+  user: Company[] = []
+  userSlice: Company[] = []
+
+  onPageChange(event){
+    const startIndex = event.pageIndex * event.pageSize
+    let endIndex = startIndex + event.pageSize
+    if(endIndex > this.user.length){
+      endIndex = this.user.length
+    }
+    this.userSlice = this.user.slice(startIndex, endIndex)
   }
 }

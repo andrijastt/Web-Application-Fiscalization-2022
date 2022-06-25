@@ -11,9 +11,9 @@
         <mat-icon>shop_two</mat-icon>
         Orders
     </button>
-    <button mat-menu-item (click)="setStorageRegisterData()" class="menuButton">
-        <mat-icon>storage</mat-icon>
-        Storage units and registers
+    <button mat-menu-item (click)="setGoodsAndServices()" class="menuButton">
+        <mat-icon>local_convenience_store</mat-icon>
+        Goods and Services
     </button>
     <button mat-menu-item (click)="setItemData()" class="menuButton">
         <mat-icon>label</mat-icon>
@@ -24,6 +24,8 @@
         Tables
     </button>
 </mat-menu>
+
+<!-- *************************************************************************************************************************** -->
 
 <div *ngIf="companyData" class="companyData">    
     <mat-tab-group dynamicHeight>
@@ -120,6 +122,8 @@
         </mat-tab>
     </mat-tab-group>
 </div>
+
+<!-- *************************************************************************************************************************** -->
 
 <div *ngIf="ordersData">
     <h2>My customers</h2>
@@ -252,6 +256,24 @@
         </tr>
     </table>
     <button (click)="addCustomer()">Add customer</button>
+</div>
+
+<!-- *************************************************************************************************************************** -->
+
+<div *ngIf="goodsAndServices">
+    <div *ngFor="let n of userSlice">
+        <div>Username: {{n.username}}</div>
+        <div>PIB: {{n.PIB}}</div>
+    </div>
+    <mat-paginator [pageSize]="2" [length]="user.length" [pageSizeOptions]="[1, 2, 3]" (page)="onPageChange($event)">
+    </mat-paginator>
+
+    <button mat-button (click)="addGoods = true">Add Goods</button>
+    <mat-tab-group *ngIf="addGoods">
+        <mat-tab label="General data"></mat-tab>
+        <mat-tab label="Additional data"></mat-tab>
+        <mat-tab label="Price and state of goods"></mat-tab>
+    </mat-tab-group>
 </div>
 
 <footer>
