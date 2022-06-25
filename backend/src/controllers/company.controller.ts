@@ -116,27 +116,27 @@ export class CompanyController{
         let storageUnits = req.body.storageUnits
         let registers = req.body.registers
         let username = req.body.username
+        let PIB = req.body.PIB
 
         CompanyModel.updateOne({"username": username}, {$set: {"category": category, "activityCodes": activityCodes, "PDV": PDV, 
         "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers, "firstTime": false}}, (err, resp)=>{
                 if(err) console.log(err)
                 else {
-                    let num
                     StorageUnitModel.find({}, (err, data)=>{
                         if(err) console.log(err)
                         else {
+                            let num
                             num = data.length
                             for(let i = 0; i < req.body.storageUnits; i++){
                                 let storageUnit = new StorageUnitModel()
                                 storageUnit.name = "Magacin " + (num + i + 1)
                                 storageUnit.id = num + i + 1
-                                storageUnit.companyPIB = req.body.PIB
+                                storageUnit.companyPIB = PIB
                     
                                 StorageUnitModel.collection.insertOne(storageUnit, (err, resp)=>{
                                     if(err) console.log(err)
                                 })
                             }
-                            res.json({'message': 'Company succesfully added'})
                         }
                     })
                     res.json({'message': 'Successfully added data'})
@@ -211,6 +211,14 @@ export class CompanyController{
     findCompanyByPIB = (req: express.Request, res: express.Response) => {
         let CompanyPIB = req.body.PIB    
         CompanyModel.findOne({"PIB": CompanyPIB}, (err, company)=>{
+            if(err) console.log(err)
+            else res.json(company)         
+        })
+    }
+
+    getCompany = (req: express.Request, res: express.Response) => {
+        let username = req.body.username    
+        CompanyModel.findOne({"username": username}, (err, company)=>{
             if(err) console.log(err)
             else res.json(company)         
         })

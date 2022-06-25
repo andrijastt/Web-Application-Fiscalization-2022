@@ -63,4 +63,8 @@ companyRouter.route('/findCompanyByPIB').post(
     (req, res) => new CompanyController().findCompanyByPIB(req, res)
 )
 
+companyRouter.route('/getCompany').post(
+    (req, res) => new CompanyController().getCompany(req, res)
+)
+
 export default companyRouter;

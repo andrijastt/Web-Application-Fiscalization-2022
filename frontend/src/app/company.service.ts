@@ -10,6 +10,11 @@ export class CompanyService {
 
   uri = 'http://localhost:4000'
 
+  getCompany(usernameForm){
+    const data = {username: usernameForm}
+    return this.http.post(`${this.uri}/company/getCompany`, data)
+  }
+
   getAllActivityCodes(){
     return this.http.get(`${this.uri}/company/getAllActivityCodes`)
   }
@@ -28,7 +33,7 @@ export class CompanyService {
     return this.http.get(`${this.uri}/company/getRegisterModels`)
   }
 
-  insertData(categoryForm, activityCodesForm, PDVForm, bankAccountsForm, storageUnitsForm, registersForm, usernameForm){
+  insertData(categoryForm, activityCodesForm, PDVForm, bankAccountsForm, storageUnitsForm, registersForm, usernameForm, PIBForm){
     const data  = {
       category: categoryForm,
       activityCodes: activityCodesForm,
@@ -36,7 +41,8 @@ export class CompanyService {
       bankAccounts: bankAccountsForm,
       storageUnits: storageUnitsForm,
       registers: registersForm,
-      username: usernameForm
+      username: usernameForm,
+      PIB: PIBForm
     }
 
     return this.http.post(`${this.uri}/company/insertData`, data)

@@ -125,28 +125,28 @@ class CompanyController {
             let storageUnits = req.body.storageUnits;
             let registers = req.body.registers;
             let username = req.body.username;
+            let PIB = req.body.PIB;
             company_1.default.updateOne({ "username": username }, { $set: { "category": category, "activityCodes": activityCodes, "PDV": PDV,
                     "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers, "firstTime": false } }, (err, resp) => {
                 if (err)
                     console.log(err);
                 else {
-                    let num;
                     storageUnit_1.default.find({}, (err, data) => {
                         if (err)
                             console.log(err);
                         else {
+                            let num;
                             num = data.length;
                             for (let i = 0; i < req.body.storageUnits; i++) {
                                 let storageUnit = new storageUnit_1.default();
                                 storageUnit.name = "Magacin " + (num + i + 1);
                                 storageUnit.id = num + i + 1;
-                                storageUnit.companyPIB = req.body.PIB;
+                                storageUnit.companyPIB = PIB;
                                 storageUnit_1.default.collection.insertOne(storageUnit, (err, resp) => {
                                     if (err)
                                         console.log(err);
                                 });
                             }
-                            res.json({ 'message': 'Company succesfully added' });
                         }
                     });
                     res.json({ 'message': 'Successfully added data' });
@@ -220,6 +220,15 @@ class CompanyController {
         this.findCompanyByPIB = (req, res) => {
             let CompanyPIB = req.body.PIB;
             company_1.default.findOne({ "PIB": CompanyPIB }, (err, company) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(company);
+            });
+        };
+        this.getCompany = (req, res) => {
+            let username = req.body.username;
+            company_1.default.findOne({ "username": username }, (err, company) => {
                 if (err)
                     console.log(err);
                 else

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CompanyService } from '../company.service';
 import { ActivityCode } from '../model/activityCode';
 import { BankAccount } from '../model/bankAccount';
+import { Company } from '../model/company';
 import { Register } from '../model/register';
 import { RegisterModel } from '../model/registerModel';
 import { User } from '../model/user';
@@ -17,6 +18,7 @@ export class CompanyFirstComponent implements OnInit {
   constructor(private router: Router, private companyService: CompanyService) { }
 
   user: User
+  company: Company
 
   category: string
   PDV: boolean
@@ -39,6 +41,10 @@ export class CompanyFirstComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'))
+    this.companyService.getCompany(this.user.username).subscribe((Data: Company)=>{
+      this.company = Data
+    })
+
     let reg = new Register
     this.registers.push(reg)
     this.registersLocation.push("")
@@ -133,7 +139,7 @@ export class CompanyFirstComponent implements OnInit {
 
     if(this.send){
       this.companyService.insertData(this.category, this.selectedActivityCodes, this.PDV, this.bankAccountsModel, 
-        this.storage, this.registers, this.user.username).subscribe((resp =>{
+        this.storage, this.registers, this.user.username, this.company.PIB).subscribe((resp =>{
           alert(resp['message'])
           this.router.navigate(['company'])
         }))
