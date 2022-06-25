@@ -131,7 +131,7 @@
     </p>
     <br>
     <p *ngIf="companySearch">
-        Owner name: {{companySearch.firstname}}
+        Owner name: {{companySearch.firstname}} {{companySearch.lastname}}
         <br>
         telephoneNumber: {{companySearch.telephoneNumber}}
         <br>
@@ -139,11 +139,19 @@
         <br>
         Location: {{companySearch.country}}, {{companySearch.city}}
         <br>
-        Street: {{companySearch.streetName}} {{companySearch.streetNumber}}
+        Street: {{companySearch.streetName}} {{companySearch.streetNumber}} {{companySearch.postNumber}}
+        <br>
+        PIB: {{companySearch.PIB}}
+        <br>
+        JMBP: {{companySearch.JMBP}}
+        <br>
+        Logo: <img src="{{companySearch.imageData}}">
         <br>
         Days to pay: <input type="number" min="0">
         <br>
         Discount percent: <input type="number" min="0" max="100">
+        <br>
+        <button (click)="addCustomer2()">Add Customer</button>
     </p>
     <h2>Add customers by adding data</h2>
     <table>
@@ -202,8 +210,17 @@
             <td class="error">{{JMBPCheck}}</td>
         </tr>
         <tr>
+            <td>Logo of company:</td>
+            <input type="file" id="file" name="logo" (change)="onFileSelected($event)">
+        </tr>
+        <tr>
+            <td>
+                <img src="{{image}}">
+            </td>
+        </tr>
+        <tr>
             <td>Days to pay:</td>
-            <input type="number" min="0" [(ngModel)]="days">
+            <input type="number" min="0" [(ngModel)]="daysToPay">
         </tr>
         <tr>
             <td>Discount percent:</td>

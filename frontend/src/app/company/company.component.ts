@@ -32,7 +32,7 @@ export class CompanyComponent implements OnInit {
     this.router.navigate(['passwordChange'])
   }
 
-  companyData: boolean
+  companyData: boolean = true
   ordersData: boolean
   storageRegisterData: boolean
   itemData: boolean
@@ -103,8 +103,47 @@ export class CompanyComponent implements OnInit {
   PIBCheck: string
   JMBPCheck: string
 
-  days: number
+  daysToPay: number
   discount: number
+
+  imageData: string
+  selectedFile: File = null
+  image: string
+
+  onFileSelected(event: any){
+    
+    if(event.target.files && event.target.files[0]){
+      const maxHW = 300;
+      const minHW = 100;
+      
+      this.selectedFile = <File>event.target.files[0];
+
+      if(this.selectedFile.type == "image/png" || this.selectedFile.type == "image/jpg" || this.selectedFile.type == "image/jpeg"){
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          const image = new Image();
+          image.src = e.target.result;
+          image.onload = rs => {
+            const img_height = rs.currentTarget['height'];
+            const img_width = rs.currentTarget['width'];
+
+            console.log(img_height, img_width);
+
+            if(img_height > maxHW || img_height < minHW || img_width > maxHW || img_width < minHW){
+              alert("Bad photo, size is big");
+            
+            } else {
+              this.imageData = e.target.result;
+              this.image = this.imageData
+            }
+          }
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      } else {
+        alert("Bad image format")
+      }
+    }
+  }
 
   checkTelephoneNumber(){
     let telephoneNumberRegex = /^\d{9,10}$/
@@ -153,8 +192,9 @@ export class CompanyComponent implements OnInit {
     let send: boolean
 
     if(!this.firstname || !this.lastname || !this.telephoneNumber || !this.email || !this.name || !this.country || 
-      !this.city || !this.postNumber || !this.streetName || !this.streetNumber || !this.PIB || !this.JMBP || !this.days || 
-      !this.discount) {
+      !this.city || !this.postNumber || !this.streetName || !this.streetNumber || !this.PIB || !this.JMBP || !this.daysToPay || 
+      !this.discount || this.telephoneNumberCheck != "" || this.emailCheck != "" || this.checkMailNumber != "" || 
+      this.streetNumberCheck != "" || this.PIBCheck != "" || this.PIBCheck != "" || this.JMBPCheck != "") {
         send = false
       } else send = true
   }
@@ -170,9 +210,15 @@ export class CompanyComponent implements OnInit {
   }
 
   findCompanyByPIB(){
-    this.companyService.findCompanyByPIB(this.PIBSearch).subscribe((data: Company)=>{
-      this.companySearch = data
-    })
+    if(this.PIBSearch != this.company.PIB){
+      this.companyService.findCompanyByPIB(this.PIBSearch).subscribe((data: Company)=>{
+        if(!data) alert('Company with this PIB does not exist')
+        else this.companySearch = data
+      })
+    } else alert('You used your PIB')
   }
 
+  addCustomer2(){
+
+  }
 }

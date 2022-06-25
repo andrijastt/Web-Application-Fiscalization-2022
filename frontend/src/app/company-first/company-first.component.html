@@ -18,10 +18,10 @@
     <tr>
         <td>In system for PDV</td>
         <td> 
-            <select [(ngModel)]="PDV">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select>
+            <mat-radio-group [(ngModel)]="PDV" name="PDV">
+                <mat-radio-button value="true">Yes</mat-radio-button>
+                <mat-radio-button value="false">No</mat-radio-button>
+            </mat-radio-group>
         </td>
     </tr>
     <tr>
