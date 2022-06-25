@@ -59,4 +59,8 @@ companyRouter.route('/getMyStorageUntis').post(
     (req, res) => new CompanyController().getMyStorageUntis(req, res)
 )
 
+companyRouter.route('/findCompanyByPIB').post(
+    (req, res) => new CompanyController().findCompanyByPIB(req, res)
+)
+
 export default companyRouter;

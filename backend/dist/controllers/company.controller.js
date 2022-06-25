@@ -217,6 +217,15 @@ class CompanyController {
                     res.json(storageUnits);
             });
         };
+        this.findCompanyByPIB = (req, res) => {
+            let CompanyPIB = req.body.PIB;
+            company_1.default.findOne({ "PIB": CompanyPIB }, (err, company) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(company);
+            });
+        };
     }
 }
 exports.CompanyController = CompanyController;

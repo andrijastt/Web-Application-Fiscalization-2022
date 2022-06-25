@@ -141,4 +141,9 @@ export class CompanyFirstComponent implements OnInit {
       alert('Not all data is filled')
     }
   }
+
+  passwordChange(){
+    localStorage.setItem('location', 'companyFirst')
+    this.router.navigate(['passwordChange'])
+  }
 }

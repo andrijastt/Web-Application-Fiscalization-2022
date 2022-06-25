@@ -121,8 +121,102 @@
     </mat-tab-group>
 </div>
 
-<footer>
-    <button (click)="logout()" class="logOut">LogOut</button>
+<div *ngIf="ordersData">
+    <h2>My customers</h2>
+    <h2>Add customers via PIB</h2>
+    <p>
+        PIB: <input type="number" [(ngModel)]="PIBSearch" (ngModelChange)="checkPIBSearch()">
+        <button (click)="findCompanyByPIB()">Search</button>
+        <td class="error">{{PIBSearchCheck}}</td>
+    </p>
     <br>
-    Click here to <a routerLink="/passwordChange">change password.</a>
+    <p *ngIf="companySearch">
+        Owner name: {{companySearch.firstname}}
+        <br>
+        telephoneNumber: {{companySearch.telephoneNumber}}
+        <br>
+        E-mail: {{companySearch.email}}
+        <br>
+        Location: {{companySearch.country}}, {{companySearch.city}}
+        <br>
+        Street: {{companySearch.streetName}} {{companySearch.streetNumber}}
+        <br>
+        Days to pay: <input type="number" min="0">
+        <br>
+        Discount percent: <input type="number" min="0" max="100">
+    </p>
+    <h2>Add customers by adding data</h2>
+    <table>
+        <tr>
+            <td>Firstname:</td>
+            <input type="text" name="firstname" [(ngModel)]="firstname">
+        </tr>
+        <tr>
+            <td>Lastname:</td>
+            <input type="text" name="lastname" [(ngModel)]="lastname">
+        </tr>
+        <tr>
+            <td>Telephone number:</td>
+            <input type="text" name="number" [(ngModel)]="telephoneNumber" (ngModelChange)="checkTelephoneNumber()">
+            <td class="error">{{telephoneNumberCheck}}</td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <input type="text" name="email" [(ngModel)]="email" (ngModelChange)="checkEmail()">
+            <td class="error">{{emailCheck}}</td>
+        </tr>
+        <tr>
+            <td>Name of company:</td>
+            <input type="text" name="companyName" [(ngModel)]="name">
+        </tr>
+        <tr>
+            <td>Country:</td>
+            <input type="text" name="country" [(ngModel)]="country">
+        </tr>
+        <tr>
+            <td>City:</td>
+            <input type="text" name="city" [(ngModel)]="city">
+        </tr>
+        <tr>
+            <td>PostNumber:</td>
+            <input type="number" name="postNumber" [(ngModel)]="postNumber" (ngModelChange)="checkPostNumber()">
+            <td class="error">{{checkMailNumber}}</td>
+        </tr>
+        <tr>
+            <td>Street name:</td>
+            <input type="text" name="street" [(ngModel)]="streetName">
+        </tr>
+        <tr>
+            <td>Street number:</td>
+            <input type="number" name="streetNumber" [(ngModel)]="streetNumber" (ngModelChange)="checkStreetNumber()">
+            <td class="error">{{streetNumberCheck}}</td>
+        </tr>
+        <tr>
+            <td>PIB:</td>
+            <input type="number" name="PIB" [(ngModel)]="PIB" (ngModelChange)="checkPIB()">
+            <td class="error">{{PIBCheck}}</td>
+        </tr>
+        <tr>
+            <td>Unique number of company:</td>
+            <input type="text" name="JMBP" [(ngModel)]="JMBP" (ngModelChange)="checkJMBP()">
+            <td class="error">{{JMBPCheck}}</td>
+        </tr>
+        <tr>
+            <td>Days to pay:</td>
+            <input type="number" min="0" [(ngModel)]="days">
+        </tr>
+        <tr>
+            <td>Discount percent:</td>
+            <td>
+                <input type="number" min="0" max="100" [(ngModel)]="discount">
+            </td>
+        </tr>
+    </table>
+    <button (click)="addCustomer()">Add customer</button>
+</div>
+
+<footer>
+    <button (click)="passwordChange()">Change password</button>
+    <br>
+    <button (click)="logout()" class="logOut">LogOut</button>
 </footer>

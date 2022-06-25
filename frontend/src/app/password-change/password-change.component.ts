@@ -14,9 +14,11 @@ export class PasswordChangeComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'))
+    this.back = localStorage.getItem('location')
   }
 
   user: User
+  back: string
   oldPassword: string
   oldPasswordCheck: string
 
@@ -33,6 +35,11 @@ export class PasswordChangeComponent implements OnInit {
   logout(){
     localStorage.clear()
     this.router.navigate([''])
+  }
+
+  return(){
+    localStorage.removeItem('location')
+    this.router.navigate([this.back])
   }
 
   checkOldPassword(){

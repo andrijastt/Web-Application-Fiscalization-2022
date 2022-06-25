@@ -207,4 +207,12 @@ export class CompanyController{
             else res.json(storageUnits)
         })
     }
+
+    findCompanyByPIB = (req: express.Request, res: express.Response) => {
+        let CompanyPIB = req.body.PIB    
+        CompanyModel.findOne({"PIB": CompanyPIB}, (err, company)=>{
+            if(err) console.log(err)
+            else res.json(company)         
+        })
+    }
 }

@@ -319,4 +319,9 @@ export class AdminComponent implements OnInit {
       location.reload()
     }))
   }
+
+  passwordChange(){
+    localStorage.setItem('location', 'admin')
+    this.router.navigate(['passwordChange'])
+  }
 }

@@ -11,3 +11,7 @@ footer{
 .companyData{
     font-size: 20px;
 }
+
+.error{
+    color: red;
+}

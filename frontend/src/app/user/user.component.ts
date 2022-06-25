@@ -17,4 +17,8 @@ export class UserComponent implements OnInit {
     this.router.navigate([''])
   }
 
+  passwordChange(){
+    localStorage.setItem('location', 'user')
+    this.router.navigate(['passwordChange'])
+  }
 }

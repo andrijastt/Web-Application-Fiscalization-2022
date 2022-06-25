@@ -89,4 +89,9 @@ export class CompanyService {
     const data = { PIB: PIBForm }
     return this.http.post(`${this.uri}/company/getMyStorageUntis`, data)
   }
+
+  findCompanyByPIB(PIBForm){
+    const data = { PIB: PIBForm }
+    return this.http.post(`${this.uri}/company/findCompanyByPIB`, data)
+  }
 }

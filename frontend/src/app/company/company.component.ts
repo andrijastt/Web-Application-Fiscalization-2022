@@ -27,6 +27,11 @@ export class CompanyComponent implements OnInit {
     this.router.navigate([''])
   }
 
+  passwordChange(){
+    localStorage.setItem('location', 'company')
+    this.router.navigate(['passwordChange'])
+  }
+
   companyData: boolean
   ordersData: boolean
   storageRegisterData: boolean
@@ -71,6 +76,103 @@ export class CompanyComponent implements OnInit {
     this.storageRegisterData = false
     this.itemData = false
     this.tableData = true
+  }
+
+  firstname: string
+  lastname: string
+
+  telephoneNumber: string
+  telephoneNumberCheck: string
+
+  email: string
+  emailCheck: string
+
+  name: string
+  country: string
+  city: string
+
+  postNumber: Number
+  checkMailNumber: string
+
+  streetName: string
+  streetNumber: Number
+  streetNumberCheck: string
+
+  PIB: Number
+  JMBP: string
+  PIBCheck: string
+  JMBPCheck: string
+
+  days: number
+  discount: number
+
+  checkTelephoneNumber(){
+    let telephoneNumberRegex = /^\d{9,10}$/
+    if(!telephoneNumberRegex.test(this.telephoneNumber)){
+      this.telephoneNumberCheck = "Bad telephone number, must contain only numbers and has 9 to 10 characters"
+    } else this.telephoneNumberCheck = ""
+  }
+
+  checkEmail(){
+    let emailRegex = /^.*@.*\..*[a-z]$/
+    if(!emailRegex.test(this.email)){
+      this.emailCheck = "Bad email format"
+    } else { this.emailCheck = "" }
+  }
+
+  checkPostNumber(){
+    if(this.postNumber < 10000 || this.postNumber > 99999){
+      this.checkMailNumber = "Bad post number"
+    } else {
+      this.checkMailNumber = ""
+    }
+  }
+
+  checkStreetNumber(){
+    if(this.streetNumber < 0){
+      this.streetNumberCheck = "Street number can't be less than 0 (0 is no number)"
+    } else {
+      this.streetNumberCheck = ""
+    }
+  }
+
+  checkPIB(){
+    if(this.PIB < 100000001 || this.PIB  > 999999999){
+      this.PIBCheck = "Wrong PIB format"
+    } else this.PIBCheck = ""
+  }
+
+  checkJMBP(){
+    let JMBPRegex = /^\d{8}$/
+    if(!JMBPRegex.test(this.JMBP)){
+      this.JMBPCheck = "Wrong JMBP format"
+    } else this.JMBPCheck = ""
+  }
+
+  addCustomer(){
+    let send: boolean
+
+    if(!this.firstname || !this.lastname || !this.telephoneNumber || !this.email || !this.name || !this.country || 
+      !this.city || !this.postNumber || !this.streetName || !this.streetNumber || !this.PIB || !this.JMBP || !this.days || 
+      !this.discount) {
+        send = false
+      } else send = true
+  }
+
+  PIBSearch: number
+  PIBSearchCheck: string
+  companySearch: Company
+
+  checkPIBSearch(){
+    if(this.PIBSearch < 100000001 || this.PIBSearch  > 999999999){
+      this.PIBSearchCheck = "Wrong PIB format"
+    } else this.PIBSearchCheck = ""
+  }
+
+  findCompanyByPIB(){
+    this.companyService.findCompanyByPIB(this.PIBSearch).subscribe((data: Company)=>{
+      this.companySearch = data
+    })
   }
 
 }
