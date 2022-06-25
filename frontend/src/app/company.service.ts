@@ -100,4 +100,33 @@ export class CompanyService {
     const data = { PIB: PIBForm }
     return this.http.post(`${this.uri}/company/findCompanyByPIB`, data)
   }
+
+  addCustomer(sellerPIBForm, firstnameForm, lastnameForm, telephoneNumberForm, emailForm, nameForm, countryForm, cityFrom, 
+    postNumberForm, streetNameForm, streetNumberFrom, PIBForm, JMBPForm, imageDataForm, daysToPayForm, discountForm){
+    const data = {
+      sellerPIB: sellerPIBForm,
+      firstname: firstnameForm,
+      lastname: lastnameForm,
+      telephoneNumber: telephoneNumberForm,
+      email: emailForm,
+      name: nameForm,
+      country: countryForm,
+      city: cityFrom,
+      postNumber: postNumberForm,
+      streetName: streetNameForm,
+      streetNumber: streetNumberFrom,
+      PIB: PIBForm,
+      JMBP: JMBPForm,
+      imageData: imageDataForm,
+      daysToPay: daysToPayForm,
+      discount: discountForm
+    }
+
+    return this.http.post(`${this.uri}/company/addCustomer`, data)
+  }
+
+  getMyCustomers(PIBForm){
+    const data = { PIB: PIBForm }
+    return this.http.post(`${this.uri}/company/getMyCustomers`, data)
+  }
 }

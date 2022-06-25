@@ -123,6 +123,26 @@
 
 <div *ngIf="ordersData">
     <h2>My customers</h2>
+    <table>
+        <tr>
+            <td>Owner name</td>
+            <td>Company name</td>
+            <td>Telephone number</td>
+            <td>E-mail</td>
+            <td>PIB</td>
+            <td>Days to pay</td>
+            <td>Discount</td>
+        </tr>
+        <tr *ngFor="let n of customers">
+            <td>{{n.firstname}} {{n.lastname}}</td>
+            <td>{{n.name}}</td>
+            <td>{{n.telephoneNumber}}</td>
+            <td>{{n.email}}</td>
+            <td>{{n.PIB}}</td>
+            <td>{{n.daysToPay}}</td>
+            <td>{{n.discount}}%</td>
+        </tr>
+    </table>
     <h2>Add customers via PIB</h2>
     <p>
         PIB: <input type="number" [(ngModel)]="PIBSearch" (ngModelChange)="checkPIBSearch()">
@@ -132,6 +152,8 @@
     <br>
     <p *ngIf="companySearch">
         Owner name: {{companySearch.firstname}} {{companySearch.lastname}}
+        <br>
+        Company name: {{companySearch.name}}
         <br>
         telephoneNumber: {{companySearch.telephoneNumber}}
         <br>
@@ -147,9 +169,9 @@
         <br>
         Logo: <img src="{{companySearch.imageData}}">
         <br>
-        Days to pay: <input type="number" min="0">
+        Days to pay: <input type="number" min="0" [(ngModel)]="daysToPay2">
         <br>
-        Discount percent: <input type="number" min="0" max="100">
+        Discount percent: <input type="number" min="0" max="100" [(ngModel)]="discount2">
         <br>
         <button (click)="addCustomer2()">Add Customer</button>
     </p>

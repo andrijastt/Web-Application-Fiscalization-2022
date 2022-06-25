@@ -22,5 +22,7 @@ companyRouter.route('/deactivate').post((req, res) => new company_controller_1.C
 companyRouter.route('/getMyStorageUntis').post((req, res) => new company_controller_1.CompanyController().getMyStorageUntis(req, res));
 companyRouter.route('/findCompanyByPIB').post((req, res) => new company_controller_1.CompanyController().findCompanyByPIB(req, res));
 companyRouter.route('/getCompany').post((req, res) => new company_controller_1.CompanyController().getCompany(req, res));
+companyRouter.route('/addCustomer').post((req, res) => new company_controller_1.CompanyController().addCustomer(req, res));
+companyRouter.route('/getMyCustomers').post((req, res) => new company_controller_1.CompanyController().getMyCustomers(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map

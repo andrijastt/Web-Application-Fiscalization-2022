@@ -4,6 +4,7 @@ import ActivityCodesModel from '../models/activityCodes'
 import RegisterModel from '../models/register'
 import CompanyModel from '../models/company'
 import StorageUnitModel from '../models/storageUnit'
+import CustomerModel from '../models/customer'
 
 export class CompanyController{
 
@@ -221,6 +222,28 @@ export class CompanyController{
         CompanyModel.findOne({"username": username}, (err, company)=>{
             if(err) console.log(err)
             else res.json(company)         
+        })
+    }
+
+    addCustomer = (req: express.Request, res: express.Response) => {
+
+        CustomerModel.findOne({"email": req.body.email}, (err, customer)=>{
+            if(err) console.log(err)
+            if(customer){
+                res.json({'message': 'Customer is already added'})
+            } else {
+                CustomerModel.collection.insertOne(req.body, (err, resp)=>{
+                    if(err) console.log(err)
+                    else res.json({'message': 'Customer added'})
+                })
+            }
+        })
+    }
+
+    getMyCustomers = (req: express.Request, res: express.Response) => {
+        CustomerModel.find({}, (err, customers)=>{
+            if(err) console.log(err)
+            else res.json(customers)
         })
     }
 }

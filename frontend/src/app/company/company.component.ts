@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyService } from '../company.service';
 import { Company } from '../model/company';
+import { Customer } from '../model/customer';
 import { StorageUnit } from '../model/storageUnit';
 
 @Component({
@@ -18,10 +19,14 @@ export class CompanyComponent implements OnInit {
     this.companyService.getMyStorageUntis(this.company.PIB).subscribe((data: StorageUnit[])=>{
       this.storageUnits = data
     })
+    this.companyService.getMyCustomers(this.company.PIB).subscribe((data: Customer[])=>{
+      this.customers = data
+    })
   }
 
   company: Company
   storageUnits: StorageUnit[] = []
+  customers: Customer[] = []
 
   logout(){
     this.router.navigate([''])
@@ -197,11 +202,27 @@ export class CompanyComponent implements OnInit {
       this.streetNumberCheck != "" || this.PIBCheck != "" || this.PIBCheck != "" || this.JMBPCheck != "") {
         send = false
       } else send = true
+
+    if(send){
+
+      this.companyService.addCustomer(this.company.PIB, this.firstname, this.lastname, this.telephoneNumber, this.email, 
+        this.name, this.country, this.city, this.postNumber, this.streetName, this.streetNumber, this.PIB, this.JMBP, 
+        this.imageData, this.daysToPay, this.discount).subscribe(resp => {
+          alert(resp['message'])
+          location.reload()
+        })
+
+    } else {
+      alert('Something is wrong')
+    }
   }
 
   PIBSearch: number
   PIBSearchCheck: string
   companySearch: Company
+
+  daysToPay2: number
+  discount2: number
 
   checkPIBSearch(){
     if(this.PIBSearch < 100000001 || this.PIBSearch  > 999999999){
@@ -219,6 +240,20 @@ export class CompanyComponent implements OnInit {
   }
 
   addCustomer2(){
+    let send: boolean
+    if(!this.daysToPay2 || !this.discount2) send = false
+    else send = true
 
+    if(send){
+      this.companyService.addCustomer(this.company.PIB, this.companySearch.firstname, this.companySearch.lastname, 
+        this.companySearch.telephoneNumber, this.companySearch.email, this.companySearch.name, this.companySearch.country, 
+        this.companySearch.city, this.companySearch.postNumber, this.companySearch.streetName, this.companySearch.streetNumber, 
+        this.companySearch.PIB, this.companySearch.JMBP, this.companySearch.imageData, this.daysToPay2, this.discount2).subscribe(resp => {
+          alert(resp['message'])
+          location.reload()
+        })
+    } else {
+      alert('Data not filled')
+    }
   }
 }

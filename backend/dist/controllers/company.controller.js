@@ -9,6 +9,7 @@ const activityCodes_1 = __importDefault(require("../models/activityCodes"));
 const register_1 = __importDefault(require("../models/register"));
 const company_1 = __importDefault(require("../models/company"));
 const storageUnit_1 = __importDefault(require("../models/storageUnit"));
+const customer_1 = __importDefault(require("../models/customer"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -233,6 +234,31 @@ class CompanyController {
                     console.log(err);
                 else
                     res.json(company);
+            });
+        };
+        this.addCustomer = (req, res) => {
+            customer_1.default.findOne({ "email": req.body.email }, (err, customer) => {
+                if (err)
+                    console.log(err);
+                if (customer) {
+                    res.json({ 'message': 'Customer is already added' });
+                }
+                else {
+                    customer_1.default.collection.insertOne(req.body, (err, resp) => {
+                        if (err)
+                            console.log(err);
+                        else
+                            res.json({ 'message': 'Customer added' });
+                    });
+                }
+            });
+        };
+        this.getMyCustomers = (req, res) => {
+            customer_1.default.find({}, (err, customers) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(customers);
             });
         };
     }
