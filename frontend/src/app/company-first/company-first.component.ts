@@ -120,7 +120,7 @@ export class CompanyFirstComponent implements OnInit {
       this.bankAccountsModel[i].bank = this.bank[i]
       this.bankAccountsModel[i].bankAccount = this.bankAcc[i]
 
-      if(!this.bank[i] || !this.bankAcc[i]){
+      if(!this.bank[i] || !this.bankAcc[i] || this.bankErrors[i] != ""){
         this.send = false
       } 
     }
