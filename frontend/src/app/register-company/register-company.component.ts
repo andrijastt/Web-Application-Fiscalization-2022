@@ -70,7 +70,7 @@ export class RegisterCompanyComponent implements OnInit {
 
             console.log(img_height, img_width);
 
-            if(img_height >= maxHW || img_height <= minHW || img_width >= maxHW || img_width <= minHW){
+            if(img_height > maxHW || img_height < minHW || img_width > maxHW || img_width < minHW){
               alert("Bad photo, size is big");
               this.send = false;
               // return false;
@@ -152,7 +152,9 @@ export class RegisterCompanyComponent implements OnInit {
 
     if(this.password != this.confirmPassword || !this.firstname || !this.lastname || !this.username ||
       !this.password || !this.confirmPassword || !this.telephoneNumber || !this.email || !this.name || !this.country ||
-      !this.city || !this.postNumber || !this.streetName || !this.streetNumber || !this.PIB || !this.JMBP || !this.image) {
+      !this.city || !this.postNumber || !this.streetName || !this.streetNumber || !this.PIB || !this.JMBP || !this.image ||
+      this.JMBPCheck != "" || this.PIBCheck != "" || this.streetNumberCheck != "" || this.checkMailNumber != "" || this.emailCheck != "" || 
+      this.telephoneNumberCheck != "" || this.confirmPasswordCheck != "" || this.passwordCheck != "") {
         this.send = false;
       }
     else this.send = true
@@ -167,7 +169,6 @@ export class RegisterCompanyComponent implements OnInit {
     else {
       this.message = "Check data"
     }
-
   }
 
 }
