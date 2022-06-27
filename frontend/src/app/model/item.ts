@@ -1,7 +1,7 @@
 export class Item {
     companyPIB: number
     id: number
-    name: string
+    itemName: string
     unitOfMeasure: string
     taxRate: string
     producer: string

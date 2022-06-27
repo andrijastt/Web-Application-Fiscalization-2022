@@ -280,4 +280,12 @@ export class CompanyComponent implements OnInit {
     }
     this.userSlice = this.user.slice(startIndex, endIndex)
   }
+
+  itemId: number
+  itemName: string
+  itemUnitOfMeasure: string
+  itemTaxRate: string
+  itemType: string
+  itemImageData: string
+  itemselectedFile: File = null
 }

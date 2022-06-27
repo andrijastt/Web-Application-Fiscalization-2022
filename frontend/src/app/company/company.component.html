@@ -270,8 +270,136 @@
 
     <button mat-button (click)="addGoods = true">Add Goods</button>
     <mat-tab-group *ngIf="addGoods">
-        <mat-tab label="General data"></mat-tab>
-        <mat-tab label="Additional data"></mat-tab>
+        <mat-tab label="General data">
+            <table>
+                <tr>
+                    <td>ID of item:</td>
+                    <td>
+                        <input type="number" min="0" [(ngModel)]="itemId">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Item name:</td>
+                    <td>
+                        <input type="text" [(ngModel)]="itemName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Unit of measure:</td>
+                    <td>
+                        <input type="text" [(ngModel)]="itemUnitOfMeasure">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tax rate:</td>
+                    <td>
+                        <select *ngIf="company.PDV" [(ngModel)]="itemTaxRate">
+                            <option value="20%">20%</option>
+                            <option value="10%">10%</option>
+                        </select>
+                        <select *ngIf="!company.PDV" disabled [(ngModel)]="itemTaxRate">
+                            <option value="0%">0%</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr *ngIf="company.category == 'caterer'">
+                    <td>
+                        Type:
+                    </td>
+                    <td>
+                        <mat-radio-group [(ngModel)]="itemType">
+                            <mat-radio-button value="food">Food</mat-radio-button>
+                            <mat-radio-button value="beverage">Beverage</mat-radio-button>
+                            <mat-radio-button value="raw material">Raw material</mat-radio-button>
+                        </mat-radio-group>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Picture of item:</td>
+                    <td>
+                        <input type="file">
+                    </td>
+                </tr>
+            </table>
+            <button mat-button>Add item</button>
+        </mat-tab>
+
+        <mat-tab label="Additional data">
+            <table>
+                <tr>
+                    <td>Country of origin:</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Foreign item name:</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Barcode number:</td>
+                    <td>
+                        <input type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Producer name:</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Customs' rate(%):</td>
+                    <td>
+                        <input type="number" min="0" max="100">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Eko tax:</td>
+                    <td>
+                        <mat-radio-group>
+                            <mat-radio-button value="true">Yes</mat-radio-button>
+                            <mat-radio-button value="false">No</mat-radio-button>
+                        </mat-radio-group>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Excise:</td>
+                    <td>
+                        <mat-radio-group>
+                            <mat-radio-button value="true">Yes</mat-radio-button>
+                            <mat-radio-button value="false">No</mat-radio-button>
+                        </mat-radio-group>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Minimum number of items:</td>
+                    <td>
+                        <input type="number" min="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maximum number of items:</td>
+                    <td>
+                        <textarea></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td>
+                        <input type="textarea">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Declaration</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+            </table>
+        </mat-tab>
         <mat-tab label="Price and state of goods"></mat-tab>
     </mat-tab-group>
 </div>
