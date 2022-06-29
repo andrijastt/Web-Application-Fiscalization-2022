@@ -1,5 +1,23 @@
-<p>user works!</p>
-<br/>
+<div>
+    <ul *ngFor="let n of comapnies; let i = index">
+        <li>
+            {{n.name}}
+            <br>
+            <table *ngFor="let j of items[i]">
+                <tr>
+                    <td>Producer:</td>
+                    <td>Lowest price:</td>
+                    <td>Objects</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+</div>
 <footer>
     <button (click)="passwordChange()">Change password</button>
     <br>

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CompanyService } from '../company.service';
+import { Company } from '../model/company';
+import { Item } from '../model/item';
+import { RegisterCompanyService } from '../register-company.service';
 
 @Component({
   selector: 'app-user',
@@ -8,9 +12,18 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private registerComapnyService: RegisterCompanyService, private companyService: CompanyService) { }
 
   ngOnInit(): void {
+    this.registerComapnyService.getAllRegisterCompany().subscribe((data: Company[]) => {
+      this.comapnies = data;
+
+      for(let i = 0; i < this.comapnies.length; i ++){
+        this.companyService.getMyItems(this.comapnies[i].PIB).subscribe((data: Item[]) => {
+          this.items[i] = data
+        })
+      }
+    })
   }
 
   logout(){
@@ -21,4 +34,7 @@ export class UserComponent implements OnInit {
     localStorage.setItem('location', 'user')
     this.router.navigate(['passwordChange'])
   }
+
+  comapnies: Company[] = []
+  items: Item[][] = []
 }
