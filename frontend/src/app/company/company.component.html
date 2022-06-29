@@ -262,18 +262,6 @@
 
 <div *ngIf="goodsAndServices">
     <div>Total of {{items.length}} of rows</div>
-    <!-- <div>Item id    Item name   Unit of measure     Tax rate    Item name</div>
-    <div *ngFor="let n of itemSlice">
-        <div>Item id: {{n.itemId}}</div>
-        <div>Item name: {{n.itemName}}</div>
-        <div>Unit of measure {{n.unitOfMeasure}}</div>
-        <div>Tax rate: {{n.taxRate}}</div>
-        <div>Producer: {{n.producer}}</div>
-        <div>
-            <button mat-button>Delete</button>
-        </div>
-        <div>{{n.itemId}}   {{n.itemName}}    {{n.unitOfMeasure}}    {{n.taxRate}}    {{n.producer}}    <button mat-button>Delete</button></div>
-    </div> -->
     <table *ngFor="let n of itemSlice">
         <tr>
             <td>Item id:</td>
