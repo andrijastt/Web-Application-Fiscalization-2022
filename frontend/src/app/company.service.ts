@@ -129,4 +129,35 @@ export class CompanyService {
     const data = { PIB: PIBForm }
     return this.http.post(`${this.uri}/company/getMyCustomers`, data)
   }
+
+  getMyItems(PIBForm){
+    const data = { PIB: PIBForm }
+    return this.http.post(`${this.uri}/company/getMyItems`, data)
+  }
+
+  addItem(companyPIBForm, itemIdForm, itemNameForm, unitOfMeasureForm, taxRateForm, typeForm, imageForm, countryOfOriginForm, 
+    foreignItemNameForm, barcodeNumberForm, producerForm, customsRateForm, ekoTaxForm, exciseForm, minItemsForm, maxItemsForm, 
+    descriptionForm, declarationForm){
+    const data = {
+      companyPIB: companyPIBForm,
+      itemId: itemIdForm,
+      itemName: itemNameForm,
+      unitOfMeasure: unitOfMeasureForm,
+      taxRate: taxRateForm, 
+      type: typeForm, 
+      image: imageForm, 
+      countryOfOrigin: countryOfOriginForm || null, 
+      foreignItemName: foreignItemNameForm || null,
+      barcodeNumber: barcodeNumberForm || null,  
+      producer: producerForm || null,
+      customsRate: customsRateForm || null,
+      ekoTax: ekoTaxForm || null,
+      excise: exciseForm || null,
+      minItems: minItemsForm || null,
+      maxItems: maxItemsForm || null,
+      description: descriptionForm || null,
+      declaration: declarationForm || null
+    }
+    return this.http.post(`${this.uri}/company/addItem`, data)
+  }
 }

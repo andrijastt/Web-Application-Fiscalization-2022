@@ -5,6 +5,7 @@ import RegisterModel from '../models/register'
 import CompanyModel from '../models/company'
 import StorageUnitModel from '../models/storageUnit'
 import CustomerModel from '../models/customer'
+import ItemModel from '../models/item'
 
 export class CompanyController{
 
@@ -245,5 +246,27 @@ export class CompanyController{
             if(err) console.log(err)
             else res.json(customers)
         })
+    }
+
+    getMyItems = (req: express.Request, res: express.Response) => {
+        ItemModel.find({}, (err, items)=>{
+            if(err) console.log(err)
+            else res.json(items)
+        })
+    }
+
+    addItem = (req: express.Request, res: express.Response) => {
+
+        ItemModel.findOne({"itemId": req.body.itemId}, (err, item)=>{
+            if(err) console.log(err)
+            if(item){
+                res.json({'message': 'Item ID taken'})
+            } else {
+                ItemModel.collection.insertOne(req.body, (err, resp) =>{
+                    if(err) console.log(err)
+                    else res.json({'message': 'Item added'})
+                })
+            }
+        })     
     }
 }

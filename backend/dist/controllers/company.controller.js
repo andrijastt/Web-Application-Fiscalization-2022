@@ -10,6 +10,7 @@ const register_1 = __importDefault(require("../models/register"));
 const company_1 = __importDefault(require("../models/company"));
 const storageUnit_1 = __importDefault(require("../models/storageUnit"));
 const customer_1 = __importDefault(require("../models/customer"));
+const item_1 = __importDefault(require("../models/item"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -259,6 +260,31 @@ class CompanyController {
                     console.log(err);
                 else
                     res.json(customers);
+            });
+        };
+        this.getMyItems = (req, res) => {
+            item_1.default.find({}, (err, items) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(items);
+            });
+        };
+        this.addItem = (req, res) => {
+            item_1.default.findOne({ "itemId": req.body.itemId }, (err, item) => {
+                if (err)
+                    console.log(err);
+                if (item) {
+                    res.json({ 'message': 'Item ID taken' });
+                }
+                else {
+                    item_1.default.collection.insertOne(req.body, (err, resp) => {
+                        if (err)
+                            console.log(err);
+                        else
+                            res.json({ 'message': 'Item added' });
+                    });
+                }
             });
         };
     }

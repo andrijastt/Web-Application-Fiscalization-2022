@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CompanyService } from '../company.service';
 import { Company } from '../model/company';
 import { Customer } from '../model/customer';
+import { Item } from '../model/item';
 import { StorageUnit } from '../model/storageUnit';
 import { RegisterCompanyService } from '../register-company.service';
 
@@ -25,9 +26,9 @@ export class CompanyComponent implements OnInit {
       this.customers = data
     })
 
-    this.registerCompanyService.getAllRegisterCompany().subscribe((data: Company[])=>{
-      this.user = data
-      this.userSlice = this.user.slice(0, 2)
+    this.companyService.getMyItems(this.company.PIB).subscribe((data: Item[])=>{
+      this.items = data
+      this.itemSlice = this.items.slice(0, 10)
     })
   }
 
@@ -269,16 +270,16 @@ export class CompanyComponent implements OnInit {
   /************************************************************/
 
   addGoods: boolean
-  user: Company[] = []
-  userSlice: Company[] = []
+  items: Item[] = []
+  itemSlice: Item[] = []
 
   onPageChange(event){
     const startIndex = event.pageIndex * event.pageSize
     let endIndex = startIndex + event.pageSize
-    if(endIndex > this.user.length){
-      endIndex = this.user.length
+    if(endIndex > this.items.length){
+      endIndex = this.items.length
     }
-    this.userSlice = this.user.slice(startIndex, endIndex)
+    this.itemSlice = this.items.slice(startIndex, endIndex)
   }
 
   itemId: number
@@ -286,6 +287,84 @@ export class CompanyComponent implements OnInit {
   itemUnitOfMeasure: string
   itemTaxRate: string
   itemType: string
-  itemImageData: string
-  itemselectedFile: File = null
+  itemImageData: string = null
+  itemSelectedFile: File = null
+
+  itemCountryOfOrigin: string
+  itemForeignName: string
+  itemBarcodeNumber: string
+  itemProducerName: string
+  itemCustomsRate: number
+  itemEkoTax: boolean
+  itemExcies: boolean
+  itemMinItems: number
+  itemMaxItems: number
+  itemDescription: number
+  itemDeclaration: string
+  itemAlert: string
+  itemAlert1: string
+
+  onFileSelectedItem(event: any){
+    
+    if(event.target.files && event.target.files[0]){
+      const maxHW = 300;
+      const minHW = 100;
+      
+      this.itemSelectedFile = <File>event.target.files[0];
+
+      if(this.itemSelectedFile.type == "image/png" || this.itemSelectedFile.type == "image/jpg" || 
+      this.itemSelectedFile.type == "image/jpeg"){
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          const image = new Image();
+          image.src = e.target.result;
+          image.onload = rs => {
+            const img_height = rs.currentTarget['height'];
+            const img_width = rs.currentTarget['width'];
+
+            if(img_height > maxHW || img_height < minHW || img_width > maxHW || img_width < minHW){
+              alert("Bad photo, size is big");
+            
+            } else {
+              this.itemImageData = e.target.result;
+            }
+          }
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      } else {
+        alert("Bad image format")
+      }
+    }
+
+  }
+
+  addItem(){
+    let send: boolean = true
+
+    if(!this.itemId || !this.itemName || !this.itemUnitOfMeasure || !this.itemTaxRate){
+      send = false;
+    }
+
+    if(this.itemMinItems != 0 && this.itemMaxItems != 0){
+      if(this.itemMinItems > this.itemMaxItems){
+          this.itemAlert1 = "Minimal number of items is bigger than maximum number of items"
+          send = false;
+      }
+    }
+
+    if(send){
+      this.companyService.addItem(this.company.PIB, this.itemId, this.itemName, this.itemUnitOfMeasure, this.itemTaxRate, this.itemType, 
+        this.itemImageData, this.itemCountryOfOrigin, this.itemForeignName, this.itemBarcodeNumber, this.itemProducerName, this.itemCustomsRate, 
+        this.itemEkoTax, this.itemExcies, this.itemMinItems, this.itemMaxItems, this.itemDescription, this.itemDeclaration). subscribe((resp => {   
+          if(resp['message'] == 'Item ID taken'){
+            alert(resp['message'])
+          } else {
+            location.reload()
+            alert(resp['message'])
+          }
+        }))
+    } else {
+      this.itemAlert = "Not all general data is filled"
+    }
+  }
 }

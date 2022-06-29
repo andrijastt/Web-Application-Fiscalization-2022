@@ -24,5 +24,7 @@ companyRouter.route('/findCompanyByPIB').post((req, res) => new company_controll
 companyRouter.route('/getCompany').post((req, res) => new company_controller_1.CompanyController().getCompany(req, res));
 companyRouter.route('/addCustomer').post((req, res) => new company_controller_1.CompanyController().addCustomer(req, res));
 companyRouter.route('/getMyCustomers').post((req, res) => new company_controller_1.CompanyController().getMyCustomers(req, res));
+companyRouter.route('/getMyItems').post((req, res) => new company_controller_1.CompanyController().getMyItems(req, res));
+companyRouter.route('/addItem').post((req, res) => new company_controller_1.CompanyController().addItem(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map

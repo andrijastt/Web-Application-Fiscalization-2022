@@ -74,4 +74,12 @@ companyRouter.route('/addCustomer').post(
 companyRouter.route('/getMyCustomers').post(
     (req, res) => new CompanyController().getMyCustomers(req, res)
 )
+
+companyRouter.route('/getMyItems').post(
+    (req, res) => new CompanyController().getMyItems(req, res)
+)
+companyRouter.route('/addItem').post(
+    (req, res) => new CompanyController().addItem(req, res)
+)
+
 export default companyRouter;
