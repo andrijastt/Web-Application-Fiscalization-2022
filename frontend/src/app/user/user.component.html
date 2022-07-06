@@ -10,10 +10,11 @@
                     <td>Lowest price:</td>
                     <td>Objects</td>
                 </tr>
-                <tr *ngFor="let j of items[i]">
+                <tr *ngFor="let j of itemStats[i]; let k = index">
                     <td>{{j.itemName}}</td>
-                    <td>{{j.producer}}</td>
-                    <td></td>
+                    <td>{{j.itemProducer}}</td>
+                    <td>{{j.sellingPrice}}</td>
+                    <td>{{j.storageUnit}}</td>
                 </tr>
             </table>
         </li>

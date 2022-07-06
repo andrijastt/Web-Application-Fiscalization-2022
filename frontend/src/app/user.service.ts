@@ -36,4 +36,24 @@ export class UserService {
 
     return this.http.post(`${this.uri}/users/searchItem`, data)
   }
+  
+  getCheapestPrice(itemNameForm, itemProducerform, companyNameForm){
+    const data = {
+      itemName: itemNameForm,
+      producer: itemProducerform,
+      companyName: companyNameForm
+    }
+
+    return this.http.post(`${this.uri}/users/getCheapestPrice`, data)
+  }
+
+  getDistinctStorageUnits(itemNameForm, itemProducerform, companyNameForm){
+    const data = {
+      itemName: itemNameForm,
+      producer: itemProducerform,
+      companyName: companyNameForm
+    }
+
+    return this.http.post(`${this.uri}/users/getDistinctStorageUnits`, data)
+  }
 }

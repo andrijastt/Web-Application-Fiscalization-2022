@@ -15,4 +15,12 @@ userRouter.route('/searchItem').post(
     (req, res) => new UserController().searchItem(req, res)
 )
 
+userRouter.route('/getCheapestPrice').post(
+    (req, res) => new UserController().getCheapestPrice(req, res)
+)
+
+userRouter.route('/getDistinctStorageUnits').post(
+    (req, res) => new UserController().getDistinctStorageUnits(req, res)
+)
+
 export default userRouter;

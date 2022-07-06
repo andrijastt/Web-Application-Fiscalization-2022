@@ -39,18 +39,40 @@ class UserController {
                 });
             });
         };
-        this.getCheapestItem = (req, res) => {
+        this.getCheapestPrice = (req, res) => {
+            let itemName = req.body.itemName;
+            let producer = req.body.producer;
+            let companyName = req.body.companyName;
+            itemStats_1.default.find({ 'itemName': { $regex: itemName }, 'itemProducer': { $regex: producer }, 'currentState': { $ne: 0 },
+                'companyName': companyName }, (err, items) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(items);
+                console.log(items);
+            }).sort({ sellingPrice: 1 }).limit(1);
+        };
+        this.getDistinctStorageUnits = (req, res) => {
+            let itemName = req.body.itemName;
+            let producer = req.body.producer;
+            let companyName = req.body.companyName;
+            itemStats_1.default.find({ 'itemName': { $regex: itemName }, 'itemProducer': { $regex: producer }, 'currentState': { $gt: 0 },
+                'companyName': companyName }, (err, items) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(items);
+            }).distinct("storageUnit");
         };
         this.searchItem = (req, res) => {
             let itemName = req.body.itemName;
             let producer = req.body.producer;
-            itemStats_1.default.find({ 'itemName': { $regex: itemName }, 'itemProducer': { $regex: producer } }, (err, items) => {
+            itemStats_1.default.find({ 'itemName': { $regex: itemName }, 'itemroducer': { $regex: producer } }, (err, items) => {
                 if (err)
                     console.log(err);
-                else {
+                else
                     res.json(items);
-                }
-            });
+            }).sort({ sellingPrice: 1 });
         };
     }
 }

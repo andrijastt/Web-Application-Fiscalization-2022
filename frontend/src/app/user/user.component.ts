@@ -4,6 +4,7 @@ import { CompanyService } from '../company.service';
 import { Company } from '../model/company';
 import { Item } from '../model/item';
 import { ItemStats } from '../model/itemStats';
+import { StorageUnit } from '../model/storageUnit';
 import { RegisterCompanyService } from '../register-company.service';
 import { UserService } from '../user.service';
 
@@ -24,8 +25,19 @@ export class UserComponent implements OnInit {
       for(let i = 0; i < this.comapnies.length; i ++){
         this.companyService.getMyItems(this.comapnies[i].PIB).subscribe((data: Item[]) => {
           this.items[i] = data
-          // this.userService.
+
+          for(let j = 0; j < this.items[i].length; j++){
+            this.userService.getCheapestPrice(this.items[i][j].itemName, this.items[i][j].producer, this.comapnies[i].name).subscribe(
+              (data: ItemStats[]) => {
+                this.itemStats[i] = data
+                this.userService.getDistinctStorageUnits(this.items[i][j].itemName, this.items[i][j].producer, this.comapnies[i].name).subscribe(
+                  (data: string)=> {
+                    this.itemStats[i][0].storageUnit = data
+                  })
+            })
+          }
         })
+        
       }
     })
   }
@@ -41,6 +53,7 @@ export class UserComponent implements OnInit {
 
   comapnies: Company[] = []
   items: Item[][] = []
+  itemStats: ItemStats[][] = []
 
   itemNameSearch: string = ""
   itemProducerSearch: string = ""
