@@ -46,7 +46,8 @@ export class UserComponent implements OnInit {
 
   searchItem(){
     this.userService.searchItem(this.itemNameSearch, this.itemProducerSearch).subscribe((data: Item[])=>{
-      this.itemsSearch = data
+      // this.itemsSearch = data
+      console.log(data)
     })
   }
 

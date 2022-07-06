@@ -359,6 +359,8 @@ export class CompanyComponent implements OnInit {
     }
 
     for(let i = 0; i < this.itemStats.length; i++){
+      this.itemStats[i].itemName = this.itemName
+      this.itemStats[i].itemProducer = this.itemProducerName
       if(!this.itemStats[i].purchasePrice || !this.itemStats[i].sellingPrice || !this.itemStats[i].currentState ||
         !this.itemStats[i].minWantingNumber || !this.itemStats[i].maxWantingNumber ||
         this.itemStats[i].minWantingNumber > this.itemStats[i].maxWantingNumber){

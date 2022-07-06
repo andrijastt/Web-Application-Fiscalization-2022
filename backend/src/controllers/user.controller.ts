@@ -2,6 +2,7 @@ import express from 'express'
 import UserModel from '../models/user'
 import CompanyModel from '../models/company'
 import ItemModel from '../models/item'
+import StorageUnitModel from '../models/storageUnit'
 
 export class UserController{
     login = (req: express.Request, res: express.Response)=>{
@@ -36,9 +37,16 @@ export class UserController{
         let itemName = req.body.itemName
         let producer = req.body.producer
 
-        ItemModel.find({'itemName': {$regex: itemName}, 'producer': {$regex: producer}}, (err, items)=>{
-            if(err) console.log(err);
-            else res.json(items)
-        })
+        // ItemModel.find({'itemName': {$regex: itemName}, 'producer': {$regex: producer}}, (err, items)=>{
+        //     if(err) console.log(err);
+        //     else res.json(items)
+        // })
+
+        // StorageUnitModel.find({'items': {'itemName':{$regex: itemName}, 'sellingPrice':{$min: 'sellingPrice'}}}, 
+        //     (err, items) => {
+        //         if(err) console.log(err)
+        //         else res.json(items)
+        // })
+
     }
 }
