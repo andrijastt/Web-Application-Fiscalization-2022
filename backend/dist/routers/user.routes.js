@@ -8,5 +8,6 @@ const user_controller_1 = require("../controllers/user.controller");
 const userRouter = express_1.default.Router();
 userRouter.route('/login').post((req, res) => new user_controller_1.UserController().login(req, res));
 userRouter.route('/changePassword').post((req, res) => new user_controller_1.UserController().changePassword(req, res));
+userRouter.route('/searchItem').post((req, res) => new user_controller_1.UserController().searchItem(req, res));
 exports.default = userRouter;
 //# sourceMappingURL=user.routes.js.map

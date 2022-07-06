@@ -27,4 +27,13 @@ export class UserService {
 
     return this.http.post(`${this.uri}/users/changePassword`, data)
   }
+
+  searchItem(itemNameForm, itemProducerform){
+    const data = {
+      itemName: itemNameForm,
+      producer: itemProducerform
+    }
+
+    return this.http.post(`${this.uri}/users/searchItem`, data)
+  }
 }

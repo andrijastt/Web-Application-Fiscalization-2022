@@ -11,4 +11,8 @@ userRouter.route('/changePassword').post(
     (req, res) => new UserController().changePassword(req, res)
 )
 
+userRouter.route('/searchItem').post(
+    (req, res) => new UserController().searchItem(req, res)
+)
+
 export default userRouter;

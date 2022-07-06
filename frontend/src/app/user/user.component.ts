@@ -4,6 +4,7 @@ import { CompanyService } from '../company.service';
 import { Company } from '../model/company';
 import { Item } from '../model/item';
 import { RegisterCompanyService } from '../register-company.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +13,8 @@ import { RegisterCompanyService } from '../register-company.service';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private router: Router, private registerComapnyService: RegisterCompanyService, private companyService: CompanyService) { }
+  constructor(private router: Router, private registerComapnyService: RegisterCompanyService, private companyService: CompanyService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
     this.registerComapnyService.getAllRegisterCompany().subscribe((data: Company[]) => {
@@ -37,4 +39,15 @@ export class UserComponent implements OnInit {
 
   comapnies: Company[] = []
   items: Item[][] = []
+
+  itemNameSearch: string = ""
+  itemProducerSearch: string = ""
+  itemsSearch: Item[] = []
+
+  searchItem(){
+    this.userService.searchItem(this.itemNameSearch, this.itemProducerSearch).subscribe((data: Item[])=>{
+      this.itemsSearch = data
+    })
+  }
+
 }

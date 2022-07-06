@@ -1,4 +1,4 @@
-<div>
+<div class="list of all items">
     <ul *ngFor="let n of comapnies; let i = index">
         <li>
             {{n.name}}
@@ -19,6 +19,31 @@
         </li>
     </ul>
 </div>
+<br>
+<div class="search">
+    Find item by name: <input type="text" [(ngModel)]="itemNameSearch">
+    <br>
+    Find item by producer: <input type="text" [(ngModel)]="itemProducerSearch">
+    <br>
+    <button mat-button (click)="searchItem()">Search</button>
+</div>
+
+<div class="searchResults">
+    <table>
+        <tr>
+            <td>Item Name:</td>
+            <td>Producer:</td>
+            <td>Lowest price:</td>
+            <td>Objects</td>
+        </tr>
+        <tr *ngFor="let j of itemsSearch">
+            <td>{{j.itemName}}</td>
+            <td>{{j.producer}}</td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
 <footer>
     <button (click)="passwordChange()">Change password</button>
     <br>

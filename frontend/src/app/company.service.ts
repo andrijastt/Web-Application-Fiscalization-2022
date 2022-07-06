@@ -149,7 +149,7 @@ export class CompanyService {
       countryOfOrigin: countryOfOriginForm || null, 
       foreignItemName: foreignItemNameForm || null,
       barcodeNumber: barcodeNumberForm || null,  
-      producer: producerForm || null,
+      producer: producerForm || "",
       customsRate: customsRateForm || null,
       ekoTax: ekoTaxForm || null,
       excise: exciseForm || null,

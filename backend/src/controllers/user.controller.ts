@@ -1,6 +1,7 @@
 import express from 'express'
 import UserModel from '../models/user'
 import CompanyModel from '../models/company'
+import ItemModel from '../models/item'
 
 export class UserController{
     login = (req: express.Request, res: express.Response)=>{
@@ -28,6 +29,16 @@ export class UserController{
                 if(err) console.log(err)
                 else res.json({'message': 'Password changed!'})
             })
+        })
+    }
+
+    searchItem = (req: express.Request, res: express.Response)=>{
+        let itemName = req.body.itemName
+        let producer = req.body.producer
+
+        ItemModel.find({'itemName': {$regex: itemName}, 'producer': {$regex: producer}}, (err, items)=>{
+            if(err) console.log(err);
+            else res.json(items)
         })
     }
 }
