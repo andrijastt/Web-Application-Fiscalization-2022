@@ -67,7 +67,7 @@ class UserController {
         this.searchItem = (req, res) => {
             let itemName = req.body.itemName;
             let producer = req.body.producer;
-            itemStats_1.default.find({ 'itemName': { $regex: itemName }, 'itemroducer': { $regex: producer } }, (err, items) => {
+            itemStats_1.default.find({ 'itemName': { $regex: itemName }, 'itemProducer': { $regex: producer }, 'currentState': { $gt: 0 } }, (err, items) => {
                 if (err)
                     console.log(err);
                 else

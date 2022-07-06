@@ -59,7 +59,7 @@ export class UserController{
         let itemName = req.body.itemName
         let producer = req.body.producer
 
-        ItemStatsModel.find({'itemName': {$regex: itemName}, 'itemroducer': {$regex: producer}}, (err, items)=>{
+        ItemStatsModel.find({'itemName': {$regex: itemName}, 'itemProducer': {$regex: producer}, 'currentState': {$gt: 0}}, (err, items)=>{
             if(err) console.log(err);
             else res.json(items)
         }).sort({sellingPrice: 1})
