@@ -420,7 +420,38 @@
                 </tr>
             </table>
         </mat-tab>
-        <mat-tab label="Price and state of goods"></mat-tab>
+        <mat-tab label="Price and state of goods">
+            <table>
+                <tr>
+                    <td>Storage Unit</td>
+                    <td>Purchase price</td>
+                    <td>Selling price</td>
+                    <td>CurrentState</td>
+                    <td>minItems</td>
+                    <td>maxItems</td>
+                </tr>
+                <tr *ngFor="let n of storageUnits; let i = index"> 
+                    <td>
+                       {{n.name}}
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStats[i].purchasePrice" min="0">
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStats[i].sellingPrice" min="0">
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStats[i].currentState" min="0">
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStats[i].minWantingNumber" min="0">
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStats[i].maxWantingNumber" min="0">
+                    </td>
+                </tr>
+            </table>
+        </mat-tab>
     </mat-tab-group>
     <button mat-button *ngIf="addGoods" (click)="addItem()">Add item</button>
     <div>{{itemAlert}}</div>

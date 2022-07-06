@@ -137,7 +137,7 @@ export class CompanyService {
 
   addItem(companyPIBForm, itemIdForm, itemNameForm, unitOfMeasureForm, taxRateForm, typeForm, imageForm, countryOfOriginForm, 
     foreignItemNameForm, barcodeNumberForm, producerForm, customsRateForm, ekoTaxForm, exciseForm, minItemsForm, maxItemsForm, 
-    descriptionForm, declarationForm){
+    descriptionForm, declarationForm, itemStatsForm, storageUnitsForm){
     const data = {
       companyPIB: companyPIBForm,
       itemId: itemIdForm,
@@ -156,7 +156,9 @@ export class CompanyService {
       minItems: minItemsForm || null,
       maxItems: maxItemsForm || null,
       description: descriptionForm || null,
-      declaration: declarationForm || null
+      declaration: declarationForm || null,
+      itemStats: itemStatsForm,
+      storageUnits: storageUnitsForm
     }
     return this.http.post(`${this.uri}/company/addItem`, data)
   }

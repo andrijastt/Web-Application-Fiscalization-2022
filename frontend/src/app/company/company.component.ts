@@ -4,6 +4,7 @@ import { CompanyService } from '../company.service';
 import { Company } from '../model/company';
 import { Customer } from '../model/customer';
 import { Item } from '../model/item';
+import { ItemStats } from '../model/itemStats';
 import { StorageUnit } from '../model/storageUnit';
 import { RegisterCompanyService } from '../register-company.service';
 
@@ -21,6 +22,9 @@ export class CompanyComponent implements OnInit {
     this.company = JSON.parse(localStorage.getItem('company'))
     this.companyService.getMyStorageUntis(this.company.PIB).subscribe((data: StorageUnit[])=>{
       this.storageUnits = data
+      for(let i = 0; i < this.storageUnits.length; i++){
+        this.itemStats.push(new ItemStats())
+      }
     })
     this.companyService.getMyCustomers(this.company.PIB).subscribe((data: Customer[])=>{
       this.customers = data
@@ -304,6 +308,8 @@ export class CompanyComponent implements OnInit {
   itemAlert: string
   itemAlert1: string
 
+  itemStats: ItemStats[] = []
+
   onFileSelectedItem(event: any){
     
     if(event.target.files && event.target.files[0]){
@@ -352,10 +358,20 @@ export class CompanyComponent implements OnInit {
       }
     }
 
+    for(let i = 0; i < this.itemStats.length; i++){
+      if(!this.itemStats[i].purchasePrice || !this.itemStats[i].sellingPrice || !this.itemStats[i].currentState ||
+        !this.itemStats[i].minWantingNumber || !this.itemStats[i].maxWantingNumber ||
+        this.itemStats[i].minWantingNumber > this.itemStats[i].maxWantingNumber){
+        send = false;
+        break;
+      }
+    }
+
     if(send){
       this.companyService.addItem(this.company.PIB, this.itemId, this.itemName, this.itemUnitOfMeasure, this.itemTaxRate, this.itemType, 
         this.itemImageData, this.itemCountryOfOrigin, this.itemForeignName, this.itemBarcodeNumber, this.itemProducerName, this.itemCustomsRate, 
-        this.itemEkoTax, this.itemExcies, this.itemMinItems, this.itemMaxItems, this.itemDescription, this.itemDeclaration). subscribe((resp => {   
+        this.itemEkoTax, this.itemExcies, this.itemMinItems, this.itemMaxItems, this.itemDescription, this.itemDeclaration,
+        this.itemStats, this.storageUnits). subscribe((resp => {   
           if(resp['message'] == 'Item ID taken'){
             alert(resp['message'])
           } else {
@@ -367,4 +383,5 @@ export class CompanyComponent implements OnInit {
       this.itemAlert = "Not all general data is filled"
     }
   }
+
 }

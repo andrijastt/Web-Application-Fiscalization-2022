@@ -11,6 +11,9 @@ let StorageUnit = new Schema({
     },
     companyPIB: {
         type: Number
+    },
+    items: {
+        type: Array
     }
 })
 

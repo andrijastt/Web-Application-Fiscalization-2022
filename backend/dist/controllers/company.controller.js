@@ -255,7 +255,8 @@ class CompanyController {
             });
         };
         this.getMyCustomers = (req, res) => {
-            customer_1.default.find({}, (err, customers) => {
+            let PIB = req.body.PIB;
+            customer_1.default.find({ "sellerPIB": PIB }, (err, customers) => {
                 if (err)
                     console.log(err);
                 else
@@ -263,7 +264,8 @@ class CompanyController {
             });
         };
         this.getMyItems = (req, res) => {
-            item_1.default.find({}, (err, items) => {
+            let PIB = req.body.PIB;
+            item_1.default.find({ "companyPIB": PIB }, (err, items) => {
                 if (err)
                     console.log(err);
                 else
@@ -278,11 +280,44 @@ class CompanyController {
                     res.json({ 'message': 'Item ID taken' });
                 }
                 else {
-                    item_1.default.collection.insertOne(req.body, (err, resp) => {
+                    let item = new item_1.default();
+                    item.companyPIB = req.body.companyPIB;
+                    item.itemId = req.body.itemId;
+                    item.itemName = req.body.itemName;
+                    item.unitOfMeasure = req.body.unitOfMeasure;
+                    item.taxRate = req.body.taxRate;
+                    item.type = req.body.type;
+                    item.image = req.body.image;
+                    item.countryOfOrigin = req.body.countryOfOrigin;
+                    item.foreignItemName = req.body.foreignItemName;
+                    item.barcodeNumber = req.body.barcodeNumber;
+                    item.producer = req.body.producer;
+                    item.customsRate = req.body.customsRate;
+                    item.ekoTax = req.body.ekoTax;
+                    item.excise = req.body.excise;
+                    item.minItems = req.body.minItems;
+                    item.maxItems = req.body.maxItems;
+                    item.description = req.body.description;
+                    item.declaration = req.body.declaration;
+                    item_1.default.collection.insertOne(item, (err, resp) => {
                         if (err)
                             console.log(err);
-                        else
+                        else {
+                            let itemStats = req.body.itemStats;
+                            let storageUnits = req.body.storageUnits;
+                            for (let i = 0; i < itemStats.length; i++) {
+                                storageUnit_1.default.updateOne({ "name": storageUnits[i].name }, { $push: { 'items': itemStats[i] } }, (err, resp) => {
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                });
+                            }
                             res.json({ 'message': 'Item added' });
+                            // StorageUnitModel.updateMany({}, {}, (err, resp)=>{
+                            //     if(err) console.log(err)
+                            //     res.json({'message': 'Item added'})
+                            // })
+                        }
                     });
                 }
             });

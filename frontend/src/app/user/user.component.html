@@ -3,15 +3,16 @@
         <li>
             {{n.name}}
             <br>
-            <table *ngFor="let j of items[i]">
+            <table>
                 <tr>
+                    <td>Item Name:</td>
                     <td>Producer:</td>
                     <td>Lowest price:</td>
                     <td>Objects</td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
+                <tr *ngFor="let j of items[i]">
+                    <td>{{j.itemName}}</td>
+                    <td>{{j.producer}}</td>
                     <td></td>
                 </tr>
             </table>
