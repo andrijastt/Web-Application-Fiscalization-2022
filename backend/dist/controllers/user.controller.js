@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const company_1 = __importDefault(require("../models/company"));
+const itemStats_1 = __importDefault(require("../models/itemStats"));
 class UserController {
     constructor() {
         this.login = (req, res) => {
@@ -38,18 +39,18 @@ class UserController {
                 });
             });
         };
+        this.getCheapestItem = (req, res) => {
+        };
         this.searchItem = (req, res) => {
             let itemName = req.body.itemName;
             let producer = req.body.producer;
-            // ItemModel.find({'itemName': {$regex: itemName}, 'producer': {$regex: producer}}, (err, items)=>{
-            //     if(err) console.log(err);
-            //     else res.json(items)
-            // })
-            // StorageUnitModel.find({'items': {'itemName':{$regex: itemName}, 'sellingPrice':{$min: 'sellingPrice'}}}, 
-            //     (err, items) => {
-            //         if(err) console.log(err)
-            //         else res.json(items)
-            // })
+            itemStats_1.default.find({ 'itemName': { $regex: itemName }, 'itemProducer': { $regex: producer } }, (err, items) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.json(items);
+                }
+            });
         };
     }
 }

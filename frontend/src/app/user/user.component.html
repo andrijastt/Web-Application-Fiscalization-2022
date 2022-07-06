@@ -33,13 +33,14 @@
         <tr>
             <td>Item Name:</td>
             <td>Producer:</td>
-            <td>Lowest price:</td>
+            <td>Price:</td>
             <td>Objects</td>
         </tr>
         <tr *ngFor="let j of itemsSearch">
             <td>{{j.itemName}}</td>
-            <td>{{j.producer}}</td>
-            <td></td>
+            <td>{{j.itemProducer}}</td>
+            <td>{{j.sellingPrice}}</td>
+            <td>{{j.storageUnit}}</td>
         </tr>
     </table>
 </div>

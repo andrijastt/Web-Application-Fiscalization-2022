@@ -11,6 +11,7 @@ const company_1 = __importDefault(require("../models/company"));
 const storageUnit_1 = __importDefault(require("../models/storageUnit"));
 const customer_1 = __importDefault(require("../models/customer"));
 const item_1 = __importDefault(require("../models/item"));
+const itemStats_1 = __importDefault(require("../models/itemStats"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -273,7 +274,8 @@ class CompanyController {
             });
         };
         this.addItem = (req, res) => {
-            item_1.default.findOne({ "itemId": req.body.itemId }, (err, item) => {
+            let PIB = req.body.companyPIB;
+            item_1.default.findOne({ "itemId": req.body.itemId, "companyPIB": PIB }, (err, item) => {
                 if (err)
                     console.log(err);
                 if (item) {
@@ -304,19 +306,12 @@ class CompanyController {
                             console.log(err);
                         else {
                             let itemStats = req.body.itemStats;
-                            let storageUnits = req.body.storageUnits;
-                            for (let i = 0; i < itemStats.length; i++) {
-                                storageUnit_1.default.updateOne({ "name": storageUnits[i].name }, { $push: { 'items': itemStats[i] } }, (err, resp) => {
-                                    if (err) {
-                                        console.log(err);
-                                    }
-                                });
-                            }
-                            res.json({ 'message': 'Item added' });
-                            // StorageUnitModel.updateMany({}, {}, (err, resp)=>{
-                            //     if(err) console.log(err)
-                            //     res.json({'message': 'Item added'})
-                            // })
+                            itemStats_1.default.collection.insertMany(itemStats, (err, resp) => {
+                                if (err)
+                                    console.log(err);
+                                else
+                                    res.json({ 'message': 'Item added' });
+                            });
                         }
                     });
                 }

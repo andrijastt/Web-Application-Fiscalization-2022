@@ -297,7 +297,7 @@ export class CompanyComponent implements OnInit {
   itemCountryOfOrigin: string
   itemForeignName: string
   itemBarcodeNumber: string
-  itemProducerName: string
+  itemProducerName: string = ""
   itemCustomsRate: number
   itemEkoTax: boolean
   itemExcies: boolean
@@ -359,6 +359,8 @@ export class CompanyComponent implements OnInit {
     }
 
     for(let i = 0; i < this.itemStats.length; i++){
+      this.itemStats[i].storageUnit = this.storageUnits[i].name
+      this.itemStats[i].companyName = this.company.name
       this.itemStats[i].itemName = this.itemName
       this.itemStats[i].itemProducer = this.itemProducerName
       if(!this.itemStats[i].purchasePrice || !this.itemStats[i].sellingPrice || !this.itemStats[i].currentState ||
@@ -373,7 +375,7 @@ export class CompanyComponent implements OnInit {
       this.companyService.addItem(this.company.PIB, this.itemId, this.itemName, this.itemUnitOfMeasure, this.itemTaxRate, this.itemType, 
         this.itemImageData, this.itemCountryOfOrigin, this.itemForeignName, this.itemBarcodeNumber, this.itemProducerName, this.itemCustomsRate, 
         this.itemEkoTax, this.itemExcies, this.itemMinItems, this.itemMaxItems, this.itemDescription, this.itemDeclaration,
-        this.itemStats, this.storageUnits). subscribe((resp => {   
+        this.itemStats). subscribe((resp => {   
           if(resp['message'] == 'Item ID taken'){
             alert(resp['message'])
           } else {

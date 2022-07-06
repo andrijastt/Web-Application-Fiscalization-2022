@@ -6,6 +6,8 @@ import CompanyModel from '../models/company'
 import StorageUnitModel from '../models/storageUnit'
 import CustomerModel from '../models/customer'
 import ItemModel from '../models/item'
+import ItemStatsModel from '../models/itemStats'
+
 
 export class CompanyController{
 
@@ -259,7 +261,9 @@ export class CompanyController{
 
     addItem = (req: express.Request, res: express.Response) => {
 
-        ItemModel.findOne({"itemId": req.body.itemId}, (err, item)=>{
+        let PIB = req.body.companyPIB
+
+        ItemModel.findOne({"itemId": req.body.itemId, "companyPIB": PIB}, (err, item)=>{
             if(err) console.log(err)
             if(item){
                 res.json({'message': 'Item ID taken'})
@@ -290,22 +294,12 @@ export class CompanyController{
                     else {
                         
                         let itemStats = req.body.itemStats
-                        let storageUnits = req.body.storageUnits
+                       
+                        ItemStatsModel.collection.insertMany(itemStats, (err, resp)=>{
+                            if(err) console.log(err)
+                            else res.json({'message': 'Item added'})
+                        })
 
-                        for(let i = 0; i < itemStats.length; i ++){
-                            StorageUnitModel.updateOne({"name": storageUnits[i].name}, {$push: {'items': itemStats[i]}}, (err, resp)=>{
-                                if(err){
-                                    console.log(err)
-                                } 
-                            })
-                        }
-
-                        res.json({'message': 'Item added'})
-
-                        // StorageUnitModel.updateMany({}, {}, (err, resp)=>{
-                        //     if(err) console.log(err)
-                        //     res.json({'message': 'Item added'})
-                        // })
                     }
                 })
             }

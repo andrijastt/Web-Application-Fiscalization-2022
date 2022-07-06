@@ -14,9 +14,6 @@ let StorageUnit = new Schema({
     },
     companyPIB: {
         type: Number
-    },
-    items: {
-        type: Array
     }
 });
 exports.default = mongoose_1.default.model('StorageUnitModel', StorageUnit, 'storageUnits');

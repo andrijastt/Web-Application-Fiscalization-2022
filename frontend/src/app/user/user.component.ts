@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CompanyService } from '../company.service';
 import { Company } from '../model/company';
 import { Item } from '../model/item';
+import { ItemStats } from '../model/itemStats';
 import { RegisterCompanyService } from '../register-company.service';
 import { UserService } from '../user.service';
 
@@ -23,6 +24,7 @@ export class UserComponent implements OnInit {
       for(let i = 0; i < this.comapnies.length; i ++){
         this.companyService.getMyItems(this.comapnies[i].PIB).subscribe((data: Item[]) => {
           this.items[i] = data
+          // this.userService.
         })
       }
     })
@@ -42,12 +44,11 @@ export class UserComponent implements OnInit {
 
   itemNameSearch: string = ""
   itemProducerSearch: string = ""
-  itemsSearch: Item[] = []
+  itemsSearch: ItemStats[] = []
 
   searchItem(){
-    this.userService.searchItem(this.itemNameSearch, this.itemProducerSearch).subscribe((data: Item[])=>{
-      // this.itemsSearch = data
-      console.log(data)
+    this.userService.searchItem(this.itemNameSearch, this.itemProducerSearch).subscribe((data: ItemStats[])=>{
+      this.itemsSearch = data
     })
   }
 
