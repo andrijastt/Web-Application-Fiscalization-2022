@@ -26,5 +26,7 @@ companyRouter.route('/addCustomer').post((req, res) => new company_controller_1.
 companyRouter.route('/getMyCustomers').post((req, res) => new company_controller_1.CompanyController().getMyCustomers(req, res));
 companyRouter.route('/getMyItems').post((req, res) => new company_controller_1.CompanyController().getMyItems(req, res));
 companyRouter.route('/addItem').post((req, res) => new company_controller_1.CompanyController().addItem(req, res));
+companyRouter.route('/createCategory').post((req, res) => new company_controller_1.CompanyController().createCategory(req, res));
+companyRouter.route('/getMyCategories').post((req, res) => new company_controller_1.CompanyController().getMyCategories(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map

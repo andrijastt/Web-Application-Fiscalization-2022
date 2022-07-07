@@ -7,6 +7,7 @@ import StorageUnitModel from '../models/storageUnit'
 import CustomerModel from '../models/customer'
 import ItemModel from '../models/item'
 import ItemStatsModel from '../models/itemStats'
+import CategoryModel from '../models/category'
 
 
 export class CompanyController{
@@ -304,5 +305,33 @@ export class CompanyController{
                 })
             }
         })     
+    }
+
+    createCategory = (req: express.Request, res: express.Response) => {
+        let PIB = req.body.PIB
+        let name = req.body.name
+
+        CategoryModel.find({'PIB': PIB, 'name': name}, (err, category)=>{
+            if(err) console.log(err)
+            else {
+                console.log(category)
+                if(!category){
+                    res.json({'message': 'Category already exists'})
+                } else {
+                    CategoryModel.collection.insertOne(req.body, (err, resp)=> {
+                        if(err) console.log(err)
+                        else res.json({'message': 'Category added'})
+                    })
+                }
+            }
+        })
+    }
+
+    getMyCategories = (req: express.Request, res: express.Response) => {
+        let PIB = req.body.PIB
+        CategoryModel.find({"PIB": PIB}, (err, category)=>{
+            if(err) console.log(err)
+            else res.json(category)
+        })
     }
 }

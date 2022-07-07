@@ -20,6 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { MatButtonModule } from '@angular/material/button';
     LoginAdminComponent,
     RegisterCompanyComponent,
     CompanyFirstComponent,
-    PasswordChangeComponent
+    PasswordChangeComponent,
+    CategoryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatRadioModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

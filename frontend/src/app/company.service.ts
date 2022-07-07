@@ -161,4 +161,17 @@ export class CompanyService {
     }
     return this.http.post(`${this.uri}/company/addItem`, data)
   }
+
+  createCategory(PIBForm, categoryNameForm){
+    const data = {
+      PIB: PIBForm,
+      name: categoryNameForm
+    }
+    return this.http.post(`${this.uri}/company/createCategory`, data)
+  }
+
+  getMyCategories(PIBForm){
+    const data = { PIB: PIBForm }
+    return this.http.post(`${this.uri}/company/getMyCategories`, data)
+  }
 }

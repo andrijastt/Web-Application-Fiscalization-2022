@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CategoryDialogComponent } from '../category-dialog/category-dialog.component';
 import { CompanyService } from '../company.service';
+import { Category } from '../model/category';
 import { Company } from '../model/company';
 import { Customer } from '../model/customer';
 import { Item } from '../model/item';
@@ -14,9 +17,11 @@ import { RegisterCompanyService } from '../register-company.service';
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.css']
 })
+
 export class CompanyComponent implements OnInit {
 
-  constructor(private router: Router, private companyService: CompanyService, private registerCompanyService: RegisterCompanyService) { }
+  constructor(private router: Router, private companyService: CompanyService, private registerCompanyService: RegisterCompanyService, 
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.company = JSON.parse(localStorage.getItem('company'))
@@ -33,6 +38,10 @@ export class CompanyComponent implements OnInit {
     this.companyService.getMyItems(this.company.PIB).subscribe((data: Item[])=>{
       this.items = data
       this.itemSlice = this.items.slice(0, 10)
+    })
+
+    this.companyService.getMyCategories(this.company.PIB).subscribe((data: Category[])=>{
+      this.allCategories = data
     })
   }
 
@@ -95,7 +104,7 @@ export class CompanyComponent implements OnInit {
     this.tableData = true
   }
 
-  /************************************************************/
+  /*********************************************************************************************************/
 
   firstname: string
   lastname: string
@@ -271,7 +280,7 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  /************************************************************/
+  /*********************************************************************************************************/
 
   addGoods: boolean
   items: Item[] = []
@@ -396,6 +405,34 @@ export class CompanyComponent implements OnInit {
     } else {
       this.itemAlert = "Not all general data is filled"
     }
+  }
+
+  /*********************************************************************************************************/
+
+  category: string = ""
+  
+  allCategories: Category[] = []
+
+  createCategory(){
+    if(this.category != ""){
+      this.companyService.createCategory(this.company.PIB, this.category).subscribe((resp)=> {
+        this.companyService.getMyCategories(this.company.PIB).subscribe((data: Category[])=>{
+          this.allCategories = data
+        })
+        alert(resp['message'])
+      })
+    }
+    this.category = ""
+  }
+
+  openDialog(){
+    this.dialog.open(CategoryDialogComponent, {
+      height: '800px',
+      width: '800px',
+      data: {
+        
+      }
+    })
   }
 
 }

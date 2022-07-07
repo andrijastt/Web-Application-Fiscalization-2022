@@ -78,8 +78,17 @@ companyRouter.route('/getMyCustomers').post(
 companyRouter.route('/getMyItems').post(
     (req, res) => new CompanyController().getMyItems(req, res)
 )
+
 companyRouter.route('/addItem').post(
     (req, res) => new CompanyController().addItem(req, res)
+)
+
+companyRouter.route('/createCategory').post(
+    (req, res) => new CompanyController().createCategory(req, res)
+)
+
+companyRouter.route('/getMyCategories').post(
+    (req, res) => new CompanyController().getMyCategories(req, res)
 )
 
 export default companyRouter;

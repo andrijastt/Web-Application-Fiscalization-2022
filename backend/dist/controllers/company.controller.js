@@ -12,6 +12,7 @@ const storageUnit_1 = __importDefault(require("../models/storageUnit"));
 const customer_1 = __importDefault(require("../models/customer"));
 const item_1 = __importDefault(require("../models/item"));
 const itemStats_1 = __importDefault(require("../models/itemStats"));
+const category_1 = __importDefault(require("../models/category"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -315,6 +316,37 @@ class CompanyController {
                         }
                     });
                 }
+            });
+        };
+        this.createCategory = (req, res) => {
+            let PIB = req.body.PIB;
+            let name = req.body.name;
+            category_1.default.find({ 'PIB': PIB, 'name': name }, (err, category) => {
+                if (err)
+                    console.log(err);
+                else {
+                    console.log(category);
+                    if (!category) {
+                        res.json({ 'message': 'Category already exists' });
+                    }
+                    else {
+                        category_1.default.collection.insertOne(req.body, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else
+                                res.json({ 'message': 'Category added' });
+                        });
+                    }
+                }
+            });
+        };
+        this.getMyCategories = (req, res) => {
+            let PIB = req.body.PIB;
+            category_1.default.find({ "PIB": PIB }, (err, category) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(category);
             });
         };
     }
