@@ -7,21 +7,35 @@
         <mat-icon>account_circle</mat-icon>
         Company Data
     </button>
+
     <button mat-menu-item (click)="setOrdersData()" class="menuButton">
         <mat-icon>shop_two</mat-icon>
         Orders
     </button>
+
     <button mat-menu-item (click)="setGoodsAndServices()" class="menuButton">
         <mat-icon>local_convenience_store</mat-icon>
         Goods and Services
     </button>
+
     <button mat-menu-item (click)="setItemData()" class="menuButton">
         <mat-icon>label</mat-icon>
         Items
     </button>
+
     <button mat-menu-item (click)="setTableData()" *ngIf="company.category == 'caterer'" class="menuButton">
         <mat-icon>local_cafe</mat-icon>
         Tables
+    </button>
+
+    <button mat-menu-item (click)="setReceiptsData()" class="menuButton">
+        <mat-icon>receipt</mat-icon>
+        Receipts
+    </button>
+
+    <button mat-menu-item (click)="setReviewsData()" class="menuButton">
+        <mat-icon>rate_review</mat-icon>
+        Report reviews
     </button>
 </mat-menu>
 
@@ -492,6 +506,10 @@
         Add to category: {{n.name}} <button mat-button (click)="openDialog(n.name)">Add</button>
     </div>
 
+</div>
+
+<div *ngIf="receiptsData">
+    
 </div>
 
 <footer>

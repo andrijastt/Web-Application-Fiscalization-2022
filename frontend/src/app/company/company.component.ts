@@ -63,6 +63,8 @@ export class CompanyComponent implements OnInit {
   goodsAndServices: boolean
   itemData: boolean
   tableData: boolean
+  receiptsData: boolean
+  reviewsData: boolean
 
   setCompanyData(){
     this.companyData = true
@@ -70,6 +72,8 @@ export class CompanyComponent implements OnInit {
     this.goodsAndServices = false
     this.itemData = false
     this.tableData = false
+    this.receiptsData = false
+    this.reviewsData = false
   }
 
   setOrdersData(){
@@ -78,6 +82,8 @@ export class CompanyComponent implements OnInit {
     this.goodsAndServices = false
     this.itemData = false
     this.tableData = false
+    this.receiptsData = false
+    this.reviewsData = false
   }
 
   setGoodsAndServices(){
@@ -86,6 +92,8 @@ export class CompanyComponent implements OnInit {
     this.goodsAndServices = true
     this.itemData = false
     this.tableData = false
+    this.receiptsData = false
+    this.reviewsData = false
   }
 
   setItemData(){
@@ -94,6 +102,8 @@ export class CompanyComponent implements OnInit {
     this.goodsAndServices = false
     this.itemData = true
     this.tableData = false
+    this.receiptsData = false
+    this.reviewsData = false
   }
 
   setTableData(){
@@ -102,6 +112,28 @@ export class CompanyComponent implements OnInit {
     this.goodsAndServices = false
     this.itemData = false
     this.tableData = true
+    this.receiptsData = false
+    this.reviewsData = false
+  }
+
+  setReceiptsData(){
+    this.companyData = false
+    this.ordersData = false
+    this.goodsAndServices = false
+    this.itemData = false
+    this.tableData = false
+    this.receiptsData = true
+    this.reviewsData = false
+  }
+
+  setReviewsData(){
+    this.companyData = false
+    this.ordersData = false
+    this.goodsAndServices = false
+    this.itemData = false
+    this.tableData = false
+    this.receiptsData = false
+    this.reviewsData = true
   }
 
   /*********************************************************************************************************/
