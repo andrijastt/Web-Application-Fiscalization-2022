@@ -56,4 +56,12 @@ export class UserService {
 
     return this.http.post(`${this.uri}/users/getDistinctStorageUnits`, data)
   }
+
+  getMyItems(companyNameForm){
+    const data = {
+      companyName: companyNameForm
+    }
+
+    return this.http.post(`${this.uri}/users/getMyItems`, data)
+  }
 }

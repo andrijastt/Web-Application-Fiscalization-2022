@@ -350,8 +350,9 @@
                 <tr>
                     <td>Barcode number:</td>
                     <td>
-                        <input type="number" [(ngModel)]="itemBarcodeNumber">
+                        <input type="text" [(ngModel)]="itemBarcodeNumber" (ngModelChange)="checkBarcode()">
                     </td>
+                    <td>{{barcodeMessage}}</td>
                 </tr>
                 <tr>
                     <td>Producer name:</td>

@@ -344,6 +344,16 @@ export class CompanyComponent implements OnInit {
 
   }
 
+  barcodeMessage: string
+  checkBarcode(){
+    let regexBarcode = /^\d{12}$/
+    if(regexBarcode.test(this.itemBarcodeNumber)){
+      this.barcodeMessage = ""
+    } else {
+      this.barcodeMessage = "Wrong format(12 digits)"
+    }
+  }
+
   addItem(){
     let send: boolean = true
 
@@ -363,8 +373,8 @@ export class CompanyComponent implements OnInit {
       this.itemStats[i].companyName = this.company.name
       this.itemStats[i].itemName = this.itemName
       this.itemStats[i].itemProducer = this.itemProducerName
-      if(!this.itemStats[i].purchasePrice || !this.itemStats[i].sellingPrice || !this.itemStats[i].currentState ||
-        !this.itemStats[i].minWantingNumber || !this.itemStats[i].maxWantingNumber ||
+      if(!this.itemStats[i].purchasePrice || !this.itemStats[i].sellingPrice || this.itemStats[i].currentState < 0 ||
+        this.itemStats[i].minWantingNumber < 0 || this.itemStats[i].maxWantingNumber < 0||
         this.itemStats[i].minWantingNumber > this.itemStats[i].maxWantingNumber){
         send = false;
         break;

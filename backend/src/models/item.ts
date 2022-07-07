@@ -31,7 +31,7 @@ let Item = new Schema({
         type: String
     }, 
     barcodeNumber: {
-        type: Number
+        type: String
     },
     producer: {
         type: String

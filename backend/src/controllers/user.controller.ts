@@ -39,8 +39,9 @@ export class UserController{
         ItemStatsModel.find({'itemName': {$regex: itemName}, 'itemProducer': {$regex: producer}, 'currentState': {$ne: 0}, 
         'companyName': companyName}, (err, items)=>{
             if(err) console.log(err);
-            else res.json(items)
-            console.log(items)
+            else{
+                res.json(items)     
+            } 
         }).sort({sellingPrice: 1}).limit(1)
     }
 
@@ -63,6 +64,14 @@ export class UserController{
             if(err) console.log(err);
             else res.json(items)
         }).sort({sellingPrice: 1})
+    }
 
+    getMyItems = (req: express.Request, res: express.Response)=>{
+        let companyName = req.body.companyName
+
+        ItemStatsModel.find({'companyName': companyName, 'currentState': {$gt: 0}}, (err, items)=>{
+            if(err) console.log(err);
+            else res.json(items)
+        }).distinct("itemName")
     }
 }

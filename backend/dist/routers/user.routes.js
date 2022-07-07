@@ -11,5 +11,6 @@ userRouter.route('/changePassword').post((req, res) => new user_controller_1.Use
 userRouter.route('/searchItem').post((req, res) => new user_controller_1.UserController().searchItem(req, res));
 userRouter.route('/getCheapestPrice').post((req, res) => new user_controller_1.UserController().getCheapestPrice(req, res));
 userRouter.route('/getDistinctStorageUnits').post((req, res) => new user_controller_1.UserController().getDistinctStorageUnits(req, res));
+userRouter.route('/getMyItems').post((req, res) => new user_controller_1.UserController().getMyItems(req, res));
 exports.default = userRouter;
 //# sourceMappingURL=user.routes.js.map

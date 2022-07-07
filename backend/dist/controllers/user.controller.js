@@ -47,9 +47,9 @@ class UserController {
                 'companyName': companyName }, (err, items) => {
                 if (err)
                     console.log(err);
-                else
+                else {
                     res.json(items);
-                console.log(items);
+                }
             }).sort({ sellingPrice: 1 }).limit(1);
         };
         this.getDistinctStorageUnits = (req, res) => {
@@ -73,6 +73,15 @@ class UserController {
                 else
                     res.json(items);
             }).sort({ sellingPrice: 1 });
+        };
+        this.getMyItems = (req, res) => {
+            let companyName = req.body.companyName;
+            itemStats_1.default.find({ 'companyName': companyName, 'currentState': { $gt: 0 } }, (err, items) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(items);
+            }).distinct("itemName");
         };
     }
 }

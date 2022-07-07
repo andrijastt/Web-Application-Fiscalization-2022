@@ -23,4 +23,8 @@ userRouter.route('/getDistinctStorageUnits').post(
     (req, res) => new UserController().getDistinctStorageUnits(req, res)
 )
 
+userRouter.route('/getMyItems').post(
+    (req, res) => new UserController().getMyItems(req, res)
+)
+
 export default userRouter;

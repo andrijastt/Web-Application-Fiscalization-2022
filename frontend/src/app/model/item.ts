@@ -1,3 +1,4 @@
+
 export class Item {
     companyPIB: number
     itemId: number
@@ -8,7 +9,7 @@ export class Item {
     image: string
     countryOfOrigin: string
     foreignItemName: string
-    barcodeNumber: number
+    barcodeNumber: string
     producer: string
     customsRate: number
     ekoTax: boolean

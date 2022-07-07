@@ -1,5 +1,5 @@
 <div class="list of all items">
-    <ul *ngFor="let n of comapnies; let i = index">
+    <ul *ngFor="let n of companies; let i = index">
         <li>
             {{n.name}}
             <br>
@@ -8,13 +8,13 @@
                     <td>Item Name:</td>
                     <td>Producer:</td>
                     <td>Lowest price:</td>
-                    <td>Objects</td>
+                    <td>Objects:</td>
                 </tr>
-                <tr *ngFor="let j of itemStats[i]; let k = index">
-                    <td>{{j.itemName}}</td>
-                    <td>{{j.itemProducer}}</td>
-                    <td>{{j.sellingPrice}}</td>
-                    <td>{{j.storageUnit}}</td>
+                <tr *ngFor="let j of lowestPrice[i]; let k =index">
+                    <td>{{itemNames[i][k]}}</td>
+                    <td>{{itemProducers[i][k]}}</td>
+                    <td>{{j}}</td>
+                    <td>{{storageUnits[i][k]}}</td>
                 </tr>
             </table>
         </li>
@@ -35,7 +35,7 @@
             <td>Item Name:</td>
             <td>Producer:</td>
             <td>Price:</td>
-            <td>Objects</td>
+            <td>Objects:</td>
         </tr>
         <tr *ngFor="let j of itemsSearch">
             <td>{{j.itemName}}</td>
