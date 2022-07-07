@@ -59,6 +59,9 @@ let Item = new Schema({
     },
     declaration: {
         type: String
+    },
+    category: {
+        type: String
     }
 });
 exports.default = mongoose_1.default.model('ItemModel', Item, 'items');

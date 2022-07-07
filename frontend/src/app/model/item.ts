@@ -18,4 +18,5 @@ export class Item {
     maxItems: number
     description: string
     declaration: string
+    category: string
 }

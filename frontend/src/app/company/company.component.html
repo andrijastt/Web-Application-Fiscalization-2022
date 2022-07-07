@@ -489,7 +489,7 @@
     </div>
     <br>
     <div class="addItemToCategory" *ngFor="let n of allCategories">
-        Add to category: {{n.name}} <button mat-button (click)="openDialog()">Open Dialog</button>
+        Add to category: {{n.name}} <button mat-button (click)="openDialog(n.name)">Add</button>
     </div>
 
 </div>

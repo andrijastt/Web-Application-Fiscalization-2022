@@ -425,12 +425,14 @@ export class CompanyComponent implements OnInit {
     this.category = ""
   }
 
-  openDialog(){
+  openDialog(name){
     this.dialog.open(CategoryDialogComponent, {
       height: '800px',
       width: '800px',
       data: {
-        
+        name: name,
+        items: this.items,
+        companyPIB: this.company.PIB
       }
     })
   }

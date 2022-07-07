@@ -157,6 +157,7 @@ export class CompanyService {
       maxItems: maxItemsForm || null,
       description: descriptionForm || null,
       declaration: declarationForm || null,
+      category: null,
       itemStats: itemStatsForm,
     }
     return this.http.post(`${this.uri}/company/addItem`, data)
@@ -173,5 +174,23 @@ export class CompanyService {
   getMyCategories(PIBForm){
     const data = { PIB: PIBForm }
     return this.http.post(`${this.uri}/company/getMyCategories`, data)
+  }
+
+  searchItem(itemNameForm, PIBForm){
+    const data = { 
+      itemName: itemNameForm,
+      PIB: PIBForm
+    }
+    return this.http.post(`${this.uri}/company/searchItem`, data)
+  }
+
+  setItemCategory(itemNameForm, itemProducerForm, PIBForm, categoryForm){
+    const data = { 
+      itemName: itemNameForm,
+      producer: itemProducerForm,
+      PIB: PIBForm,
+      category: categoryForm
+    }
+    return this.http.post(`${this.uri}/company/setItemCategory`, data)
   }
 }

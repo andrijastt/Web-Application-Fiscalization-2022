@@ -91,4 +91,12 @@ companyRouter.route('/getMyCategories').post(
     (req, res) => new CompanyController().getMyCategories(req, res)
 )
 
+companyRouter.route('/searchItem').post(
+    (req, res) => new CompanyController().searchItem(req, res)
+)
+
+companyRouter.route('/setItemCategory').post(
+    (req, res) => new CompanyController().setItemCategory(req, res)
+)
+
 export default companyRouter;

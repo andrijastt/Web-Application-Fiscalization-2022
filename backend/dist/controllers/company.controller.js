@@ -349,6 +349,39 @@ class CompanyController {
                     res.json(category);
             });
         };
+        this.searchItem = (req, res) => {
+            let itemName = req.body.itemName;
+            let PIB = req.body.PIB;
+            item_1.default.find({ "itemName": { $regex: itemName }, 'companyPIB': PIB }, (err, items) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(items);
+            });
+        };
+        this.setItemCategory = (req, res) => {
+            let itemName = req.body.itemName;
+            let PIB = req.body.PIB;
+            let producer = req.body.producer;
+            let category = req.body.category;
+            item_1.default.findOne({ "itemName": itemName, 'companyPIB': PIB, 'producer': producer }, (err, items) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (!items.category) {
+                        item_1.default.updateOne({ "itemName": itemName, 'companyPIB': PIB, 'producer': producer }, { $set: { 'category': category } }, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else
+                                res.json({ 'message': 'Category set!' });
+                        });
+                    }
+                    else {
+                        res.json({ 'message': 'Already has category' });
+                    }
+                }
+            });
+        };
     }
 }
 exports.CompanyController = CompanyController;

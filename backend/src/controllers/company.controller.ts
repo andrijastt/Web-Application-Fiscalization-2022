@@ -8,6 +8,7 @@ import CustomerModel from '../models/customer'
 import ItemModel from '../models/item'
 import ItemStatsModel from '../models/itemStats'
 import CategoryModel from '../models/category'
+import category from '../models/category'
 
 
 export class CompanyController{
@@ -332,6 +333,36 @@ export class CompanyController{
         CategoryModel.find({"PIB": PIB}, (err, category)=>{
             if(err) console.log(err)
             else res.json(category)
+        })
+    }
+
+    searchItem = (req: express.Request, res: express.Response) => {
+        let itemName = req.body.itemName
+        let PIB = req.body.PIB
+        ItemModel.find({"itemName": {$regex: itemName}, 'companyPIB': PIB}, (err, items)=>{
+            if(err) console.log(err)
+            else res.json(items)
+        })
+    }
+
+    setItemCategory = (req: express.Request, res: express.Response) => {
+        let itemName = req.body.itemName
+        let PIB = req.body.PIB
+        let producer = req.body.producer
+        let category = req.body.category
+        ItemModel.findOne({"itemName": itemName, 'companyPIB': PIB, 'producer': producer}, (err, items)=>{
+            if(err) console.log(err)
+            else {
+                if(!items.category){
+                    ItemModel.updateOne({"itemName": itemName, 'companyPIB': PIB, 'producer': producer}, {$set: {'category': category}}, 
+                    (err, resp) => {
+                        if(err) console.log(err)
+                        else res.json({'message': 'Category set!'})
+                    })
+                } else{
+                    res.json({'message': 'Already has category'})
+                }
+            }
         })
     }
 }
