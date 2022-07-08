@@ -40,16 +40,7 @@ class CompanyController {
                                         if (err)
                                             console.log(err);
                                         else {
-                                            let user = new user_1.default();
-                                            user.username = username;
-                                            user.password = req.body.password;
-                                            user.type = 1;
-                                            user_1.default.collection.insertOne(user, (err, resp) => {
-                                                if (err)
-                                                    console.log(err);
-                                                else
-                                                    res.json({ 'message': 'Registration succesfully added' });
-                                            });
+                                            res.json({ 'message': 'Registration succesfully added' });
                                         }
                                     });
                                 }

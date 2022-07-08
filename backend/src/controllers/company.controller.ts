@@ -35,14 +35,7 @@ export class CompanyController{
                                 CompanyModel.collection.insertOne(req.body, (err, resp)=>{
                                     if(err) console.log(err)
                                     else{
-                                        let user = new UserModel()
-                                        user.username = username
-                                        user.password = req.body.password
-                                        user.type = 1
-                                        UserModel.collection.insertOne(user, (err, resp) => {
-                                            if(err) console.log(err)
-                                            else res.json({'message': 'Registration succesfully added'})
-                                        })
+                                        res.json({'message': 'Registration succesfully added'})
                                     } 
                                 })
                             }
