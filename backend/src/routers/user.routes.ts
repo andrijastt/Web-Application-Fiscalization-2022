@@ -11,6 +11,10 @@ userRouter.route('/changePassword').post(
     (req, res) => new UserController().changePassword(req, res)
 )
 
+userRouter.route('/getMyBuyer').post(
+    (req, res) => new UserController().getMyBuyer(req, res)
+)
+
 userRouter.route('/searchItem').post(
     (req, res) => new UserController().searchItem(req, res)
 )

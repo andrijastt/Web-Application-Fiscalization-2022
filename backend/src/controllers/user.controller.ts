@@ -2,6 +2,7 @@ import express from 'express'
 import UserModel from '../models/user'
 import CompanyModel from '../models/company'
 import ItemStatsModel from '../models/itemStats'
+import BuyerModel from '../models/buyer'
 
 export class UserController{
     login = (req: express.Request, res: express.Response)=>{
@@ -29,6 +30,15 @@ export class UserController{
                 if(err) console.log(err)
                 else res.json({'message': 'Password changed!'})
             })
+        })
+    }
+
+    getMyBuyer = (req: express.Request, res: express.Response)=>{
+        let username = req.body.username
+
+        BuyerModel.findOne({'username': username}, (err, buyer) => {
+            if(err) console.log(err)
+            else res.json(buyer)
         })
     }
 

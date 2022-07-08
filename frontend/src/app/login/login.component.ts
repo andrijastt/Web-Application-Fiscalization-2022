@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Buyer } from '../model/buyer';
 import { Company } from '../model/company';
 import { User } from '../model/user';
 import { RegisterCompanyService } from '../register-company.service';
@@ -26,7 +27,10 @@ export class LoginComponent implements OnInit {
       if(userFromDB != null){
         localStorage.setItem('user', JSON.stringify(userFromDB))
         if(userFromDB.type == 0){
-          this.router.navigate(['user'])
+          this.userService.getMyBuyer(userFromDB.username).subscribe((data: Buyer)=> {
+            localStorage.setItem('buyer', JSON.stringify(data))
+            this.router.navigate(['user'])
+          })
         } 
         else {
           if(userFromDB.type == 1){

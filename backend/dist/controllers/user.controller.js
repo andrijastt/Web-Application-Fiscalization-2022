@@ -7,6 +7,7 @@ exports.UserController = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const company_1 = __importDefault(require("../models/company"));
 const itemStats_1 = __importDefault(require("../models/itemStats"));
+const buyer_1 = __importDefault(require("../models/buyer"));
 class UserController {
     constructor() {
         this.login = (req, res) => {
@@ -37,6 +38,15 @@ class UserController {
                     else
                         res.json({ 'message': 'Password changed!' });
                 });
+            });
+        };
+        this.getMyBuyer = (req, res) => {
+            let username = req.body.username;
+            buyer_1.default.findOne({ 'username': username }, (err, buyer) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(buyer);
             });
         };
         this.getCheapestPrice = (req, res) => {

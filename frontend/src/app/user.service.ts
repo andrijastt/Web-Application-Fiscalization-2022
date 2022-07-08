@@ -28,6 +28,14 @@ export class UserService {
     return this.http.post(`${this.uri}/users/changePassword`, data)
   }
 
+  getMyBuyer(usernameForm){
+    const data = {
+      username: usernameForm    
+    }
+
+    return this.http.post(`${this.uri}/users/getMyBuyer`, data)
+  }
+
   searchItem(itemNameForm, itemProducerform){
     const data = {
       itemName: itemNameForm,
@@ -64,4 +72,6 @@ export class UserService {
 
     return this.http.post(`${this.uri}/users/getMyItems`, data)
   }
+
+  
 }
