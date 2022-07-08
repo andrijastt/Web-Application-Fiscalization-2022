@@ -385,7 +385,6 @@ class CompanyController {
                 if (err)
                     console.log(err);
                 else {
-                    console.log(category);
                     if (!category) {
                         res.json({ 'message': 'Category already exists' });
                     }
@@ -458,6 +457,25 @@ class CompanyController {
                         res.json({ 'message': 'Already has category' });
                     }
                 }
+            });
+        };
+        this.getMyPlaces = (req, res) => {
+            let companyName = req.body.companyName;
+            itemStats_1.default.find({ "companyName": companyName }, (err, itemStats) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(itemStats);
+            }).distinct('place');
+        };
+        this.getItemStats = (req, res) => {
+            let companyName = req.body.companyName;
+            let place = req.body.place;
+            itemStats_1.default.find({ "companyName": companyName, 'place': place }, (err, itemStats) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(itemStats);
             });
         };
     }

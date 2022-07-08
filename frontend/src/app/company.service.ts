@@ -206,4 +206,19 @@ export class CompanyService {
     }
     return this.http.post(`${this.uri}/company/setItemCategory`, data)
   }
+
+  getMyPlaces(companyNameForm){
+    const data = {
+      companyName: companyNameForm
+    }
+    return this.http.post(`${this.uri}/company/getMyPlaces`, data)
+  }
+
+  getItemStats(companyNameForm, placeForm){
+    const data = {
+      companyName: companyNameForm,
+      place: placeForm
+    }
+    return this.http.post(`${this.uri}/company/getItemStats`, data)
+  }
 }

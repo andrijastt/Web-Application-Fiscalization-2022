@@ -372,7 +372,6 @@ export class CompanyController{
         CategoryModel.find({'PIB': PIB, 'name': name}, (err, category)=>{
             if(err) console.log(err)
             else {
-                console.log(category)
                 if(!category){
                     res.json({'message': 'Category already exists'})
                 } else {
@@ -436,6 +435,23 @@ export class CompanyController{
                     res.json({'message': 'Already has category'})
                 }
             }
+        })
+    }
+
+    getMyPlaces = (req: express.Request, res: express.Response) => {
+        let companyName = req.body.companyName
+        ItemStatsModel.find({"companyName": companyName}, (err, itemStats)=>{
+            if(err) console.log(err)
+            else res.json(itemStats)
+        }).distinct('place')
+    }
+
+    getItemStats = (req: express.Request, res: express.Response) => {
+        let companyName = req.body.companyName
+        let place = req.body.place
+        ItemStatsModel.find({"companyName": companyName, 'place': place}, (err, itemStats)=>{
+            if(err) console.log(err)
+            else res.json(itemStats)
         })
     }
 }

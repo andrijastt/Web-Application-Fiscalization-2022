@@ -56,6 +56,10 @@ export class CompanyComponent implements OnInit {
         this.itemStatsStore.push(new ItemStats())
       }
     })
+
+    this.companyService.getMyPlaces(this.company.name).subscribe((data: string[]) => {
+      this.myPlaces = data
+    })
   }
 
   company: Company
@@ -501,4 +505,72 @@ export class CompanyComponent implements OnInit {
     })
   }
 
+  /*********************************************************************************************************/
+
+  myPlaces: string[] = []
+  place: string
+  myItemStats: ItemStats[] = []
+  orderNumber: number[] = []
+
+  selectedItems: ItemStats[] = []
+  selectedItemsName: string[] =[]
+
+  billClosed: boolean = false
+  amountToPay: number = 0
+  paymentType: string
+
+  getItemStats(){
+    this.companyService.getItemStats(this.company.name, this.place).subscribe((data: ItemStats[]) => {
+      this.myItemStats = data
+      this.selectedItemsName = []
+      this.selectedItems = []
+      this.orderNumber = []
+      for(let i = 0; i < data.length; i++){
+        this.orderNumber.push(0)
+      }
+    })
+  }
+
+  addToCart(item, num){
+
+    if(this.billClosed){
+      alert('Bill is closed')
+    } else {
+      if(this.selectedItemsName.length > 0 && this.selectedItemsName.includes(item.itemName)){
+        let i = this.selectedItemsName.indexOf(item.itemName)
+        console.log(i)
+        this.selectedItemsName.splice(i, 1)
+        this.selectedItems.splice(i, 1)
+      }
+  
+      let itemStat = new ItemStats()
+  
+      itemStat.itemName = item.itemName
+      itemStat.itemProducer = item.itemProducer
+      itemStat.sellingPrice = item.sellingPrice
+      itemStat.currentState = this.orderNumber[num]
+  
+      this.selectedItems.push(itemStat)
+      this.selectedItemsName.push(itemStat.itemName)
+      alert('Item added')
+    }
+  }
+
+  closeBill(){
+    if(this.selectedItems.length == 0){
+      alert("Can't close the bill, no items added")
+    } else {
+      this.billClosed = true
+      for(let i = 0; i < this.selectedItems.length; i++){
+        this.amountToPay += (this.selectedItems[i].currentState * this.selectedItems[i].sellingPrice)
+      }
+    }
+  }
 }
+
+// 300 din
+// 300/6 = 50 pdv
+// 250 neto, 50 pdv, kada je 20%
+// 300 = x + y
+// x = 100,  20
+// 120% = 300

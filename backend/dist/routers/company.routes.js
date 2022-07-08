@@ -32,5 +32,7 @@ companyRouter.route('/getMyRegisters').post((req, res) => new company_controller
 companyRouter.route('/getMyStores').post((req, res) => new company_controller_1.CompanyController().getMyStores(req, res));
 companyRouter.route('/searchItem').post((req, res) => new company_controller_1.CompanyController().searchItem(req, res));
 companyRouter.route('/setItemCategory').post((req, res) => new company_controller_1.CompanyController().setItemCategory(req, res));
+companyRouter.route('/getMyPlaces').post((req, res) => new company_controller_1.CompanyController().getMyPlaces(req, res));
+companyRouter.route('/getItemStats').post((req, res) => new company_controller_1.CompanyController().getItemStats(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map

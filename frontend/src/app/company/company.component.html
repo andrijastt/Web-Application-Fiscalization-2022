@@ -312,7 +312,9 @@
     <mat-paginator [pageSize]="10" [length]="items.length"  (page)="onPageChange($event)">
         <!-- [pageSizeOptions]="[1, 2, 3]" -->
     </mat-paginator>
-
+    <BR>
+        GOVNO JEDNO NAPRAVI AUTOMATSKU SLICICU
+    <BR>
     <button mat-button (click)="addGoods = true">Add Goods</button>
     <mat-tab-group *ngIf="addGoods">
         <mat-tab label="General data">
@@ -510,6 +512,7 @@
 </div>
 
 <!-- *************************************************************************************************************************** -->
+
 <div *ngIf="itemData">
 
     <div class="createCategory">
@@ -544,8 +547,91 @@
 
 </div>
 
+<!-- *************************************************************************************************************************** -->
+
 <div *ngIf="receiptsData">
-    
+
+    <select [(ngModel)]="place" (ngModelChange)="getItemStats()">
+        <option *ngFor="let n of myPlaces">{{n}}</option>
+    </select>
+
+    <table>
+        <tr>
+            <td>Item name</td>
+            <td>Item producer</td>
+            <td>Current amount</td>
+            <td>Item Selling Price</td>
+            <td>Amount to add to cart</td>
+        </tr>
+        <tr *ngFor="let n of myItemStats; let i = index">
+            <td>{{n.itemName}}</td>
+            <td>{{n.itemProducer}}</td>
+            <td>{{n.currentState}}</td>
+            <td>{{n.sellingPrice}}</td>
+            <td>
+                <input type="number" max="{{n.currentState}}" min="0" [(ngModel)]="orderNumber[i]">
+            </td>
+            <td>
+                <button mat-button [disabled]="n.currentState == 0" (click)="addToCart(n, i)">Add to cart</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <h2>Cart</h2>
+    <table>
+        <tr>
+            <td>Item number</td>
+            <td>Item name</td>
+            <td>Item producer</td>
+            <td>Amount selected</td>
+            <td>Price</td>
+        </tr>
+        <tr *ngFor="let n of selectedItems; let i = index">
+            <td>{{i + 1}}.</td>
+            <td>{{n.itemName}}</td>
+            <td>{{n.itemProducer}}</td>
+            <td>{{n.currentState}}</td>
+            <td>{{n.sellingPrice * n.currentState}}</td>
+        </tr>
+    </table>
+    <button mat-button (click)="closeBill()">Close the bill</button>
+    <br>
+    <div *ngIf="billClosed">
+        <h2>Recepit</h2>
+        Amount to pay is: {{amountToPay}}
+        <br>
+        <select [(ngModel)]="paymentType">
+            <option value="cash">Cash</option>
+            <option value="moneyCheck">Money check</option>
+            <option value="creditCard">Credit card</option>
+            <option value="virman">Virman</option>
+        </select>
+        <div *ngIf="paymentType == 'cash'">
+            Amount of money to give: &nbsp;<input type="number" min="{{amountToPay}}">
+            <br>
+            Number of id card (optional): &nbsp;<input type="text">
+        </div>
+
+        <div *ngIf="paymentType == 'moneyCheck'">
+            Firstame: &nbsp;<input type="text">
+            <br>
+            Lastname: &nbsp;<input type="text">
+            <br>
+            Card ID: &nbsp;<input type="text">
+        </div>
+            
+        <div *ngIf="paymentType == 'creditCard'">
+            Card ID: &nbsp;<input type="text">
+            <br>
+            Credit card slip: &nbsp;<input type="text">
+        </div>
+
+        <div *ngIf="paymentType == 'virman'">
+            <select *ngFor="let n of customers">
+                <option>{{n.name}}</option>
+            </select>
+        </div>
+    </div>
 </div>
 
 <footer>
