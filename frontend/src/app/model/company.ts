@@ -15,7 +15,7 @@ export class Company{
     postNumber: Number
     streetName: string
     streetNumber: Number
-    PIB: Number
+    PIB: number
     JMBP: string
     imageData: string
     status: string

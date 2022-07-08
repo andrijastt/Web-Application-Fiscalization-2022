@@ -8,8 +8,8 @@ import CustomerModel from '../models/customer'
 import ItemModel from '../models/item'
 import ItemStatsModel from '../models/itemStats'
 import CategoryModel from '../models/category'
-import category from '../models/category'
-
+import StoreModel from '../models/store'
+import WorkingRegisterModel from '../models/workingRegister'
 
 export class CompanyController{
 
@@ -34,7 +34,16 @@ export class CompanyController{
                             else {
                                 CompanyModel.collection.insertOne(req.body, (err, resp)=>{
                                     if(err) console.log(err)
-                                    else res.json({'message': 'Registration succesfully added'})
+                                    else{
+                                        let user = new UserModel()
+                                        user.username = username
+                                        user.password = req.body.password
+                                        user.type = 1
+                                        UserModel.collection.insertOne(user, (err, resp) => {
+                                            if(err) console.log(err)
+                                            else res.json({'message': 'Registration succesfully added'})
+                                        })
+                                    } 
                                 })
                             }
                         }
@@ -119,35 +128,36 @@ export class CompanyController{
         let activityCodes = req.body.activityCodes
         let PDV = req.body.PDV
         let bankAccounts = req.body.bankAccounts
+        let stores = req.body.objects
         let storageUnits = req.body.storageUnits
         let registers = req.body.registers
         let username = req.body.username
-        let PIB = req.body.PIB
 
         CompanyModel.updateOne({"username": username}, {$set: {"category": category, "activityCodes": activityCodes, "PDV": PDV, 
-        "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers, "firstTime": false}}, (err, resp)=>{
-                if(err) console.log(err)
-                else {
-                    StorageUnitModel.find({}, (err, data)=>{
-                        if(err) console.log(err)
-                        else {
-                            let num
-                            num = data.length
-                            for(let i = 0; i < req.body.storageUnits; i++){
-                                let storageUnit = new StorageUnitModel()
-                                storageUnit.name = "Magacin " + (num + i + 1)
-                                storageUnit.id = num + i + 1
-                                storageUnit.companyPIB = PIB
-                    
-                                StorageUnitModel.collection.insertOne(storageUnit, (err, resp)=>{
-                                    if(err) console.log(err)
-                                })
+        "bankAccounts": bankAccounts, "storageUnits": storageUnits.length, "registers": registers, "firstTime": false}}, (err, resp)=>{
+            if(err) console.log(err)
+            else {
+                StorageUnitModel.collection.insertMany(storageUnits, (err, resp)=>{
+                    if(err) console.log(err)
+                    else {
+                        StoreModel.collection.insertMany(stores, (err, resp1)=>{
+                            if(err) console.log(err)
+                            else {
+                                for(let i = 0; i < registers.length; i++){
+                                    WorkingRegisterModel.collection.insertMany(registers[i], (err, resp2)=> {
+                                        if(err) console.log(err)
+                                    })
+                                }
+                                res.json({'message': 'Successfully added data'})
                             }
-                        }
-                    })
-                    res.json({'message': 'Successfully added data'})
-                }
-            })
+                        })
+                    }
+                })
+            }
+        })
+
+
+        
     }
 
     insertCompany = (req: express.Request, res: express.Response) => {
@@ -331,6 +341,14 @@ export class CompanyController{
     getMyCategories = (req: express.Request, res: express.Response) => {
         let PIB = req.body.PIB
         CategoryModel.find({"PIB": PIB}, (err, category)=>{
+            if(err) console.log(err)
+            else res.json(category)
+        })
+    }
+
+    getMyRegisters = (req: express.Request, res: express.Response) => {
+        let PIB = req.body.PIB
+        WorkingRegisterModel.find({"companyPIB": PIB}, (err, category)=>{
             if(err) console.log(err)
             else res.json(category)
         })

@@ -4,8 +4,10 @@ import { CompanyService } from '../company.service';
 import { ActivityCode } from '../model/activityCode';
 import { BankAccount } from '../model/bankAccount';
 import { Company } from '../model/company';
+import { Store } from '../model/store';
 import { Register } from '../model/register';
 import { RegisterModel } from '../model/registerModel';
+import { StorageUnit } from '../model/storageUnit';
 import { User } from '../model/user';
 
 @Component({
@@ -22,7 +24,9 @@ export class CompanyFirstComponent implements OnInit {
 
   category: string
   PDV: boolean
-  storage: number = 1
+
+  storageUnitNumber: number = 1
+  storageUnits: StorageUnit[] = []
 
   bankAccountsModel: BankAccount[] = []
   bankAcc: string[] = []
@@ -32,34 +36,46 @@ export class CompanyFirstComponent implements OnInit {
   activityCodes: ActivityCode[] = []
   selectedActivityCodes: ActivityCode[] = []
 
-  registerNumber: number = 1
   registerModels: RegisterModel[] = []
   
-  registers: Register[] = []
-  registersLocation: string[] = []
-  registersType: string[] = []
+  registers: Register[][] = []
+  registerTypes: string[][] = []
+
+  stores: Store[] = []
+  storesNumber: number = 1
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'))
     this.companyService.getCompany(this.user.username).subscribe((Data: Company)=>{
       this.company = Data
+      let obj = new Store
+      obj.numRegisters = 1
+      obj.companyPIB = this.company.PIB
+      this.stores.push(obj)
+
+      let stg = new StorageUnit
+      stg.companyPIB = this.company.PIB
+      this.storageUnits.push(stg)
     })
 
-    let reg = new Register
-    this.registers.push(reg)
-    this.registersLocation.push("")
-    this.registersType.push("")
+    let regsTypes: string[] = []
+    regsTypes.push("")
+    this.registerTypes.push(regsTypes)
+
     this.companyService.getRegisterModels().subscribe((data: RegisterModel[])=>{
       this.registerModels = data
     })
+
     const BA = new BankAccount()
     this.bankAcc.push('')
     this.bank.push('')
     this.bankErrors.push('')
     this.bankAccountsModel.push(BA)
+
   }
 
   logout(){
+    localStorage.clear()
     this.router.navigate([''])
   }
 
@@ -85,12 +101,39 @@ export class CompanyFirstComponent implements OnInit {
     while(this.selectedActivityCodes.length > 0) this.selectedActivityCodes.pop()
   }
 
-  changeRegisterNumber(){  
-    if(this.registerNumber > this.registers.length){
-      let reg = new Register
-      this.registers.push(reg)
+  changeRegisterNumber(num){  
+    if(this.stores[num].numRegisters > this.registerTypes[num].length){
+      let reg = ""
+      this.registerTypes[num].push(reg)
     } else {
-      this.registers.pop()
+      this.registerTypes[num].pop()
+    }
+  }
+
+  changeObjectsNumber(){  
+    if(this.storesNumber > this.stores.length){
+      let obj = new Store
+      obj.numRegisters = 1
+      obj.companyPIB = this.company.PIB
+      this.stores.push(obj)
+
+      let regsTypes: string[] = []
+      regsTypes.push("")
+      this.registerTypes.push(regsTypes)
+
+    } else {
+      this.stores.pop()
+      this.registerTypes.pop()
+    }
+  }
+
+  changeStorageUnitsNumber(){
+    if(this.storageUnitNumber > this.storageUnits.length){
+      let stg = new StorageUnit
+      stg.companyPIB = this.company.PIB
+      this.storageUnits.push(stg)
+    } else {
+      this.storageUnits.pop()
     }
   }
 
@@ -125,21 +168,40 @@ export class CompanyFirstComponent implements OnInit {
       } 
     }
 
-    for(let i = 0; i < this.registers.length; i++){
-      this.registers[i].location = this.registersLocation[i]
-      this.registers[i].type = this.registersType[i]
-
-      if(!this.registers[i].location || !this.registers[i].type){
-        this.send = false
-        break
+    for(let i = 0; i < this.storageUnitNumber; i++){
+      if(!this.storageUnits[i].id || !this.storageUnits[i].name){
+        this.send = false;
+        break;
       }
+    }
+
+    for(let i = 0; i < this.stores.length; i++){
+      
+      if(!this.stores[i].id || !this.stores[i].location || !this.stores[i].name){
+        this.send = false
+        break;
+      }
+
+      let regs: Register[] = []
+      for(let j = 0; j < this.stores[i].numRegisters; j++){
+        let reg = new Register
+        reg.location = this.stores[i].location
+        reg.type = this.registerTypes[i][j]
+        reg.companyPIB = this.company.PIB
+        if(this.registerTypes[i][j] == ""){
+          this.send = false
+          break;
+        } 
+        regs.push(reg)
+      }
+      this.registers[i] = regs
     }
 
     if(!this.category || !this.selectedActivityCodes || !this.PDV) this.send = false
 
     if(this.send){
       this.companyService.insertData(this.category, this.selectedActivityCodes, this.PDV, this.bankAccountsModel, 
-        this.storage, this.registers, this.user.username, this.company.PIB).subscribe((resp =>{
+        this.storageUnits, this.stores, this.registers, this.user.username, this.company.PIB).subscribe((resp =>{
           alert(resp['message'])
           this.router.navigate(['company'])
         }))
@@ -151,5 +213,26 @@ export class CompanyFirstComponent implements OnInit {
   passwordChange(){
     localStorage.setItem('location', 'companyFirst')
     this.router.navigate(['passwordChange'])
+  }
+
+  provera(){
+    for(let i = 0; i < this.stores.length; i++){
+      
+      // if(!this.objects[i].id || !this.objects[i].location || !this.objects[i].name){
+      //   this.send = false
+      // }
+
+      let regs: Register[] = []
+      for(let j = 0; j < this.stores[i].numRegisters; j++){
+        let reg = new Register
+        reg.location = this.stores[i].location
+        reg.type = this.registerTypes[i][j]
+        // if(this.registerTypes[i][j] == "") this.send = false
+        regs.push(reg)
+      }
+      this.registers[i] = regs
+    }
+    console.log(this.registers)
+    console.log(this.stores)
   }
 }

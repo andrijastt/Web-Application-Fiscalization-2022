@@ -74,6 +74,7 @@ export class UserComponent implements OnInit {
   }
 
   logout(){
+    localStorage.clear()
     this.router.navigate([''])
   }
 

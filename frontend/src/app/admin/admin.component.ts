@@ -42,6 +42,7 @@ export class AdminComponent implements OnInit {
   registerCompanys: Company[] = []
 
   logout(){
+    localStorage.clear()
     this.router.navigate([''])
   }
 

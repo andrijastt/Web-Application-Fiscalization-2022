@@ -33,13 +33,14 @@ export class CompanyService {
     return this.http.get(`${this.uri}/company/getRegisterModels`)
   }
 
-  insertData(categoryForm, activityCodesForm, PDVForm, bankAccountsForm, storageUnitsForm, registersForm, usernameForm, PIBForm){
+  insertData(categoryForm, activityCodesForm, PDVForm, bankAccountsForm, storageUnitsForm, objectsForm, registersForm, usernameForm, PIBForm){
     const data  = {
       category: categoryForm,
       activityCodes: activityCodesForm,
       PDV: PDVForm,
       bankAccounts: bankAccountsForm,
       storageUnits: storageUnitsForm,
+      objects: objectsForm,
       registers: registersForm,
       username: usernameForm,
       PIB: PIBForm
@@ -174,6 +175,11 @@ export class CompanyService {
   getMyCategories(PIBForm){
     const data = { PIB: PIBForm }
     return this.http.post(`${this.uri}/company/getMyCategories`, data)
+  }
+
+  getMyRegisters(PIBForm){
+    const data = { PIB: PIBForm }
+    return this.http.post(`${this.uri}/company/getMyRegisters`, data)
   }
 
   searchItem(itemNameForm, PIBForm){

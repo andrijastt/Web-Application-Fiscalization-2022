@@ -8,6 +8,7 @@ import { Company } from '../model/company';
 import { Customer } from '../model/customer';
 import { Item } from '../model/item';
 import { ItemStats } from '../model/itemStats';
+import { Register } from '../model/register';
 import { StorageUnit } from '../model/storageUnit';
 import { RegisterCompanyService } from '../register-company.service';
 
@@ -43,13 +44,19 @@ export class CompanyComponent implements OnInit {
     this.companyService.getMyCategories(this.company.PIB).subscribe((data: Category[])=>{
       this.allCategories = data
     })
+
+    this.companyService.getMyRegisters(this.company.PIB).subscribe((data: Register[])=>{
+      this.myRegisters = data
+    })
   }
 
   company: Company
+  myRegisters: Register[]
   storageUnits: StorageUnit[] = []
   customers: Customer[] = []
 
   logout(){
+    localStorage.clear()
     this.router.navigate([''])
   }
 

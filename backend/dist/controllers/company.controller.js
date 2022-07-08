@@ -13,6 +13,8 @@ const customer_1 = __importDefault(require("../models/customer"));
 const item_1 = __importDefault(require("../models/item"));
 const itemStats_1 = __importDefault(require("../models/itemStats"));
 const category_1 = __importDefault(require("../models/category"));
+const store_1 = __importDefault(require("../models/store"));
+const workingRegister_1 = __importDefault(require("../models/workingRegister"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -37,8 +39,18 @@ class CompanyController {
                                     company_1.default.collection.insertOne(req.body, (err, resp) => {
                                         if (err)
                                             console.log(err);
-                                        else
-                                            res.json({ 'message': 'Registration succesfully added' });
+                                        else {
+                                            let user = new user_1.default();
+                                            user.username = username;
+                                            user.password = req.body.password;
+                                            user.type = 1;
+                                            user_1.default.collection.insertOne(user, (err, resp) => {
+                                                if (err)
+                                                    console.log(err);
+                                                else
+                                                    res.json({ 'message': 'Registration succesfully added' });
+                                            });
+                                        }
                                     });
                                 }
                             }
@@ -126,34 +138,34 @@ class CompanyController {
             let activityCodes = req.body.activityCodes;
             let PDV = req.body.PDV;
             let bankAccounts = req.body.bankAccounts;
+            let stores = req.body.objects;
             let storageUnits = req.body.storageUnits;
             let registers = req.body.registers;
             let username = req.body.username;
-            let PIB = req.body.PIB;
             company_1.default.updateOne({ "username": username }, { $set: { "category": category, "activityCodes": activityCodes, "PDV": PDV,
-                    "bankAccounts": bankAccounts, "storageUnits": storageUnits, "registers": registers, "firstTime": false } }, (err, resp) => {
+                    "bankAccounts": bankAccounts, "storageUnits": storageUnits.length, "registers": registers, "firstTime": false } }, (err, resp) => {
                 if (err)
                     console.log(err);
                 else {
-                    storageUnit_1.default.find({}, (err, data) => {
+                    storageUnit_1.default.collection.insertMany(storageUnits, (err, resp) => {
                         if (err)
                             console.log(err);
                         else {
-                            let num;
-                            num = data.length;
-                            for (let i = 0; i < req.body.storageUnits; i++) {
-                                let storageUnit = new storageUnit_1.default();
-                                storageUnit.name = "Magacin " + (num + i + 1);
-                                storageUnit.id = num + i + 1;
-                                storageUnit.companyPIB = PIB;
-                                storageUnit_1.default.collection.insertOne(storageUnit, (err, resp) => {
-                                    if (err)
-                                        console.log(err);
-                                });
-                            }
+                            store_1.default.collection.insertMany(stores, (err, resp1) => {
+                                if (err)
+                                    console.log(err);
+                                else {
+                                    for (let i = 0; i < registers.length; i++) {
+                                        workingRegister_1.default.collection.insertMany(registers[i], (err, resp2) => {
+                                            if (err)
+                                                console.log(err);
+                                        });
+                                    }
+                                    res.json({ 'message': 'Successfully added data' });
+                                }
+                            });
                         }
                     });
-                    res.json({ 'message': 'Successfully added data' });
                 }
             });
         };
@@ -343,6 +355,15 @@ class CompanyController {
         this.getMyCategories = (req, res) => {
             let PIB = req.body.PIB;
             category_1.default.find({ "PIB": PIB }, (err, category) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(category);
+            });
+        };
+        this.getMyRegisters = (req, res) => {
+            let PIB = req.body.PIB;
+            workingRegister_1.default.find({ "companyPIB": PIB }, (err, category) => {
                 if (err)
                     console.log(err);
                 else
