@@ -19,7 +19,7 @@
         <td>{{n.telephoneNumber}}</td>
         <td>{{n.email}}</td>
         <td>{{n.name}}</td>
-        <td colspan="4">{{n.country}} {{n.city}} {{n.streetName}} {{n.streetNumber}}</td>
+        <td colspan="4">{{n.country}}, {{n.city}}, {{n.streetName}} {{n.streetNumber}}</td>
         <td>{{n.PIB}}</td>
         <td>{{n.JMBP}}</td>
         <td>{{n.status}}</td>
@@ -236,6 +236,38 @@
     </tr>
 </table>
 
+<h2>Insert user</h2>
+
+<table>
+    <tr>
+        <td>Firstname:</td>
+        <input type="text" name="firstname" [(ngModel)]="firstnameUser">
+    </tr>
+    <tr>
+        <td>Lastname:</td>
+        <input type="text" name="lastname" [(ngModel)]="lastnameUser">
+    </tr>
+    <tr>
+        <td>Username:</td>
+        <input type="text" name="username" [(ngModel)]="usernameUser">
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <input type="password" name="password" [(ngModel)]="passwordUser" (ngModelChange)="checkPasswordUser()">
+        <td class="error">{{passwordCheckUser}}</td>
+    </tr>
+    <tr>
+        <td>Telephone number:</td>
+        <input type="text" name="number" [(ngModel)]="telephoneNumberUser" (ngModelChange)="checkTelephoneNumberUser()">
+        <td class="error">{{telephoneNumberCheckUser}}</td>
+    </tr>
+    <tr>
+        <td>ID Card:</td>
+        <input type="text" name="email" [(ngModel)]="idCardUser" (ngModelChange)="checkIDCard()">
+        <td class="error">{{idCardCheck}}</td>
+    </tr>
+</table>
+<button mat-button (click)="insertUser()">Insert user</button>
 <footer>
     <button (click)="passwordChange()">Change password</button>
     <br>

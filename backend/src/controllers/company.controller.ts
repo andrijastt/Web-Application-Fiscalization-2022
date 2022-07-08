@@ -237,29 +237,6 @@ export class CompanyController{
                 })
             }
         })
-        // 
-
-        // UserModel.collection.insertOne(user, (err, resp)=>{
-        //     if(err) console.log(err)
-        //     else {
-        //         StorageUnitModel.collection.insertMany(storageUnits, (err, resp)=>{
-        //             if(err) console.log(err)
-        //             else {
-        //                 StoreModel.collection.insertMany(stores, (err, resp1)=>{
-        //                     if(err) console.log(err)
-        //                     else {
-        //                         for(let i = 0; i < registers.length; i++){
-        //                             WorkingRegisterModel.collection.insertMany(registers[i], (err, resp2)=> {
-        //                                 if(err) console.log(err)
-        //                             })
-        //                         }
-        //                         res.json({'message': 'Successfully added company'})
-        //                     }
-        //                 })
-        //             }
-        //         })
-        //     }     
-        // })    
     }
 
     activate = (req: express.Request, res: express.Response) => {

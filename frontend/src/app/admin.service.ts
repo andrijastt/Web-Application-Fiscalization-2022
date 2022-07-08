@@ -17,6 +17,18 @@ export class AdminService {
     }
 
     return this.http.post(`${this.uri}/admin/loginAdmin`, data)
-    // return this.http.post('http://localhost:4000/users/login', data)
+  }
+
+  insertUser(firstnameForm, lastnameForm, usernameForm, passwordFrom, telephoneNumberForm, idCardForm){
+    const data = {
+      firstname: firstnameForm,
+      lastname: lastnameForm,
+      username: usernameForm,
+      password: passwordFrom,
+      telephoneNumber: telephoneNumberForm,
+      idCard: idCardForm
+    }
+    return this.http.post(`${this.uri}/admin/insertUser`, data)
+
   }
 }

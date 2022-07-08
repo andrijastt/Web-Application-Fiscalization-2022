@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminService } from '../admin.service';
 import { CompanyService } from '../company.service';
 import { ActivityCode } from '../model/activityCode';
 import { BankAccount } from '../model/bankAccount';
@@ -19,7 +20,7 @@ import { RegisterCompanyService } from '../register-company.service';
 export class AdminComponent implements OnInit {
 
   constructor(private router: Router, private registerCompanyService: RegisterCompanyService,
-    private companyService: CompanyService) { }
+    private companyService: CompanyService, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'))
@@ -394,5 +395,58 @@ export class AdminComponent implements OnInit {
   passwordChange(){
     localStorage.setItem('location', 'admin')
     this.router.navigate(['passwordChange'])
+  }
+
+  // add user deo
+
+  firstnameUser: string = ""
+  lastnameUser: string = ""
+  usernameUser: string = ""
+  passwordUser: string = ""
+  telephoneNumberUser: string = ""
+  idCardUser: string = ""
+
+  passwordCheckUser: string = ""
+  telephoneNumberCheckUser: string = ""
+  idCardCheck: string = ""
+
+  checkPasswordUser(){
+    let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,12}$/
+    if(!passwordRegex.test(this.passwordUser)){
+      this.passwordCheckUser = "Password must contain at least 1 number, 1 small letter, 1 capital letter, 1 special charater and 8 to 12 characters"
+    } else { this.passwordCheckUser = "" }
+  }
+
+  checkTelephoneNumberUser(){
+    let telephoneNumberRegex = /^\d{9,10}$/
+    if(!telephoneNumberRegex.test(this.telephoneNumberUser)){
+      this.telephoneNumberCheckUser = "Bad telephone number, must contain only numbers and has 9 to 10 characters"
+    } else this.telephoneNumberCheckUser = ""
+  }
+
+  checkIDCard(){
+    let idCardRegex = /^\d{9}$/
+    if(!idCardRegex.test(this.idCardUser)){
+      this.idCardCheck = "Bad id number, must contain only numbers and has 9 characters"
+    } else this.idCardCheck = ""
+  }
+
+  insertUser(){
+    if(this.firstnameUser == "" || this.lastnameUser == "" || this.usernameUser == "" || this.passwordUser == "" || 
+    this.telephoneNumberUser == "" || this.idCardUser == "" || this.idCardCheck != "" || this.telephoneNumberCheckUser != "" || 
+    this.passwordCheckUser != ""){
+      alert('Bad data')
+    } else {
+      this.adminService.insertUser(this.firstnameUser, this.lastnameUser, this.usernameUser, this.passwordUser, this.telephoneNumberUser, 
+        this.idCardUser).subscribe((resp)=>{
+          alert(resp['message'])
+          this.firstnameUser = ""
+          this.lastnameUser = ""
+          this.usernameUser = ""
+          this.passwordUser = ""
+          this.telephoneNumberUser = ""
+          this.idCardUser = ""
+      })
+    }
   }
 }
