@@ -51,7 +51,7 @@ export class CompanyService {
 
   insertCompany(firstnameForm, lastnameForm, usernameForm, passwordFrom, telephoneNumberForm, emailForm, nameForm, countryForm,
     cityFrom, postNumberForm, streetNameForm, streetNumberFrom, PIBForm, JMBPForm, imageDataForm, categoryForm, activityCodesForm, 
-    PDVForm, bankAccountsForm, storageUnitsForm, registersForm){
+    PDVForm, bankAccountsForm, storageUnitsForm, storesForm,registersForm){
     const data = {
       firstname: firstnameForm,
       lastname: lastnameForm,
@@ -76,6 +76,7 @@ export class CompanyService {
       PDV: PDVForm,
       bankAccounts: bankAccountsForm,
       storageUnits: storageUnitsForm,
+      stores: storesForm,
       registers: registersForm,
     }
 

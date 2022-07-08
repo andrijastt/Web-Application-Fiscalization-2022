@@ -6,6 +6,8 @@ import { BankAccount } from '../model/bankAccount';
 import { Company } from '../model/company';
 import { Register } from '../model/register';
 import { RegisterModel } from '../model/registerModel';
+import { StorageUnit } from '../model/storageUnit';
+import { Store } from '../model/store';
 import { User } from '../model/user';
 import { RegisterCompanyService } from '../register-company.service';
 
@@ -24,13 +26,22 @@ export class AdminComponent implements OnInit {
     this.registerCompanyService.getAllRegisterCompany().subscribe((data: Company[])=>{
       this.registerCompanys = data
     })
-    let reg = new Register
-    this.registers.push(reg)
-    this.registersLocation.push("")
-    this.registersType.push("")
+
+    let obj = new Store
+    obj.numRegisters = 1
+    this.stores.push(obj)
+
+    let stg = new StorageUnit
+    this.storageUnits.push(stg)
+
+    let regsTypes: string[] = []
+    regsTypes.push("")
+    this.registerTypes.push(regsTypes)
+
     this.companyService.getRegisterModels().subscribe((data: RegisterModel[])=>{
       this.registerModels = data
     })
+
     const BA = new BankAccount()
     this.bankAcc.push('')
     this.bank.push('')
@@ -86,7 +97,7 @@ export class AdminComponent implements OnInit {
   streetNumber: Number
   streetNumberCheck: string
 
-  PIB: Number
+  PIB: number
   JMBP: string
   PIBCheck: string
   JMBPCheck: string
@@ -198,7 +209,9 @@ export class AdminComponent implements OnInit {
 
   category: string
   PDV: boolean
-  storage: number = 1
+
+  storageUnitNumber: number = 1
+  storageUnits: StorageUnit[] = []
 
   bankAccountsModel: BankAccount[] = []
   bankAcc: string[] = []
@@ -208,12 +221,13 @@ export class AdminComponent implements OnInit {
   activityCodes: ActivityCode[] = []
   selectedActivityCodes: ActivityCode[] = []
 
-  registerNumber: number = 1
   registerModels: RegisterModel[] = []
   
-  registers: Register[] = []
-  registersLocation: string[] = []
-  registersType: string[] = []
+  registers: Register[][] = []
+  registerTypes: string[][] = []
+
+  stores: Store[] = []
+  storesNumber: number = 1
 
   onAddBankAccount(){
     const BA = new BankAccount()
@@ -237,12 +251,37 @@ export class AdminComponent implements OnInit {
     while(this.selectedActivityCodes.length > 0) this.selectedActivityCodes.pop()
   }
 
-  changeRegisterNumber(){  
-    if(this.registerNumber > this.registers.length){
-      let reg = new Register
-      this.registers.push(reg)
+  changeRegisterNumber(num){  
+    if(this.stores[num].numRegisters > this.registerTypes[num].length){
+      let reg = ""
+      this.registerTypes[num].push(reg)
     } else {
-      this.registers.pop()
+      this.registerTypes[num].pop()
+    }
+  }
+
+  changeObjectsNumber(){  
+    if(this.storesNumber > this.stores.length){
+      let obj = new Store
+      obj.numRegisters = 1
+      this.stores.push(obj)
+
+      let regsTypes: string[] = []
+      regsTypes.push("")
+      this.registerTypes.push(regsTypes)
+
+    } else {
+      this.stores.pop()
+      this.registerTypes.pop()
+    }
+  }
+
+  changeStorageUnitsNumber(){
+    if(this.storageUnitNumber > this.storageUnits.length){
+      let stg = new StorageUnit
+      this.storageUnits.push(stg)
+    } else {
+      this.storageUnits.pop()
     }
   }
 
@@ -275,13 +314,42 @@ export class AdminComponent implements OnInit {
       } 
     }
 
-    for(let i = 0; i < this.registers.length; i++){
-      this.registers[i].location = this.registersLocation[i]
-      this.registers[i].type = this.registersType[i]
+    for(let i = 0; i < this.storageUnitNumber; i++){
+      this.storageUnits[i].companyPIB = this.PIB
+      if(!this.storageUnits[i].id || !this.storageUnits[i].name){
+        this.send = false;
+        break;
+      }
+    }
 
-      if(!this.registers[i].location || !this.registers[i].type){
+    for(let i = 0; i < this.stores.length; i++){
+      
+      this.stores[i].companyPIB = this.PIB
+
+      if(!this.stores[i].id || !this.stores[i].location || !this.stores[i].name){
         this.send = false
-        break
+        break;
+      }
+
+      for(let j = 0; j < this.stores[i].numRegisters; j++){  
+        if(this.registerTypes[i][j] == ""){
+          this.send = false
+          break;
+        } 
+      }
+    }
+
+    if(this.send){
+      for(let i = 0; i < this.stores.length; i++){
+        let regs: Register[] = []
+        for(let j = 0; j < this.stores[i].numRegisters; j++){
+          let reg = new Register
+          reg.location = this.stores[i].location
+          reg.type = this.registerTypes[i][j]
+          reg.companyPIB = this.PIB
+          regs.push(reg)
+        }
+        this.registers[i] = regs
       }
     }
 
@@ -300,7 +368,7 @@ export class AdminComponent implements OnInit {
       this.companyService.insertCompany(this.firstname, this.lastname, this.username, this.password, 
         this.telephoneNumber, this.email, this.name, this.country, this.city, this.postNumber, this.streetName, 
         this.streetNumber, this.PIB, this.JMBP, this.image, this.category, this.selectedActivityCodes, this.PDV, this.bankAccountsModel, 
-        this.storage, this.registers).subscribe((resp =>{
+        this.storageUnits, this.stores, this.registers).subscribe((resp =>{
           alert(resp['message'])
           location.reload()
         }))

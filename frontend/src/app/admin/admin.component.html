@@ -162,34 +162,53 @@
     <tr>
         <td>Number of storage units</td>
         <td>
-            <input type="number" min="1" [(ngModel)]="storage">
+            <input type="number" min="1" [(ngModel)]="storageUnitNumber" (ngModelChange)="changeStorageUnitsNumber()">
         </td>
     </tr>
     <tr>
-        <td>Number of registers</td>
+        <td>Id:</td>
+        <td>Name:</td>
+    </tr>
+    <tr *ngFor="let n of storageUnits; let i = index">
         <td>
-            <input type="number" [(ngModel)]="registerNumber" (ngModelChange)="changeRegisterNumber()" min="1">
+            <input type="number" min="1" [(ngModel)]="storageUnits[i].id">
+        </td>
+        <td>
+            <input type="text" [(ngModel)]="storageUnits[i].name">
         </td>
     </tr>
     <tr>
+        <td>Number of Stores:</td>
         <td>
-            Location
-        </td>
-        <td>
-            Register Type
+            <input type="number" [(ngModel)]="storesNumber" (ngModelChange)="changeObjectsNumber()" min="1">
         </td>
     </tr>
-    <tr *ngFor="let n of registers; let i = index">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Location</td>
+        <td>Number of Registers</td>
+    </tr>
+    <tr *ngFor="let n of stores; let i = index">
         <td>
-            <input type="text" [(ngModel)]="registersLocation[i]">
+            <input type="number" min="1" [(ngModel)]="stores[i].id">
         </td>
         <td>
-            <select [(ngModel)]="registersType[i]">
+            <input type="text" [(ngModel)]="stores[i].name">
+        </td>
+        <td>
+            <input type="text" [(ngModel)]="stores[i].location">
+        </td>
+        <td>
+            <input type="number" min="1" [(ngModel)]="stores[i].numRegisters" (ngModelChange)="changeRegisterNumber(i)">
+        </td>
+    </tr>
+    <tr *ngFor="let n of stores; let i = index">
+        <td>Registers for store {{i}}</td>
+        <td *ngFor="let j of [].constructor(stores[i].numRegisters); let k = index">
+            <select [(ngModel)]="registerTypes[i][k]">
                 <option *ngFor="let n of registerModels" value="{{n.name}}">{{n.name}}</option>
             </select>
-        </td>
-        <td>
-            <button (click)="removeRegister(i)">Remove register</button>
         </td>
     </tr>
 </table>

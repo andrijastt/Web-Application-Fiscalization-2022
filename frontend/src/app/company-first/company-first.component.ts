@@ -182,19 +182,26 @@ export class CompanyFirstComponent implements OnInit {
         break;
       }
 
-      let regs: Register[] = []
       for(let j = 0; j < this.stores[i].numRegisters; j++){
-        let reg = new Register
-        reg.location = this.stores[i].location
-        reg.type = this.registerTypes[i][j]
-        reg.companyPIB = this.company.PIB
         if(this.registerTypes[i][j] == ""){
           this.send = false
           break;
         } 
-        regs.push(reg)
       }
-      this.registers[i] = regs
+    }
+
+    if(this.send){
+      for(let i = 0; i < this.stores.length; i++){
+        let regs: Register[] = []
+        for(let j = 0; j < this.stores[i].numRegisters; j++){
+          let reg = new Register
+          reg.location = this.stores[i].location
+          reg.type = this.registerTypes[i][j]
+          reg.companyPIB = this.company.PIB
+          regs.push(reg)
+        }
+        this.registers[i] = regs
+      }
     }
 
     if(!this.category || !this.selectedActivityCodes || !this.PDV) this.send = false
@@ -215,24 +222,4 @@ export class CompanyFirstComponent implements OnInit {
     this.router.navigate(['passwordChange'])
   }
 
-  provera(){
-    for(let i = 0; i < this.stores.length; i++){
-      
-      // if(!this.objects[i].id || !this.objects[i].location || !this.objects[i].name){
-      //   this.send = false
-      // }
-
-      let regs: Register[] = []
-      for(let j = 0; j < this.stores[i].numRegisters; j++){
-        let reg = new Register
-        reg.location = this.stores[i].location
-        reg.type = this.registerTypes[i][j]
-        // if(this.registerTypes[i][j] == "") this.send = false
-        regs.push(reg)
-      }
-      this.registers[i] = regs
-    }
-    console.log(this.registers)
-    console.log(this.stores)
-  }
 }

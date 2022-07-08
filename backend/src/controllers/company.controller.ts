@@ -155,39 +155,111 @@ export class CompanyController{
 
     insertCompany = (req: express.Request, res: express.Response) => {
         
-        CompanyModel.collection.insertOne(req.body, (err, resp)=>{
+        let firstname = req.body.firstname
+        let lastname = req.body.lastname
+        let username = req.body.username
+        let password = req.body.password
+        let telephoneNumber = req.body.telephoneNumber
+        let email = req.body.email
+        let name = req.body.name
+        let country = req.body.country
+        let city = req.body.city
+        let postNumber = req.body.postNumber
+        let streetName = req.body.streetName
+        let streetNumber = req.body.streetNumber
+        let PIB = req.body.PIB
+        let JMBP = req.body.JMBP
+        let imageData = req.body.imageData
+        let status = req.body.status
+        let firstTime = req.body.firstTime
+        let active = req.body.active
+        let category = req.body.category
+        let activityCodes = req.body.activityCodes
+        let PDV = req.body.PDV
+        let bankAccounts = req.body.bankAccounts
+        let storageUnits = req.body.storageUnits
+        let stores = req.body.stores
+        let registers = req.body.registers
+        
+        let company = new CompanyModel()
+        company.firstname = firstname
+        company.lastname = lastname
+        company.username = username
+        company.password = password
+        company.telephoneNumber = telephoneNumber
+        company.email = email
+        company.name = name
+        company.country = country
+        company.city = city
+        company.postNumber = postNumber
+        company.streetName = streetName
+        company.streetNumber = streetNumber
+        company.PIB = PIB
+        company.JMBP = JMBP
+        company.imageData = imageData
+        company.status = status
+        company.active = active
+        company.firstTime = firstTime
+        company.category = category
+        company.activityCodes = activityCodes
+        company.PDV = PDV
+        company.bankAccounts = bankAccounts
+        company.storageUnits = storageUnits.length
+        company.registers = registers
+
+        CompanyModel.collection.insertOne(company, (err, resp) => {
             if(err) console.log(err)
             else {
                 let user = new UserModel()
                 user.username = req.body.username
                 user.password = req.body.password
                 user.type = 1
-
                 UserModel.collection.insertOne(user, (err, resp)=>{
                     if(err) console.log(err)
                     else {
-                        let num
-                        StorageUnitModel.find({}, (err, data)=>{
+                        StorageUnitModel.collection.insertMany(storageUnits, (err, resp)=>{
                             if(err) console.log(err)
-                            else {                 
-                                num = data.length
-                                for(let i = 0; i < req.body.storageUnits; i++){
-                                    let storageUnit = new StorageUnitModel()
-                                    storageUnit.name = "Magacin " + (num + i + 1)
-                                    storageUnit.id = num + i + 1
-                                    storageUnit.companyPIB = req.body.PIB
-                        
-                                    StorageUnitModel.collection.insertOne(storageUnit, (err, resp)=>{
-                                        if(err) console.log(err)
-                                    })
-                                }
-                                res.json({'message': 'Company succesfully added'})
+                            else {
+                                StoreModel.collection.insertMany(stores, (err, resp) => {
+                                    if(err) console.log(err)
+                                    else{
+                                        for(let i = 0; i < registers.length; i++){
+                                            WorkingRegisterModel.collection.insertMany(registers[i], (err, resp2)=> {
+                                                if(err) console.log(err)
+                                            })
+                                        }
+                                        res.json({'message': 'Successfully added data'})
+                                    }
+                                })
                             }
                         })
-                    }     
-                })           
+                    }
+                })
             }
-        })    
+        })
+        // 
+
+        // UserModel.collection.insertOne(user, (err, resp)=>{
+        //     if(err) console.log(err)
+        //     else {
+        //         StorageUnitModel.collection.insertMany(storageUnits, (err, resp)=>{
+        //             if(err) console.log(err)
+        //             else {
+        //                 StoreModel.collection.insertMany(stores, (err, resp1)=>{
+        //                     if(err) console.log(err)
+        //                     else {
+        //                         for(let i = 0; i < registers.length; i++){
+        //                             WorkingRegisterModel.collection.insertMany(registers[i], (err, resp2)=> {
+        //                                 if(err) console.log(err)
+        //                             })
+        //                         }
+        //                         res.json({'message': 'Successfully added company'})
+        //                     }
+        //                 })
+        //             }
+        //         })
+        //     }     
+        // })    
     }
 
     activate = (req: express.Request, res: express.Response) => {
