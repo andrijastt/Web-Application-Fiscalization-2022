@@ -44,7 +44,7 @@ export class UserComponent implements OnInit {
               this.lowestPrice[i] = numbers
               this.itemNames[i] = stringsName
               this.itemProducers[i] = stringsProducer
-              this.userService.getDistinctStorageUnits(data[j], "", this.companies[i].name).subscribe((data2: string)=>{
+              this.userService.getDistinctPlace(data[j], "", this.companies[i].name).subscribe((data2: string)=>{
                 strings.push(data2)
                 this.storageUnits[i] = strings
               })

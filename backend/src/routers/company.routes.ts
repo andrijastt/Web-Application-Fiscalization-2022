@@ -95,6 +95,10 @@ companyRouter.route('/getMyRegisters').post(
     (req, res) => new CompanyController().getMyRegisters(req, res)
 )
 
+companyRouter.route('/getMyStores').post(
+    (req, res) => new CompanyController().getMyStores(req, res)
+)
+
 companyRouter.route('/searchItem').post(
     (req, res) => new CompanyController().searchItem(req, res)
 )

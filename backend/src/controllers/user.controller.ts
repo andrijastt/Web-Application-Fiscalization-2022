@@ -55,7 +55,7 @@ export class UserController{
         }).sort({sellingPrice: 1}).limit(1)
     }
 
-    getDistinctStorageUnits = (req: express.Request, res: express.Response)=>{
+    getDistinctPlace = (req: express.Request, res: express.Response)=>{
         let itemName = req.body.itemName
         let producer = req.body.producer
         let companyName = req.body.companyName
@@ -63,7 +63,7 @@ export class UserController{
         'companyName': companyName}, (err, items)=>{
             if(err) console.log(err);
             else res.json(items)
-        }).distinct("storageUnit")
+        }).distinct("place")
     }
 
     searchItem = (req: express.Request, res: express.Response)=>{

@@ -62,7 +62,7 @@ class UserController {
                 }
             }).sort({ sellingPrice: 1 }).limit(1);
         };
-        this.getDistinctStorageUnits = (req, res) => {
+        this.getDistinctPlace = (req, res) => {
             let itemName = req.body.itemName;
             let producer = req.body.producer;
             let companyName = req.body.companyName;
@@ -72,7 +72,7 @@ class UserController {
                     console.log(err);
                 else
                     res.json(items);
-            }).distinct("storageUnit");
+            }).distinct("place");
         };
         this.searchItem = (req, res) => {
             let itemName = req.body.itemName;

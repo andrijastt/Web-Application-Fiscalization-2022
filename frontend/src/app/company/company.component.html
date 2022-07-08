@@ -133,6 +133,21 @@
                     <td>{{n.name}}</td>
                 </tr>
             </table>
+            <br>
+            <table>
+                <tr>
+                    <td>Store ID</td>
+                    <td>Store name</td>
+                    <td>Store location</td>
+                    <td>Number of register</td>
+                </tr>
+                <tr *ngFor="let n of myStores">
+                    <td>{{n.id}}</td>
+                    <td>{{n.name}}</td>
+                    <td>{{n.location}}</td>
+                    <td>{{n.numRegisters}}</td>
+                </tr>
+            </table>
         </mat-tab>
     </mat-tab-group>
 </div>
@@ -438,7 +453,7 @@
         <mat-tab label="Price and state of goods">
             <table>
                 <tr>
-                    <td>Storage Unit</td>
+                    <td>Storage Unit/Store</td>
                     <td>Purchase price</td>
                     <td>Selling price</td>
                     <td>CurrentState</td>
@@ -465,6 +480,27 @@
                         <input type="number" [(ngModel)]="itemStats[i].maxWantingNumber" min="0">
                     </td>
                 </tr>
+                <tr *ngFor="let n of myStores; let i = index"> 
+                    <td>
+                       {{n.name}}
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStatsStore[i].purchasePrice" min="0">
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStatsStore[i].sellingPrice" min="0">
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStatsStore[i].currentState" min="0">
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStatsStore[i].minWantingNumber" min="0">
+                    </td>
+                    <td>
+                        <input type="number" [(ngModel)]="itemStatsStore[i].maxWantingNumber" min="0">
+                    </td>
+                </tr>
+
             </table>
         </mat-tab>
     </mat-tab-group>

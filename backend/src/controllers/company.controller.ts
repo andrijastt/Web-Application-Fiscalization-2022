@@ -348,10 +348,15 @@ export class CompanyController{
                     else {
                         
                         let itemStats = req.body.itemStats
-                       
+                        let itemStatsStore = req.body.itemStatsStore
                         ItemStatsModel.collection.insertMany(itemStats, (err, resp)=>{
                             if(err) console.log(err)
-                            else res.json({'message': 'Item added'})
+                            else {
+                                ItemStatsModel.collection.insertMany(itemStatsStore, (err, resp)=>{
+                                    if(err) console.log(err)
+                                    else res.json({'message': 'Item added'})
+                                })
+                            }
                         })
 
                     }
@@ -393,6 +398,14 @@ export class CompanyController{
         WorkingRegisterModel.find({"companyPIB": PIB}, (err, category)=>{
             if(err) console.log(err)
             else res.json(category)
+        })
+    }
+
+    getMyStores = (req: express.Request, res: express.Response) => {
+        let PIB = req.body.PIB
+        StoreModel.find({"companyPIB": PIB}, (err, stores)=>{
+            if(err) console.log(err)
+            else res.json(stores)
         })
     }
 

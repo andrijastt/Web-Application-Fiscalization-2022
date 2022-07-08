@@ -1,5 +1,6 @@
 export class ItemStats{
-    storageUnit: string
+    place: string
+    typeOfPlace: string
     itemName: string
     itemProducer: string
     companyName: string

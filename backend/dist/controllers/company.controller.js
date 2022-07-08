@@ -360,11 +360,18 @@ class CompanyController {
                             console.log(err);
                         else {
                             let itemStats = req.body.itemStats;
+                            let itemStatsStore = req.body.itemStatsStore;
                             itemStats_1.default.collection.insertMany(itemStats, (err, resp) => {
                                 if (err)
                                     console.log(err);
-                                else
-                                    res.json({ 'message': 'Item added' });
+                                else {
+                                    itemStats_1.default.collection.insertMany(itemStatsStore, (err, resp) => {
+                                        if (err)
+                                            console.log(err);
+                                        else
+                                            res.json({ 'message': 'Item added' });
+                                    });
+                                }
                             });
                         }
                     });
@@ -409,6 +416,15 @@ class CompanyController {
                     console.log(err);
                 else
                     res.json(category);
+            });
+        };
+        this.getMyStores = (req, res) => {
+            let PIB = req.body.PIB;
+            store_1.default.find({ "companyPIB": PIB }, (err, stores) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(stores);
             });
         };
         this.searchItem = (req, res) => {

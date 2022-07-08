@@ -10,6 +10,7 @@ import { Item } from '../model/item';
 import { ItemStats } from '../model/itemStats';
 import { Register } from '../model/register';
 import { StorageUnit } from '../model/storageUnit';
+import { Store } from '../model/store';
 import { RegisterCompanyService } from '../register-company.service';
 
 
@@ -48,12 +49,20 @@ export class CompanyComponent implements OnInit {
     this.companyService.getMyRegisters(this.company.PIB).subscribe((data: Register[])=>{
       this.myRegisters = data
     })
+
+    this.companyService.getMyStores(this.company.PIB).subscribe((data: Store[])=>{
+      this.myStores = data
+      for(let i = 0; i < this.myStores.length; i++){
+        this.itemStatsStore.push(new ItemStats())
+      }
+    })
   }
 
   company: Company
   myRegisters: Register[]
   storageUnits: StorageUnit[] = []
   customers: Customer[] = []
+  myStores: Store[] = []
 
   logout(){
     localStorage.clear()
@@ -357,6 +366,7 @@ export class CompanyComponent implements OnInit {
   itemAlert1: string
 
   itemStats: ItemStats[] = []
+  itemStatsStore: ItemStats[] = []
 
   onFileSelectedItem(event: any){
     
@@ -417,7 +427,8 @@ export class CompanyComponent implements OnInit {
     }
 
     for(let i = 0; i < this.itemStats.length; i++){
-      this.itemStats[i].storageUnit = this.storageUnits[i].name
+      this.itemStats[i].place = this.storageUnits[i].name
+      this.itemStats[i].typeOfPlace = "storageUnit"
       this.itemStats[i].companyName = this.company.name
       this.itemStats[i].itemName = this.itemName
       this.itemStats[i].itemProducer = this.itemProducerName
@@ -429,11 +440,25 @@ export class CompanyComponent implements OnInit {
       }
     }
 
+    for(let i = 0; i < this.itemStatsStore.length; i++){
+      this.itemStatsStore[i].place = this.myStores[i].name
+      this.itemStatsStore[i].typeOfPlace = "store"
+      this.itemStatsStore[i].companyName = this.company.name
+      this.itemStatsStore[i].itemName = this.itemName
+      this.itemStatsStore[i].itemProducer = this.itemProducerName
+      if(!this.itemStatsStore[i].purchasePrice || !this.itemStatsStore[i].sellingPrice || this.itemStatsStore[i].currentState < 0 ||
+        this.itemStatsStore[i].minWantingNumber < 0 || this.itemStatsStore[i].maxWantingNumber < 0||
+        this.itemStatsStore[i].minWantingNumber > this.itemStatsStore[i].maxWantingNumber){
+        send = false;
+        break;
+      }
+    }
+
     if(send){
       this.companyService.addItem(this.company.PIB, this.itemId, this.itemName, this.itemUnitOfMeasure, this.itemTaxRate, this.itemType, 
         this.itemImageData, this.itemCountryOfOrigin, this.itemForeignName, this.itemBarcodeNumber, this.itemProducerName, this.itemCustomsRate, 
         this.itemEkoTax, this.itemExcies, this.itemMinItems, this.itemMaxItems, this.itemDescription, this.itemDeclaration,
-        this.itemStats). subscribe((resp => {   
+        this.itemStats, this.itemStatsStore). subscribe((resp => {   
           if(resp['message'] == 'Item ID taken'){
             alert(resp['message'])
           } else {

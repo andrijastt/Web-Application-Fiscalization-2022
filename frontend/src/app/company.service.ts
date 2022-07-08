@@ -139,7 +139,7 @@ export class CompanyService {
 
   addItem(companyPIBForm, itemIdForm, itemNameForm, unitOfMeasureForm, taxRateForm, typeForm, imageForm, countryOfOriginForm, 
     foreignItemNameForm, barcodeNumberForm, producerForm, customsRateForm, ekoTaxForm, exciseForm, minItemsForm, maxItemsForm, 
-    descriptionForm, declarationForm, itemStatsForm){
+    descriptionForm, declarationForm, itemStatsForm, itemStatsStoreForm){
     const data = {
       companyPIB: companyPIBForm,
       itemId: itemIdForm,
@@ -161,6 +161,7 @@ export class CompanyService {
       declaration: declarationForm || null,
       category: null,
       itemStats: itemStatsForm,
+      itemStatsStore: itemStatsStoreForm
     }
     return this.http.post(`${this.uri}/company/addItem`, data)
   }
@@ -181,6 +182,11 @@ export class CompanyService {
   getMyRegisters(PIBForm){
     const data = { PIB: PIBForm }
     return this.http.post(`${this.uri}/company/getMyRegisters`, data)
+  }
+
+  getMyStores(PIBForm){
+    const data = { PIB: PIBForm }
+    return this.http.post(`${this.uri}/company/getMyStores`, data)
   }
 
   searchItem(itemNameForm, PIBForm){

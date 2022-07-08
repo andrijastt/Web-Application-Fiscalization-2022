@@ -23,8 +23,8 @@ userRouter.route('/getCheapestPrice').post(
     (req, res) => new UserController().getCheapestPrice(req, res)
 )
 
-userRouter.route('/getDistinctStorageUnits').post(
-    (req, res) => new UserController().getDistinctStorageUnits(req, res)
+userRouter.route('/getDistinctPlace').post(
+    (req, res) => new UserController().getDistinctPlace(req, res)
 )
 
 userRouter.route('/getMyItems').post(

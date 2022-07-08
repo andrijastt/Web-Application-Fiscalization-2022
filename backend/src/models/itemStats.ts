@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 let ItemStats = new Schema({ 
-    storageUnit: {
+    place: {
+        type: String
+    },
+    typeOfPlace: {
         type: String
     },
     companyName: {
