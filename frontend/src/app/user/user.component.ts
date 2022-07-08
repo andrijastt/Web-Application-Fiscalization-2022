@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyService } from '../company.service';
+import { Buyer } from '../model/buyer';
 import { Company } from '../model/company';
 import { Item } from '../model/item';
 import { ItemStats } from '../model/itemStats';
@@ -19,27 +20,8 @@ export class UserComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit(): void {
-    // this.registerComapnyService.getAllRegisterCompany().subscribe((data: Company[]) => {
-    //   this.companies = data;
-
-    //   for(let i = 0; i < this.companies.length; i ++){
-    //     this.companyService.getMyItems(this.companies[i].PIB).subscribe((data: Item[]) => {
-    //       this.items[i] = data
-
-    //       for(let j = 0; j < this.items[i].length; j++){
-    //         this.userService.getCheapestPrice(this.items[i][j].itemName, this.items[i][j].producer, this.companies[i].name).subscribe(
-    //           (data: ItemStats[]) => {
-    //             this.itemStats[i] = data
-    //             this.userService.getDistinctStorageUnits(this.items[i][j].itemName, this.items[i][j].producer, this.companies[i].name).subscribe(
-    //               (data: string)=> {
-    //                 this.itemStats[i][0].storageUnit = data
-    //               })
-    //         })
-    //       }
-    //     })
-        
-    //   }
-    // })
+    
+    this.meBuyer = JSON.parse(localStorage.getItem('buyer'))
 
     this.registerComapnyService.getAllRegisterCompany().subscribe((data: Company[])=>{
       this.companies = data;
@@ -82,6 +64,8 @@ export class UserComponent implements OnInit {
     localStorage.setItem('location', 'user')
     this.router.navigate(['passwordChange'])
   }
+
+  meBuyer: Buyer
 
   companies: Company[] = []
 
