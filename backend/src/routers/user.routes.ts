@@ -7,6 +7,10 @@ userRouter.route('/login').post(
     (req, res) => new UserController().login(req, res)
 )
 
+userRouter.route('/get5latestReceipts').get(
+    (req, res) => new UserController().get5latestReceipts(req, res)
+)
+
 userRouter.route('/changePassword').post(
     (req, res) => new UserController().changePassword(req, res)
 )

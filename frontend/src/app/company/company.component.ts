@@ -705,7 +705,7 @@ export class CompanyComponent implements OnInit {
       if(this.idCardCashError == ""){
         this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
           this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-          this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
+          this.virmanCustomer, this.company.name, this.company.PIB).subscribe((resp)=>{
             alert(resp['message'])
           })
 
@@ -716,7 +716,7 @@ export class CompanyComponent implements OnInit {
         } else {
           this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
             "", this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-            this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
+            this.virmanCustomer, this.company.name, this.company.PIB).subscribe((resp)=>{
               alert(resp['message'])
             })
         }
@@ -733,7 +733,7 @@ export class CompanyComponent implements OnInit {
         else {
           this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
             this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-            this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
+            this.virmanCustomer, this.company.name, this.company.PIB).subscribe((resp)=>{
               alert(resp['message'])
             })
         }
@@ -748,7 +748,7 @@ export class CompanyComponent implements OnInit {
           else {
             this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
               this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-              this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
+              this.virmanCustomer, this.company.name, this.company.PIB).subscribe((resp)=>{
                 alert(resp['message'])
               })
           }
@@ -762,7 +762,7 @@ export class CompanyComponent implements OnInit {
           else {
             this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
               this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-              this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
+              this.virmanCustomer, this.company.name, this.company.PIB).subscribe((resp)=>{
                 alert(resp['message'])
               })
           }

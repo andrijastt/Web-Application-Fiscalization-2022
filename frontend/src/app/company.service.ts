@@ -223,7 +223,7 @@ export class CompanyService {
   }
 
   giveReceipt(selectedItemsForm, paymentTypeFrom, amountToPayForm, taxForm, moneyFrom, changeForm, idCardCashForm, firstNameBuyerForm, 
-    lastNameBuyerForm, idCardMoneyCheckForm, idCardCreditCardForm, creditCardSlipForm, virmanCustomerForm, companyPIBForm){
+    lastNameBuyerForm, idCardMoneyCheckForm, idCardCreditCardForm, creditCardSlipForm, virmanCustomerForm, companyNameForm, companyPIBForm){
       const data = {
         selectedItems: selectedItemsForm,
         paymentType: paymentTypeFrom,
@@ -236,6 +236,7 @@ export class CompanyService {
         lastNameBuyer: lastNameBuyerForm,
         creditCardSlip: creditCardSlipForm,
         virmanCustomer: virmanCustomerForm,
+        companyName: companyNameForm,
         companyPIB: companyPIBForm,
         date: new Date(),
         dateReview: (new Date()).getDate() + "." + (new Date()).getMonth() + "." + (new Date()).getFullYear() + "." 

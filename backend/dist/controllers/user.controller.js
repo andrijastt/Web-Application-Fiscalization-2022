@@ -8,6 +8,7 @@ const user_1 = __importDefault(require("../models/user"));
 const company_1 = __importDefault(require("../models/company"));
 const itemStats_1 = __importDefault(require("../models/itemStats"));
 const buyer_1 = __importDefault(require("../models/buyer"));
+const receipt_1 = __importDefault(require("../models/receipt"));
 class UserController {
     constructor() {
         this.login = (req, res) => {
@@ -19,6 +20,14 @@ class UserController {
                 else
                     res.json(user);
             });
+        };
+        this.get5latestReceipts = (req, res) => {
+            receipt_1.default.find({}, (err, receipts) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(receipts);
+            }).sort({ date: 1 }).limit(5);
         };
         this.changePassword = (req, res) => {
             let username = req.body.username;

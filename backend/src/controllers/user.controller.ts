@@ -3,6 +3,7 @@ import UserModel from '../models/user'
 import CompanyModel from '../models/company'
 import ItemStatsModel from '../models/itemStats'
 import BuyerModel from '../models/buyer'
+import ReceiptModel from '../models/receipt'
 
 export class UserController{
     login = (req: express.Request, res: express.Response)=>{
@@ -13,6 +14,13 @@ export class UserController{
             if(err) console.log(err)
             else res.json(user)
         })
+    }
+
+    get5latestReceipts = (req: express.Request, res: express.Response) => {
+        ReceiptModel.find({}, (err, receipts) => {
+            if(err) console.log(err)
+            else res.json(receipts)
+        }).sort({date: 1}).limit(5)
     }
 
     changePassword = (req: express.Request, res: express.Response)=>{

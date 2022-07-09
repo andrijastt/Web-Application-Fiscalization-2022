@@ -499,7 +499,7 @@ class CompanyController {
                             });
                         }
                         let receipt = new receipt_1.default();
-                        receipt.companyPIB = req.body.companyPIB;
+                        receipt.companyName = req.body.companyName;
                         receipt.selectedItems = req.body.selectedItems;
                         receipt.paymentType = req.body.paymentType;
                         receipt.amountToPay = req.body.amountToPay;
@@ -546,7 +546,7 @@ class CompanyController {
                                     });
                                 }
                                 let receipt = new receipt_1.default();
-                                receipt.companyPIB = req.body.companyPIB;
+                                receipt.companyName = req.body.companyName;
                                 receipt.selectedItems = req.body.selectedItems;
                                 receipt.paymentType = req.body.paymentType;
                                 receipt.amountToPay = req.body.amountToPay;

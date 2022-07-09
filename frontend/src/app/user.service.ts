@@ -19,6 +19,10 @@ export class UserService {
     return this.http.post(`${this.uri}/users/login`, data)
   }
 
+  get5latestReceipts(){
+    return this.http.get(`${this.uri}/users/get5latestReceipts`)
+  }
+
   changePassword(usernameForm, passwordForm){
     const data = {
       username: usernameForm,

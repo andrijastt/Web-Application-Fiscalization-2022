@@ -31,8 +31,16 @@
         <td>PDV</td>
         <td>Stavke računa sa količinama</td>
     </tr>
-    <tr>
-        
+    <tr *ngFor="let n of receipts; let i = index">
+        <td>{{n.companyName}}</td>
+        <td>{{n.amountToPay}}</td>
+        <td>{{n.tax}}</td>
+        <td>
+            <ul *ngFor="let m of receiptsItems[i]">
+                <li>{{m.itemName}}, {{m.currentState}}</li>
+            </ul>
+        </td>
+        <td>{{n.date | date:'short'}}</td>
     </tr>
 </table>
 <footer>

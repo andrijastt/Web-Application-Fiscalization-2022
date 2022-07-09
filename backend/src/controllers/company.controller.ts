@@ -478,7 +478,7 @@ export class CompanyController{
                     }
 
                     let receipt = new ReceiptModel()
-                    receipt.companyPIB = req.body.companyPIB
+                    receipt.companyName= req.body.companyName
                     receipt.selectedItems = req.body.selectedItems
                     receipt.paymentType = req.body.paymentType
                     receipt.amountToPay = req.body.amountToPay
@@ -522,7 +522,7 @@ export class CompanyController{
                             }
 
                             let receipt = new ReceiptModel()
-                            receipt.companyPIB = req.body.companyPIB
+                            receipt.companyName= req.body.companyName
                             receipt.selectedItems = req.body.selectedItems
                             receipt.paymentType = req.body.paymentType
                             receipt.amountToPay = req.body.amountToPay

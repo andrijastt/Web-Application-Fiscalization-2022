@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Buyer } from '../model/buyer';
 import { Company } from '../model/company';
+import { ItemStats } from '../model/itemStats';
+import { Receipt } from '../model/receipt';
 import { User } from '../model/user';
 import { RegisterCompanyService } from '../register-company.service';
 import { UserService } from '../user.service';
@@ -16,7 +18,20 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private registerCompanyService: RegisterCompanyService) { }
 
   ngOnInit(): void {
+    this.userService.get5latestReceipts().subscribe((data: Receipt[])=>{
+      this.receipts = data
+
+      for(let i = 0; i < this.receipts.length; i++){
+        let items: ItemStats[] = []
+        items = this.receipts[i].selectedItems
+        this.receiptsItems.push(items)
+      }
+      console.log(this.receiptsItems)
+    })
   }
+
+  receipts: Receipt[] = []
+  receiptsItems: ItemStats[][] = []
 
   username: string;
   password: string;

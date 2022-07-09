@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 let Receipt = new Schema({
-    companyPIB:{
-        type: Number
+    companyName:{
+        type: String
     },
     selectedItems: {
         type: Array
