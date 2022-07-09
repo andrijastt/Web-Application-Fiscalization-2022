@@ -15,6 +15,8 @@ const itemStats_1 = __importDefault(require("../models/itemStats"));
 const category_1 = __importDefault(require("../models/category"));
 const store_1 = __importDefault(require("../models/store"));
 const workingRegister_1 = __importDefault(require("../models/workingRegister"));
+const dailyReview_1 = __importDefault(require("../models/dailyReview"));
+const receipt_1 = __importDefault(require("../models/receipt"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -479,8 +481,94 @@ class CompanyController {
             });
         };
         this.giveReceipt = (req, res) => {
-            console.log(req.body);
-            console.log(typeof req.body.date);
+            let dateReview = req.body.dateReview;
+            let companyPIB = req.body.companyPIB;
+            dailyReview_1.default.findOne({ 'date': dateReview, 'companyPIB': companyPIB }, (err, DR) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (DR) {
+                        let itemStats = req.body.selectedItems;
+                        for (let i = 0; i < itemStats.length; i++) {
+                            itemStats_1.default.updateOne({ 'place': itemStats[i].place, 'itemName': itemStats[i].itemName, 'companyName': itemStats[i].companyName,
+                                'itemProducer': itemStats[i].itemProducer }, { $inc: { currentState: -itemStats[i].currentState } }, (err, resp) => {
+                                if (err)
+                                    console.log(err);
+                                else
+                                    console.log("ok");
+                            });
+                        }
+                        let receipt = new receipt_1.default();
+                        receipt.companyPIB = req.body.companyPIB;
+                        receipt.selectedItems = req.body.selectedItems;
+                        receipt.paymentType = req.body.paymentType;
+                        receipt.amountToPay = req.body.amountToPay;
+                        receipt.tax = req.body.tax;
+                        receipt.change = req.body.change;
+                        receipt.idCard = req.body.idCard;
+                        receipt.firstNameBuyer = req.body.firstNameBuyer;
+                        receipt.lastNameBuyer = req.body.lastNameBuyer;
+                        receipt.creditCardSlip = req.body.creditCardSlip;
+                        receipt.virmanCustor = req.body.virmanCustomer;
+                        receipt.date = req.body.date;
+                        receipt_1.default.collection.insertOne(receipt, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                dailyReview_1.default.updateOne({ 'date': dateReview, 'companyPIB': companyPIB }, { $inc: { tax: receipt.tax,
+                                        moneyEarned: receipt.amountToPay } }, (err, resp) => {
+                                    if (err)
+                                        console.log(err);
+                                    else
+                                        res.json({ 'message': 'Receipt successfully added' });
+                                });
+                            }
+                        });
+                    }
+                    else {
+                        let DRtemp = new dailyReview_1.default();
+                        DRtemp.companyPIB = req.body.companyPIB;
+                        DRtemp.tax = req.body.tax;
+                        DRtemp.moneyEarned = req.body.amountToPay;
+                        DRtemp.date = dateReview;
+                        dailyReview_1.default.collection.insertOne(DRtemp, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                let itemStats = req.body.selectedItems;
+                                for (let i = 0; i < itemStats.length; i++) {
+                                    itemStats_1.default.updateOne({ 'place': itemStats[i].place, 'itemName': itemStats[i].itemName,
+                                        'itemProducer': itemStats[i].itemProducer }, { $inc: { currentState: -itemStats[i].currentState } }, (err, resp) => {
+                                        if (err)
+                                            console.log(err);
+                                        else
+                                            console.log("ok");
+                                    });
+                                }
+                                let receipt = new receipt_1.default();
+                                receipt.companyPIB = req.body.companyPIB;
+                                receipt.selectedItems = req.body.selectedItems;
+                                receipt.paymentType = req.body.paymentType;
+                                receipt.amountToPay = req.body.amountToPay;
+                                receipt.tax = req.body.tax;
+                                receipt.change = req.body.change;
+                                receipt.idCard = req.body.idCard;
+                                receipt.firstNameBuyer = req.body.firstNameBuyer;
+                                receipt.lastNameBuyer = req.body.lastNameBuyer;
+                                receipt.creditCardSlip = req.body.creditCardSlip;
+                                receipt.virmanCustor = req.body.virmanCustomer;
+                                receipt.date = req.body.date;
+                                receipt_1.default.collection.insertOne(receipt, (err, resp) => {
+                                    if (err)
+                                        console.log(err);
+                                    else
+                                        res.json({ 'message': 'Receipt successfully added' });
+                                });
+                            }
+                        });
+                    }
+                }
+            });
         };
     }
 }

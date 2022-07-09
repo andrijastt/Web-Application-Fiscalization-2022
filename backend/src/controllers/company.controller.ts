@@ -10,6 +10,8 @@ import ItemStatsModel from '../models/itemStats'
 import CategoryModel from '../models/category'
 import StoreModel from '../models/store'
 import WorkingRegisterModel from '../models/workingRegister'
+import DailyReviewModel from '../models/dailyReview'
+import ReceiptModel from '../models/receipt'
 
 export class CompanyController{
 
@@ -456,7 +458,90 @@ export class CompanyController{
     }
 
     giveReceipt = (req: express.Request, res: express.Response) => {
-        console.log(req.body)
-        console.log(typeof req.body.date)
+       
+        let dateReview = req.body.dateReview
+        let companyPIB = req.body.companyPIB
+
+        DailyReviewModel.findOne({'date': dateReview, 'companyPIB': companyPIB}, (err, DR) =>{
+            if(err) console.log(err)
+            else {
+                if(DR){
+                    let itemStats = req.body.selectedItems
+                    for(let i =0; i < itemStats.length; i++){
+
+                        ItemStatsModel.updateOne({'place': itemStats[i].place, 'itemName': itemStats[i].itemName, 'companyName': itemStats[i].companyName,
+                        'itemProducer': itemStats[i].itemProducer}, {$inc: {currentState: -itemStats[i].currentState}}, 
+                        (err, resp) => {
+                            if(err) console.log(err)
+                            else console.log("ok")
+                        })
+                    }
+
+                    let receipt = new ReceiptModel()
+                    receipt.companyPIB = req.body.companyPIB
+                    receipt.selectedItems = req.body.selectedItems
+                    receipt.paymentType = req.body.paymentType
+                    receipt.amountToPay = req.body.amountToPay
+                    receipt.tax = req.body.tax
+                    receipt.change = req.body.change
+                    receipt.idCard = req.body.idCard
+                    receipt.firstNameBuyer = req.body.firstNameBuyer
+                    receipt.lastNameBuyer = req.body.lastNameBuyer
+                    receipt.creditCardSlip = req.body.creditCardSlip
+                    receipt.virmanCustor = req.body.virmanCustomer
+                    receipt.date = req.body.date
+                    ReceiptModel.collection.insertOne(receipt, (err,resp)=> {
+                        if(err) console.log(err)
+                        else {
+                            DailyReviewModel.updateOne({'date': dateReview, 'companyPIB': companyPIB}, {$inc: {tax: receipt.tax, 
+                                moneyEarned: receipt.amountToPay}}, (err, resp) => {
+                                if(err) console.log(err)
+                                else res.json({'message': 'Receipt successfully added'})
+                            })
+                        }
+                    })
+
+                } else {
+                    let DRtemp = new DailyReviewModel()
+                    DRtemp.companyPIB = req.body.companyPIB
+                    DRtemp.tax = req.body.tax
+                    DRtemp.moneyEarned = req.body.amountToPay
+                    DRtemp.date = dateReview
+                    DailyReviewModel.collection.insertOne(DRtemp, (err, resp)=>{
+                        if(err) console.log(err)
+                        else {
+                            let itemStats = req.body.selectedItems
+                            for(let i =0; i < itemStats.length; i++){
+
+                                ItemStatsModel.updateOne({'place': itemStats[i].place, 'itemName': itemStats[i].itemName, 
+                                'itemProducer': itemStats[i].itemProducer}, {$inc: {currentState: -itemStats[i].currentState}}, 
+                                (err, resp) => {
+                                    if(err) console.log(err)
+                                    else console.log("ok")
+                                })
+                            }
+
+                            let receipt = new ReceiptModel()
+                            receipt.companyPIB = req.body.companyPIB
+                            receipt.selectedItems = req.body.selectedItems
+                            receipt.paymentType = req.body.paymentType
+                            receipt.amountToPay = req.body.amountToPay
+                            receipt.tax = req.body.tax
+                            receipt.change = req.body.change
+                            receipt.idCard = req.body.idCard
+                            receipt.firstNameBuyer = req.body.firstNameBuyer
+                            receipt.lastNameBuyer = req.body.lastNameBuyer
+                            receipt.creditCardSlip = req.body.creditCardSlip
+                            receipt.virmanCustor = req.body.virmanCustomer
+                            receipt.date = req.body.date
+                            ReceiptModel.collection.insertOne(receipt, (err,resp)=> {
+                                if(err) console.log(err)
+                                else res.json({'message': 'Receipt successfully added'})
+                            })
+                        }
+                    })
+                }
+            }
+        })
     }
 }

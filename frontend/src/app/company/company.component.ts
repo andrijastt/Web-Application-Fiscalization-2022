@@ -527,6 +527,7 @@ export class CompanyComponent implements OnInit {
       this.selectedItemsName = []
       this.selectedItems = []
       this.orderNumber = []
+      this.selectedItemPDV = []
       for(let i = 0; i < data.length; i++){
         this.orderNumber.push(0)
       }
@@ -535,8 +536,8 @@ export class CompanyComponent implements OnInit {
 
   addToCart(item, num){
 
-    if(this.billClosed){
-      alert('Bill is closed')
+    if(this.billClosed || this.orderNumber[num] > item.currentState){
+      alert('No')
     } else {
       if(this.orderNumber[num] > 0){
         if(this.selectedItemsName.length > 0 && this.selectedItemsName.includes(item.itemName)){
@@ -553,6 +554,7 @@ export class CompanyComponent implements OnInit {
         itemStat.itemProducer = item.itemProducer
         itemStat.sellingPrice = item.sellingPrice
         itemStat.currentState = this.orderNumber[num]
+        itemStat.companyName = this.company.name
         itemStat.place = item.place
   
         this.selectedItems.push(itemStat)
@@ -680,14 +682,25 @@ export class CompanyComponent implements OnInit {
 
   giveReceipt(){
 
-    // let date = new Date
+    let tax = 0
+    for(let i = 0; i < this.selectedItems.length; i++){
+      if(this.selectedItemPDV[i] == '20%'){
+        tax += (this.selectedItems[i].currentState * this.selectedItems[i].sellingPrice) / 6
+      }
+      if(this.selectedItemPDV[i] == '10%'){
+        tax += (this.selectedItems[i].currentState * this.selectedItems[i].sellingPrice) * 10 /11
+      }
+      if(this.selectedItemPDV[i] == '0%'){
+        continue;
+      }
+    }
 
     if(this.paymentType == 'cash'){
       this.change = this.money - this.amountToPay
       if(this.idCardCashError == ""){
-        this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+        this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
           this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-          this.virmanCustomer).subscribe((resp)=>{
+          this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
             alert(resp['message'])
           })
 
@@ -696,9 +709,9 @@ export class CompanyComponent implements OnInit {
         if(this.idCardCash != ""){
           alert('Fill good id card info')
         } else {
-          this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+          this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
             "", this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-            this.virmanCustomer).subscribe((resp)=>{
+            this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
               alert(resp['message'])
             })
         }
@@ -713,9 +726,9 @@ export class CompanyComponent implements OnInit {
           alert('Not all data is filled')
         }
         else {
-          this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+          this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
             this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-            this.virmanCustomer).subscribe((resp)=>{
+            this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
               alert(resp['message'])
             })
         }
@@ -728,9 +741,9 @@ export class CompanyComponent implements OnInit {
             alert('Not all data is filled')
           }
           else {
-            this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+            this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
               this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-              this.virmanCustomer).subscribe((resp)=>{
+              this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
                 alert(resp['message'])
               })
           }
@@ -742,16 +755,27 @@ export class CompanyComponent implements OnInit {
             alert('Not all data is filled')
           }
           else {
-            this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+            this.companyService.giveReceipt(this.selectedItems, this.paymentType, this.amountToPay, tax, this.money, this.change, 
               this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
-              this.virmanCustomer).subscribe((resp)=>{
+              this.virmanCustomer, this.company.PIB).subscribe((resp)=>{
                 alert(resp['message'])
               })
           }
         }
       }
     }
+    this.billClosed = false
+    while(this.orderNumber.length > 0) this.orderNumber.pop()
+    this.selectedItemsName = []
+    this.selectedItems = []
+    this.orderNumber = []
+    this.selectedItemPDV = []
+  }
 
+  myDate: Date
+
+  provera(){
+    this.myDate = new Date()
   }
 
 }

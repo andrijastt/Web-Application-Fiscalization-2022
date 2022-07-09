@@ -595,6 +595,8 @@
         </tr>
     </table>
     <button mat-button (click)="closeBill()">Close the bill</button>
+    <button mat-button (click)="provera()">Provera</button>
+    {{myDate | date:'short'}}
     <br>
     <div *ngIf="billClosed">
         <h2>Recepit</h2>

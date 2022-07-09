@@ -222,13 +222,13 @@ export class CompanyService {
     return this.http.post(`${this.uri}/company/getItemStats`, data)
   }
 
-  giveReceipt(selectedItemsForm, selectedItemPDVForm, paymentTypeFrom, amountToPayForm, moneyFrom, changeForm, idCardCashForm, firstNameBuyerForm, 
-    lastNameBuyerForm, idCardMoneyCheckForm, idCardCreditCardForm, creditCardSlipForm, virmanCustomerForm){
+  giveReceipt(selectedItemsForm, paymentTypeFrom, amountToPayForm, taxForm, moneyFrom, changeForm, idCardCashForm, firstNameBuyerForm, 
+    lastNameBuyerForm, idCardMoneyCheckForm, idCardCreditCardForm, creditCardSlipForm, virmanCustomerForm, companyPIBForm){
       const data = {
         selectedItems: selectedItemsForm,
-        selectedItemPDV: selectedItemPDVForm,
         paymentType: paymentTypeFrom,
         amountToPay: amountToPayForm,
+        tax: taxForm,
         money: moneyFrom,
         changeForm: changeForm,
         idCard: idCardCashForm || idCardMoneyCheckForm || idCardCreditCardForm,
@@ -236,7 +236,10 @@ export class CompanyService {
         lastNameBuyer: lastNameBuyerForm,
         creditCardSlip: creditCardSlipForm,
         virmanCustomer: virmanCustomerForm,
-        date: Date.now()
+        companyPIB: companyPIBForm,
+        date: (new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + (new Date()).getSeconds() + " " + (
+          new Date()).getDate() + "." + (new Date()).getMonth() + "." + (new Date()).getFullYear() + ".",
+        dateReview: (new Date()).getDate() + "." + (new Date()).getMonth() + "." + (new Date()).getFullYear() + "." 
       }
     return this.http.post(`${this.uri}/company/giveReceipt`, data)
   }
