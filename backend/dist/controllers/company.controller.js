@@ -478,6 +478,10 @@ class CompanyController {
                     res.json(itemStats);
             });
         };
+        this.giveReceipt = (req, res) => {
+            console.log(req.body);
+            console.log(typeof req.body.date);
+        };
     }
 }
 exports.CompanyController = CompanyController;

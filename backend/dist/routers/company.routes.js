@@ -34,5 +34,6 @@ companyRouter.route('/searchItem').post((req, res) => new company_controller_1.C
 companyRouter.route('/setItemCategory').post((req, res) => new company_controller_1.CompanyController().setItemCategory(req, res));
 companyRouter.route('/getMyPlaces').post((req, res) => new company_controller_1.CompanyController().getMyPlaces(req, res));
 companyRouter.route('/getItemStats').post((req, res) => new company_controller_1.CompanyController().getItemStats(req, res));
+companyRouter.route('/giveReceipt').post((req, res) => new company_controller_1.CompanyController().giveReceipt(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map

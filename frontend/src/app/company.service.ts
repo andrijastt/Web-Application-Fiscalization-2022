@@ -221,4 +221,23 @@ export class CompanyService {
     }
     return this.http.post(`${this.uri}/company/getItemStats`, data)
   }
+
+  giveReceipt(selectedItemsForm, selectedItemPDVForm, paymentTypeFrom, amountToPayForm, moneyFrom, changeForm, idCardCashForm, firstNameBuyerForm, 
+    lastNameBuyerForm, idCardMoneyCheckForm, idCardCreditCardForm, creditCardSlipForm, virmanCustomerForm){
+      const data = {
+        selectedItems: selectedItemsForm,
+        selectedItemPDV: selectedItemPDVForm,
+        paymentType: paymentTypeFrom,
+        amountToPay: amountToPayForm,
+        money: moneyFrom,
+        changeForm: changeForm,
+        idCard: idCardCashForm || idCardMoneyCheckForm || idCardCreditCardForm,
+        firstNameBuyer: firstNameBuyerForm,
+        lastNameBuyer: lastNameBuyerForm,
+        creditCardSlip: creditCardSlipForm,
+        virmanCustomer: virmanCustomerForm,
+        date: Date.now()
+      }
+    return this.http.post(`${this.uri}/company/giveReceipt`, data)
+  }
 }

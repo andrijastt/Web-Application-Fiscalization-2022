@@ -454,4 +454,9 @@ export class CompanyController{
             else res.json(itemStats)
         })
     }
+
+    giveReceipt = (req: express.Request, res: express.Response) => {
+        console.log(req.body)
+        console.log(typeof req.body.date)
+    }
 }

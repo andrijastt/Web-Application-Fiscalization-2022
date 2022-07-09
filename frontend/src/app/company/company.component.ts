@@ -513,13 +513,15 @@ export class CompanyComponent implements OnInit {
   orderNumber: number[] = []
 
   selectedItems: ItemStats[] = []
-  selectedItemsName: string[] =[]
+  selectedItemsName: string[] = []
+  selectedItemPDV: string[] = []
 
   billClosed: boolean = false
   amountToPay: number = 0
   paymentType: string
 
   getItemStats(){
+    while(this.orderNumber.length > 0) this.orderNumber.pop()
     this.companyService.getItemStats(this.company.name, this.place).subscribe((data: ItemStats[]) => {
       this.myItemStats = data
       this.selectedItemsName = []
@@ -536,23 +538,37 @@ export class CompanyComponent implements OnInit {
     if(this.billClosed){
       alert('Bill is closed')
     } else {
-      if(this.selectedItemsName.length > 0 && this.selectedItemsName.includes(item.itemName)){
-        let i = this.selectedItemsName.indexOf(item.itemName)
-        console.log(i)
-        this.selectedItemsName.splice(i, 1)
-        this.selectedItems.splice(i, 1)
+      if(this.orderNumber[num] > 0){
+        if(this.selectedItemsName.length > 0 && this.selectedItemsName.includes(item.itemName)){
+          let i = this.selectedItemsName.indexOf(item.itemName)
+          console.log(i)
+          this.selectedItemsName.splice(i, 1)
+          this.selectedItems.splice(i, 1)
+          this.selectedItemPDV.splice(i, 1)
+        }
+    
+        let itemStat = new ItemStats()
+    
+        itemStat.itemName = item.itemName
+        itemStat.itemProducer = item.itemProducer
+        itemStat.sellingPrice = item.sellingPrice
+        itemStat.currentState = this.orderNumber[num]
+        itemStat.place = item.place
+  
+        this.selectedItems.push(itemStat)
+        this.selectedItemsName.push(itemStat.itemName)
+
+        for(let i = 0; i < this.items.length; i++){
+          if(item.itemName == this.items[i].itemName){
+            this.selectedItemPDV.push(this.items[0].taxRate)
+            break;    
+          }
+        }
+
+        alert('Item added')
+      } else {
+        alert('Amount equals 0')
       }
-  
-      let itemStat = new ItemStats()
-  
-      itemStat.itemName = item.itemName
-      itemStat.itemProducer = item.itemProducer
-      itemStat.sellingPrice = item.sellingPrice
-      itemStat.currentState = this.orderNumber[num]
-  
-      this.selectedItems.push(itemStat)
-      this.selectedItemsName.push(itemStat.itemName)
-      alert('Item added')
     }
   }
 
@@ -566,6 +582,178 @@ export class CompanyComponent implements OnInit {
       }
     }
   }
+
+  money: number
+  change: number
+  idCardCash: string
+  idCardCashError: string = ""
+
+  firstNameBuyer: string
+  lastNameBuyer: string
+  idCardMoneyCheck: string
+  idCardMoneyCheckError: string = ""
+
+  idCardCreditCard: string
+  idCardCreditCardError: string = ""
+
+  creditCardSlip: string
+
+  virmanCustomer: string = ""
+
+  checkIDCardCash(){
+    let idCardRegex = /^\d{9}$/
+    if(!idCardRegex.test(this.idCardCash)){
+      this.idCardCashError = "Bad id number, must contain only numbers and has 9 characters"
+    } else this.idCardCashError = ""
+  }
+
+  checkIDCardMoneyCheck(){
+    let idCardRegex = /^\d{9}$/
+    if(!idCardRegex.test(this.idCardMoneyCheck)){
+      this.idCardMoneyCheckError = "Bad id number, must contain only numbers and has 9 characters"
+    } else this.idCardMoneyCheckError = ""
+  }
+
+  checkIDCardCreditCard(){
+    let idCardRegex = /^\d{9}$/
+    if(!idCardRegex.test(this.idCardCreditCard)){
+      this.idCardCreditCardError = "Bad id number, must contain only numbers and has 9 characters"
+    } else this.idCardCreditCardError = ""
+  }
+
+  paymentTypeChange(){
+    
+    if(this.paymentType == 'cash'){
+      this.money = this.amountToPay
+
+      this.firstNameBuyer = ""
+      this.lastNameBuyer = ""
+      this.idCardMoneyCheck = ""
+
+      this.idCardCreditCard = ""
+      this.creditCardSlip = ""
+
+      this.virmanCustomer = ""
+    }
+
+    if(this.paymentType == 'moneyCheck'){
+
+      this.money = 0
+      this.change = 0   
+      this.idCardCash = ""
+
+      this.idCardCreditCard = ""
+      this.creditCardSlip = ""
+
+      this.virmanCustomer = ""
+    }
+
+    if(this.paymentType == 'creditCard'){
+      this.money = 0
+      this.change = 0   
+      this.idCardCash = ""
+
+      this.firstNameBuyer = ""
+      this.lastNameBuyer = ""
+      this.idCardMoneyCheck = ""
+
+      this.virmanCustomer = ""
+    }
+
+    if(this.paymentType == 'virman'){
+
+      this.money = 0
+      this.change = 0   
+      this.idCardCash = ""
+
+      this.firstNameBuyer = ""
+      this.lastNameBuyer = ""
+      this.idCardMoneyCheck = ""
+
+      this.idCardCreditCard = ""
+      this.creditCardSlip = ""
+
+      this.virmanCustomer = ""
+    }
+    
+  }
+
+  giveReceipt(){
+
+    // let date = new Date
+
+    if(this.paymentType == 'cash'){
+      this.change = this.money - this.amountToPay
+      if(this.idCardCashError == ""){
+        this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+          this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
+          this.virmanCustomer).subscribe((resp)=>{
+            alert(resp['message'])
+          })
+
+      } 
+      else {
+        if(this.idCardCash != ""){
+          alert('Fill good id card info')
+        } else {
+          this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+            "", this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
+            this.virmanCustomer).subscribe((resp)=>{
+              alert(resp['message'])
+            })
+        }
+
+      }
+    } 
+    else {
+      if(this.paymentType == 'moneyCheck'){
+
+        if(this.firstNameBuyer == "" || this.lastNameBuyer == "" || this.idCardMoneyCheckError != "" || 
+        this.idCardMoneyCheck == ""){
+          alert('Not all data is filled')
+        }
+        else {
+          this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+            this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
+            this.virmanCustomer).subscribe((resp)=>{
+              alert(resp['message'])
+            })
+        }
+
+      } 
+      else {
+        if(this.paymentType == 'creditCard'){
+
+          if(this.idCardCreditCardError != "" || this.creditCardSlip == "" || this.idCardCreditCard == ""){
+            alert('Not all data is filled')
+          }
+          else {
+            this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+              this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
+              this.virmanCustomer).subscribe((resp)=>{
+                alert(resp['message'])
+              })
+          }
+
+        } 
+        else {
+          console.log(this.virmanCustomer)
+          if(this.virmanCustomer == ""){
+            alert('Not all data is filled')
+          }
+          else {
+            this.companyService.giveReceipt(this.selectedItems, this.selectedItemPDV, this.paymentType, this.amountToPay, this.money, this.change, 
+              this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
+              this.virmanCustomer).subscribe((resp)=>{
+                alert(resp['message'])
+              })
+          }
+        }
+      }
+    }
+
+  }
+
 }
 
 // 300 din

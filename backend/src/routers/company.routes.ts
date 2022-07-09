@@ -114,4 +114,8 @@ companyRouter.route('/getMyPlaces').post(
 companyRouter.route('/getItemStats').post(
     (req, res) => new CompanyController().getItemStats(req, res)
 )
+
+companyRouter.route('/giveReceipt').post(
+    (req, res) => new CompanyController().giveReceipt(req, res)
+)
 export default companyRouter;
