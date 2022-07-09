@@ -640,6 +640,29 @@
     </div>
 </div>
 
+<!-- *************************************************************************************************************************** -->
+
+<div *ngIf="reviewsData">
+
+    <div>
+        <select [(ngModel)]="dailyReviewDate" (ngModelChange)="setDailyReview()">
+            <option *ngFor="let n of dailyReviews">{{n.date}}</option>
+        </select>    
+    </div>
+    <br>
+    <table>
+        <tr>
+            <td>Money earned</td>
+            <td *ngIf="company.PDV">Tax</td>
+        </tr>
+        <tr>
+            <td>{{dailyReview.moneyEarned}}</td>
+            <td *ngIf="company.PDV">{{dailyReview.tax}}</td>
+        </tr>
+    </table>
+
+</div>
+
 <footer>
     <button (click)="passwordChange()">Change password</button>
     <br>

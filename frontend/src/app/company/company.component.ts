@@ -6,6 +6,7 @@ import { CompanyService } from '../company.service';
 import { Category } from '../model/category';
 import { Company } from '../model/company';
 import { Customer } from '../model/customer';
+import { DailyReview } from '../model/dailyReview';
 import { Item } from '../model/item';
 import { ItemStats } from '../model/itemStats';
 import { Register } from '../model/register';
@@ -59,6 +60,10 @@ export class CompanyComponent implements OnInit {
 
     this.companyService.getMyPlaces(this.company.name).subscribe((data: string[]) => {
       this.myPlaces = data
+    })
+
+    this.companyService.getMyDailyReviews(this.company.PIB).subscribe((data: DailyReview[]) => {
+      this.dailyReviews = data
     })
   }
 
@@ -775,9 +780,23 @@ export class CompanyComponent implements OnInit {
   myDate: Date
 
   provera(){
-    this.myDate = new Date()
+    // this.myDate = new Date()
+    console.log(this.dailyReview)
   }
 
+  /*********************************************************************************************************/
+
+  dailyReviews: DailyReview[] = []
+  dailyReviewDate: string
+  dailyReview: DailyReview = new DailyReview
+
+  setDailyReview(){
+    for(let i = 0; i < this.dailyReviews.length; i++){
+      if(this.dailyReviews[i].date == this.dailyReviewDate){
+        this.dailyReview = this.dailyReviews[i]
+      }
+    }
+  }
 }
 
 // 300 din

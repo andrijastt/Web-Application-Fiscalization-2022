@@ -570,6 +570,15 @@ class CompanyController {
                 }
             });
         };
+        this.getMyDailyReviews = (req, res) => {
+            let companyPIB = req.body.companyPIB;
+            dailyReview_1.default.find({ 'companyPIB': companyPIB }, (err, dailyReviews) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(dailyReviews);
+            });
+        };
     }
 }
 exports.CompanyController = CompanyController;

@@ -544,4 +544,12 @@ export class CompanyController{
             }
         })
     }
+
+    getMyDailyReviews = (req: express.Request, res: express.Response) => {
+        let companyPIB = req.body.companyPIB
+        DailyReviewModel.find({'companyPIB': companyPIB}, (err, dailyReviews)=>{
+            if(err) console.log(err)
+            else res.json(dailyReviews)
+        })
+    }
 }
