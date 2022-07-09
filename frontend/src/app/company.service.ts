@@ -237,8 +237,7 @@ export class CompanyService {
         creditCardSlip: creditCardSlipForm,
         virmanCustomer: virmanCustomerForm,
         companyPIB: companyPIBForm,
-        date: (new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + (new Date()).getSeconds() + " " + (
-          new Date()).getDate() + "." + (new Date()).getMonth() + "." + (new Date()).getFullYear() + ".",
+        date: new Date(),
         dateReview: (new Date()).getDate() + "." + (new Date()).getMonth() + "." + (new Date()).getFullYear() + "." 
       }
     return this.http.post(`${this.uri}/company/giveReceipt`, data)

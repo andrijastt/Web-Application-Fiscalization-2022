@@ -40,7 +40,7 @@ let Receipt = new Schema({
         type: String
     },
     date: {
-        type: String
+        type: Date
     }
 });
 exports.default = mongoose_1.default.model('ReceiptModel', Receipt, 'receipts');
