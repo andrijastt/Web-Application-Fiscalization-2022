@@ -31,4 +31,9 @@ export class AdminService {
     return this.http.post(`${this.uri}/admin/insertUser`, data)
 
   }
+
+  getAllDailyReviews(){
+    return this.http.get(`${this.uri}/admin/getAllDailyReviews`)
+
+  }
 }

@@ -5,6 +5,7 @@ import { CompanyService } from '../company.service';
 import { ActivityCode } from '../model/activityCode';
 import { BankAccount } from '../model/bankAccount';
 import { Company } from '../model/company';
+import { DailyReview } from '../model/dailyReview';
 import { Register } from '../model/register';
 import { RegisterModel } from '../model/registerModel';
 import { StorageUnit } from '../model/storageUnit';
@@ -48,6 +49,11 @@ export class AdminComponent implements OnInit {
     this.bank.push('')
     this.bankErrors.push('')
     this.bankAccountsModel.push(BA)
+
+    this.adminService.getAllDailyReviews().subscribe((data: DailyReview[])=>{
+      console.log(data)
+      this.allDailyReview = data
+    })
   }
 
   user: User
@@ -71,6 +77,8 @@ export class AdminComponent implements OnInit {
       location.reload()
     })
   }
+
+  /*************************************************************************************************************************** */
 
   firstname: string
   lastname: string
@@ -378,6 +386,9 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  /*************************************************************************************************************************** */
+
+
   activate(username){
     this.companyService.activate(username).subscribe((resp =>{
       alert(resp['message'])
@@ -392,12 +403,15 @@ export class AdminComponent implements OnInit {
     }))
   }
 
+  /*************************************************************************************************************************** */
+
+
   passwordChange(){
     localStorage.setItem('location', 'admin')
     this.router.navigate(['passwordChange'])
   }
 
-  // add user deo
+  /*************************************************************************************************************************** */
 
   firstnameUser: string = ""
   lastnameUser: string = ""
@@ -449,4 +463,9 @@ export class AdminComponent implements OnInit {
       })
     }
   }
+
+  /*************************************************************************************************************************** */
+
+  allDailyReview: DailyReview[] 
+
 }

@@ -1,6 +1,7 @@
 import express from 'express'
 import UserModel from '../models/user'
 import BuyerModel from '../models/buyer'
+import DailyReviewModel from '../models/dailyReview'
 
 export class AdminController{
     loginAdmin = (req: express.Request, res: express.Response) =>{
@@ -38,6 +39,13 @@ export class AdminController{
                     })
                 }
             }
+        })
+    }
+
+    getAllDailyReviews = (req: express.Request, res: express.Response) => {
+        DailyReviewModel.find({}, (err, DR)=>{
+            if(err) console.log(err)
+            else res.json(DR)
         })
     }
 }

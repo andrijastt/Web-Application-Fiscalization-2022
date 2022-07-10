@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminController = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const buyer_1 = __importDefault(require("../models/buyer"));
+const dailyReview_1 = __importDefault(require("../models/dailyReview"));
 class AdminController {
     constructor() {
         this.loginAdmin = (req, res) => {
@@ -47,6 +48,14 @@ class AdminController {
                         });
                     }
                 }
+            });
+        };
+        this.getAllDailyReviews = (req, res) => {
+            dailyReview_1.default.find({}, (err, DR) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(DR);
             });
         };
     }

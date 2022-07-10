@@ -8,5 +8,6 @@ const admin_controller_1 = require("../controllers/admin.controller");
 const adminRouter = express_1.default.Router();
 adminRouter.route('/loginAdmin').post((req, res) => new admin_controller_1.AdminController().loginAdmin(req, res));
 adminRouter.route('/insertUser').post((req, res) => new admin_controller_1.AdminController().insertUser(req, res));
+adminRouter.route('/getAllDailyReviews').get((req, res) => new admin_controller_1.AdminController().getAllDailyReviews(req, res));
 exports.default = adminRouter;
 //# sourceMappingURL=admin.routes.js.map
