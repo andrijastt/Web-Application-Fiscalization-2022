@@ -63,10 +63,10 @@ export class AdminController{
         })
         } else {
             DailyReviewModel.find({'companyName': {$regex: companyNameSearch}, 'companyPIB': companyPIBSearch, 
-        'date': {$gte: firstDay, $lte: lastDay}}, (err, DRs)=>{
-            if(err) console.log(err)
-            else res.json(DRs)
-        })
+            'date': {$gte: firstDay, $lte: lastDay}}, (err, DRs)=>{
+                if(err) console.log(err)
+                else res.json(DRs)
+            })
         }
         
     }
