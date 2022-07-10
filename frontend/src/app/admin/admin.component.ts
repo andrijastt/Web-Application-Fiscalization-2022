@@ -467,5 +467,29 @@ export class AdminComponent implements OnInit {
   /*************************************************************************************************************************** */
 
   allDailyReview: DailyReview[] 
+  searchDailyReview: DailyReview[] = []
+
+  companyNameSearch: string = ""
+  companyPIBSearch: number
+  companyPIBSearchError: string = ""
+  firstDay: string
+  lastDay: string
+
+  checkPIBSearch(){
+    if((this.companyPIBSearch < 100000001 || this.companyPIBSearch  > 999999999) && this.companyPIBSearch){
+      this.companyPIBSearchError = "Wrong PIB format"
+    } else this.companyPIBSearchError = ""
+  }
+
+  searchDailyReviews(){
+    if(this.firstDay > this.lastDay || !this.firstDay || !this.lastDay){
+      alert('Greska')
+    } else {
+      this.adminService.getSearchDailyReviews(this.companyNameSearch, this.companyPIBSearch, this.firstDay, this.lastDay).subscribe(
+        (data: DailyReview[]) => {
+        this.searchDailyReview = data
+      })
+    }
+  }
 
 }

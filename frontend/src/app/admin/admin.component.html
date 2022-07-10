@@ -269,7 +269,7 @@
 </table>
 <button mat-button (click)="insertUser()">Insert user</button>
 
-<h2>All daily Reports</h2>
+<h2>All Daily Reports</h2>
 <table>
     <tr>
         <td>Company name</td>
@@ -284,6 +284,55 @@
         <td>{{n.tax}}</td>
     </tr>
 </table>
+
+<h2>Search Daily Reports</h2>
+<table>
+    <tr>
+        <td>Name of company (optional)</td>
+        <td>
+            <input type="text" [(ngModel)]="companyNameSearch">
+        </td>
+    </tr>
+    <tr>
+        <td>PIB of company (optional)</td>
+        <td>
+            <input type="text" [(ngModel)]="companyPIBSearch" min="100000001" max="999999999" (ngModelChange)="checkPIBSearch()">
+        </td>
+        <td>
+            {{companyPIBSearchError}}
+        </td>
+    </tr>
+    <tr>
+        <td>First date (must)</td>
+        <td>
+            <input type="date" [(ngModel)]="firstDay">
+        </td>
+    </tr>
+    <tr>
+        <td>Last date (must)</td>
+        <td>
+            <input type="date" [(ngModel)]="lastDay">
+        </td>
+    </tr>
+</table>
+<br>
+<h3>Result</h3>
+<table>
+    <tr>
+        <td>Company name</td>
+        <td>Date</td>
+        <td>Daily money</td>
+        <td>Tax</td>
+    </tr>
+    <tr *ngFor="let n of searchDailyReview">
+        <td>{{n.companyName}}</td>
+        <td>{{n.date | date:'mediumDate'}}</td>
+        <td>{{n.moneyEarned}}</td>
+        <td>{{n.tax}}</td>
+    </tr>
+</table>
+<button mat-button (click)="searchDailyReviews()">Search</button>
+
 <footer>
     <button (click)="passwordChange()">Change password</button>
     <br>

@@ -15,4 +15,8 @@ adminRouter.route('/getAllDailyReviews').get(
     (req, res) => new AdminController().getAllDailyReviews(req, res)
 )
 
+adminRouter.route('/getSearchDailyReviews').post(
+    (req, res) => new AdminController().getSearchDailyReviews(req, res)
+)
+
 export default adminRouter;

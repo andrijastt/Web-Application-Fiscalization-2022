@@ -36,4 +36,16 @@ export class AdminService {
     return this.http.get(`${this.uri}/admin/getAllDailyReviews`)
 
   }
+
+  getSearchDailyReviews(companyNameSearchForm, companyPIBSearchForm, firstDayForm, lastDayForm){
+    const data = {
+      companyNameSearch: companyNameSearchForm,
+      companyPIBSearch: companyPIBSearchForm,
+      firstDay: firstDayForm,
+      lastDay: lastDayForm
+    }
+
+    return this.http.post(`${this.uri}/admin/getSearchDailyReviews`, data)
+
+  }
 }

@@ -58,6 +58,29 @@ class AdminController {
                     res.json(DR);
             });
         };
+        this.getSearchDailyReviews = (req, res) => {
+            let companyNameSearch = req.body.companyNameSearch;
+            let companyPIBSearch = req.body.companyPIBSearch;
+            let firstDay = new Date(req.body.firstDay);
+            let lastDay = new Date(req.body.lastDay);
+            if (companyPIBSearch == undefined) {
+                dailyReview_1.default.find({ 'companyName': { $regex: companyNameSearch }, 'date': { $gte: firstDay, $lte: lastDay } }, (err, DRs) => {
+                    if (err)
+                        console.log(err);
+                    else
+                        res.json(DRs);
+                });
+            }
+            else {
+                dailyReview_1.default.find({ 'companyName': { $regex: companyNameSearch }, 'companyPIB': companyPIBSearch,
+                    'date': { $gte: firstDay, $lte: lastDay } }, (err, DRs) => {
+                    if (err)
+                        console.log(err);
+                    else
+                        res.json(DRs);
+                });
+            }
+        };
     }
 }
 exports.AdminController = AdminController;
