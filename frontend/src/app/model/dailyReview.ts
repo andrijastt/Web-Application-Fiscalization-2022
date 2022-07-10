@@ -1,6 +1,7 @@
 export class DailyReview{
     companyPIB: number
+    companyName: string
     tax: number
-    date: string
+    date: Date
     moneyEarned: number
 }

@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
         items = this.receipts[i].selectedItems
         this.receiptsItems.push(items)
       }
-      console.log(this.receiptsItems)
     })
   }
 

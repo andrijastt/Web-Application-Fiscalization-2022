@@ -1,6 +1,7 @@
 import { ItemStats } from "./itemStats"
 
 export class Receipt{
+    companyPIB: number
     companyName: string
     selectedItems: Array<ItemStats>
     paymentType: string

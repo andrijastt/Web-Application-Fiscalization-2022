@@ -239,7 +239,7 @@ export class CompanyService {
         companyName: companyNameForm,
         companyPIB: companyPIBForm,
         date: new Date(),
-        dateReview: (new Date()).getDate() + "." + (new Date()).getMonth() + "." + (new Date()).getFullYear() + "." 
+        dateReview: (new Date()).getDate() + "-" + (new Date()).getMonth() + "-" + (new Date()).getFullYear() 
       }
     return this.http.post(`${this.uri}/company/giveReceipt`, data)
   }

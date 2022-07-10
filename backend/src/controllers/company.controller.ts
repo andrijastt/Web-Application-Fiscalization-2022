@@ -459,10 +459,11 @@ export class CompanyController{
 
     giveReceipt = (req: express.Request, res: express.Response) => {
        
-        let dateReview = req.body.dateReview
+        let dateReview = new Date(req.body.dateReview)
         let companyPIB = req.body.companyPIB
+        let companyName = req.body.companyName
 
-        DailyReviewModel.findOne({'date': dateReview, 'companyPIB': companyPIB}, (err, DR) =>{
+        DailyReviewModel.findOne({'date': dateReview, 'companyPIB': companyPIB, 'companyName': companyName}, (err, DR) =>{
             if(err) console.log(err)
             else {
                 if(DR){
@@ -479,6 +480,7 @@ export class CompanyController{
 
                     let receipt = new ReceiptModel()
                     receipt.companyName= req.body.companyName
+                    receipt.companyPIB= req.body.companyPIB
                     receipt.selectedItems = req.body.selectedItems
                     receipt.paymentType = req.body.paymentType
                     receipt.amountToPay = req.body.amountToPay
@@ -504,6 +506,7 @@ export class CompanyController{
                 } else {
                     let DRtemp = new DailyReviewModel()
                     DRtemp.companyPIB = req.body.companyPIB
+                    DRtemp.companyName = req.body.companyName
                     DRtemp.tax = req.body.tax
                     DRtemp.moneyEarned = req.body.amountToPay
                     DRtemp.date = dateReview
@@ -523,6 +526,7 @@ export class CompanyController{
 
                             let receipt = new ReceiptModel()
                             receipt.companyName= req.body.companyName
+                            receipt.companyPIB= req.body.companyPIB
                             receipt.selectedItems = req.body.selectedItems
                             receipt.paymentType = req.body.paymentType
                             receipt.amountToPay = req.body.amountToPay
@@ -552,4 +556,5 @@ export class CompanyController{
             else res.json(dailyReviews)
         })
     }
+
 }

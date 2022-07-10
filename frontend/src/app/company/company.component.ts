@@ -159,6 +159,10 @@ export class CompanyComponent implements OnInit {
     this.tableData = false
     this.receiptsData = false
     this.reviewsData = true
+
+    this.companyService.getMyDailyReviews(this.company.PIB).subscribe((data: DailyReview[]) => {
+      this.dailyReviews = data
+    })
   }
 
   /*********************************************************************************************************/
@@ -764,6 +768,7 @@ export class CompanyComponent implements OnInit {
               this.idCardCash, this.firstNameBuyer, this.lastNameBuyer, this.idCardMoneyCheck, this.idCardCreditCard, this.creditCardSlip, 
               this.virmanCustomer, this.company.name, this.company.PIB).subscribe((resp)=>{
                 alert(resp['message'])
+                
               })
           }
         }
@@ -777,26 +782,12 @@ export class CompanyComponent implements OnInit {
     this.selectedItemPDV = []
   }
 
-  myDate: Date
-
-  provera(){
-    // this.myDate = new Date()
-    console.log(this.dailyReview)
-  }
-
   /*********************************************************************************************************/
 
   dailyReviews: DailyReview[] = []
   dailyReviewDate: string
   dailyReview: DailyReview = new DailyReview
 
-  setDailyReview(){
-    for(let i = 0; i < this.dailyReviews.length; i++){
-      if(this.dailyReviews[i].date == this.dailyReviewDate){
-        this.dailyReview = this.dailyReviews[i]
-      }
-    }
-  }
 }
 
 // 300 din

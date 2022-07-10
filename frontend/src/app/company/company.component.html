@@ -595,8 +595,6 @@
         </tr>
     </table>
     <button mat-button (click)="closeBill()">Close the bill</button>
-    <button mat-button (click)="provera()">Provera</button>
-    {{myDate | date:'short'}}
     <br>
     <div *ngIf="billClosed">
         <h2>Recepit</h2>
@@ -645,8 +643,8 @@
 <div *ngIf="reviewsData">
 
     <div>
-        <select [(ngModel)]="dailyReviewDate" (ngModelChange)="setDailyReview()">
-            <option *ngFor="let n of dailyReviews">{{n.date}}</option>
+        <select>
+            <option *ngFor="let n of dailyReviews">{{n.date | date:'medium'}}</option>
         </select>    
     </div>
     <br>

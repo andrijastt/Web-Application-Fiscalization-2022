@@ -481,9 +481,10 @@ class CompanyController {
             });
         };
         this.giveReceipt = (req, res) => {
-            let dateReview = req.body.dateReview;
+            let dateReview = new Date(req.body.dateReview);
             let companyPIB = req.body.companyPIB;
-            dailyReview_1.default.findOne({ 'date': dateReview, 'companyPIB': companyPIB }, (err, DR) => {
+            let companyName = req.body.companyName;
+            dailyReview_1.default.findOne({ 'date': dateReview, 'companyPIB': companyPIB, 'companyName': companyName }, (err, DR) => {
                 if (err)
                     console.log(err);
                 else {
@@ -500,6 +501,7 @@ class CompanyController {
                         }
                         let receipt = new receipt_1.default();
                         receipt.companyName = req.body.companyName;
+                        receipt.companyPIB = req.body.companyPIB;
                         receipt.selectedItems = req.body.selectedItems;
                         receipt.paymentType = req.body.paymentType;
                         receipt.amountToPay = req.body.amountToPay;
@@ -528,6 +530,7 @@ class CompanyController {
                     else {
                         let DRtemp = new dailyReview_1.default();
                         DRtemp.companyPIB = req.body.companyPIB;
+                        DRtemp.companyName = req.body.companyName;
                         DRtemp.tax = req.body.tax;
                         DRtemp.moneyEarned = req.body.amountToPay;
                         DRtemp.date = dateReview;
@@ -547,6 +550,7 @@ class CompanyController {
                                 }
                                 let receipt = new receipt_1.default();
                                 receipt.companyName = req.body.companyName;
+                                receipt.companyPIB = req.body.companyPIB;
                                 receipt.selectedItems = req.body.selectedItems;
                                 receipt.paymentType = req.body.paymentType;
                                 receipt.amountToPay = req.body.amountToPay;

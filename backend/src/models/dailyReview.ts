@@ -6,11 +6,14 @@ let DailyReview = new Schema({
     companyPIB:{
         type: Number
     },
+    companyName:{
+        type: String
+    },
     tax: {
         type: Number
     },
     date: {
-        type: String
+        type: Date
     }, 
     moneyEarned: {
         type: Number
