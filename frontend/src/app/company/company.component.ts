@@ -62,9 +62,6 @@ export class CompanyComponent implements OnInit {
       this.myPlaces = data
     })
 
-    this.companyService.getMyDailyReviews(this.company.PIB).subscribe((data: DailyReview[]) => {
-      this.dailyReviews = data
-    })
   }
 
   company: Company
@@ -160,8 +157,13 @@ export class CompanyComponent implements OnInit {
     this.receiptsData = false
     this.reviewsData = true
 
-    this.companyService.getMyDailyReviews(this.company.PIB).subscribe((data: DailyReview[]) => {
-      this.dailyReviews = data
+    this.companyService.getMyDailyReviews(this.company.PIB).subscribe((data: Date[]) => {
+      this.dailyReviewDates = data
+      if(data.length > 0){
+        this.companyService.getDailyReview(this.company.PIB, this.dailyReviewDates[0]).subscribe((data: DailyReview)=>{
+          this.dailyReview = data
+        })
+      }
     })
   }
 
@@ -800,9 +802,16 @@ export class CompanyComponent implements OnInit {
 
   /*********************************************************************************************************/
 
-  dailyReviews: DailyReview[] = []
-  dailyReviewDate: string
-  dailyReview: DailyReview = new DailyReview
+  dailyReviewDates: Date[] = []
+  dailyReview: DailyReview = new DailyReview()
+
+  dateSearch: string = ""
+
+  getDailyReview(){
+    this.companyService.getDailyReview(this.company.PIB, this.dateSearch).subscribe((data: DailyReview)=>{
+      this.dailyReview = data
+    })
+  }
 
 }
 

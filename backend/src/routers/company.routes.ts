@@ -123,4 +123,8 @@ companyRouter.route('/getMyDailyReviews').post(
     (req, res) => new CompanyController().getMyDailyReviews(req, res)
 )
 
+companyRouter.route('/getDailyReview').post(
+    (req, res) => new CompanyController().getDailyReview(req, res)
+)
+
 export default companyRouter;

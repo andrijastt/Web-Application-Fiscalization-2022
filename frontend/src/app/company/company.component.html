@@ -643,8 +643,8 @@
 <div *ngIf="reviewsData">
 
     <div>
-        <select>
-            <option *ngFor="let n of dailyReviews">{{n.date | date:'medium'}}</option>
+        <select [(ngModel)]="dateSearch" (ngModelChange)="getDailyReview()">
+            <option *ngFor="let n of dailyReviewDates">{{n | date:'mediumDate'}}</option>
         </select>    
     </div>
     <br>

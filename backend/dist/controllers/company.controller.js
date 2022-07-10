@@ -581,15 +581,17 @@ class CompanyController {
                     console.log(err);
                 else
                     res.json(dailyReviews);
-            });
+            }).distinct('date');
         };
-        this.datum = (req, res) => {
-            let dateReview = req.body.dateReview;
-            console.log(req.body.dateReview);
-            console.log(typeof req.body.dateReview);
-            console.log(dateReview);
+        this.getDailyReview = (req, res) => {
+            let companyPIB = req.body.companyPIB;
             let date = req.body.date;
-            console.log(req.body.date);
+            dailyReview_1.default.findOne({ 'companyPIB': companyPIB, 'date': date }, (err, dailyReviews) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(dailyReviews);
+            });
         };
     }
 }

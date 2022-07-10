@@ -554,19 +554,17 @@ export class CompanyController{
         DailyReviewModel.find({'companyPIB': companyPIB}, (err, dailyReviews)=>{
             if(err) console.log(err)
             else res.json(dailyReviews)
-        })
+        }).distinct('date')
     }
 
+    getDailyReview = (req: express.Request, res: express.Response) => {
+        let companyPIB = req.body.companyPIB
+        let date = req.body.date
 
-    datum = (req: express.Request, res: express.Response) => {
-     
-        let dateReview = req.body.dateReview
-        console.log(req.body.dateReview)
-        console.log(typeof req.body.dateReview)
-        console.log(dateReview)
-        let date: Date = req.body.date
-        console.log(req.body.date)
-        
+        DailyReviewModel.findOne({'companyPIB': companyPIB, 'date': date}, (err, dailyReviews)=>{
+            if(err) console.log(err)
+            else res.json(dailyReviews)
+        })
     }
 
 }

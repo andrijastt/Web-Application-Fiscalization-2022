@@ -253,4 +253,12 @@ export class CompanyService {
     return this.http.post(`${this.uri}/company/getMyDailyReviews`, data)
   }
 
+  getDailyReview(companyPIBForm, dateForm){
+    const data = {
+      companyPIB: companyPIBForm,
+      date: dateForm
+    }
+    return this.http.post(`${this.uri}/company/getDailyReview`, data)
+  }
+
 }
