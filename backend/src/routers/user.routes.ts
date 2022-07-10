@@ -35,4 +35,8 @@ userRouter.route('/getMyItems').post(
     (req, res) => new UserController().getMyItems(req, res)
 )
 
+userRouter.route('/getMyReceipts').post(
+    (req, res) => new UserController().getMyReceipts(req, res)
+)
+
 export default userRouter;

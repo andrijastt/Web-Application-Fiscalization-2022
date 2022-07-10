@@ -14,5 +14,6 @@ userRouter.route('/searchItem').post((req, res) => new user_controller_1.UserCon
 userRouter.route('/getCheapestPrice').post((req, res) => new user_controller_1.UserController().getCheapestPrice(req, res));
 userRouter.route('/getDistinctPlace').post((req, res) => new user_controller_1.UserController().getDistinctPlace(req, res));
 userRouter.route('/getMyItems').post((req, res) => new user_controller_1.UserController().getMyItems(req, res));
+userRouter.route('/getMyReceipts').post((req, res) => new user_controller_1.UserController().getMyReceipts(req, res));
 exports.default = userRouter;
 //# sourceMappingURL=user.routes.js.map

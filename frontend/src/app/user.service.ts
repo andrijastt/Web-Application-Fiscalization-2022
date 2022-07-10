@@ -77,5 +77,11 @@ export class UserService {
     return this.http.post(`${this.uri}/users/getMyItems`, data)
   }
 
-  
+  getMyReceipts(idCardForm){
+    const data = {
+      idCard: idCardForm
+    }
+
+    return this.http.post(`${this.uri}/users/getMyReceipts`, data)
+  }
 }

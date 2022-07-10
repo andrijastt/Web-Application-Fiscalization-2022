@@ -102,6 +102,15 @@ class UserController {
                     res.json(items);
             }).distinct("itemName");
         };
+        this.getMyReceipts = (req, res) => {
+            let idCard = req.body.idCard;
+            receipt_1.default.find({ 'idCard': idCard }, (err, receipts) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(receipts);
+            });
+        };
     }
 }
 exports.UserController = UserController;

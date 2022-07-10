@@ -5,6 +5,7 @@ import { Buyer } from '../model/buyer';
 import { Company } from '../model/company';
 import { Item } from '../model/item';
 import { ItemStats } from '../model/itemStats';
+import { Receipt } from '../model/receipt';
 import { StorageUnit } from '../model/storageUnit';
 import { RegisterCompanyService } from '../register-company.service';
 import { UserService } from '../user.service';
@@ -53,6 +54,10 @@ export class UserComponent implements OnInit {
         })
       }
     })
+
+    this.userService.getMyReceipts(this.meBuyer.idCard).subscribe((data: Receipt[])=> {
+      this.myReceipts = data
+    })
   }
 
   logout(){
@@ -66,6 +71,8 @@ export class UserComponent implements OnInit {
   }
 
   meBuyer: Buyer
+
+  myReceipts: Receipt[] = []
 
   companies: Company[] = []
 

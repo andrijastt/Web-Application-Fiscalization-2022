@@ -92,4 +92,13 @@ export class UserController{
             else res.json(items)
         }).distinct("itemName")
     }
+
+    getMyReceipts = (req: express.Request, res: express.Response)=>{
+        let idCard = req.body.idCard
+
+        ReceiptModel.find({'idCard': idCard}, (err, receipts)=>{
+            if(err) console.log(err);
+            else res.json(receipts)
+        })
+    }
 }
