@@ -557,4 +557,16 @@ export class CompanyController{
         })
     }
 
+
+    datum = (req: express.Request, res: express.Response) => {
+     
+        let dateReview = req.body.dateReview
+        console.log(req.body.dateReview)
+        console.log(typeof req.body.dateReview)
+        console.log(dateReview)
+        let date: Date = req.body.date
+        console.log(req.body.date)
+        
+    }
+
 }

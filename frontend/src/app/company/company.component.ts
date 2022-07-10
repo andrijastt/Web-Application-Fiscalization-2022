@@ -780,6 +780,22 @@ export class CompanyComponent implements OnInit {
     this.selectedItems = []
     this.orderNumber = []
     this.selectedItemPDV = []
+    this.amountToPay = 0
+
+    this.paymentType = ""
+
+    this.money = 0
+    this.change = 0   
+    this.idCardCash = ""
+
+    this.firstNameBuyer = ""
+    this.lastNameBuyer = ""
+    this.idCardMoneyCheck = ""
+
+    this.idCardCreditCard = ""
+    this.creditCardSlip = ""
+
+    this.virmanCustomer = ""
   }
 
   /*********************************************************************************************************/

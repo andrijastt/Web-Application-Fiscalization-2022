@@ -224,6 +224,8 @@ export class CompanyService {
 
   giveReceipt(selectedItemsForm, paymentTypeFrom, amountToPayForm, taxForm, moneyFrom, changeForm, idCardCashForm, firstNameBuyerForm, 
     lastNameBuyerForm, idCardMoneyCheckForm, idCardCreditCardForm, creditCardSlipForm, virmanCustomerForm, companyNameForm, companyPIBForm){
+      let datePass = new Date()
+      datePass.setHours(0, 0, 0, 0)
       const data = {
         selectedItems: selectedItemsForm,
         paymentType: paymentTypeFrom,
@@ -239,7 +241,7 @@ export class CompanyService {
         companyName: companyNameForm,
         companyPIB: companyPIBForm,
         date: new Date(),
-        dateReview: (new Date()).getDate() + "-" + (new Date()).getMonth() + "-" + (new Date()).getFullYear() 
+        dateReview: datePass
       }
     return this.http.post(`${this.uri}/company/giveReceipt`, data)
   }

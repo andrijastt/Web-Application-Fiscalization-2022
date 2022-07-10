@@ -583,6 +583,14 @@ class CompanyController {
                     res.json(dailyReviews);
             });
         };
+        this.datum = (req, res) => {
+            let dateReview = req.body.dateReview;
+            console.log(req.body.dateReview);
+            console.log(typeof req.body.dateReview);
+            console.log(dateReview);
+            let date = req.body.date;
+            console.log(req.body.date);
+        };
     }
 }
 exports.CompanyController = CompanyController;
