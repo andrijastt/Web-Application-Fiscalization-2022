@@ -12,6 +12,7 @@ import { ItemStats } from '../model/itemStats';
 import { Register } from '../model/register';
 import { StorageUnit } from '../model/storageUnit';
 import { Store } from '../model/store';
+import { Table } from '../model/table';
 import { RegisterCompanyService } from '../register-company.service';
 
 @Component({
@@ -518,7 +519,7 @@ export class CompanyComponent implements OnInit {
 
   /*********************************************************************************************************/
 
-  selectedStore: Store
+  selectedStore: string
   ctx: CanvasRenderingContext2D
   selectedStoreChange(){
     this.ctx = this.canvas.nativeElement.getContext('2d')
@@ -538,6 +539,35 @@ export class CompanyComponent implements OnInit {
       }
     }
 
+    this.companyService.getMyTables(this.company.PIB, this.selectedStore).subscribe((data: Table[]) => {
+
+      for(let i = 0; i < data.length; i++){
+        if(data[i].type == "square"){
+          context.fillStyle = 'white'
+          const square = new Square(this.ctx);  
+          square.draw(data[i].x, data[i].y, data[i].w, data[i].h);
+
+          context.fillStyle = 'black'
+          context.font = "20px Arial";
+          let text: string = ""
+          text += data[i].id
+          context.fillText(text, data[i].x, data[i].y +20)
+
+        } else {
+          context.fillStyle = 'white'
+          const circle = new Circle(this.ctx);  
+          circle.draw(data[i].x, data[i].y, data[i].w);
+          
+          context.fillStyle = 'black'
+          context.font = "20px Arial";
+          let text: string = ""
+          text += data[i].id
+          context.fillText(text, data[i].x, data[i].y +20)
+        }
+      }
+
+    })
+
     var x: number
     var y: number
     var context = this.ctx
@@ -545,15 +575,6 @@ export class CompanyComponent implements OnInit {
     function canvasClicked(e) {
       x = e.x;
       y = e.y;
-
-      context.fillStyle = 'red'
-      const square = new Square(context);  
-      square.draw(0, 0, 20, 20);
-
-      // context.fillStyle = 'green'
-      // const circle = new Circle(context);  
-      // circle.draw(x - 10, y - 20, 20);
-
     }
       
   }
@@ -861,6 +882,7 @@ export class Square {
   constructor(private ctx: CanvasRenderingContext2D) {}
 
   draw(x: number, y: number, w: number, h: number) {
+    this.ctx.rect(x, y, w, h);
     this.ctx.fillRect(x, y, w, h)
   }
 }

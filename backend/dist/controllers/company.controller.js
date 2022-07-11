@@ -17,6 +17,7 @@ const store_1 = __importDefault(require("../models/store"));
 const workingRegister_1 = __importDefault(require("../models/workingRegister"));
 const dailyReview_1 = __importDefault(require("../models/dailyReview"));
 const receipt_1 = __importDefault(require("../models/receipt"));
+const table_1 = __importDefault(require("../models/table"));
 class CompanyController {
     constructor() {
         this.register = (req, res) => {
@@ -591,6 +592,18 @@ class CompanyController {
                     console.log(err);
                 else
                     res.json(dailyReviews);
+            });
+        };
+        this.getMyTables = (req, res) => {
+            let companyPIB = req.body.companyPIB;
+            let storeName = req.body.storeName;
+            console.log(req.body);
+            table_1.default.find({ 'companyPIB': companyPIB, 'storeName': storeName }, (err, tables) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(tables);
+                console.log(tables);
             });
         };
     }

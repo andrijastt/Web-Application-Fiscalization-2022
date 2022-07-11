@@ -12,6 +12,7 @@ import StoreModel from '../models/store'
 import WorkingRegisterModel from '../models/workingRegister'
 import DailyReviewModel from '../models/dailyReview'
 import ReceiptModel from '../models/receipt'
+import TableModel from '../models/table'
 
 export class CompanyController{
 
@@ -564,6 +565,19 @@ export class CompanyController{
         DailyReviewModel.findOne({'companyPIB': companyPIB, 'date': date}, (err, dailyReviews)=>{
             if(err) console.log(err)
             else res.json(dailyReviews)
+        })
+    }
+
+    getMyTables = (req: express.Request, res: express.Response) => {
+        let companyPIB = req.body.companyPIB
+        let storeName = req.body.storeName
+
+        console.log(req.body)
+
+        TableModel.find({'companyPIB': companyPIB, 'storeName': storeName}, (err, tables)=>{
+            if(err) console.log(err)
+            else res.json(tables)
+            console.log(tables)
         })
     }
 

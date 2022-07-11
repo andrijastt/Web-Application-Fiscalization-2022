@@ -91,7 +91,11 @@
                 </tr>
                 <tr>
                     <td>Activity codes: </td>
-                    <td *ngFor="let n of company.activityCodes">{{n.code}}</td>
+                    <td>
+                        <ul *ngFor="let n of company.activityCodes">
+                            <li>{{n.code}}</li>
+                        </ul>
+                    </td>
                 </tr>
                 <tr>
                     <td>In system for PDV: </td>
@@ -550,7 +554,7 @@
 <!-- *************************************************************************************************************************** -->
 <div *ngIf="tableData" id="tables">
     <select [(ngModel)]="selectedStore" (ngModelChange)="selectedStoreChange()">
-        <option *ngFor="let n of myStores" value="{{n}}">{{n.name}}</option>
+        <option *ngFor="let n of myStores">{{n.name}}</option>
     </select>
     <br><br>
     <div>

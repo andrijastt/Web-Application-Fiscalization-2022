@@ -37,5 +37,6 @@ companyRouter.route('/getItemStats').post((req, res) => new company_controller_1
 companyRouter.route('/giveReceipt').post((req, res) => new company_controller_1.CompanyController().giveReceipt(req, res));
 companyRouter.route('/getMyDailyReviews').post((req, res) => new company_controller_1.CompanyController().getMyDailyReviews(req, res));
 companyRouter.route('/getDailyReview').post((req, res) => new company_controller_1.CompanyController().getDailyReview(req, res));
+companyRouter.route('/getMyTables').post((req, res) => new company_controller_1.CompanyController().getMyTables(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map
