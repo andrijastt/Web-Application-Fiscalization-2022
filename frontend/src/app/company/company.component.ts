@@ -521,6 +521,9 @@ export class CompanyComponent implements OnInit {
 
   selectedStore: string
   ctx: CanvasRenderingContext2D
+
+  myTables: Table[] = []
+
   selectedStoreChange(){
     this.ctx = this.canvas.nativeElement.getContext('2d')
     this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
@@ -540,9 +543,12 @@ export class CompanyComponent implements OnInit {
     }
 
     this.companyService.getMyTables(this.company.PIB, this.selectedStore).subscribe((data: Table[]) => {
+      this.myTables = data
 
       for(let i = 0; i < data.length; i++){
+
         if(data[i].type == "square"){
+
           this.ctx.fillStyle = 'white'
           const square = new Square(this.ctx);  
           square.draw(data[i].x, data[i].y, data[i].w, data[i].h);
@@ -553,7 +559,24 @@ export class CompanyComponent implements OnInit {
           text += data[i].id
           this.ctx.fillText(text, data[i].x, data[i].y +20)
 
-        } else {
+          this.canvas.nativeElement.addEventListener('click', (event) => {
+            const rect = this.canvas.nativeElement.getBoundingClientRect()
+            const x = event.clientX - rect.left
+            const y = event.clientY - rect.top
+            console.log("Kvadrat", x, y)
+            if(square.clickSquare(x, y)){
+              console.log(true)
+            } else {
+              console.log(false)
+            }
+          })
+
+          this.canvas.nativeElement.addEventListener('mouseout', (event) => {
+            document.body.style.cursor = 'default'
+          })
+
+        } 
+        else {
           this.ctx.fillStyle = 'white'
           const circle = new Circle(this.ctx);  
           circle.draw(data[i].x, data[i].y, data[i].w);
@@ -562,20 +585,63 @@ export class CompanyComponent implements OnInit {
           this.ctx.font = "20px Arial";
           let text: string = ""
           text += data[i].id
-          this.ctx.fillText(text, data[i].x, data[i].y +20)
+          this.ctx.fillText(text, data[i].x - data[i].w, data[i].y - data[i].w + 20)
+
+          this.canvas.nativeElement.addEventListener('click', (event) => {
+            const rect = this.canvas.nativeElement.getBoundingClientRect()
+            const x = event.clientX - rect.left
+            const y = event.clientY - rect.top
+            console.log("Krug", x, y)
+            if(circle.clickCircle(x, y)){
+              console.log(true)
+            } else {
+              console.log(false)
+            }
+          })
+
+          this.canvas.nativeElement.addEventListener('mouseout', (event) => {
+            document.body.style.cursor = 'default'
+          })
         }
       }
+            
+      this.canvas.nativeElement.addEventListener('mousemove', (event) => {
+        const rect = this.canvas.nativeElement.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+
+        let bool: Boolean = false
+
+        for(let i = 0; i < this.myTables.length; i++){
+
+          if(this.myTables[i].type == 'circle'){
+            const circle = new Circle(this.ctx)
+            circle.setData(this.myTables[i].x, this.myTables[i].y, this.myTables[i].w)
+
+            if(circle.clickCircle(x, y)){
+              bool = true
+              break
+            }
+          } else {
+            const square = new Square(this.ctx)
+            square.setData(this.myTables[i].x, this.myTables[i].y, this.myTables[i].w, this.myTables[i].h)
+
+            if(square.clickSquare(x, y)){
+              bool = true
+              break
+            }
+          }
+        }
+
+        if(bool){
+          document.body.style.cursor = 'pointer' 
+        } else {
+          document.body.style.cursor = 'default'
+        }
+
+      })
 
     })
-
-    var x: number
-    var y: number
-    var context = this.ctx
-    this.canvas.nativeElement.addEventListener('click', canvasClicked, true)
-    function canvasClicked(e) {
-      x = e.x;
-      y = e.y;
-    }
       
   }
 
@@ -881,16 +947,56 @@ export class CompanyComponent implements OnInit {
 export class Square {
   constructor(private ctx: CanvasRenderingContext2D) {}
 
+  x: number
+  y: number
+  w: number
+  h: number
+
+  setData(x: number, y: number, w: number, h: number){
+    this.x = x
+    this.y = y
+    this.w = w
+    this.h = h
+  }
+
   draw(x: number, y: number, w: number, h: number) {
+    this.x = x
+    this.y = y
+    this.w = w
+    this.h = h
     this.ctx.rect(x, y, w, h);
     this.ctx.fillRect(x, y, w, h)
+  }
+
+  clickSquare(x: number, y: number){
+
+    if(x >= this.x && x <= (this.x + this.h) && y >= this.y && y <= (this.y + this.w)){
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
 export class Circle {
   constructor(private ctx: CanvasRenderingContext2D) {}
 
+  x: number
+  y: number
+  r: number
+
+  setData(x: number, y: number, r: number){
+    this.x = x
+    this.y = y
+    this.r = r
+  }
+
   draw(x: number, y: number, r: number) {
+
+    this.x = x
+    this.y = y
+    this.r = r
+
     this.ctx.beginPath();
     this.ctx.arc(x, y, r, 0, 2 * Math.PI)
     this.ctx.fill();
@@ -902,6 +1008,17 @@ export class Circle {
     this.ctx.fill();
     this.ctx.closePath();
     this.ctx.stroke();
+  }
+
+  clickCircle(x: number, y: number){
+
+    const distance = Math.sqrt( (this.x - x)*(this.x - x) + (this.y - y)*(this.y - y))
+
+    if(distance < this.r){
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
