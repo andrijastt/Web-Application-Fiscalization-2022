@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CategoryDialogComponent } from '../category-dialog/category-dialog.component';
@@ -14,7 +14,6 @@ import { StorageUnit } from '../model/storageUnit';
 import { Store } from '../model/store';
 import { RegisterCompanyService } from '../register-company.service';
 
-
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
@@ -22,6 +21,8 @@ import { RegisterCompanyService } from '../register-company.service';
 })
 
 export class CompanyComponent implements OnInit {
+
+  @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement>;
 
   constructor(private router: Router, private companyService: CompanyService, private registerCompanyService: RegisterCompanyService, 
     private dialog: MatDialog) { }
@@ -61,7 +62,6 @@ export class CompanyComponent implements OnInit {
     this.companyService.getMyPlaces(this.company.name).subscribe((data: string[]) => {
       this.myPlaces = data
     })
-
   }
 
   company: Company
@@ -518,6 +518,48 @@ export class CompanyComponent implements OnInit {
 
   /*********************************************************************************************************/
 
+  selectedStore: Store
+  ctx: CanvasRenderingContext2D
+  selectedStoreChange(){
+    this.ctx = this.canvas.nativeElement.getContext('2d')
+    this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+
+    this.ctx.fillStyle = '#fec'
+    this.ctx.fillRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+    this.ctx.strokeStyle = '#0f0f0f'
+    for (let x = 0; x <= this.canvas.nativeElement.width; x += 100) {
+      for (let y = 0; y <= this.canvas.nativeElement.height; y += 100) {
+        this.ctx.moveTo(x, 0);
+        this.ctx.lineTo(x, this.canvas.nativeElement.height);
+        this.ctx.stroke();
+        this.ctx.moveTo(0, y);
+        this.ctx.lineTo(this.canvas.nativeElement.width, y);
+        this.ctx.stroke();
+      }
+    }
+
+    var x: number
+    var y: number
+    var context = this.ctx
+    this.canvas.nativeElement.addEventListener('click', canvasClicked, true)
+    function canvasClicked(e) {
+      x = e.x;
+      y = e.y;
+
+      context.fillStyle = 'red'
+      const square = new Square(context);  
+      square.draw(0, 0, 20, 20);
+
+      // context.fillStyle = 'green'
+      // const circle = new Circle(context);  
+      // circle.draw(x - 10, y - 20, 20);
+
+    }
+      
+  }
+
+  /*********************************************************************************************************/
+
   myPlaces: string[] = []
   place: string
   myItemStats: ItemStats[] = []
@@ -815,9 +857,22 @@ export class CompanyComponent implements OnInit {
 
 }
 
-// 300 din
-// 300/6 = 50 pdv
-// 250 neto, 50 pdv, kada je 20%
-// 300 = x + y
-// x = 100,  20
-// 120% = 300
+export class Square {
+  constructor(private ctx: CanvasRenderingContext2D) {}
+
+  draw(x: number, y: number, w: number, h: number) {
+    this.ctx.fillRect(x, y, w, h)
+  }
+}
+
+export class Circle {
+  constructor(private ctx: CanvasRenderingContext2D) {}
+
+  draw(x: number, y: number, r: number) {
+    this.ctx.beginPath();
+    this.ctx.arc(x, y, r, 0, 2*Math.PI)
+    this.ctx.fill();
+    this.ctx.lineWidth = 2;
+    this.ctx.stroke();
+  }
+}

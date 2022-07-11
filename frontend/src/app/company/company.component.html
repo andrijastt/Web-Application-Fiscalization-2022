@@ -548,6 +548,18 @@
 </div>
 
 <!-- *************************************************************************************************************************** -->
+<div *ngIf="tableData" id="tables">
+    <select [(ngModel)]="selectedStore" (ngModelChange)="selectedStoreChange()">
+        <option *ngFor="let n of myStores" value="{{n}}">{{n.name}}</option>
+    </select>
+    <br><br>
+    <div>
+        <canvas #canvas width="1200" height="800" id="canvas"></canvas>
+    </div>
+</div>
+
+
+<!-- *************************************************************************************************************************** -->
 
 <div *ngIf="receiptsData">
 
