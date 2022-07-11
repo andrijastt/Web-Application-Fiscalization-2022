@@ -604,6 +604,28 @@ class CompanyController {
                     res.json(tables);
             });
         };
+        this.setTableToTaken = (req, res) => {
+            let id = req.body.id;
+            let companyPIB = req.body.companyPIB;
+            let storeName = req.body.storeName;
+            table_1.default.updateOne({ 'companyPIB': companyPIB, 'storeName': storeName, 'id': id }, { $set: { taken: true } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json('Taken');
+            });
+        };
+        this.setTableToFree = (req, res) => {
+            let id = req.body.id;
+            let companyPIB = req.body.companyPIB;
+            let storeName = req.body.storeName;
+            table_1.default.updateOne({ 'companyPIB': companyPIB, 'storeName': storeName, 'id': id }, { $set: { taken: false } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json('Free');
+            });
+        };
     }
 }
 exports.CompanyController = CompanyController;

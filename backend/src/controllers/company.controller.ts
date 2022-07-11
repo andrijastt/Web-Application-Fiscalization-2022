@@ -578,4 +578,26 @@ export class CompanyController{
         })
     }
 
+    setTableToTaken = (req: express.Request, res: express.Response) => {
+        let id = req.body.id
+        let companyPIB = req.body.companyPIB
+        let storeName = req.body.storeName
+
+        TableModel.updateOne({'companyPIB': companyPIB, 'storeName': storeName, 'id': id}, {$set: {taken: true}}, (err, resp)=>{
+            if(err) console.log(err)
+            else res.json('Taken')
+        })
+    }
+
+    setTableToFree = (req: express.Request, res: express.Response) => {
+        let id = req.body.id
+        let companyPIB = req.body.companyPIB
+        let storeName = req.body.storeName
+
+        TableModel.updateOne({'companyPIB': companyPIB, 'storeName': storeName, 'id': id}, {$set: {taken: false}}, (err, resp)=>{
+            if(err) console.log(err)
+            else res.json('Free')
+        })
+    }
+
 }

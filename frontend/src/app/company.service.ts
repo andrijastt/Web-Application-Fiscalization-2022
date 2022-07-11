@@ -269,4 +269,22 @@ export class CompanyService {
     return this.http.post(`${this.uri}/company/getMyTables`, data)
   }
 
+  setTableToTaken(companyPIBForm, storeNameForm, idForm){
+    const data = {
+      companyPIB: companyPIBForm,
+      storeName: storeNameForm,
+      id: idForm
+    }
+    return this.http.post(`${this.uri}/company/setTableToTaken`, data)
+  }
+
+  setTableToFree(companyPIBForm, storeNameForm, idForm){
+    const data = {
+      companyPIB: companyPIBForm,
+      storeName: storeNameForm,
+      id: idForm
+    }
+    return this.http.post(`${this.uri}/company/setTableToTaken`, data)
+  }
+
 }

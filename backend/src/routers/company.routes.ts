@@ -131,4 +131,12 @@ companyRouter.route('/getMyTables').post(
     (req, res) => new CompanyController().getMyTables(req, res)
 )
 
+companyRouter.route('/setTableToTaken').post(
+    (req, res) => new CompanyController().setTableToTaken(req, res)
+)
+
+companyRouter.route('/setTableToFree').post(
+    (req, res) => new CompanyController().setTableToFree(req, res)
+)
+
 export default companyRouter;

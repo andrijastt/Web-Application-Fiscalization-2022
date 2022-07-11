@@ -559,6 +559,12 @@ export class CompanyComponent implements OnInit {
           text += data[i].id
           this.ctx.fillText(text, data[i].x, data[i].y +20)
 
+          if(this.myTables[i].taken){
+            this.ctx.font = "35px Arial";
+            let text: string = "TAKEN"
+            this.ctx.fillText(text, this.myTables[i].x + (this.myTables[i].w / 8), this.myTables[i].y + (this.myTables[i].h / 8 * 4.5))
+          }
+
           this.canvas.nativeElement.addEventListener('click', (event) => {
             const rect = this.canvas.nativeElement.getBoundingClientRect()
             const x = event.clientX - rect.left
@@ -568,10 +574,14 @@ export class CompanyComponent implements OnInit {
               if(!this.myTables[i].taken){
                 this.myTables[i].taken = true
                 this.ctx.fillStyle = 'black'
-
                 this.ctx.font = "35px Arial";
                 let text: string = "TAKEN"
                 this.ctx.fillText(text, this.myTables[i].x + (this.myTables[i].w / 8), this.myTables[i].y + (this.myTables[i].h / 8 * 4.5))
+                this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
+                  (resp) => {
+                    alert(resp)
+                  }
+                )
               }
             } 
           })
@@ -592,6 +602,12 @@ export class CompanyComponent implements OnInit {
           text += data[i].id
           this.ctx.fillText(text, data[i].x - data[i].w, data[i].y - data[i].w + 20)
 
+          if(this.myTables[i].taken){
+            this.ctx.font = "35px Arial";
+            let text: string = "TAKEN"
+            this.ctx.fillText(text, this.myTables[i].x - (this.myTables[i].w / 8 * 3), this.myTables[i].y + (this.myTables[i].h / 8))
+          }
+
           this.canvas.nativeElement.addEventListener('click', (event) => {
             const rect = this.canvas.nativeElement.getBoundingClientRect()
             const x = event.clientX - rect.left
@@ -604,7 +620,11 @@ export class CompanyComponent implements OnInit {
                 this.ctx.font = "35px Arial";
                 let text: string = "TAKEN"
                 this.ctx.fillText(text, this.myTables[i].x - (this.myTables[i].w / 8 * 3), this.myTables[i].y + (this.myTables[i].h / 8))
-                this.ctx.fillStyle = 'white'
+                this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
+                  (resp) => {
+                    alert(resp)
+                  }
+                )
               }
             } 
           })
