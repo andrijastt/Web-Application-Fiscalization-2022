@@ -40,5 +40,6 @@ companyRouter.route('/getDailyReview').post((req, res) => new company_controller
 companyRouter.route('/getMyTables').post((req, res) => new company_controller_1.CompanyController().getMyTables(req, res));
 companyRouter.route('/setTableToTaken').post((req, res) => new company_controller_1.CompanyController().setTableToTaken(req, res));
 companyRouter.route('/setTableToFree').post((req, res) => new company_controller_1.CompanyController().setTableToFree(req, res));
+companyRouter.route('/getDistinctTables').post((req, res) => new company_controller_1.CompanyController().getDistinctTables(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map

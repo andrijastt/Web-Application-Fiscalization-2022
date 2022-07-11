@@ -626,6 +626,15 @@ class CompanyController {
                     res.json('Free');
             });
         };
+        this.getDistinctTables = (req, res) => {
+            let companyPIB = req.body.companyPIB;
+            table_1.default.find({ 'companyPIB': companyPIB }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(resp);
+            }).distinct('id');
+        };
     }
 }
 exports.CompanyController = CompanyController;

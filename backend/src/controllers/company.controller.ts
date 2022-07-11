@@ -600,4 +600,13 @@ export class CompanyController{
         })
     }
 
+    getDistinctTables = (req: express.Request, res: express.Response) => {
+        let companyPIB = req.body.companyPIB
+
+        TableModel.find({'companyPIB': companyPIB}, (err, resp)=>{
+            if(err) console.log(err)
+            else res.json(resp)
+        }).distinct('id')
+    }
+
 }

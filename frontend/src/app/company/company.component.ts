@@ -63,6 +63,12 @@ export class CompanyComponent implements OnInit {
     this.companyService.getMyPlaces(this.company.name).subscribe((data: string[]) => {
       this.myPlaces = data
     })
+
+    this.companyService.getDistinctTables(this.company.PIB).subscribe((data: number[]) => {
+      this.tableCount = data.length
+    })
+
+
   }
 
   company: Company
@@ -523,6 +529,7 @@ export class CompanyComponent implements OnInit {
   ctx: CanvasRenderingContext2D
 
   myTables: Table[] = []
+  tableCount: number
 
   selectedStoreChange(){
     this.ctx = this.canvas.nativeElement.getContext('2d')

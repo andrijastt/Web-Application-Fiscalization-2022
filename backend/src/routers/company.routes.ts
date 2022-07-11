@@ -139,4 +139,8 @@ companyRouter.route('/setTableToFree').post(
     (req, res) => new CompanyController().setTableToFree(req, res)
 )
 
+companyRouter.route('/getDistinctTables').post(
+    (req, res) => new CompanyController().getDistinctTables(req, res)
+)
+
 export default companyRouter;

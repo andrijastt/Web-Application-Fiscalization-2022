@@ -287,4 +287,11 @@ export class CompanyService {
     return this.http.post(`${this.uri}/company/setTableToTaken`, data)
   }
 
+  getDistinctTables(companyPIBForm){
+    const data = {
+      companyPIB: companyPIBForm
+    }
+    return this.http.post(`${this.uri}/company/getDistinctTables`, data)
+  }
+
 }
