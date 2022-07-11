@@ -572,12 +572,9 @@ export class CompanyController{
         let companyPIB = req.body.companyPIB
         let storeName = req.body.storeName
 
-        console.log(req.body)
-
         TableModel.find({'companyPIB': companyPIB, 'storeName': storeName}, (err, tables)=>{
             if(err) console.log(err)
             else res.json(tables)
-            console.log(tables)
         })
     }
 

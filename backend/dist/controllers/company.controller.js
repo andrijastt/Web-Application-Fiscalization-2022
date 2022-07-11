@@ -597,13 +597,11 @@ class CompanyController {
         this.getMyTables = (req, res) => {
             let companyPIB = req.body.companyPIB;
             let storeName = req.body.storeName;
-            console.log(req.body);
             table_1.default.find({ 'companyPIB': companyPIB, 'storeName': storeName }, (err, tables) => {
                 if (err)
                     console.log(err);
                 else
                     res.json(tables);
-                console.log(tables);
             });
         };
     }

@@ -543,26 +543,26 @@ export class CompanyComponent implements OnInit {
 
       for(let i = 0; i < data.length; i++){
         if(data[i].type == "square"){
-          context.fillStyle = 'white'
+          this.ctx.fillStyle = 'white'
           const square = new Square(this.ctx);  
           square.draw(data[i].x, data[i].y, data[i].w, data[i].h);
 
-          context.fillStyle = 'black'
-          context.font = "20px Arial";
+          this.ctx.fillStyle = 'black'
+          this.ctx.font = "20px Arial";
           let text: string = ""
           text += data[i].id
-          context.fillText(text, data[i].x, data[i].y +20)
+          this.ctx.fillText(text, data[i].x, data[i].y +20)
 
         } else {
-          context.fillStyle = 'white'
+          this.ctx.fillStyle = 'white'
           const circle = new Circle(this.ctx);  
           circle.draw(data[i].x, data[i].y, data[i].w);
           
-          context.fillStyle = 'black'
-          context.font = "20px Arial";
+          this.ctx.fillStyle = 'black'
+          this.ctx.font = "20px Arial";
           let text: string = ""
           text += data[i].id
-          context.fillText(text, data[i].x, data[i].y +20)
+          this.ctx.fillText(text, data[i].x, data[i].y +20)
         }
       }
 
@@ -892,9 +892,16 @@ export class Circle {
 
   draw(x: number, y: number, r: number) {
     this.ctx.beginPath();
-    this.ctx.arc(x, y, r, 0, 2*Math.PI)
+    this.ctx.arc(x, y, r, 0, 2 * Math.PI)
     this.ctx.fill();
-    this.ctx.lineWidth = 2;
+    this.ctx.closePath();
+    this.ctx.stroke();
+
+    this.ctx.fillStyle = 'white'
+    this.ctx.beginPath();
+    this.ctx.fill();
+    this.ctx.closePath();
     this.ctx.stroke();
   }
+
 }
