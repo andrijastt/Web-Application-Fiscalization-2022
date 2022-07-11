@@ -563,12 +563,17 @@ export class CompanyComponent implements OnInit {
             const rect = this.canvas.nativeElement.getBoundingClientRect()
             const x = event.clientX - rect.left
             const y = event.clientY - rect.top
-            console.log("Kvadrat", x, y)
             if(square.clickSquare(x, y)){
-              console.log(true)
-            } else {
-              console.log(false)
-            }
+
+              if(!this.myTables[i].taken){
+                this.myTables[i].taken = true
+                this.ctx.fillStyle = 'black'
+
+                this.ctx.font = "35px Arial";
+                let text: string = "TAKEN"
+                this.ctx.fillText(text, this.myTables[i].x + (this.myTables[i].w / 8), this.myTables[i].y + (this.myTables[i].h / 8 * 4.5))
+              }
+            } 
           })
 
           this.canvas.nativeElement.addEventListener('mouseout', (event) => {
@@ -591,12 +596,17 @@ export class CompanyComponent implements OnInit {
             const rect = this.canvas.nativeElement.getBoundingClientRect()
             const x = event.clientX - rect.left
             const y = event.clientY - rect.top
-            console.log("Krug", x, y)
+
             if(circle.clickCircle(x, y)){
-              console.log(true)
-            } else {
-              console.log(false)
-            }
+              if(!this.myTables[i].taken){
+                this.myTables[i].taken = true
+                this.ctx.fillStyle = 'black'
+                this.ctx.font = "35px Arial";
+                let text: string = "TAKEN"
+                this.ctx.fillText(text, this.myTables[i].x - (this.myTables[i].w / 8 * 3), this.myTables[i].y + (this.myTables[i].h / 8))
+                this.ctx.fillStyle = 'white'
+              }
+            } 
           })
 
           this.canvas.nativeElement.addEventListener('mouseout', (event) => {

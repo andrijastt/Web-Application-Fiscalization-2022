@@ -1,3 +1,5 @@
+import { ItemStats } from "./itemStats"
+
 export class Table{
     id: number
     companyName: string
@@ -8,4 +10,6 @@ export class Table{
     y: number
     w: number
     h: number
+    items: Array<ItemStats>
+    taken: boolean
 }

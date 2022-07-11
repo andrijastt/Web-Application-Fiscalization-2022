@@ -32,6 +32,12 @@ let Table = new Schema({
     },
     h: {
         type: Number
+    },
+    items: {
+        type: Array
+    },
+    taken: {
+        type: Boolean
     }
 });
 exports.default = mongoose_1.default.model('TableModel', Table, 'tables');
