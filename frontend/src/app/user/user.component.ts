@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CompanyService } from '../company.service';
 import { Buyer } from '../model/buyer';
@@ -7,6 +8,7 @@ import { Item } from '../model/item';
 import { ItemStats } from '../model/itemStats';
 import { Receipt } from '../model/receipt';
 import { StorageUnit } from '../model/storageUnit';
+import { ReceiptDetailsComponent } from '../receipt-details/receipt-details.component';
 import { RegisterCompanyService } from '../register-company.service';
 import { UserService } from '../user.service';
 
@@ -18,7 +20,7 @@ import { UserService } from '../user.service';
 export class UserComponent implements OnInit {
 
   constructor(private router: Router, private registerComapnyService: RegisterCompanyService, private companyService: CompanyService,
-    private userService: UserService) { }
+    private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     
@@ -88,6 +90,16 @@ export class UserComponent implements OnInit {
   searchItem(){
     this.userService.searchItem(this.itemNameSearch, this.itemProducerSearch).subscribe((data: ItemStats[])=>{
       this.itemsSearch = data
+    })
+  }
+
+  openDialog(receipt){
+    this.dialog.open(ReceiptDetailsComponent, {
+      height: '800px',
+      width: '800px',
+      data: {
+        receipt: receipt 
+      }
     })
   }
 

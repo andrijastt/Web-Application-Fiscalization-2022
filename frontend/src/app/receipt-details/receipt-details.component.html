@@ -1,0 +1,20 @@
+<h1>Receipt {{receipt.companyName}}, {{receipt.date | date:'medium'}}</h1>
+
+<table>
+    <tr>
+        <td>Item name</td>
+        <td>Item porducer</td>
+        <td>Amount</td>
+        <td>Price per item</td>
+        <td>Total item price</td>
+    </tr>
+    <tr *ngFor="let n of receipt.selectedItems">
+        <td>{{n.itemName}}</td>
+        <td>{{n.itemProducer}}</td>
+        <td>{{n.currentState}}</td>
+        <td>{{n.sellingPrice}}</td>
+        <td>{{n.sellingPrice * n.currentState}}</td>
+    </tr>
+</table>
+
+<button mat-dialog-close mat-button>Close</button>

@@ -24,6 +24,7 @@ import { CompanyFirstComponent } from './company-first/company-first.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 import { TableReceiptComponent } from './table-receipt/table-receipt.component';
+import { ReceiptDetailsComponent } from './receipt-details/receipt-details.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TableReceiptComponent } from './table-receipt/table-receipt.component';
     CompanyFirstComponent,
     PasswordChangeComponent,
     CategoryDialogComponent,
-    TableReceiptComponent
+    TableReceiptComponent,
+    ReceiptDetailsComponent
   ],
   imports: [
     BrowserModule,

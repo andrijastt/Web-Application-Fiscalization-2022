@@ -62,6 +62,9 @@
             <td>{{n.selectedItems[0].place}}</td>
             <td>{{n.amountToPay}}</td>
             <td>{{n.paymentType}}</td>
+            <td>
+                <button mat-button (click)="openDialog(n)">Details</button>
+            </td>
         </tr>
     </table>
 </div>
