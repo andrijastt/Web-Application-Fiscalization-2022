@@ -316,9 +316,7 @@
     <mat-paginator [pageSize]="10" [length]="items.length"  (page)="onPageChange($event)">
         <!-- [pageSizeOptions]="[1, 2, 3]" -->
     </mat-paginator>
-    <BR>
-        GOVNO JEDNO NAPRAVI AUTOMATSKU SLICICU
-    <BR>
+    <br><br>
     <button mat-button (click)="addGoods = true">Add Goods</button>
     <mat-tab-group *ngIf="addGoods">
         <mat-tab label="General data">

@@ -346,24 +346,32 @@ export class CompanyController{
                 item.description = req.body.description
                 item.declaration = req.body.declaration
 
-                ItemModel.collection.insertOne(item, (err, resp) =>{
-                    if(err) console.log(err)
-                    else {
-                        
-                        let itemStats = req.body.itemStats
-                        let itemStatsStore = req.body.itemStatsStore
-                        ItemStatsModel.collection.insertMany(itemStats, (err, resp)=>{
-                            if(err) console.log(err)
-                            else {
-                                ItemStatsModel.collection.insertMany(itemStatsStore, (err, resp)=>{
-                                    if(err) console.log(err)
-                                    else res.json({'message': 'Item added'})
-                                })
-                            }
-                        })
-
-                    }
-                })
+                if(item.image == null){
+                    CompanyModel.findOne({'PIB': item.companyPIB}, (err, image)=>{
+                        if(err) console.log(err)
+                        else{
+                            item.image = image[0]
+                            ItemModel.collection.insertOne(item, (err, resp) =>{
+                                if(err) console.log(err)
+                                else {
+                                    
+                                    let itemStats = req.body.itemStats
+                                    let itemStatsStore = req.body.itemStatsStore
+                                    ItemStatsModel.collection.insertMany(itemStats, (err, resp)=>{
+                                        if(err) console.log(err)
+                                        else {
+                                            ItemStatsModel.collection.insertMany(itemStatsStore, (err, resp)=>{
+                                                if(err) console.log(err)
+                                                else res.json({'message': 'Item added'})
+                                            })
+                                        }
+                                    })
+            
+                                }
+                            })
+                        }
+                    }).distinct('imageData')
+                }
             }
         })     
     }

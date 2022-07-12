@@ -358,26 +358,35 @@ class CompanyController {
                     item.maxItems = req.body.maxItems;
                     item.description = req.body.description;
                     item.declaration = req.body.declaration;
-                    item_1.default.collection.insertOne(item, (err, resp) => {
-                        if (err)
-                            console.log(err);
-                        else {
-                            let itemStats = req.body.itemStats;
-                            let itemStatsStore = req.body.itemStatsStore;
-                            itemStats_1.default.collection.insertMany(itemStats, (err, resp) => {
-                                if (err)
-                                    console.log(err);
-                                else {
-                                    itemStats_1.default.collection.insertMany(itemStatsStore, (err, resp) => {
-                                        if (err)
-                                            console.log(err);
-                                        else
-                                            res.json({ 'message': 'Item added' });
-                                    });
-                                }
-                            });
-                        }
-                    });
+                    if (item.image == null) {
+                        company_1.default.findOne({ 'PIB': item.companyPIB }, (err, image) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                item.image = image[0];
+                                item_1.default.collection.insertOne(item, (err, resp) => {
+                                    if (err)
+                                        console.log(err);
+                                    else {
+                                        let itemStats = req.body.itemStats;
+                                        let itemStatsStore = req.body.itemStatsStore;
+                                        itemStats_1.default.collection.insertMany(itemStats, (err, resp) => {
+                                            if (err)
+                                                console.log(err);
+                                            else {
+                                                itemStats_1.default.collection.insertMany(itemStatsStore, (err, resp) => {
+                                                    if (err)
+                                                        console.log(err);
+                                                    else
+                                                        res.json({ 'message': 'Item added' });
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        }).distinct('imageData');
+                    }
                 }
             });
         };
