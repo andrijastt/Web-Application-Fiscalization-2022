@@ -35,6 +35,9 @@ let Table = new Schema({
     },
     taken: {
         type: Boolean
+    },
+    department: {
+        type: String
     }
 })
 

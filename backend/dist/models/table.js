@@ -38,6 +38,9 @@ let Table = new Schema({
     },
     taken: {
         type: Boolean
+    },
+    department: {
+        type: String
     }
 });
 exports.default = mongoose_1.default.model('TableModel', Table, 'tables');

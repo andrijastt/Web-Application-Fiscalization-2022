@@ -603,10 +603,21 @@ class CompanyController {
                     res.json(dailyReviews);
             });
         };
-        this.getMyTables = (req, res) => {
+        this.getDepartmentsByPlace = (req, res) => {
             let companyPIB = req.body.companyPIB;
             let storeName = req.body.storeName;
             table_1.default.find({ 'companyPIB': companyPIB, 'storeName': storeName }, (err, tables) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(tables);
+            }).distinct('department');
+        };
+        this.getMyTables = (req, res) => {
+            let companyPIB = req.body.companyPIB;
+            let storeName = req.body.storeName;
+            let department = req.body.department;
+            table_1.default.find({ 'companyPIB': companyPIB, 'storeName': storeName, 'department': department }, (err, tables) => {
                 if (err)
                     console.log(err);
                 else

@@ -527,15 +527,34 @@ export class CompanyComponent implements OnInit {
   /*********************************************************************************************************/
 
   selectedStore: string
+  departments: string[]
   ctx: CanvasRenderingContext2D
 
   myTables: Table[] = []
   tableCount: number
 
-  selectedStoreChange(){
+  getDepartmentsByPlace(){
+    this.companyService.getDepartmentsByPlace(this.company.PIB, this.selectedStore).subscribe((data: string[]) => {
+      this.departments = data
+      this.ctx = this.canvas.nativeElement.getContext('2d')
+      this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+
+      this.canvas.nativeElement.removeAllListeners()
+
+    })
+  }
+
+  selectedStoreChange(storeDepartment){
     this.ctx = this.canvas.nativeElement.getContext('2d')
     this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
 
+    this.canvas.nativeElement.removeAllListeners()
+
+    this.ctx.strokeStyle = "white"
+    this.ctx.beginPath()
+    this.ctx.closePath()
+    this.ctx.stroke()
+    
     this.ctx.fillStyle = '#fec'
     this.ctx.fillRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
     this.ctx.strokeStyle = '#0f0f0f'
@@ -550,7 +569,7 @@ export class CompanyComponent implements OnInit {
       }
     }
 
-    this.companyService.getMyTables(this.company.PIB, this.selectedStore).subscribe((data: Table[]) => {
+    this.companyService.getMyTables(this.company.PIB, this.selectedStore, storeDepartment).subscribe((data: Table[]) => {
       this.myTables = data
 
       for(let i = 0; i < data.length; i++){
@@ -612,19 +631,6 @@ export class CompanyComponent implements OnInit {
                   }
                 }
               })
-
-              // if(!this.myTables[i].taken){
-              //   this.myTables[i].taken = true
-              //   this.ctx.fillStyle = 'black'
-              //   this.ctx.font = "35px Arial";
-              //   let text: string = "TAKEN"
-              //   this.ctx.fillText(text, this.myTables[i].x + (this.myTables[i].w / 8), this.myTables[i].y + (this.myTables[i].h / 8 * 4.5))
-              //   this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
-              //     (resp) => {
-              //       alert(resp)
-              //     }
-              //   )
-              // }
             } 
           })
 
@@ -656,19 +662,6 @@ export class CompanyComponent implements OnInit {
             const y = event.clientY - rect.top
 
             if(circle.clickCircle(x, y)){
-              // if(!this.myTables[i].taken){
-              //   this.myTables[i].taken = true
-              //   this.ctx.fillStyle = 'black'
-              //   this.ctx.font = "35px Arial";
-              //   let text: string = "TAKEN"
-              //   this.ctx.fillText(text, this.myTables[i].x - (this.myTables[i].w / 8 * 3), this.myTables[i].y + (this.myTables[i].h / 8))
-              //   this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
-              //     (resp) => {
-              //       alert(resp)
-              //     }
-              //   )
-              // }
-
               const dialogRef = this.dialog.open(TableReceiptComponent, {
                 height: '800px',
                 width: '800px',
@@ -702,8 +695,6 @@ export class CompanyComponent implements OnInit {
                   }
                 }
               })
-
-
             } 
           })
 

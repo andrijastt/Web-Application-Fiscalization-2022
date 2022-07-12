@@ -551,9 +551,12 @@
 
 <!-- *************************************************************************************************************************** -->
 <div *ngIf="tableData" id="tables">
-    <select [(ngModel)]="selectedStore" (ngModelChange)="selectedStoreChange()">
+    <select [(ngModel)]="selectedStore" (ngModelChange)="getDepartmentsByPlace()">
         <option *ngFor="let n of myStores">{{n.name}}</option>
     </select>
+    <br>
+    <button *ngFor="let n of departments" mat-button (click)="selectedStoreChange(n)">{{n}}</button>
+
     <br><br>
     <div>
         <canvas #canvas width="1200" height="800" id="canvas"></canvas>

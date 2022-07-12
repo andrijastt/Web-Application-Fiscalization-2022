@@ -131,6 +131,10 @@ companyRouter.route('/getMyTables').post(
     (req, res) => new CompanyController().getMyTables(req, res)
 )
 
+companyRouter.route('/getDepartmentsByPlace').post(
+    (req, res) => new CompanyController().getDepartmentsByPlace(req, res)
+)
+
 companyRouter.route('/setTableToTaken').post(
     (req, res) => new CompanyController().setTableToTaken(req, res)
 )

@@ -12,4 +12,5 @@ export class Table{
     h: number
     items: Array<ItemStats>
     taken: boolean
+    department: string
 }

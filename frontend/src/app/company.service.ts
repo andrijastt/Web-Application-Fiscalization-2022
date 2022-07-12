@@ -261,10 +261,19 @@ export class CompanyService {
     return this.http.post(`${this.uri}/company/getDailyReview`, data)
   }
 
-  getMyTables(companyPIBForm, storeNameForm){
+  getDepartmentsByPlace(companyPIBForm, storeNameForm){
     const data = {
       companyPIB: companyPIBForm,
       storeName: storeNameForm
+    }
+    return this.http.post(`${this.uri}/company/getDepartmentsByPlace`, data)
+  }
+
+  getMyTables(companyPIBForm, storeNameForm, departmentForm){
+    const data = {
+      companyPIB: companyPIBForm,
+      storeName: storeNameForm,
+      department: departmentForm
     }
     return this.http.post(`${this.uri}/company/getMyTables`, data)
   }

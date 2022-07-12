@@ -576,11 +576,22 @@ export class CompanyController{
         })
     }
 
-    getMyTables = (req: express.Request, res: express.Response) => {
+    getDepartmentsByPlace = (req: express.Request, res: express.Response) => {
         let companyPIB = req.body.companyPIB
         let storeName = req.body.storeName
 
         TableModel.find({'companyPIB': companyPIB, 'storeName': storeName}, (err, tables)=>{
+            if(err) console.log(err)
+            else res.json(tables)
+        }).distinct('department')
+    }
+
+    getMyTables = (req: express.Request, res: express.Response) => {
+        let companyPIB = req.body.companyPIB
+        let storeName = req.body.storeName
+        let department = req.body.department
+
+        TableModel.find({'companyPIB': companyPIB, 'storeName': storeName, 'department': department}, (err, tables)=>{
             if(err) console.log(err)
             else res.json(tables)
         })
