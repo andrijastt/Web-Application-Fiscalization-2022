@@ -609,4 +609,30 @@ export class CompanyController{
         }).distinct('id')
     }
 
+    updateCurrentState = (req: express.Request, res: express.Response) =>{
+        let itemStat = req.body.itemStat
+        ItemStatsModel.updateOne({'itemName': itemStat.itemName, 'itemProducer': itemStat.itemProducer, 'companyName': itemStat.companyName,
+            'place': itemStat.place}, {$inc: {currentState: -itemStat.currentState}}, (err, resp)=>{
+                if(err) console.log(err)
+                else {
+                    res.json('ok')
+                    console.log("Storage updated")
+                }
+        })
+    }
+
+    updateTable = (req: express.Request, res: express.Response) =>{
+        let items1 = req.body.items
+        let table = req.body.table
+
+        TableModel.updateOne({'id': table.id, 'companyPIB': table.companyPIB, 'storeName': table.storeName}, {$set: {items: items1}}, 
+        (err, resp) => {
+            if(err) console.log(err)
+            else {
+                res.json('ok')
+                console.log("Table updated")
+            }
+        })
+    }
+
 }

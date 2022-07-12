@@ -41,5 +41,7 @@ companyRouter.route('/getMyTables').post((req, res) => new company_controller_1.
 companyRouter.route('/setTableToTaken').post((req, res) => new company_controller_1.CompanyController().setTableToTaken(req, res));
 companyRouter.route('/setTableToFree').post((req, res) => new company_controller_1.CompanyController().setTableToFree(req, res));
 companyRouter.route('/getDistinctTables').post((req, res) => new company_controller_1.CompanyController().getDistinctTables(req, res));
+companyRouter.route('/updateCurrentState').post((req, res) => new company_controller_1.CompanyController().updateCurrentState(req, res));
+companyRouter.route('/updateTable').post((req, res) => new company_controller_1.CompanyController().updateTable(req, res));
 exports.default = companyRouter;
 //# sourceMappingURL=company.routes.js.map

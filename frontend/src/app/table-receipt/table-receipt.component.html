@@ -1,0 +1,90 @@
+<h1>Table {{table.id}}, {{table.storeName}}</h1>
+
+<h2>Items</h2>
+<table>
+    <tr>
+        <td>Item name</td>
+        <td>Item producer</td>
+        <td>Current amount</td>
+        <td>Item Selling Price</td>
+        <td>Amount to add to cart</td>
+    </tr>
+    <tr *ngFor="let n of myItemStats; let i = index">
+        <td>{{n.itemName}}</td>
+        <td>{{n.itemProducer}}</td>
+        <td>{{n.currentState}}</td>
+        <td>{{n.sellingPrice}}</td>
+        <td>
+            <input type="number" max="{{n.currentState}}" min="0" [(ngModel)]="orderNumber[i]">
+        </td>
+        <td>
+            <button mat-button [disabled]="n.currentState == 0" (click)="addToCart(n, i)">Add to cart</button>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <br>
+    <h2>Cart</h2>
+    <table>
+        <tr>
+            <td>Item number</td>
+            <td>Item name</td>
+            <td>Item producer</td>
+            <td>Amount selected</td>
+            <td>Price</td>
+        </tr>
+        <tr *ngFor="let n of table.items; let i = index">
+            <td>{{i + 1}}.</td>
+            <td>{{n.itemName}}</td>
+            <td>{{n.itemProducer}}</td>
+            <td>{{n.currentState}}</td>
+            <td>{{n.sellingPrice * n.currentState}}</td>
+        </tr>
+    </table>
+    <button mat-button (click)="closeBill()">Close the bill</button>
+    <br>
+    <div *ngIf="billClosed">
+        <h2>Recepit</h2>
+        Amount to pay is: {{amountToPay}}
+        <br>
+        <select [(ngModel)]="paymentType" (ngModelChange)="paymentTypeChange()">
+            <option value="cash">Cash</option>
+            <option value="moneyCheck">Money check</option>
+            <option value="creditCard">Credit card</option>
+            <option value="virman">Virman</option>
+        </select>
+        <div *ngIf="paymentType == 'cash'">
+            Amount of money to give: &nbsp;<input type="number" min="{{amountToPay}}" [(ngModel)]="money">
+            <br>
+            Number of id card (optional): &nbsp;<input type="text" [(ngModel)]="idCardCash" (ngModelChange)="checkIDCardCash()"> &nbsp; {{idCardCashError}}
+            <br>
+            Change: {{money - amountToPay}}
+        </div>
+
+        <div *ngIf="paymentType == 'moneyCheck'">
+            Firstame: &nbsp;<input type="text" [(ngModel)]="firstNameBuyer">
+            <br>
+            Lastname: &nbsp;<input type="text" [(ngModel)]="lastNameBuyer">
+            <br>
+            Card ID: &nbsp;<input type="text" [(ngModel)]="idCardMoneyCheck" (ngModelChange)="checkIDCardMoneyCheck()"> &nbsp; {{idCardMoneyCheckError}}
+        </div>
+            
+        <div *ngIf="paymentType == 'creditCard'">
+            Card ID: &nbsp;<input type="text" [(ngModel)]="idCardCreditCard" (ngModelChange)="checkIDCardCreditCard()"> &nbsp; {{idCardCreditCardError}}
+            <br>
+            Credit card slip: &nbsp;<input type="text" [(ngModel)]="creditCardSlip">
+        </div>
+
+        <div *ngIf="paymentType == 'virman'">
+            <select [(ngModel)]="virmanCustomer">
+                <option *ngFor="let n of customers">{{n.name}}</option>
+            </select>
+        </div>
+        <br>
+        <button mat-button (click)="giveReceipt()">Give receipt</button>
+    </div>
+    <br>
+</div>
+<br>
+<button mat-dialog-close="data.selectedItems" mat-button (click)="close()">Close window</button>

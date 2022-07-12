@@ -14,6 +14,7 @@ import { StorageUnit } from '../model/storageUnit';
 import { Store } from '../model/store';
 import { Table } from '../model/table';
 import { RegisterCompanyService } from '../register-company.service';
+import { TableReceiptComponent } from '../table-receipt/table-receipt.component';
 
 @Component({
   selector: 'app-company',
@@ -578,18 +579,52 @@ export class CompanyComponent implements OnInit {
             const y = event.clientY - rect.top
             if(square.clickSquare(x, y)){
 
-              if(!this.myTables[i].taken){
-                this.myTables[i].taken = true
-                this.ctx.fillStyle = 'black'
-                this.ctx.font = "35px Arial";
-                let text: string = "TAKEN"
-                this.ctx.fillText(text, this.myTables[i].x + (this.myTables[i].w / 8), this.myTables[i].y + (this.myTables[i].h / 8 * 4.5))
-                this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
-                  (resp) => {
-                    alert(resp)
+              const dialogRef = this.dialog.open(TableReceiptComponent, {
+                height: '800px',
+                width: '800px',
+                data: {
+                  table: this.myTables[i],
+                  selectedItems: this.myTables[i].items
+                }
+              })
+
+              dialogRef.afterClosed().subscribe(result => {
+                if(this.myTables[i].items.length != 0 && !this.myTables[i].taken){
+                  this.myTables[i].taken = true
+                  this.ctx.fillStyle = 'black'
+                  this.ctx.font = "35px Arial";
+                  let text: string = "TAKEN"
+                  this.ctx.fillText(text, this.myTables[i].x + (this.myTables[i].w / 8), this.myTables[i].y + (this.myTables[i].h / 8 * 4.5))
+                  this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
+                    (resp) => {
+                      alert(resp)
+                    }
+                  )
+                } else {
+                  if(this.myTables[i].taken){
+                    this.myTables[i].taken = false
+                    this.ctx.clearRect(this.myTables[i].x, this.myTables[i].y + 35, this.myTables[i].w, this.myTables[i].h - 35)
+                    this.companyService.setTableToFree(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
+                      (resp) => {
+                        alert(resp)
+                      }
+                    )
                   }
-                )
-              }
+                }
+              })
+
+              // if(!this.myTables[i].taken){
+              //   this.myTables[i].taken = true
+              //   this.ctx.fillStyle = 'black'
+              //   this.ctx.font = "35px Arial";
+              //   let text: string = "TAKEN"
+              //   this.ctx.fillText(text, this.myTables[i].x + (this.myTables[i].w / 8), this.myTables[i].y + (this.myTables[i].h / 8 * 4.5))
+              //   this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
+              //     (resp) => {
+              //       alert(resp)
+              //     }
+              //   )
+              // }
             } 
           })
 
@@ -621,18 +656,54 @@ export class CompanyComponent implements OnInit {
             const y = event.clientY - rect.top
 
             if(circle.clickCircle(x, y)){
-              if(!this.myTables[i].taken){
-                this.myTables[i].taken = true
-                this.ctx.fillStyle = 'black'
-                this.ctx.font = "35px Arial";
-                let text: string = "TAKEN"
-                this.ctx.fillText(text, this.myTables[i].x - (this.myTables[i].w / 8 * 3), this.myTables[i].y + (this.myTables[i].h / 8))
-                this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
-                  (resp) => {
-                    alert(resp)
+              // if(!this.myTables[i].taken){
+              //   this.myTables[i].taken = true
+              //   this.ctx.fillStyle = 'black'
+              //   this.ctx.font = "35px Arial";
+              //   let text: string = "TAKEN"
+              //   this.ctx.fillText(text, this.myTables[i].x - (this.myTables[i].w / 8 * 3), this.myTables[i].y + (this.myTables[i].h / 8))
+              //   this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
+              //     (resp) => {
+              //       alert(resp)
+              //     }
+              //   )
+              // }
+
+              const dialogRef = this.dialog.open(TableReceiptComponent, {
+                height: '800px',
+                width: '800px',
+                data: {
+                  table: this.myTables[i],
+                  selectedItems: this.myTables[i].items
+                }
+              })
+
+              dialogRef.afterClosed().subscribe(result => {
+                if(this.myTables[i].items.length != 0 && !this.myTables[i].taken){
+                  this.myTables[i].taken = true
+                  this.ctx.fillStyle = 'black'
+                  this.ctx.font = "35px Arial";
+                  let text: string = "TAKEN"
+                  this.ctx.fillText(text, this.myTables[i].x - (this.myTables[i].w / 8 * 3), this.myTables[i].y + (this.myTables[i].h / 8))
+                  this.companyService.setTableToTaken(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
+                    (resp) => {
+                      alert(resp)
+                    }
+                  )
+                } else {
+                  if(this.myTables[i].taken && this.myTables[i].items.length == 0){
+                    this.myTables[i].taken = false
+                    this.ctx.clearRect(this.myTables[i].x - (this.myTables[i].w / 8 * 3), this.myTables[i].y - (this.myTables[i].h / 8), 120, 35)
+                    this.companyService.setTableToFree(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
+                      (resp) => {
+                        alert(resp)
+                      }
+                    )
                   }
-                )
-              }
+                }
+              })
+
+
             } 
           })
 
@@ -719,7 +790,6 @@ export class CompanyComponent implements OnInit {
       if(this.orderNumber[num] > 0){
         if(this.selectedItemsName.length > 0 && this.selectedItemsName.includes(item.itemName)){
           let i = this.selectedItemsName.indexOf(item.itemName)
-          console.log(i)
           this.selectedItemsName.splice(i, 1)
           this.selectedItems.splice(i, 1)
           this.selectedItemPDV.splice(i, 1)

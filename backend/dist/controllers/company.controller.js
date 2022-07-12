@@ -635,6 +635,30 @@ class CompanyController {
                     res.json(resp);
             }).distinct('id');
         };
+        this.updateCurrentState = (req, res) => {
+            let itemStat = req.body.itemStat;
+            itemStats_1.default.updateOne({ 'itemName': itemStat.itemName, 'itemProducer': itemStat.itemProducer, 'companyName': itemStat.companyName,
+                'place': itemStat.place }, { $inc: { currentState: -itemStat.currentState } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.json('ok');
+                    console.log("Storage updated");
+                }
+            });
+        };
+        this.updateTable = (req, res) => {
+            let items1 = req.body.items;
+            let table = req.body.table;
+            table_1.default.updateOne({ 'id': table.id, 'companyPIB': table.companyPIB, 'storeName': table.storeName }, { $set: { items: items1 } }, (err, resp) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.json('ok');
+                    console.log("Table updated");
+                }
+            });
+        };
     }
 }
 exports.CompanyController = CompanyController;

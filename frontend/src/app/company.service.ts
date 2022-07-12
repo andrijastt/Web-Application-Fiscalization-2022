@@ -284,7 +284,22 @@ export class CompanyService {
       storeName: storeNameForm,
       id: idForm
     }
-    return this.http.post(`${this.uri}/company/setTableToTaken`, data)
+    return this.http.post(`${this.uri}/company/setTableToFree`, data)
+  }
+
+  updateCurrentState(itemStatForm){
+    const data = {
+      itemStat: itemStatForm
+    }
+    return this.http.post(`${this.uri}/company/updateCurrentState`, data)
+  }
+
+  updateTable(itemsForm, tableForm){
+    const data = {
+      items: itemsForm,
+      table: tableForm
+    }
+    return this.http.post(`${this.uri}/company/updateTable`, data)
   }
 
   getDistinctTables(companyPIBForm){

@@ -143,4 +143,12 @@ companyRouter.route('/getDistinctTables').post(
     (req, res) => new CompanyController().getDistinctTables(req, res)
 )
 
+companyRouter.route('/updateCurrentState').post(
+    (req, res) => new CompanyController().updateCurrentState(req, res)
+)
+
+companyRouter.route('/updateTable').post(
+    (req, res) => new CompanyController().updateTable(req, res)
+)
+
 export default companyRouter;

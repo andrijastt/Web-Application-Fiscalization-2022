@@ -23,6 +23,7 @@ import { RegisterCompanyComponent } from './register-company/register-company.co
 import { CompanyFirstComponent } from './company-first/company-first.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
+import { TableReceiptComponent } from './table-receipt/table-receipt.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CategoryDialogComponent } from './category-dialog/category-dialog.compo
     RegisterCompanyComponent,
     CompanyFirstComponent,
     PasswordChangeComponent,
-    CategoryDialogComponent
+    CategoryDialogComponent,
+    TableReceiptComponent
   ],
   imports: [
     BrowserModule,
