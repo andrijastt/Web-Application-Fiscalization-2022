@@ -37,6 +37,7 @@ export class LoginAdminComponent implements OnInit {
   loginAdmin(){
     this.adminService.loginAdmin(this.username, this.password).subscribe((userFromDB : User)=>{
       if(userFromDB != null){
+        localStorage.setItem('user', JSON.stringify(userFromDB))
         this.router.navigate(['admin'])
       } else this.message = "Error"
     })

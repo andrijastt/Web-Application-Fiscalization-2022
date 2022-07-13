@@ -1,10 +1,128 @@
-footer{
-    position: fixed;
-  	bottom:0;
-    right:0;
-    font-size: 20px;    
+html{
+  display: flex;
+}
+
+h1{
+  font-weight: 500;
+  font-size: 30px;
+}
+
+h2{
+  font-weight: 450;
+  font-size: 25px;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+h3{
+  font-weight: 400;
+  font-size: 22px;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+input[type=text]{
+  font-size: 15px;
+}
+
+input[type=password]{
+  font-size: 15px;
+}
+
+input[type=number]{
+  font-size: 15px;
+}
+
+input[type=file]{
+  font-size: 15px;
+}
+
+input[type=date]{
+  font-size: 15px;
+}
+
+select{
+  font-size: 15px;
+}
+
+.companyRegistrations  {
+  border:none;
+  border-collapse: collapse;
+  font-size: 20px;
+}
+
+.companyRegistrations th {
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-weight: 450;
+}
+
+.companyRegistrations td{
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  text-align: center;
+}
+
+.registerCompanyTable th{
+  font-weight: 425;
+  text-align: left;
+}
+
+#firstTimeCompanyTable th{
+  font-weight: 425;
+  text-align: left;
+}
+
+ul#activityCodes li{
+  display: inline;
+}
+
+#activeComapnies  {
+  border:none;
+  border-collapse: collapse;
+  font-size: 20px;
+}
+
+#activeComapnies th {
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-weight: 450;
+}
+
+#activeComapnies td:not(:last-child){
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  text-align: center;
+}
+
+.columnText{
+  font-size: 20px;
 }
 
 .error{
-    color: red;
+  font-size: 20px;
+  color: red;
+}
+
+button{
+  font-size: 20px;
+}
+
+footer{
+  position: fixed;
+  bottom:0;
+  right:0;
+  font-size: 20px;    
 }

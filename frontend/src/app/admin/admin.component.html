@@ -1,17 +1,17 @@
 <h1>Hello Admin {{user.username}}</h1>
 
 <h2>Company registrations phase one</h2>
-<table>
+<table class="companyRegistrations">
     <tr>
-        <td colspan="2">Firstname and lastname</td>
-        <td>Username</td>
-        <td>Telephone number</td>
-        <td>Email</td>
-        <td>Comapny Name</td>
-        <td colspan="4">Address</td>
-        <td>PIB</td>
-        <td>JMBP</td>
-        <td>Status</td>
+        <th colspan="2">Firstname and lastname</th>
+        <th>Username</th>
+        <th>Telephone number</th>
+        <th>Email</th>
+        <th>Comapny Name</th>
+        <th colspan="4">Address</th>
+        <th>PIB</th>
+        <th>JMBP</th>
+        <th>Status</th>
     </tr>
     <tr *ngFor="let n of registerCompanys">
         <td colspan="2">{{n.firstname}} {{n.lastname}}</td>
@@ -23,127 +23,136 @@
         <td>{{n.PIB}}</td>
         <td>{{n.JMBP}}</td>
         <td>{{n.status}}</td>
-        <td *ngIf="n.status == 'new'">
-            <button (click)="accept(n.username, n.password)">Accept</button>
-        </td>
-        <td *ngIf="n.status == 'new'">
-            <button (click)="decline(n.username)">Decline</button>
-        </td>
+        <div *ngIf="n.status == 'new'">
+            &nbsp;
+            <button mat-raised-button color="primary" (click)="accept(n.username, n.password)">Accept</button>
+            &nbsp;
+            <button mat-raised-button color="warn" (click)="decline(n.username)">Decline</button>
+        </div>
     </tr>
 </table>
-
+<br>
 <h2>Insert company</h2>
-<table>
+
+<table class="registerCompanyTable">
     <tr>
-        <td>Firstname:</td>
+        <th class="columnText">Firstname:</th>
         <input type="text" name="firstname" [(ngModel)]="firstname">
     </tr>
     <tr>
-        <td>Lastname:</td>
+        <th class="columnText">Lastname:</th>
         <input type="text" name="lastname" [(ngModel)]="lastname">
     </tr>
     <tr>
-        <td>Username:</td>
+        <th class="columnText">Username:</th>
         <input type="text" name="username" [(ngModel)]="username">
     </tr>
     <tr>
-        <td>Password:</td>
+        <th class="columnText">Password:</th>
         <input type="password" name="password" [(ngModel)]="password" (ngModelChange)="checkPassword()">
         <td class="error">{{passwordCheck}}</td>
     </tr>
     <tr>
-        <td>Confirm Password:</td>
+        <th class="columnText">Confirm Password:</th>
         <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" (ngModelChange)="checkConfirmPassword()">
         <td class="error">{{confirmPasswordCheck}}</td>
     </tr>
     <tr>
-        <td>Telephone number:</td>
+        <th class="columnText">Telephone number:</th>
         <input type="text" name="number" [(ngModel)]="telephoneNumber" (ngModelChange)="checkTelephoneNumber()">
         <td class="error">{{telephoneNumberCheck}}</td>
     </tr>
     <tr>
-        <td>E-mail:</td>
+        <th class="columnText">E-mail:</th>
         <input type="text" name="email" [(ngModel)]="email" (ngModelChange)="checkEmail()">
         <td class="error">{{emailCheck}}</td>
     </tr>
     <tr>
-        <td>Name of company:</td>
+        <th class="columnText">Name of company:</th>
         <input type="text" name="companyName" [(ngModel)]="name">
     </tr>
     <tr>
-        <td>Country:</td>
+        <th class="columnText">Country:</th>
         <input type="text" name="country" [(ngModel)]="country">
     </tr>
     <tr>
-        <td>City:</td>
+        <th class="columnText">City:</th>
         <input type="text" name="city" [(ngModel)]="city">
     </tr>
     <tr>
-        <td>PostNumber:</td>
+        <th class="columnText">PostNumber:</th>
         <input type="number" name="postNumber" [(ngModel)]="postNumber" (ngModelChange)="checkPostNumber()">
         <td class="error">{{checkMailNumber}}</td>
     </tr>
     <tr>
-        <td>Street name:</td>
+        <th class="columnText">Street name:</th>
         <input type="text" name="street" [(ngModel)]="streetName">
     </tr>
     <tr>
-        <td>Street number:</td>
+        <th class="columnText">Street number:</th>
         <input type="number" name="streetNumber" [(ngModel)]="streetNumber" (ngModelChange)="checkStreetNumber()">
         <td class="error">{{streetNumberCheck}}</td>
     </tr>
     <tr>
-        <td>PIB:</td>
+        <th class="columnText">PIB:</th>
         <input type="number" name="PIB" [(ngModel)]="PIB" (ngModelChange)="checkPIB()">
         <td class="error">{{PIBCheck}}</td>
     </tr>
     <tr>
-        <td>Unique number of company:</td>
+        <th class="columnText">Unique number of company:</th>
         <input type="text" name="JMBP" [(ngModel)]="JMBP" (ngModelChange)="checkJMBP()">
         <td class="error">{{JMBPCheck}}</td>
     </tr>
     <tr>
-        <td>Logo of company:</td>
-        <input type="file" id="file" name="logo" (change)="onFileSelected($event)">
+        <th class="columnText">Logo of company:</th>
+        <input type="file" (change)="onFileSelected($event)">
     </tr>
     <tr>
         <td>
             <img src="{{image}}">
         </td>
     </tr>
+</table>
+
+<table id="firstTimeCompanyTable">
     <tr>
-        <td>Category</td>
+        <th class="columnText">Category</th>
         <td>
-            <select [(ngModel)]="category" (ngModelChange)="getActivityCodes()">
+            <select [(ngModel)]="category" (ngModelChange)="getActivityCodes()" class="columnText">
                 <option value="store">Store</option>
                 <option value="caterer">Caterer</option>
             </select>
         </td>
     </tr>
     <tr>
-        <td>Activity code</td>
-        <td *ngFor="let n of activityCodes; let i=index">
-            <input type="checkbox" value="{{n.code}}" (change)="addActivityCode(n)">{{n.code}}
+        <th class="columnText">Activity code</th>
+        <td>
+            <ul *ngFor="let n of activityCodes" id="activityCodes">
+                <li class="columnText">
+                    <input type="checkbox" value="{{n.code}}" (change)="addActivityCode(n)">{{n.code}}
+                </li>
+            </ul>            
         </td>
     </tr>
     <tr>
-        <td>In system for PDV</td>
+        <th class="columnText">In system for PDV</th>
         <td>
-            <mat-radio-group [(ngModel)]="PDV" name="PDV">
+            <mat-radio-group [(ngModel)]="PDV" name="PDV" class="columnText">
                 <mat-radio-button value="true">Yes</mat-radio-button>
+                &nbsp;
                 <mat-radio-button value="false">No</mat-radio-button>
             </mat-radio-group>
         </td>
     </tr>
     <tr>
-        <td>Bank accounts</td>
+        <th class="columnText">Bank accounts</th>
         <td>
-            <button (click)="onAddBankAccount()">Add account</button>
+            <button mat-stroked-button (click)="onAddBankAccount()">Add account</button>
         </td>
     </tr>
     <tr>
-        <td>Bank account</td>
-        <td>Bank</td>
+        <th class="columnText">Bank account</th>
+        <th class="columnText">Bank</th>
     </tr>
     <tr *ngFor="let bankAccount of bankAccountsModel; let i = index">
         <td>
@@ -153,21 +162,21 @@
             <input type="text" [(ngModel)]="bank[i]">
         </td>
         <td>
-            <button (click)="remove(i)">Remove</button>
+            <button mat-stroked-button color="warn" (click)="removeBankAccount(i)">Remove</button>
         </td>
-        <td>
+        <td class="error">
             {{bankErrors[i]}}
         </td>
     </tr>
     <tr>
-        <td>Number of storage units</td>
+        <th class="columnText">Number of storage units</th>
         <td>
-            <input type="number" min="1" [(ngModel)]="storageUnitNumber" (ngModelChange)="changeStorageUnitsNumber()">
+            <button mat-stroked-button (click)="onAddStorageUnit()">Add Storage Unit</button>
         </td>
     </tr>
     <tr>
-        <td>Id:</td>
-        <td>Name:</td>
+        <th class="columnText">Id:</th>
+        <th class="columnText">Name:</th>
     </tr>
     <tr *ngFor="let n of storageUnits; let i = index">
         <td>
@@ -176,18 +185,21 @@
         <td>
             <input type="text" [(ngModel)]="storageUnits[i].name">
         </td>
-    </tr>
-    <tr>
-        <td>Number of Stores:</td>
         <td>
-            <input type="number" [(ngModel)]="storesNumber" (ngModelChange)="changeObjectsNumber()" min="1">
+            <button mat-stroked-button color="warn" (click)="removeStorageUnit(i)">Remove</button>
         </td>
     </tr>
     <tr>
-        <td>ID</td>
-        <td>Name</td>
-        <td>Location</td>
-        <td>Number of Registers</td>
+        <th class="columnText">Number of Stores:</th>
+        <td>
+            <button mat-stroked-button (click)="onAddStore()">Add Store</button>
+        </td>
+    </tr>
+    <tr>
+        <th class="columnText">ID</th>
+        <th class="columnText">Name</th>
+        <th class="columnText">Location</th>
+        <th class="columnText">Number of Registers</th>
     </tr>
     <tr *ngFor="let n of stores; let i = index">
         <td>
@@ -202,9 +214,12 @@
         <td>
             <input type="number" min="1" [(ngModel)]="stores[i].numRegisters" (ngModelChange)="changeRegisterNumber(i)">
         </td>
+        <td>
+            <button mat-stroked-button color="warn" (click)="removeStore(i)">Remove</button>
+        </td>
     </tr>
     <tr *ngFor="let n of stores; let i = index">
-        <td>Registers for store {{i}}</td>
+        <th class="columnText">Registers for store {{i}}</th>
         <td *ngFor="let j of [].constructor(stores[i].numRegisters); let k = index">
             <select [(ngModel)]="registerTypes[i][k]">
                 <option *ngFor="let n of registerModels" value="{{n.name}}">{{n.name}}</option>
@@ -212,70 +227,71 @@
         </td>
     </tr>
 </table>
-<button (click)="insert()">Insert</button>
-
+<button mat-button (click)="insert()">Insert</button>
+<br><br>
 <h2>Activate/Deactivate companies</h2>
-<table>
+<table id="activeComapnies">
     <tr>
-        <td>Comapny Name</td>
-        <td>PIB</td>
-        <td>JMBP</td>
-        <td>Active</td>
+        <th>Comapny Name</th>
+        <th>PIB</th>
+        <th>JMBP</th>
+        <th>Active</th>
     </tr>
     <tr *ngFor="let n of registerCompanys">
         <td>{{n.name}}</td>
         <td>{{n.PIB}}</td>
         <td>{{n.JMBP}}</td>
-        <td>{{n.active}}</td>
+        <td style="text-transform: uppercase;">{{n.active}}</td>
         <td *ngIf="n.active">
-            <button (click)="deactivate(n.username)">Deactivate</button>
+            <button mat-raised-button color="warn" (click)="deactivate(n.username)">Deactivate</button>
         </td>
         <td *ngIf="!n.active">
-            <button (click)="activate(n.username)">Activate</button>
+            <button mat-raised-button color="primary" (click)="activate(n.username)">Activate</button>
         </td>
     </tr>
 </table>
-
+<br><br>
 <h2>Insert user</h2>
 
-<table>
+<table class="registerCompanyTable">
     <tr>
-        <td>Firstname:</td>
+        <th class="columnText">Firstname:</th>
         <input type="text" name="firstname" [(ngModel)]="firstnameUser">
     </tr>
     <tr>
-        <td>Lastname:</td>
+        <th class="columnText">Lastname:</th>
         <input type="text" name="lastname" [(ngModel)]="lastnameUser">
     </tr>
     <tr>
-        <td>Username:</td>
+        <th class="columnText">Username:</th>
         <input type="text" name="username" [(ngModel)]="usernameUser">
     </tr>
     <tr>
-        <td>Password:</td>
+        <th class="columnText">Password:</th>
         <input type="password" name="password" [(ngModel)]="passwordUser" (ngModelChange)="checkPasswordUser()">
         <td class="error">{{passwordCheckUser}}</td>
     </tr>
     <tr>
-        <td>Telephone number:</td>
+        <th class="columnText">Telephone number:</th>
         <input type="text" name="number" [(ngModel)]="telephoneNumberUser" (ngModelChange)="checkTelephoneNumberUser()">
         <td class="error">{{telephoneNumberCheckUser}}</td>
     </tr>
     <tr>
-        <td>ID Card:</td>
+        <th class="columnText">ID Card:</th>
         <input type="text" name="email" [(ngModel)]="idCardUser" (ngModelChange)="checkIDCard()">
         <td class="error">{{idCardCheck}}</td>
     </tr>
 </table>
 <button mat-button (click)="insertUser()">Insert user</button>
+<br><br>
 
 <h2>All Daily Reports</h2>
-<table>
+<table class="companyRegistrations">
     <tr>
-        <td>Company name</td>
-        <td>Date</td>
-        <td>Daily money</td>
-        <td>Tax</td>
+        <th>Company name</th>
+        <th>Date</th>
+        <th>Daily money</th>
+        <th>Tax</th>
     </tr>
     <tr *ngFor="let n of allDailyReview">
         <td>{{n.companyName}}</td>
@@ -284,45 +300,48 @@
         <td>{{n.tax}}</td>
     </tr>
 </table>
+<br><br>
 
 <h2>Search Daily Reports</h2>
-<table>
+<table class="registerCompanyTable">
     <tr>
-        <td>Name of company (optional)</td>
+        <th class="columnText">Name of company (optional)</th>
         <td>
             <input type="text" [(ngModel)]="companyNameSearch">
         </td>
     </tr>
     <tr>
-        <td>PIB of company (optional)</td>
+        <th class="columnText">PIB of company (optional)</th>
         <td>
             <input type="text" [(ngModel)]="companyPIBSearch" min="100000001" max="999999999" (ngModelChange)="checkPIBSearch()">
         </td>
-        <td>
+        <td class="error">
             {{companyPIBSearchError}}
         </td>
     </tr>
     <tr>
-        <td>First date (must)</td>
+        <th class="columnText">First date (must)</th>
         <td>
             <input type="date" [(ngModel)]="firstDay">
         </td>
     </tr>
     <tr>
-        <td>Last date (must)</td>
+        <th class="columnText">Last date (must)</th>
         <td>
             <input type="date" [(ngModel)]="lastDay">
         </td>
     </tr>
 </table>
-<br>
+<button mat-button (click)="searchDailyReviews()">Search</button>
+
+<br><br>
 <h3>Result</h3>
-<table>
+<table class="companyRegistrations">
     <tr>
-        <td>Company name</td>
-        <td>Date</td>
-        <td>Daily money</td>
-        <td>Tax</td>
+        <th>Company name</th>
+        <th>Date</th>
+        <th>Daily money</th>
+        <th>Tax</th>
     </tr>
     <tr *ngFor="let n of searchDailyReview">
         <td>{{n.companyName}}</td>
@@ -331,7 +350,6 @@
         <td>{{n.tax}}</td>
     </tr>
 </table>
-<button mat-button (click)="searchDailyReviews()">Search</button>
 
 <footer>
     <button (click)="passwordChange()">Change password</button>

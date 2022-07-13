@@ -51,7 +51,6 @@ export class AdminComponent implements OnInit {
     this.bankAccountsModel.push(BA)
 
     this.adminService.getAllDailyReviews().subscribe((data: DailyReview[])=>{
-      console.log(data)
       this.allDailyReview = data
     })
   }
@@ -246,11 +245,47 @@ export class AdminComponent implements OnInit {
     this.bankAccountsModel.push(BA)
   }
 
-  remove(i){
-    this.bankAccountsModel.splice(i, 1)
-    this.bankAcc.splice(i, 1)
-    this.bank.splice(i, 1)
-    this.bankErrors.splice(i, 1)
+  removeBankAccount(i){
+    if(this.bankAccountsModel.length == 1){
+      alert('You need at least 1 back account')
+    } else {
+      this.bankAccountsModel.splice(i, 1)
+      this.bankAcc.splice(i, 1)
+      this.bank.splice(i, 1)
+      this.bankErrors.splice(i, 1)
+    }
+  }
+
+  onAddStorageUnit(){
+    let stg = new StorageUnit
+    this.storageUnits.push(stg)
+  }
+
+  removeStorageUnit(i){
+    if(this.storageUnits.length == 1){
+      alert('You need at least 1 storage')
+    } else {
+      this.storageUnits.splice(i, 1)
+    }
+  }
+
+  onAddStore(){
+    let obj = new Store
+    obj.numRegisters = 1
+    this.stores.push(obj)
+
+    let regsTypes: string[] = []
+    regsTypes.push("")
+    this.registerTypes.push(regsTypes)
+  }
+
+  removeStore(i){
+    if(this.stores.length == 1){
+      alert('You need at least 1 storage')
+    } else {
+      this.stores.splice(i, 1)
+      this.registerTypes.splice(i, 1)
+    }
   }
 
   getActivityCodes(){
@@ -266,31 +301,6 @@ export class AdminComponent implements OnInit {
       this.registerTypes[num].push(reg)
     } else {
       this.registerTypes[num].pop()
-    }
-  }
-
-  changeObjectsNumber(){  
-    if(this.storesNumber > this.stores.length){
-      let obj = new Store
-      obj.numRegisters = 1
-      this.stores.push(obj)
-
-      let regsTypes: string[] = []
-      regsTypes.push("")
-      this.registerTypes.push(regsTypes)
-
-    } else {
-      this.stores.pop()
-      this.registerTypes.pop()
-    }
-  }
-
-  changeStorageUnitsNumber(){
-    if(this.storageUnitNumber > this.storageUnits.length){
-      let stg = new StorageUnit
-      this.storageUnits.push(stg)
-    } else {
-      this.storageUnits.pop()
     }
   }
 
