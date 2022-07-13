@@ -344,7 +344,6 @@ export class AdminComponent implements OnInit {
     for(let i = 0; i < this.stores.length; i++){
       
       this.stores[i].companyPIB = this.PIB
-
       if(!this.stores[i].id || !this.stores[i].location || !this.stores[i].name){
         this.send = false
         break;

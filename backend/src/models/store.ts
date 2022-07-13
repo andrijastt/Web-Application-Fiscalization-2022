@@ -20,4 +20,4 @@ let Store = new Schema({
     }
 })
 
-export default mongoose.model('StoreModel', Store, 'Stores')
+export default mongoose.model('StoreModel', Store, 'stores')

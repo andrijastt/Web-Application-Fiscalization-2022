@@ -22,5 +22,5 @@ let Store = new Schema({
         type: Number
     }
 });
-exports.default = mongoose_1.default.model('StoreModel', Store, 'Stores');
+exports.default = mongoose_1.default.model('StoreModel', Store, 'stores');
 //# sourceMappingURL=store.js.map

@@ -17,6 +17,17 @@ footer{
     color: red;
 }
 
+.companyData{
+    font-size: 20;
+}
+
+.companyData th{
+    font-weight: 425;
+    text-align: left;
+}
+
+.registerCompanyTable th
+
 #canvas{
     border: 2px solid black;
     width: auto;

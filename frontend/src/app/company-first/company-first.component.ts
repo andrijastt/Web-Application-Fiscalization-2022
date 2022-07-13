@@ -174,6 +174,7 @@ export class CompanyFirstComponent implements OnInit {
     }
 
     for(let i = 0; i < this.storageUnitNumber; i++){
+      this.storageUnits[i].companyPIB = this.company.PIB
       if(!this.storageUnits[i].id || !this.storageUnits[i].name){
         this.send = false;
         break;
@@ -181,7 +182,7 @@ export class CompanyFirstComponent implements OnInit {
     }
 
     for(let i = 0; i < this.stores.length; i++){
-      
+      this.stores[i].companyPIB = this.company.PIB     
       if(!this.stores[i].id || !this.stores[i].location || !this.stores[i].name){
         this.send = false
         break;

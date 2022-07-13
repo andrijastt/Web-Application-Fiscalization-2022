@@ -44,53 +44,53 @@
 <div *ngIf="companyData" class="companyData">    
     <mat-tab-group dynamicHeight>
         <mat-tab label="Opsti podaci">
-            <table>
+            <table class="companyData">
                 <tr>
-                    <td>Firstname: </td>
+                    <th>Firstname: </th>
                     <td>{{company.firstname}}</td>
                 </tr>
                 <tr>
-                    <td>Lastname: </td>
+                    <th>Lastname: </th>
                     <td>{{company.lastname}}</td>
                 </tr>
                 <tr>
-                    <td>Telephone nummber: </td>
+                    <th>Telephone nummber: </th>
                     <td>{{company.telephoneNumber}}</td>
                 </tr>
                 <tr>
-                    <td>E-mail: </td>
+                    <th>E-mail: </th>
                     <td>{{company.email}}</td>
                 </tr>
                 <tr>
-                    <td>Company name: </td>
+                    <th>Company name: </th>
                     <td>{{company.name}}</td>
                 </tr>
                 <tr>
-                    <td>Country: </td>
+                    <th>Country: </th>
                     <td>{{company.country}}</td>
                 </tr>
                 <tr>
-                    <td>City: </td>
+                    <th>City: </th>
                     <td>{{company.city}}</td>
                 </tr>
                 <tr>
-                    <td>Street: </td>
+                    <th>Street: </th>
                     <td>{{company.streetName}} {{company.streetNumber}}</td>
                 </tr>
                 <tr>
-                    <td>PIB: </td>
+                    <th>PIB: </th>
                     <td>{{company.PIB}}</td>
                 </tr>
                 <tr>
-                    <td>JMBP: </td>
+                    <th>JMBP: </th>
                     <td>{{company.JMBP}}</td>
                 </tr>
                 <tr>
-                    <td>Category: </td>
+                    <th>Category: </th>
                     <td>{{company.category}}</td>
                 </tr>
                 <tr>
-                    <td>Activity codes:</td>
+                    <th>Activity codes:</th>
                     <td>
                         <ul *ngFor="let n of company.activityCodes">
                             <li>{{n.code}}</li>
@@ -98,7 +98,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>In system for PDV: </td>
+                    <th>In system for PDV: </th>
                     <td>{{company.PDV}}</td>
                 </tr>
             </table>
@@ -106,11 +106,11 @@
         <mat-tab label="Ziro racuni">
             <table>
                 <tr>
-                  <td>Bank account</td>  
+                  <th>Bank account</th>  
                   <td>Bank</td>
                 </tr>
                 <tr *ngFor="let n of company.bankAccounts">
-                    <td>{{n.bankAccount}}</td>
+                    <th>{{n.bankAccount}}</th>
                     <td>{{n.bank}}</td>
                 </tr>
             </table>
@@ -118,8 +118,8 @@
         <mat-tab label="Magcini i kase">
             <table>
                 <tr>
-                    <td>Register Location</td>
-                    <td>Register Type</td>
+                    <th>Register Location</th>
+                    <th>Register Type</th>
                 </tr>
                 <tr *ngFor="let n of myRegisters">
                     <td>{{n.location}}</td>
@@ -129,8 +129,8 @@
             <br>
             <table>
                 <tr>
-                    <td>Storage unit ID</td>
-                    <td>Storage unit name</td>
+                    <th>Storage unit ID</th>
+                    <th>Storage unit name</th>
                 </tr>
                 <tr *ngFor="let n of storageUnits">
                     <td>{{n.id}}</td>
@@ -140,10 +140,10 @@
             <br>
             <table>
                 <tr>
-                    <td>Store ID</td>
-                    <td>Store name</td>
-                    <td>Store location</td>
-                    <td>Number of register</td>
+                    <th>Store ID</th>
+                    <th>Store name</th>
+                    <th>Store location</th>
+                    <th>Number of register</th>
                 </tr>
                 <tr *ngFor="let n of myStores">
                     <td>{{n.id}}</td>
