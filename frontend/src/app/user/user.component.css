@@ -1,6 +1,57 @@
+h1{
+  font-weight: 500;
+  font-size: 30px;
+}
+
+h2{
+  font-weight: 450;
+  font-size: 25px;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+input[type=text]{
+  font-size: 15px;
+}
+
+button{
+  font-size: 20px
+}
+
+
+.columnText{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.allItems  {
+  border:none;
+  border-collapse: collapse;
+  font-size: 20px;
+}
+
+.allItems th {
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-weight: 450;
+}
+
+.allItems td{
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  text-align: center;
+}
+
+
 footer{
-    position: fixed;
-  	bottom:0;
-    right:0;
-    font-size: 20px;    
+  position: fixed;
+  bottom:0;
+  right:0;
+  font-size: 20px;    
 }

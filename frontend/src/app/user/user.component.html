@@ -1,15 +1,17 @@
+<h1>Hello, {{meBuyer.firstname}} {{meBuyer.lastname}}</h1>
+
 <div class="list of all items">
     <h2>All items</h2>
     <ul *ngFor="let n of companies; let i = index">
         <li>
-            {{n.name}}
-            <br>
-            <table>
+            <span class="columnText">{{n.name}}</span>
+            <br><br>
+            <table class="allItems">
                 <tr>
-                    <td>Item Name:</td>
-                    <td>Producer:</td>
-                    <td>Lowest price:</td>
-                    <td>Objects:</td>
+                    <th>Item Name:</th>
+                    <th>Producer:</th>
+                    <th>Lowest price:</th>
+                    <th>Objects:</th>
                 </tr>
                 <tr *ngFor="let j of lowestPrice[i]; let k =index">
                     <td>{{itemNames[i][k]}}</td>
@@ -23,21 +25,21 @@
 </div>
 <br>
 <div class="search">
-    Find item by name: <input type="text" [(ngModel)]="itemNameSearch">
-    <br>
-    Find item by producer: <input type="text" [(ngModel)]="itemProducerSearch">
-    <br>
+    <span class="columnText">Find item by name: &nbsp;</span><input type="text" [(ngModel)]="itemNameSearch">
+    <br><br>
+    <span class="columnText">Find item by producer: &nbsp;</span><input type="text" [(ngModel)]="itemProducerSearch">
+    <br><br>
     <button mat-button (click)="searchItem()">Search</button>
 </div>
 <br>
 <div class="searchResults">
     <h2>Search item</h2>
-    <table>
+    <table class="allItems">
         <tr>
-            <td>Item Name:</td>
-            <td>Producer:</td>
-            <td>Price:</td>
-            <td>Objects:</td>
+            <th>Item Name:</th>
+            <th>Producer:</th>
+            <th>Lowest price:</th>
+            <th>Objects:</th>
         </tr>
         <tr *ngFor="let j of itemsSearch">
             <td>{{j.itemName}}</td>
@@ -50,7 +52,7 @@
 <br>
 <div class="myReceipts">
     <h2>My receipts</h2>
-    <table>
+    <table class="allItems">
         <tr>
             <td>Company Name</td>
             <td>Place</td>
@@ -62,15 +64,13 @@
             <td>{{n.selectedItems[0].place}}</td>
             <td>{{n.amountToPay}}</td>
             <td>{{n.paymentType}}</td>
-            <td>
-                <button mat-button (click)="openDialog(n)">Details</button>
-            </td>
+            <button mat-button (click)="openDialog(n)">Details</button>
         </tr>
     </table>
 </div>
 <footer>
-    <button (click)="passwordChange()">Change password</button>
-    <br>
-    <button (click)="logout()" class="logOut">LogOut</button>
+    <button mat-raised-button (click)="passwordChange()">Change password</button>
+    <br><br>
+    <button mat-raised-button (click)="logout()" class="logOut">LogOut</button>
 </footer>
 
