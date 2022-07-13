@@ -214,8 +214,12 @@ export class CompanyFirstComponent implements OnInit {
     if(this.send){
       this.companyService.insertData(this.category, this.selectedActivityCodes, this.PDV, this.bankAccountsModel, 
         this.storageUnits, this.stores, this.registers, this.user.username, this.company.PIB).subscribe((resp =>{
-          alert(resp['message'])
-          this.router.navigate(['company'])
+          this.companyService.getCompany(this.user.username).subscribe((Data: Company)=>{
+            alert(resp['message'])
+            this.company = Data
+            localStorage.setItem('company', JSON.stringify(this.company))
+            this.router.navigate(['company'])
+          })
         }))
     } else {
       alert('Not all data is filled')
