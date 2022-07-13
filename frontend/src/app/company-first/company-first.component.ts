@@ -173,11 +173,20 @@ export class CompanyFirstComponent implements OnInit {
       } 
     }
 
-    for(let i = 0; i < this.storageUnitNumber; i++){
+    for(let i = 0; i < this.storageUnits.length; i++){
       this.storageUnits[i].companyPIB = this.company.PIB
       if(!this.storageUnits[i].id || !this.storageUnits[i].name){
         this.send = false;
         break;
+      }
+
+      if(i != this.storageUnits.length){
+        for(let j = i + 1; j < this.storageUnits.length; j++){
+          if(this.storageUnits[i].id == this.storageUnits[j].id){
+            this.send = false
+            break
+          }
+        }
       }
     }
 
@@ -186,6 +195,14 @@ export class CompanyFirstComponent implements OnInit {
       if(!this.stores[i].id || !this.stores[i].location || !this.stores[i].name){
         this.send = false
         break;
+      }
+      if(i != this.stores.length){
+        for(let j = i + 1; j < this.stores.length; j++){
+          if(this.stores[i].id == this.stores[j].id){
+            this.send = false
+            break
+          }
+        }
       }
 
       for(let j = 0; j < this.stores[i].numRegisters; j++){
