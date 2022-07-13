@@ -1,13 +1,13 @@
 <h1>Table {{table.id}}, {{table.storeName}}</h1>
 
 <h2>Items</h2>
-<table>
+<table class="itemsToAdd">
     <tr>
-        <td>Item name</td>
-        <td>Item producer</td>
-        <td>Current amount</td>
-        <td>Item Selling Price</td>
-        <td>Amount to add to cart</td>
+        <th>Item name</th>
+        <th>Item producer</th>
+        <th>Current amount</th>
+        <th>Item Selling Price</th>
+        <th>Amount to add to cart</th>
     </tr>
     <tr *ngFor="let n of myItemStats; let i = index">
         <td>{{n.itemName}}</td>
@@ -17,22 +17,21 @@
         <td>
             <input type="number" max="{{n.currentState}}" min="0" [(ngModel)]="orderNumber[i]">
         </td>
-        <td>
-            <button mat-button [disabled]="n.currentState == 0" (click)="addToCart(n, i)">Add to cart</button>
-        </td>
+        <button mat-button [disabled]="n.currentState == 0" (click)="addToCart(n, i)">Add to cart</button>
     </tr>
 </table>
 
 <div>
     <br>
-    <h2>Cart</h2>
-    <table>
+    <h2>Table</h2>
+    <table class="itemsOnTable">
         <tr>
-            <td>Item number</td>
-            <td>Item name</td>
-            <td>Item producer</td>
-            <td>Amount selected</td>
-            <td>Price</td>
+            <th>Item number</th>
+            <th>Item name</th>
+            <th>Item producer</th>
+            <th>Unit of measure</th>
+            <th>Amount selected</th>
+            <th>Price</th>
         </tr>
         <tr *ngFor="let n of table.items; let i = index">
             <td>{{i + 1}}.</td>
@@ -42,11 +41,12 @@
             <td>{{n.sellingPrice * n.currentState}}</td>
         </tr>
     </table>
+    <br><br>
     <button mat-button (click)="closeBill()">Close the bill</button>
-    <br>
+    <br><br>
     <div *ngIf="billClosed">
         <h2>Recepit</h2>
-        Amount to pay is: {{amountToPay}}
+        <span class="columnText">Amount to pay is: {{amountToPay}}</span>
         <br>
         <select [(ngModel)]="paymentType" (ngModelChange)="paymentTypeChange()">
             <option value="cash">Cash</option>
@@ -54,26 +54,30 @@
             <option value="creditCard">Credit card</option>
             <option value="virman">Virman</option>
         </select>
+        <br><br>
         <div *ngIf="paymentType == 'cash'">
-            Amount of money to give: &nbsp;<input type="number" min="{{amountToPay}}" [(ngModel)]="money">
-            <br>
-            Number of id card (optional): &nbsp;<input type="text" [(ngModel)]="idCardCash" (ngModelChange)="checkIDCardCash()"> &nbsp; {{idCardCashError}}
-            <br>
-            Change: {{money - amountToPay}}
+            <span class="columnText">Amount of money to give: &nbsp;</span><input type="number" min="{{amountToPay}}" [(ngModel)]="money">
+            <br><br>
+            <span class="columnText"> Number of id card (optional): &nbsp;</span><input type="text" [(ngModel)]="idCardCash" (ngModelChange)="checkIDCardCash()"> 
+            <span class="columnText">&nbsp; {{idCardCashError}}</span>
+            <br><br>
+            <span class="columnText">Change: {{money - amountToPay}}</span>
         </div>
 
         <div *ngIf="paymentType == 'moneyCheck'">
-            Firstame: &nbsp;<input type="text" [(ngModel)]="firstNameBuyer">
-            <br>
-            Lastname: &nbsp;<input type="text" [(ngModel)]="lastNameBuyer">
-            <br>
-            Card ID: &nbsp;<input type="text" [(ngModel)]="idCardMoneyCheck" (ngModelChange)="checkIDCardMoneyCheck()"> &nbsp; {{idCardMoneyCheckError}}
+            <span class="columnText">Firstame: &nbsp;</span><input type="text" [(ngModel)]="firstNameBuyer">
+            <br><br>
+            <span class="columnText">Lastname: &nbsp;</span><input type="text" [(ngModel)]="lastNameBuyer">
+            <br><br>
+            <span class="columnText">Card ID: &nbsp;</span><input type="text" [(ngModel)]="idCardMoneyCheck" (ngModelChange)="checkIDCardMoneyCheck()"> 
+            <span class="columnText">&nbsp; {{idCardMoneyCheckError}}</span>
         </div>
             
         <div *ngIf="paymentType == 'creditCard'">
-            Card ID: &nbsp;<input type="text" [(ngModel)]="idCardCreditCard" (ngModelChange)="checkIDCardCreditCard()"> &nbsp; {{idCardCreditCardError}}
-            <br>
-            Credit card slip: &nbsp;<input type="text" [(ngModel)]="creditCardSlip">
+            <span class="columnText">Card ID: &nbsp;</span> <input type="text" [(ngModel)]="idCardCreditCard" (ngModelChange)="checkIDCardCreditCard()"> 
+            <span class="columnText">&nbsp; {{idCardCreditCardError}}</span>
+            <br><br>
+            <span class="columnText">Credit card slip: &nbsp;</span><input type="text" [(ngModel)]="creditCardSlip">
         </div>
 
         <div *ngIf="paymentType == 'virman'">

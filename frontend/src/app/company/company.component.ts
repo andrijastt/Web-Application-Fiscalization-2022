@@ -615,8 +615,8 @@ export class CompanyComponent implements OnInit {
             if(square.clickSquare(x, y)){
 
               const dialogRef = this.dialog.open(TableReceiptComponent, {
-                height: '800px',
-                width: '800px',
+                height: '75%',
+                width: '75%',
                 data: {
                   table: this.myTables[i],
                   selectedItems: this.myTables[i].items
@@ -636,7 +636,7 @@ export class CompanyComponent implements OnInit {
                     }
                   )
                 } else {
-                  if(this.myTables[i].taken){
+                  if(this.myTables[i].taken && this.myTables[i].items.length == 0){
                     this.myTables[i].taken = false
                     this.ctx.clearRect(this.myTables[i].x, this.myTables[i].y + 35, this.myTables[i].w, this.myTables[i].h - 35)
                     this.companyService.setTableToFree(this.company.PIB, this.myTables[i].storeName, this.myTables[i].id).subscribe(
@@ -679,8 +679,8 @@ export class CompanyComponent implements OnInit {
 
             if(circle.clickCircle(x, y)){
               const dialogRef = this.dialog.open(TableReceiptComponent, {
-                height: '800px',
-                width: '800px',
+                height: '75%',
+                width: '75%',
                 data: {
                   table: this.myTables[i],
                   selectedItems: this.myTables[i].items
