@@ -23,6 +23,14 @@ input[type=password]{
 table{
     font-size: 20px;
     text-align: center;
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+.logInTable{
+    display: center; 
+    justify-content: center; 
+    align-items: center;
 }
 
 .receiptTable  {
