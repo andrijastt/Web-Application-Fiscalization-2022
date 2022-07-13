@@ -442,17 +442,20 @@ export class CompanyComponent implements OnInit {
   addItem(){
     let send: boolean = true
 
+    console.log(1)
     if(!this.itemId || !this.itemName || !this.itemUnitOfMeasure || !this.itemTaxRate){
       send = false;
     }
 
-    if(this.itemMinItems != 0 && this.itemMaxItems != 0){
+    console.log(2)
+    if(this.itemMinItems != 0 && this.itemMaxItems != 0 && this.itemMinItems && this.itemMaxItems){
       if(this.itemMinItems > this.itemMaxItems){
           this.itemAlert1 = "Minimal number of items is bigger than maximum number of items"
           send = false;
       }
     }
 
+    console.log(3)
     for(let i = 0; i < this.itemStats.length; i++){
       this.itemStats[i].place = this.storageUnits[i].name
       this.itemStats[i].typeOfPlace = "storageUnit"
@@ -466,7 +469,8 @@ export class CompanyComponent implements OnInit {
         break;
       }
     }
-
+    
+    console.log(4)
     for(let i = 0; i < this.itemStatsStore.length; i++){
       this.itemStatsStore[i].place = this.myStores[i].name
       this.itemStatsStore[i].typeOfPlace = "store"
@@ -481,6 +485,7 @@ export class CompanyComponent implements OnInit {
       }
     }
 
+    console.log(5)
     if(send){
       this.companyService.addItem(this.company.PIB, this.itemId, this.itemName, this.itemUnitOfMeasure, this.itemTaxRate, this.itemType, 
         this.itemImageData, this.itemCountryOfOrigin, this.itemForeignName, this.itemBarcodeNumber, this.itemProducerName, this.itemCustomsRate, 
@@ -489,8 +494,11 @@ export class CompanyComponent implements OnInit {
           if(resp['message'] == 'Item ID taken'){
             alert(resp['message'])
           } else {
-            location.reload()
-            alert(resp['message'])
+            this.companyService.getMyItems(this.company.PIB).subscribe((data: Item[])=>{
+              this.items = data
+              this.itemSlice = this.items.slice(0, 10)
+              alert(resp['message'])
+            })
           }
         }))
     } else {

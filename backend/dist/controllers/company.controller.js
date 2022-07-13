@@ -412,6 +412,28 @@ class CompanyController {
                             }
                         }).distinct('imageData');
                     }
+                    else {
+                        item_1.default.collection.insertOne(item, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                let itemStats = req.body.itemStats;
+                                let itemStatsStore = req.body.itemStatsStore;
+                                itemStats_1.default.collection.insertMany(itemStats, (err, resp) => {
+                                    if (err)
+                                        console.log(err);
+                                    else {
+                                        itemStats_1.default.collection.insertMany(itemStatsStore, (err, resp) => {
+                                            if (err)
+                                                console.log(err);
+                                            else
+                                                res.json({ 'message': 'Item added' });
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
             });
         };

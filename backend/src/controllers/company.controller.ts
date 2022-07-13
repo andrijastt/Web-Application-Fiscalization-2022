@@ -394,6 +394,24 @@ export class CompanyController{
                             })
                         }
                     }).distinct('imageData')
+                } else {
+                    ItemModel.collection.insertOne(item, (err, resp) =>{
+                        if(err) console.log(err)
+                        else {
+                            let itemStats = req.body.itemStats
+                            let itemStatsStore = req.body.itemStatsStore
+                            ItemStatsModel.collection.insertMany(itemStats, (err, resp)=>{
+                                if(err) console.log(err)
+                                else {
+                                    ItemStatsModel.collection.insertMany(itemStatsStore, (err, resp)=>{
+                                        if(err) console.log(err)
+                                        else res.json({'message': 'Item added'})
+                                    })
+                                }
+                            })
+    
+                        }
+                    })
                 }
             }
         })     

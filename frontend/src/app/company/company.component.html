@@ -44,7 +44,7 @@
 <div *ngIf="companyData">    
     <h2>Company Data</h2>
     <mat-tab-group dynamicHeight>
-        <mat-tab label="General Data" >
+        <mat-tab label="General Data">
             <table class="companyData">
                 <tr>
                     <th>Firstname: </th>
@@ -342,14 +342,14 @@
 <!-- *************************************************************************************************************************** -->
 
 <div *ngIf="goodsAndServices">
-    <div>Total of {{items.length}} of rows</div>
-    <table *ngFor="let n of itemSlice">
+    <div class="columnText">Total of {{items.length}} of rows</div>
+    <table *ngFor="let n of itemSlice" class="customers">
         <tr>
-            <td>Item id:</td>
-            <td>Item name:</td>
-            <td>Unit of measure</td>
-            <td>Tax rate:</td>
-            <td>Producer:</td>
+            <th>Item id:</th>
+            <th>Item name:</th>
+            <th>Unit of measure</th>
+            <th>Tax rate:</th>
+            <th>Producer:</th>
         </tr>
         <tr>
             <td>{{n.itemId}}</td>
@@ -357,7 +357,7 @@
             <td>{{n.unitOfMeasure}}</td>
             <td>{{n.taxRate}}</td>
             <td>{{n.producer}}</td>
-            <td><button mat-button>Delete</button></td>
+            <button mat-button color="warn">Delete</button>
         </tr>
     </table>
 
@@ -366,29 +366,29 @@
     </mat-paginator>
     <br><br>
     <button mat-button (click)="addGoods = true">Add Goods</button>
-    <mat-tab-group *ngIf="addGoods">
+    <mat-tab-group *ngIf="addGoods" dynamicHeight>
         <mat-tab label="General data">
-            <table>
+            <table class="customerTable">
                 <tr>
-                    <td>ID of item:</td>
+                    <th>ID of item:</th>
                     <td>
                         <input type="number" min="0" [(ngModel)]="itemId">
                     </td>
                 </tr>
                 <tr>
-                    <td>Item name:</td>
+                    <th>Item name:</th>
                     <td>
                         <input type="text" [(ngModel)]="itemName">
                     </td>
                 </tr>
                 <tr>
-                    <td>Unit of measure:</td>
+                    <th>Unit of measure:</th>
                     <td>
                         <input type="text" [(ngModel)]="itemUnitOfMeasure">
                     </td>
                 </tr>
                 <tr>
-                    <td>Tax rate:</td>
+                    <th>Tax rate:</th>
                     <td>
                         <select *ngIf="company.PDV" [(ngModel)]="itemTaxRate">
                             <option value="20%">20%</option>
@@ -400,9 +400,7 @@
                     </td>
                 </tr>
                 <tr *ngIf="company.category == 'caterer'">
-                    <td>
-                        Type:
-                    </td>
+                    <th>Type:</th>
                     <td>
                         <mat-radio-group [(ngModel)]="itemType">
                             <mat-radio-button value="food">Food</mat-radio-button>
@@ -415,40 +413,40 @@
         </mat-tab>
 
         <mat-tab label="Additional data">
-            <table>
+            <table class="customerTable">
                 <tr>
-                    <td>Country of origin:</td>
+                    <th>Country of origin:</th>
                     <td>
                         <input type="text" [(ngModel)]="itemCountryOfOrigin">
                     </td>
                 </tr>
                 <tr>
-                    <td>Foreign item name:</td>
+                    <th>Foreign item name:</th>
                     <td>
                         <input type="text" [(ngModel)]="itemForeignName">
                     </td>
                 </tr>
                 <tr>
-                    <td>Barcode number:</td>
+                    <th>Barcode number:</th>
                     <td>
                         <input type="text" [(ngModel)]="itemBarcodeNumber" (ngModelChange)="checkBarcode()">
                     </td>
                     <td>{{barcodeMessage}}</td>
                 </tr>
                 <tr>
-                    <td>Producer name:</td>
+                    <th>Producer name:</th>
                     <td>
                         <input type="text" [(ngModel)]="itemProducerName">
                     </td>
                 </tr>
                 <tr>
-                    <td>Customs' rate(%):</td>
+                    <th>Customs' rate(%):</th>
                     <td>
                         <input type="number" min="0" max="100" [(ngModel)]="itemCustomsRate">
                     </td>
                 </tr>
                 <tr>
-                    <td>Eko tax:</td>
+                    <th>Eko tax:</th>
                     <td>
                         <mat-radio-group [(ngModel)]="itemEkoTax">
                             <mat-radio-button value="true">Yes</mat-radio-button>
@@ -457,7 +455,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Excise:</td>
+                    <th>Excise:</th>
                     <td>
                         <mat-radio-group [(ngModel)]="itemExcies">
                             <mat-radio-button value="true">Yes</mat-radio-button>
@@ -466,31 +464,31 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Minimum number of items:</td>
+                    <th>Minimum number of items:</th>
                     <td>
                         <input type="number" min="0" [(ngModel)]="itemMinItems">
                     </td>
                 </tr>
                 <tr>
-                    <td>Maximum number of items:</td>
+                    <th>Maximum number of items:</th>
                     <td>
                         <input type="number" min="0" [(ngModel)]="itemMaxItems">
                     </td>
                 </tr>
                 <tr>
-                    <td>Description:</td>
+                    <th>Description:</th>
                     <td>
                         <textarea [(ngModel)]="itemDescription"></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <td>Declaration</td>
+                    <th>Declaration</th>
                     <td>
                         <input type="text" [(ngModel)]="itemDeclaration">
                     </td>
                 </tr>
                 <tr>
-                    <td>Picture of item:</td>
+                    <th>Picture of item:</th>
                     <td>
                         <input type="file" id="file" name="logo" (change)="onFileSelectedItem($event)">
                     </td>
@@ -503,14 +501,14 @@
             </table>
         </mat-tab>
         <mat-tab label="Price and state of goods">
-            <table>
+            <table class="customerTable">
                 <tr>
-                    <td>Storage Unit/Store</td>
-                    <td>Purchase price</td>
-                    <td>Selling price</td>
-                    <td>CurrentState</td>
-                    <td>minItems</td>
-                    <td>maxItems</td>
+                    <th>Storage Unit/Store</th>
+                    <th>Purchase price</th>
+                    <th>Selling price</th>
+                    <th>CurrentState</th>
+                    <th>minItems</th>
+                    <th>maxItems</th>
                 </tr>
                 <tr *ngFor="let n of storageUnits; let i = index"> 
                     <td>
@@ -557,8 +555,8 @@
         </mat-tab>
     </mat-tab-group>
     <button mat-button *ngIf="addGoods" (click)="addItem()">Add item</button>
-    <div>{{itemAlert}}</div>
-    <div>{{itemAlert1}}</div>
+    <div class="error">{{itemAlert}}</div>
+    <div class="error">{{itemAlert1}}</div>
 </div>
 
 <!-- *************************************************************************************************************************** -->
