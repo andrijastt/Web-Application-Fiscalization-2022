@@ -1,0 +1,48 @@
+h1{
+    font-weight: 500;
+    font-size: 30px;
+}
+
+input[type=text]{
+    font-size: 15px;
+}
+  
+input[type=password]{
+    font-size: 15px;
+}
+
+input[type=number]{
+    font-size: 15px;
+}
+
+input[type=file]{
+    font-size: 15px;
+}
+
+input[type=date]{
+    font-size: 15px;
+}
+
+select{
+    font-size: 15px;
+}
+
+button{
+    font-size: 20px;
+}
+
+.columnText{
+    font-size: 20px;
+  }
+
+#firstTimeCompanyTable th{
+    font-weight: 425;
+    text-align: left;
+}
+
+footer{
+    position: fixed;
+    bottom:0;
+    right:0;
+    font-size: 20px;    
+}

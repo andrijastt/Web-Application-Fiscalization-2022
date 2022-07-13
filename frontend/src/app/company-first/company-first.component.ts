@@ -87,7 +87,7 @@ export class CompanyFirstComponent implements OnInit {
     this.bankAccountsModel.push(BA)
   }
 
-  remove(i){
+  removeBankAccount(i){
     this.bankAccountsModel.splice(i, 1)
     this.bankAcc.splice(i, 1)
     this.bank.splice(i, 1)
@@ -110,30 +110,35 @@ export class CompanyFirstComponent implements OnInit {
     }
   }
 
-  changeObjectsNumber(){  
-    if(this.storesNumber > this.stores.length){
-      let obj = new Store
-      obj.numRegisters = 1
-      obj.companyPIB = this.company.PIB
-      this.stores.push(obj)
+  onAddStorageUnit(){
+    let stg = new StorageUnit
+    this.storageUnits.push(stg)
+  }
 
-      let regsTypes: string[] = []
-      regsTypes.push("")
-      this.registerTypes.push(regsTypes)
-
+  removeStorageUnit(i){
+    if(this.storageUnits.length == 1){
+      alert('You need at least 1 storage')
     } else {
-      this.stores.pop()
-      this.registerTypes.pop()
+      this.storageUnits.splice(i, 1)
     }
   }
 
-  changeStorageUnitsNumber(){
-    if(this.storageUnitNumber > this.storageUnits.length){
-      let stg = new StorageUnit
-      stg.companyPIB = this.company.PIB
-      this.storageUnits.push(stg)
+  onAddStore(){
+    let obj = new Store
+    obj.numRegisters = 1
+    this.stores.push(obj)
+
+    let regsTypes: string[] = []
+    regsTypes.push("")
+    this.registerTypes.push(regsTypes)
+  }
+
+  removeStore(i){
+    if(this.stores.length == 1){
+      alert('You need at least 1 storage')
     } else {
-      this.storageUnits.pop()
+      this.stores.splice(i, 1)
+      this.registerTypes.splice(i, 1)
     }
   }
 
