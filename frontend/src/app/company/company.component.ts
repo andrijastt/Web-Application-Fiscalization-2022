@@ -443,12 +443,10 @@ export class CompanyComponent implements OnInit {
   addItem(){
     let send: boolean = true
 
-    console.log(1)
     if(!this.itemId || !this.itemName || !this.itemUnitOfMeasure || !this.itemTaxRate){
       send = false;
     }
 
-    console.log(2)
     if(this.itemMinItems != 0 && this.itemMaxItems != 0 && this.itemMinItems && this.itemMaxItems){
       if(this.itemMinItems > this.itemMaxItems){
           this.itemAlert1 = "Minimal number of items is bigger than maximum number of items"
@@ -456,13 +454,13 @@ export class CompanyComponent implements OnInit {
       }
     }
 
-    console.log(3)
     for(let i = 0; i < this.itemStats.length; i++){
       this.itemStats[i].place = this.storageUnits[i].name
       this.itemStats[i].typeOfPlace = "storageUnit"
       this.itemStats[i].companyName = this.company.name
       this.itemStats[i].itemName = this.itemName
       this.itemStats[i].itemProducer = this.itemProducerName
+      this.itemStats[i].unitOfMeasure = this.itemUnitOfMeasure
       if(!this.itemStats[i].purchasePrice || !this.itemStats[i].sellingPrice || this.itemStats[i].currentState < 0 ||
         this.itemStats[i].minWantingNumber < 0 || this.itemStats[i].maxWantingNumber < 0||
         this.itemStats[i].minWantingNumber > this.itemStats[i].maxWantingNumber){
@@ -471,13 +469,13 @@ export class CompanyComponent implements OnInit {
       }
     }
     
-    console.log(4)
     for(let i = 0; i < this.itemStatsStore.length; i++){
       this.itemStatsStore[i].place = this.myStores[i].name
       this.itemStatsStore[i].typeOfPlace = "store"
       this.itemStatsStore[i].companyName = this.company.name
       this.itemStatsStore[i].itemName = this.itemName
       this.itemStatsStore[i].itemProducer = this.itemProducerName
+      this.itemStatsStore[i].unitOfMeasure = this.itemUnitOfMeasure
       if(!this.itemStatsStore[i].purchasePrice || !this.itemStatsStore[i].sellingPrice || this.itemStatsStore[i].currentState < 0 ||
         this.itemStatsStore[i].minWantingNumber < 0 || this.itemStatsStore[i].maxWantingNumber < 0||
         this.itemStatsStore[i].minWantingNumber > this.itemStatsStore[i].maxWantingNumber){
@@ -486,7 +484,6 @@ export class CompanyComponent implements OnInit {
       }
     }
 
-    console.log(5)
     if(send){
       this.companyService.addItem(this.company.PIB, this.itemId, this.itemName, this.itemUnitOfMeasure, this.itemTaxRate, this.itemType, 
         this.itemImageData, this.itemCountryOfOrigin, this.itemForeignName, this.itemBarcodeNumber, this.itemProducerName, this.itemCustomsRate, 

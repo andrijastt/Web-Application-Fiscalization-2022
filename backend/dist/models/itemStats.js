@@ -15,6 +15,9 @@ let ItemStats = new Schema({
     companyName: {
         type: String
     },
+    unitOfMeasure: {
+        type: String
+    },
     itemName: {
         type: String
     },

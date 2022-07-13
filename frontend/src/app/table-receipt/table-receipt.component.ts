@@ -24,6 +24,7 @@ export class TableReceiptComponent implements OnInit {
       this.items = data
       this.companyService.getItemStats(this.table.companyName, this.table.storeName).subscribe((data: ItemStats[])=>{
         this.myItemStats = data
+        console.log(this.myItemStats)
         this.selectedItemsName = []
         this.orderNumber = []
         this.selectedItemPDV = []
@@ -88,6 +89,7 @@ export class TableReceiptComponent implements OnInit {
         itemStat.sellingPrice = item.sellingPrice
         itemStat.currentState = this.orderNumber[num]
         itemStat.companyName = this.table.companyName
+        itemStat.unitOfMeasure = item.unitOfMeasure
         itemStat.place = item.place
   
         this.table.items.push(itemStat)

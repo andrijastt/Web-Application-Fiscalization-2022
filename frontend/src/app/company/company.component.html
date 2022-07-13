@@ -635,6 +635,7 @@
         <tr>
             <td>Item name</td>
             <td>Item producer</td>
+            <td>Unit of measure</td>
             <td>Current amount</td>
             <td>Item Selling Price</td>
             <td>Amount to add to cart</td>
@@ -642,6 +643,7 @@
         <tr *ngFor="let n of myItemStats; let i = index">
             <td>{{n.itemName}}</td>
             <td>{{n.itemProducer}}</td>
+            <td>{{n.unitOfMeasure}}</td>
             <td>{{n.currentState}}</td>
             <td>{{n.sellingPrice}}</td>
             <td>

@@ -4,6 +4,7 @@ export class ItemStats{
     itemName: string
     itemProducer: string
     companyName: string
+    unitOfMeasure: string
     purchasePrice: number
     sellingPrice: number
     currentState: number
