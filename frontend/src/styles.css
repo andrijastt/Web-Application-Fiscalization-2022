@@ -10,3 +10,7 @@ body {
     margin: 10px; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+
+.mat-tab-label{
+    font-size: 20px !important;
+ } 

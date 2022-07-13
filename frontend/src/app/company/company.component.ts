@@ -303,7 +303,9 @@ export class CompanyComponent implements OnInit {
         this.name, this.country, this.city, this.postNumber, this.streetName, this.streetNumber, this.PIB, this.JMBP, 
         this.imageData, this.daysToPay, this.discount).subscribe(resp => {
           alert(resp['message'])
-          location.reload()
+          this.companyService.getMyCustomers(this.company.PIB).subscribe((data: Customer[])=>{
+            this.customers = data
+          })
         })
 
     } else {
@@ -344,7 +346,9 @@ export class CompanyComponent implements OnInit {
         this.companySearch.city, this.companySearch.postNumber, this.companySearch.streetName, this.companySearch.streetNumber, 
         this.companySearch.PIB, this.companySearch.JMBP, this.companySearch.imageData, this.daysToPay2, this.discount2).subscribe(resp => {
           alert(resp['message'])
-          location.reload()
+          this.companyService.getMyCustomers(this.company.PIB).subscribe((data: Customer[])=>{
+            this.customers = data
+          })
         })
     } else {
       alert('Data not filled')

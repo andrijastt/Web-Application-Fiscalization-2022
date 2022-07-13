@@ -1,7 +1,7 @@
 <button mat-icon-button [matMenuTriggerFor]="menu" class="menuButton">
     Menu
 </button>
-
+<br><br>
 <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="setCompanyData()" class="menuButton">
         <mat-icon>account_circle</mat-icon>
@@ -41,9 +41,10 @@
 
 <!-- *************************************************************************************************************************** -->
 
-<div *ngIf="companyData" class="companyData">    
+<div *ngIf="companyData">    
+    <h2>Company Data</h2>
     <mat-tab-group dynamicHeight>
-        <mat-tab label="Opsti podaci">
+        <mat-tab label="General Data" >
             <table class="companyData">
                 <tr>
                     <th>Firstname: </th>
@@ -103,8 +104,8 @@
                 </tr>
             </table>
         </mat-tab>
-        <mat-tab label="Ziro racuni">
-            <table>
+        <mat-tab label="Bank Accounts">
+            <table class="companyData">
                 <tr>
                   <th>Bank account</th>  
                   <td>Bank</td>
@@ -115,8 +116,8 @@
                 </tr>
             </table>
         </mat-tab>
-        <mat-tab label="Magcini i kase">
-            <table>
+        <mat-tab label="Storage units, stores and registers">
+            <table class="companyData">
                 <tr>
                     <th>Register Location</th>
                     <th>Register Type</th>
@@ -127,7 +128,7 @@
                 </tr>
             </table>
             <br>
-            <table>
+            <table class="companyData">
                 <tr>
                     <th>Storage unit ID</th>
                     <th>Storage unit name</th>
@@ -138,7 +139,7 @@
                 </tr>
             </table>
             <br>
-            <table>
+            <table class="companyData">
                 <tr>
                     <th>Store ID</th>
                     <th>Store name</th>
@@ -160,15 +161,15 @@
 
 <div *ngIf="ordersData">
     <h2>My customers</h2>
-    <table>
+    <table class="customers">
         <tr>
-            <td>Owner name</td>
-            <td>Company name</td>
-            <td>Telephone number</td>
-            <td>E-mail</td>
-            <td>PIB</td>
-            <td>Days to pay</td>
-            <td>Discount</td>
+            <th>Owner name</th>
+            <th>Company name</th>
+            <th>Telephone number</th>
+            <th>E-mail</th>
+            <th>PIB</th>
+            <th>Days to pay</th>
+            <th>Discount</th>
         </tr>
         <tr *ngFor="let n of customers">
             <td>{{n.firstname}} {{n.lastname}}</td>
@@ -180,96 +181,143 @@
             <td>{{n.discount}}%</td>
         </tr>
     </table>
+    <br><br>
     <h2>Add customers via PIB</h2>
-    <p>
+    <div>
         PIB: <input type="number" [(ngModel)]="PIBSearch" (ngModelChange)="checkPIBSearch()">
-        <button (click)="findCompanyByPIB()">Search</button>
+        <button mat-stroked-button (click)="findCompanyByPIB()">Search</button>
         <td class="error">{{PIBSearchCheck}}</td>
-    </p>
-    <br>
-    <p *ngIf="companySearch">
-        Owner name: {{companySearch.firstname}} {{companySearch.lastname}}
-        <br>
-        Company name: {{companySearch.name}}
-        <br>
-        telephoneNumber: {{companySearch.telephoneNumber}}
-        <br>
-        E-mail: {{companySearch.email}}
-        <br>
-        Location: {{companySearch.country}}, {{companySearch.city}}
-        <br>
-        Street: {{companySearch.streetName}} {{companySearch.streetNumber}} {{companySearch.postNumber}}
-        <br>
-        PIB: {{companySearch.PIB}}
-        <br>
-        JMBP: {{companySearch.JMBP}}
-        <br>
-        Logo: <img src="{{companySearch.imageData}}">
-        <br>
-        Days to pay: <input type="number" min="0" [(ngModel)]="daysToPay2">
-        <br>
-        Discount percent: <input type="number" min="0" max="100" [(ngModel)]="discount2">
-        <br>
-        <button (click)="addCustomer2()">Add Customer</button>
-    </p>
-    <h2>Add customers by adding data</h2>
-    <table>
+    </div>
+    <br><br>
+    <table *ngIf="companySearch" class="customerTable"> 
         <tr>
-            <td>Firstname:</td>
+            <th>Owner name:</th>
+            <td>
+                {{companySearch.firstname}} {{companySearch.lastname}}
+            </td>
+        </tr>
+        <tr>
+            <th>Company name:</th>
+            <td>
+                {{companySearch.telephoneNumber}}
+            </td>
+        </tr>
+        <tr>
+            <th>TelephoneNumber:</th>
+            <td>
+                {{companySearch.firstname}} {{companySearch.lastname}}
+            </td>
+        </tr>
+        <tr>
+            <th>E-mail:</th>
+            <td>
+                {{companySearch.email}}
+            </td>
+        </tr>
+        <tr>
+            <th>Location:</th>
+            <td>
+                {{companySearch.country}}, {{companySearch.city}}
+            </td>
+        </tr>
+        <tr>
+            <th>Street:</th>
+            <td>
+                {{companySearch.streetName}} {{companySearch.streetNumber}} {{companySearch.postNumber}}
+            </td>
+        </tr>
+        <tr>
+            <th>PIB:</th>
+            <td>
+                {{companySearch.PIB}}
+            </td>
+        </tr>
+        <tr>
+            <th>JMBP:</th>
+            <td>
+                {{companySearch.JMBP}}
+            </td>
+        </tr>
+        <tr>
+            <th>Logo:</th>
+            <td>
+                <img src="{{companySearch.imageData}}">
+            </td>
+        </tr>
+        <tr>
+            <th>Days to pay:</th>
+            <td>
+                <input type="number" min="0" [(ngModel)]="daysToPay2">
+            </td>
+        </tr>
+        <tr>
+            <th>Discount percent::</th>
+            <td>
+                <input type="number" min="0" max="100" [(ngModel)]="discount2">
+            </td>
+        </tr>
+    </table>
+    <button mat-stroked-button *ngIf="companySearch" (click)="addCustomer2()">Add Customer</button>
+    <br><br>
+
+    <h2>Add customers by adding data</h2>
+    <table class="customerTable">
+        <tr>
+            <th>Firstname:</th>
             <input type="text" name="firstname" [(ngModel)]="firstname">
         </tr>
         <tr>
-            <td>Lastname:</td>
+            <th>Lastname:</th>
             <input type="text" name="lastname" [(ngModel)]="lastname">
         </tr>
         <tr>
-            <td>Telephone number:</td>
+            <th>Telephone number:</th>
             <input type="text" name="number" [(ngModel)]="telephoneNumber" (ngModelChange)="checkTelephoneNumber()">
             <td class="error">{{telephoneNumberCheck}}</td>
         </tr>
         <tr>
-            <td>E-mail:</td>
+            <th>E-mail:</th>
             <input type="text" name="email" [(ngModel)]="email" (ngModelChange)="checkEmail()">
             <td class="error">{{emailCheck}}</td>
         </tr>
         <tr>
-            <td>Name of company:</td>
+            <th>Name of company:</th>
             <input type="text" name="companyName" [(ngModel)]="name">
         </tr>
         <tr>
-            <td>Country:</td>
+            <th>Country:</th>
             <input type="text" name="country" [(ngModel)]="country">
         </tr>
         <tr>
-            <td>City:</td>
+            <th>City:</th>
             <input type="text" name="city" [(ngModel)]="city">
         </tr>
         <tr>
-            <td>PostNumber:</td>
+            <th>PostNumber:</th>
             <input type="number" name="postNumber" [(ngModel)]="postNumber" (ngModelChange)="checkPostNumber()">
             <td class="error">{{checkMailNumber}}</td>
         </tr>
         <tr>
-            <td>Street name:</td>
+            <th>Street name:</th>
             <input type="text" name="street" [(ngModel)]="streetName">
         </tr>
         <tr>
-            <td>Street number:</td>
+            <th>Street number:</th>
             <input type="number" name="streetNumber" [(ngModel)]="streetNumber" (ngModelChange)="checkStreetNumber()">
             <td class="error">{{streetNumberCheck}}</td>
         </tr>
         <tr>
-            <td>PIB:</td>
+            <th>PIB:</th>
             <input type="number" name="PIB" [(ngModel)]="PIB" (ngModelChange)="checkPIB()">
             <td class="error">{{PIBCheck}}</td>
         </tr>
         <tr>
-            <td>Unique number of company:</td>
+            <th>Unique number of company:</th>
             <input type="text" name="JMBP" [(ngModel)]="JMBP" (ngModelChange)="checkJMBP()">
             <td class="error">{{JMBPCheck}}</td>
         </tr>
         <tr>
-            <td>Logo of company:</td>
+            <th>Logo of company:</th>
             <input type="file" id="file" name="logo" (change)="onFileSelected($event)">
         </tr>
         <tr>
@@ -278,17 +326,17 @@
             </td>
         </tr>
         <tr>
-            <td>Days to pay:</td>
+            <th>Days to pay:</th>
             <input type="number" min="0" [(ngModel)]="daysToPay">
         </tr>
         <tr>
-            <td>Discount percent:</td>
+            <th>Discount percent:</th>
             <td>
                 <input type="number" min="0" max="100" [(ngModel)]="discount">
             </td>
         </tr>
     </table>
-    <button (click)="addCustomer()">Add customer</button>
+    <button mat-stroked-button (click)="addCustomer()">Add customer</button>
 </div>
 
 <!-- *************************************************************************************************************************** -->
