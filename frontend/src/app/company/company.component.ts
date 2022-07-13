@@ -528,6 +528,8 @@ export class CompanyComponent implements OnInit {
 
   selectedStore: string
   departments: string[]
+  selectedDepartment: string
+
   ctx: CanvasRenderingContext2D
 
   myTables: Table[] = []
@@ -544,7 +546,7 @@ export class CompanyComponent implements OnInit {
     })
   }
 
-  selectedStoreChange(storeDepartment){
+  selectedStoreChange(){
     this.ctx = this.canvas.nativeElement.getContext('2d')
     this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
 
@@ -569,7 +571,7 @@ export class CompanyComponent implements OnInit {
       }
     }
 
-    this.companyService.getMyTables(this.company.PIB, this.selectedStore, storeDepartment).subscribe((data: Table[]) => {
+    this.companyService.getMyTables(this.company.PIB, this.selectedStore, this.selectedDepartment).subscribe((data: Table[]) => {
       this.myTables = data
 
       for(let i = 0; i < data.length; i++){
