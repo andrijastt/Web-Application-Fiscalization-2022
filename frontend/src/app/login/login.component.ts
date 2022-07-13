@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
                 else this.router.navigate(['company'])
               } else {
                 alert('Account deactivated')
-                location.reload
+                location.reload()
               }
             })   
           } 
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
             } else this.message = "Ne postoji takav tip"
           }
         }
-      } else this.message = "Error"
+      } else this.message = "Wrong input"
     })
   }
 

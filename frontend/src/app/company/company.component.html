@@ -550,14 +550,12 @@
 </div>
 
 <!-- *************************************************************************************************************************** -->
+
 <div *ngIf="tableData" id="tables">
     <select [(ngModel)]="selectedStore" (ngModelChange)="getDepartmentsByPlace()">
         <option *ngFor="let n of myStores">{{n.name}}</option>
     </select>
-    <br>
-    <!-- <button *ngFor="let n of departments" mat-button (click)="selectedStoreChange(n)">{{n}}</button>
-    <br>
-    <span>{{selectedStore}}</span> -->
+    <br><br>
 
    <mat-button-toggle-group [(ngModel)]="selectedDepartment" (ngModelChange)="selectedStoreChange()">
     <mat-button-toggle *ngFor="let n of departments" value="{{n}}">{{n}}</mat-button-toggle>
@@ -568,7 +566,6 @@
         <canvas #canvas width="1200" height="800" id="canvas"></canvas>
     </div>
 </div>
-
 
 <!-- *************************************************************************************************************************** -->
 

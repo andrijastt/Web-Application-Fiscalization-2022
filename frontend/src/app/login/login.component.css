@@ -1,0 +1,53 @@
+html{
+    display: flex;
+}
+
+h1{
+    font-weight: 500;
+}
+
+table{
+    font-size: 20px;
+    text-align: center;
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+.receiptTable  {
+    border:none;
+    border-collapse: collapse;
+}
+
+.receiptTable th {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.receiptTable td {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.logInTable{
+    display: center; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.error{
+    color: red;
+    font-size: large;
+}
+
+footer{
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: x-large;
+}
+
+.logInButton{
+    font-size: 20px;
+}

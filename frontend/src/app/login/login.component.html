@@ -1,35 +1,37 @@
-<header>
+<h1>
     Log in form for all users
-</header>
+</h1>
 
-<table>
+<div class="logInTable">
+    <table>
+        <tr>
+            <td><span class="columnText"> Username: </span></td>
+            <td>
+                <input type="text" name="username" [(ngModel)]="username">
+            </td>
+        </tr>
+        <tr>
+            <td><span class="columnText"> Password: </span></td>
+            <td>
+                <input type="password" name="password" [(ngModel)]="password">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <button mat-raised-button (click)="login()" class="logInButton">LogIn</button>
+</div>
+
+<span class="error">{{message}}</span>
+<br/><br>
+
+<h2>5 latest receipts</h2>
+<table class="receiptTable">
     <tr>
-        <td>Username:</td>
-        <td>
-            <input type="text" name="username" [(ngModel)]="username">
-        </td>
-    </tr>
-    <tr>
-        <td>Password:</td>
-        <td>
-            <input type="password" name="password" [(ngModel)]="password">
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <button (click)="login()">LogIn</button>
-        </td>
-    </tr>
-</table>
-{{message}}
-<br/>
-<h2>5 poslednjih fiskalnih računa</h2>
-<table>
-    <tr>
-        <td>Naziv preduzeća</td>
-        <td>Iznos računa</td>
-        <td>PDV</td>
-        <td>Stavke računa sa količinama</td>
+        <th>Company Name</th>
+        <th>Receipt value</th>
+        <th>Tax</th>
+        <th>Items and item amount</th>
+        <th>Date and Time</th>
     </tr>
     <tr *ngFor="let n of receipts; let i = index">
         <td>{{n.companyName}}</td>
