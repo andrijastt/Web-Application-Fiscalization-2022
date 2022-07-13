@@ -3,6 +3,13 @@ h1{
     font-size: 30px;
 }
 
+h2{
+    font-weight: 450;
+    font-size: 25px;
+    font-style: italic;
+    text-decoration: underline;
+}
+
 input[type=text]{
     font-size: 15px;
 }

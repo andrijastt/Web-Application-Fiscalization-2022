@@ -1,4 +1,6 @@
 <h1>Hello {{user.username}}</h1>
+<br>
+<h2>Additional data needs to be filled</h2>
 <table id="firstTimeCompanyTable">
     <tr>
         <th class="columnText">Category</th>
@@ -112,8 +114,8 @@
         </td>
     </tr>
 </table>
-
-<button mat-button (click)="insert()">Insert</button>
+<br>
+<button mat-raised-button color="primary" (click)="insert()">Insert</button>
 <footer>
     <button mat-button (click)="passwordChange()">Change password</button>
     <br>
