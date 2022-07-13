@@ -43,7 +43,7 @@ let Company = new Schema({
         type: Number
     }, 
     JMBP: {
-        type: Number
+        type: String
     }, 
     imageData: {
         type: String

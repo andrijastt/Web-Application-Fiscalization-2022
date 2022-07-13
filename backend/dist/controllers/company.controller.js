@@ -23,7 +23,10 @@ class CompanyController {
         this.register = (req, res) => {
             let username = req.body.username;
             let email = req.body.email;
-            company_1.default.findOne({ "username": username }, (err, registerCompany) => {
+            let PIB = req.body.PIB;
+            let JMBP = req.body.JMBP;
+            console.log(JMBP);
+            user_1.default.findOne({ "username": username }, (err, registerCompany) => {
                 if (err)
                     console.log(err);
                 else {
@@ -39,11 +42,33 @@ class CompanyController {
                                     res.json({ 'message': 'Email is taken' });
                                 }
                                 else {
-                                    company_1.default.collection.insertOne(req.body, (err, resp) => {
+                                    company_1.default.findOne({ "PIB": PIB }, (err, registerCompany2) => {
                                         if (err)
                                             console.log(err);
                                         else {
-                                            res.json({ 'message': 'Registration succesfully added' });
+                                            if (registerCompany2) {
+                                                res.json({ 'message': 'PIB is taken' });
+                                            }
+                                            else {
+                                                company_1.default.findOne({ "JMBP": JMBP }, (err, registerCompany3) => {
+                                                    if (err)
+                                                        console.log(err);
+                                                    else {
+                                                        if (registerCompany3) {
+                                                            res.json({ 'message': 'JMBP is taken' });
+                                                        }
+                                                        else {
+                                                            company_1.default.collection.insertOne(req.body, (err, resp) => {
+                                                                if (err)
+                                                                    console.log(err);
+                                                                else {
+                                                                    res.json({ 'message': 'Registration succesfully added' });
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
                                         }
                                     });
                                 }

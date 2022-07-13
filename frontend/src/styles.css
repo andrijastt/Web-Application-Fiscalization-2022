@@ -1,4 +1,10 @@
-html, body { height: 100%; }
+html, body { 
+    height: 100%; 
+}
+
+html{
+    display: flex;    
+}
 
 body { 
     margin: 10px; 

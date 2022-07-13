@@ -32,6 +32,10 @@ input[type=number]{
     font-size: 15px;
 }
 
+input[type=file]{
+    font-size: 15px;
+}
+
 .error{
     color: red;
     font-size: large;

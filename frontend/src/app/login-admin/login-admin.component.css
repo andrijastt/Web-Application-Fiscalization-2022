@@ -4,6 +4,7 @@ html{
 
 h1{
     font-weight: 500;
+    font-size: 30px;
 }
 
 h2{
@@ -45,6 +46,7 @@ table{
 .receiptTable td {
     border-left: 1px solid #000;
     border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
 }
 
 .logInTable{
@@ -59,7 +61,7 @@ table{
 }
 
 footer{
-    position: fixed;
+    position: absolute;
     bottom: 10px;
     left: 10px;
     font-size: x-large;

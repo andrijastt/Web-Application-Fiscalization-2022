@@ -20,8 +20,12 @@ export class CompanyController{
 
         let username = req.body.username
         let email = req.body.email
+        let PIB = req.body.PIB
+        let JMBP = req.body.JMBP
 
-        CompanyModel.findOne({"username": username}, (err, registerCompany)=>{
+        console.log(JMBP)
+
+        UserModel.findOne({"username": username}, (err, registerCompany)=>{
             if(err) console.log(err)
             else {
                 if(registerCompany){
@@ -35,11 +39,30 @@ export class CompanyController{
                                 res.json({'message': 'Email is taken'})
                             }
                             else {
-                                CompanyModel.collection.insertOne(req.body, (err, resp)=>{
+                                CompanyModel.findOne({"PIB": PIB}, (err, registerCompany2)=>{
                                     if(err) console.log(err)
-                                    else{
-                                        res.json({'message': 'Registration succesfully added'})
-                                    } 
+                                    else {
+                                        if(registerCompany2){
+                                            res.json({'message': 'PIB is taken'})
+                                        } else {
+                                            CompanyModel.findOne({"JMBP": JMBP}, (err, registerCompany3)=>{
+                                                if(err) console.log(err)
+                                                else {
+                                                    if(registerCompany3){
+                                                        res.json({'message': 'JMBP is taken'})
+                                                    } else {
+                                                        CompanyModel.collection.insertOne(req.body, (err, resp)=>{
+                                                            if(err) console.log(err)
+                                                            else{
+                                                                res.json({'message': 'Registration succesfully added'})
+                                                            } 
+                                                        })
+                                                    }
+                                                }
+                                            })
+
+                                        }
+                                    }
                                 })
                             }
                         }

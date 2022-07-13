@@ -23,8 +23,6 @@ input[type=password]{
 table{
     font-size: 20px;
     text-align: center;
-    border-spacing: 10px;
-    border-collapse: separate;
 }
 
 .receiptTable  {
@@ -47,12 +45,8 @@ table{
 .receiptTable td {
     border-left: 1px solid #000;
     border-right: 1px solid #000;
-}
+    border-bottom: 1px solid #000;
 
-.logInTable{
-    display: center; 
-    justify-content: center; 
-    align-items: center;
 }
 
 .error{
@@ -61,7 +55,7 @@ table{
 }
 
 footer{
-    position: fixed;
+    position: absolute;
     bottom: 10px;
     left: 10px;
     font-size: x-large;
