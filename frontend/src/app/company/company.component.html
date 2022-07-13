@@ -589,20 +589,25 @@
                 <td>{{n.name}}</td>
             </tr>
             <tr>
-                <th>subCategory name:</th>
+                <th>Subcategory name:</th>
                 <td>
-                    <input type="text">
-                    <button mat-button>Add</button>
+                    <input type="text" [(ngModel)]="subcategory">
+                    <button mat-button (click)="createSubcategory(n.name)">Add</button>
                 </td>
             </tr>
         </table>
         
     </div>
-    <br>
+    <br><br>
+    <h2>Categories</h2>
     <div class="columnText" *ngFor="let n of allCategories">
-        Add to category: {{n.name}} <button mat-button (click)="openDialog(n.name)">Add</button>
+        Add to category: {{n.name}} <button mat-button (click)="openDialog(n)">Add</button>
     </div>
-
+    <br><br>
+    <h2>SubCategories</h2>
+    <div class="columnText" *ngFor="let n of allSubCategories">
+        Add to subcategory: {{n.subcategory}} <button mat-button (click)="openDialogSubCategory(n)">Add</button>
+    </div>
 </div>
 
 <!-- *************************************************************************************************************************** -->

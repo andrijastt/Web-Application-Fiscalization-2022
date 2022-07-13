@@ -13,6 +13,7 @@ const customer_1 = __importDefault(require("../models/customer"));
 const item_1 = __importDefault(require("../models/item"));
 const itemStats_1 = __importDefault(require("../models/itemStats"));
 const category_1 = __importDefault(require("../models/category"));
+const subCategory_1 = __importDefault(require("../models/subCategory"));
 const store_1 = __importDefault(require("../models/store"));
 const workingRegister_1 = __importDefault(require("../models/workingRegister"));
 const dailyReview_1 = __importDefault(require("../models/dailyReview"));
@@ -458,9 +459,40 @@ class CompanyController {
                 }
             });
         };
+        this.createSubCategory = (req, res) => {
+            let PIB = req.body.PIB;
+            let name = req.body.name;
+            let subcategory = req.body.subcategory;
+            subCategory_1.default.find({ 'PIB': PIB, 'name': subcategory, 'category': name }, (err, subcategory) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (!subcategory) {
+                        res.json({ 'message': 'Subcategory already exists' });
+                    }
+                    else {
+                        subCategory_1.default.collection.insertOne(req.body, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else
+                                res.json({ 'message': 'Subcategory added' });
+                        });
+                    }
+                }
+            });
+        };
         this.getMyCategories = (req, res) => {
             let PIB = req.body.PIB;
             category_1.default.find({ "PIB": PIB }, (err, category) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(category);
+            });
+        };
+        this.getMySubCategories = (req, res) => {
+            let PIB = req.body.PIB;
+            subCategory_1.default.find({ "PIB": PIB }, (err, category) => {
                 if (err)
                     console.log(err);
                 else
@@ -514,6 +546,29 @@ class CompanyController {
                     }
                     else {
                         res.json({ 'message': 'Already has category' });
+                    }
+                }
+            });
+        };
+        this.setItemSubCategory = (req, res) => {
+            let itemName = req.body.itemName;
+            let PIB = req.body.PIB;
+            let producer = req.body.producer;
+            let subcategory = req.body.subcategory;
+            item_1.default.findOne({ "itemName": itemName, 'companyPIB': PIB, 'producer': producer }, (err, items) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (!items.subcategory && items.category == subcategory.name) {
+                        item_1.default.updateOne({ "itemName": itemName, 'companyPIB': PIB, 'producer': producer }, { $set: { 'subcategory': subcategory.subcategory } }, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else
+                                res.json({ 'message': 'Subategory set!' });
+                        });
+                    }
+                    else {
+                        res.json({ 'message': "Already has subcategory or subactegory isn't a part of category" });
                     }
                 }
             });

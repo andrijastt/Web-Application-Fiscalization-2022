@@ -25,6 +25,7 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 import { TableReceiptComponent } from './table-receipt/table-receipt.component';
 import { ReceiptDetailsComponent } from './receipt-details/receipt-details.component';
+import { SubcategoryDialogComponent } from './subcategory-dialog/subcategory-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ReceiptDetailsComponent } from './receipt-details/receipt-details.compo
     PasswordChangeComponent,
     CategoryDialogComponent,
     TableReceiptComponent,
-    ReceiptDetailsComponent
+    ReceiptDetailsComponent,
+    SubcategoryDialogComponent
   ],
   imports: [
     BrowserModule,

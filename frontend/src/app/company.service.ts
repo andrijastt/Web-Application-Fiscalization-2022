@@ -174,9 +174,23 @@ export class CompanyService {
     return this.http.post(`${this.uri}/company/createCategory`, data)
   }
 
+  createSubCategory(PIBForm, categoryNameForm, subcategoryNameForm){
+    const data = {
+      PIB: PIBForm,
+      name: categoryNameForm,
+      subcategory: subcategoryNameForm
+    }
+    return this.http.post(`${this.uri}/company/createSubCategory`, data)
+  }
+
   getMyCategories(PIBForm){
     const data = { PIB: PIBForm }
     return this.http.post(`${this.uri}/company/getMyCategories`, data)
+  }
+
+  getMySubCategories(PIBForm){
+    const data = { PIB: PIBForm }
+    return this.http.post(`${this.uri}/company/getMySubCategories`, data)
   }
 
   getMyRegisters(PIBForm){
@@ -205,6 +219,16 @@ export class CompanyService {
       category: categoryForm
     }
     return this.http.post(`${this.uri}/company/setItemCategory`, data)
+  }
+
+  setItemSubCategory(itemNameForm, itemProducerForm, PIBForm, subcategoryForm){
+    const data = { 
+      itemName: itemNameForm,
+      producer: itemProducerForm,
+      PIB: PIBForm,
+      subcategory: subcategoryForm
+    }
+    return this.http.post(`${this.uri}/company/setItemSubCategory`, data)
   }
 
   getMyPlaces(companyNameForm){

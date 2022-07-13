@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Category {{subcategory.name}}, Subcategory {{subcategory.subcategory}}</h1>
+
+<table class="items">
+    <tr>
+        <th>Item id:</th>
+        <th>Item name:</th>
+        <th>Item producer:</th>
+    </tr>
+    <tr *ngFor="let n of myItems">
+        <td>{{n.itemId}}</td>
+        <td>{{n.itemName}}</td>
+        <td>{{n.producer}}</td>
+        <button mat-button (click)="setCategory(n)">Set Subcategory</button>
+    </tr>
+</table>
+<br><br>
+<span class="columnText">Item name serach: &nbsp;</span><input type="text" [(ngModel)]="itemNameSearch"> <button mat-button (click)="serachItem()">Search</button>
+<br><br>
+<table class="items">
+    <tr>
+        <th>Item id:</th>
+        <th>Item name:</th>
+        <th>Item producer:</th>
+    </tr>
+    <tr *ngFor="let n of itemsSearch">
+        <td>{{n.itemId}}</td>
+        <td>{{n.itemName}}</td>
+        <td>{{n.producer}}</td>
+        <button mat-button (click)="setCategory(n)">Set Category</button>
+    </tr>
+</table>
+
+<footer>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close (click)="close()">Close</button>
+    </div>
+</footer>

@@ -19,4 +19,5 @@ export class Item {
     description: string
     declaration: string
     category: string
+    subcategory: string
 }

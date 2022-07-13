@@ -12,8 +12,10 @@ import { ItemStats } from '../model/itemStats';
 import { Register } from '../model/register';
 import { StorageUnit } from '../model/storageUnit';
 import { Store } from '../model/store';
+import { SubCategory } from '../model/subCategory';
 import { Table } from '../model/table';
 import { RegisterCompanyService } from '../register-company.service';
+import { SubcategoryDialogComponent } from '../subcategory-dialog/subcategory-dialog.component';
 import { TableReceiptComponent } from '../table-receipt/table-receipt.component';
 
 @Component({
@@ -49,6 +51,10 @@ export class CompanyComponent implements OnInit {
 
     this.companyService.getMyCategories(this.company.PIB).subscribe((data: Category[])=>{
       this.allCategories = data
+    })
+
+    this.companyService.getMySubCategories(this.company.PIB).subscribe((data: SubCategory[])=>{
+      this.allSubCategories = data
     })
 
     this.companyService.getMyRegisters(this.company.PIB).subscribe((data: Register[])=>{
@@ -507,8 +513,9 @@ export class CompanyComponent implements OnInit {
   /*********************************************************************************************************/
 
   category: string = ""
-  
+  subcategory: string= ""
   allCategories: Category[] = []
+  allSubCategories: SubCategory[] = []
 
   createCategory(){
     if(this.category != ""){
@@ -522,8 +529,32 @@ export class CompanyComponent implements OnInit {
     this.category = ""
   }
 
+  createSubcategory(name){
+    if(this.subcategory != ""){
+      this.companyService.createSubCategory(this.company.PIB, name, this.subcategory).subscribe((resp)=> {
+        this.companyService.getMySubCategories(this.company.PIB).subscribe((data: SubCategory[])=>{
+          this.allSubCategories = data
+        })
+        alert(resp['message'])
+      })
+    }
+    this.subcategory = ""
+  }
+
   openDialog(name){
     this.dialog.open(CategoryDialogComponent, {
+      height: '75%',
+      width: '50%',
+      data: {
+        name: name,
+        items: this.items,
+        companyPIB: this.company.PIB
+      }
+    })
+  }
+
+  openDialogSubCategory(name){
+    this.dialog.open(SubcategoryDialogComponent, {
       height: '75%',
       width: '50%',
       data: {

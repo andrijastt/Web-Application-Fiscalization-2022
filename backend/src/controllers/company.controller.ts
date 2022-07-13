@@ -8,6 +8,7 @@ import CustomerModel from '../models/customer'
 import ItemModel from '../models/item'
 import ItemStatsModel from '../models/itemStats'
 import CategoryModel from '../models/category'
+import SubCategoryModel from '../models/subCategory'
 import StoreModel from '../models/store'
 import WorkingRegisterModel from '../models/workingRegister'
 import DailyReviewModel from '../models/dailyReview'
@@ -436,9 +437,36 @@ export class CompanyController{
         })
     }
 
+    createSubCategory = (req: express.Request, res: express.Response) => {
+        let PIB = req.body.PIB
+        let name = req.body.name
+        let subcategory = req.body.subcategory
+        SubCategoryModel.find({'PIB': PIB, 'name': subcategory, 'category': name}, (err, subcategory)=>{
+            if(err) console.log(err)
+            else {
+                if(!subcategory){
+                    res.json({'message': 'Subcategory already exists'})
+                } else {
+                    SubCategoryModel.collection.insertOne(req.body, (err, resp)=> {
+                        if(err) console.log(err)
+                        else res.json({'message': 'Subcategory added'})
+                    })
+                }
+            }
+        })
+    }
+
     getMyCategories = (req: express.Request, res: express.Response) => {
         let PIB = req.body.PIB
         CategoryModel.find({"PIB": PIB}, (err, category)=>{
+            if(err) console.log(err)
+            else res.json(category)
+        })
+    }
+
+    getMySubCategories = (req: express.Request, res: express.Response) => {
+        let PIB = req.body.PIB
+        SubCategoryModel.find({"PIB": PIB}, (err, category)=>{
             if(err) console.log(err)
             else res.json(category)
         })
@@ -485,6 +513,27 @@ export class CompanyController{
                     })
                 } else{
                     res.json({'message': 'Already has category'})
+                }
+            }
+        })
+    }
+
+    setItemSubCategory = (req: express.Request, res: express.Response) => {
+        let itemName = req.body.itemName
+        let PIB = req.body.PIB
+        let producer = req.body.producer
+        let subcategory = req.body.subcategory
+        ItemModel.findOne({"itemName": itemName, 'companyPIB': PIB, 'producer': producer}, (err, items)=>{
+            if(err) console.log(err)
+            else {
+                if(!items.subcategory && items.category == subcategory.name){
+                    ItemModel.updateOne({"itemName": itemName, 'companyPIB': PIB, 'producer': producer}, {$set: {'subcategory': subcategory.subcategory}}, 
+                    (err, resp) => {
+                        if(err) console.log(err)
+                        else res.json({'message': 'Subategory set!'})
+                    })
+                } else{
+                    res.json({'message': "Already has subcategory or subactegory isn't a part of category"})
                 }
             }
         })

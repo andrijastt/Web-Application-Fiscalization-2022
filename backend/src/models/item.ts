@@ -59,6 +59,9 @@ let Item = new Schema({
     },
     category: {
         type: String
+    },
+    subcategory: {
+        type: String
     }
 })
 

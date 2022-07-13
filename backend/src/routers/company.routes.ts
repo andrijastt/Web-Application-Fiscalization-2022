@@ -87,8 +87,16 @@ companyRouter.route('/createCategory').post(
     (req, res) => new CompanyController().createCategory(req, res)
 )
 
+companyRouter.route('/createSubCategory').post(
+    (req, res) => new CompanyController().createSubCategory(req, res)
+)
+
 companyRouter.route('/getMyCategories').post(
     (req, res) => new CompanyController().getMyCategories(req, res)
+)
+
+companyRouter.route('/getMySubCategories').post(
+    (req, res) => new CompanyController().getMySubCategories(req, res)
 )
 
 companyRouter.route('/getMyRegisters').post(
@@ -105,6 +113,10 @@ companyRouter.route('/searchItem').post(
 
 companyRouter.route('/setItemCategory').post(
     (req, res) => new CompanyController().setItemCategory(req, res)
+)
+
+companyRouter.route('/setItemSubCategory').post(
+    (req, res) => new CompanyController().setItemSubCategory(req, res)
 )
 
 companyRouter.route('/getMyPlaces').post(
