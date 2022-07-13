@@ -30,6 +30,7 @@ export class CompanyComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
+
     this.company = JSON.parse(localStorage.getItem('company'))
     this.companyService.getMyStorageUntis(this.company.PIB).subscribe((data: StorageUnit[])=>{
       this.storageUnits = data

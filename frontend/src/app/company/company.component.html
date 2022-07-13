@@ -37,6 +37,16 @@
         <mat-icon>rate_review</mat-icon>
         Report reviews
     </button>
+
+    <button mat-menu-item (click)="passwordChange()" class="menuButton">
+        <mat-icon>settings</mat-icon>
+        Change password
+    </button>
+
+    <button mat-menu-item (click)="logout()" class="menuButton">
+        <mat-icon>keyboard_backspace</mat-icon>
+        Log out
+    </button>
 </mat-menu>
 
 <!-- *************************************************************************************************************************** -->
@@ -184,7 +194,7 @@
     <br><br>
     <h2>Add customers via PIB</h2>
     <div>
-        PIB: <input type="number" [(ngModel)]="PIBSearch" (ngModelChange)="checkPIBSearch()">
+        <span class="columnText">PIB: &nbsp;</span><input type="number" [(ngModel)]="PIBSearch" (ngModelChange)="checkPIBSearch()">
         <button mat-stroked-button (click)="findCompanyByPIB()">Search</button>
         <td class="error">{{PIBSearchCheck}}</td>
     </div>
@@ -598,7 +608,7 @@
 <!-- *************************************************************************************************************************** -->
 
 <div *ngIf="tableData" id="tables">
-    <select [(ngModel)]="selectedStore" (ngModelChange)="getDepartmentsByPlace()">
+    <select [(ngModel)]="selectedStore" (ngModelChange)="getDepartmentsByPlace()" class="columnText">
         <option *ngFor="let n of myStores">{{n.name}}</option>
     </select>
     <br><br>
@@ -609,7 +619,7 @@
 
     <br><br>
     <div>
-        <canvas #canvas width="1200" height="800" id="canvas"></canvas>
+        <canvas #canvas width="1800px" height="790px" id="canvas"></canvas>
     </div>
 </div>
 
@@ -730,7 +740,5 @@
 </div>
 
 <footer>
-    <button (click)="passwordChange()">Change password</button>
-    <br>
-    <button (click)="logout()" class="logOut">LogOut</button>
+    
 </footer>

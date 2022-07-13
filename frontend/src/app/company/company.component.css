@@ -110,11 +110,4 @@ button{
 
 #canvas{
     border: 2px solid black;
-    /* width: max-content;
-    height: max-content; */
-    margin-top: auto;
-    margin-left: auto;
-    margin-bottom: auto;
-    margin-right: auto; 
-    position: fixed;
 }
