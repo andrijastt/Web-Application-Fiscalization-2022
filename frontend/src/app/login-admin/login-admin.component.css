@@ -6,6 +6,11 @@ h1{
     font-weight: 500;
 }
 
+h2{
+    font-weight: 400;
+    font-size: 25px;
+}
+
 table{
     font-size: 20px;
     text-align: center;
@@ -21,8 +26,12 @@ table{
 .receiptTable th {
     border-left: 1px solid #000;
     border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+
     padding-left: 10px;
     padding-right: 10px;
+
+    font-weight: 450;
 }
 
 .receiptTable td {
