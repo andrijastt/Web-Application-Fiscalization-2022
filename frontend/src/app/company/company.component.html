@@ -563,23 +563,23 @@
 
 <div *ngIf="itemData">
 
-    <div class="createCategory">
-        <h2>Form Category</h2>
+    <h2>Form Category</h2>
+    <div class="columnText">        
         Category name: &nbsp;<input type="text" [(ngModel)]="category">
         <br>
         <button mat-button (click)="createCategory()">Create</button>
     </div>
-
+    <br>
+    <h2>Form SubCategory</h2>
     <div class="createCategory">
-        <h2>Form SubCategory</h2>
 
-        <table *ngFor="let n of allCategories">
+        <table *ngFor="let n of allCategories" class="customerTable">
             <tr>
-                <td>Category:</td>
+                <th>Category:</th>
                 <td>{{n.name}}</td>
             </tr>
             <tr>
-                <td>subCategory name:</td>
+                <th>subCategory name:</th>
                 <td>
                     <input type="text">
                     <button mat-button>Add</button>
@@ -589,7 +589,7 @@
         
     </div>
     <br>
-    <div class="addItemToCategory" *ngFor="let n of allCategories">
+    <div class="columnText" *ngFor="let n of allCategories">
         Add to category: {{n.name}} <button mat-button (click)="openDialog(n.name)">Add</button>
     </div>
 

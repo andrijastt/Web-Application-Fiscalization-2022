@@ -526,8 +526,8 @@ export class CompanyComponent implements OnInit {
 
   openDialog(name){
     this.dialog.open(CategoryDialogComponent, {
-      height: '800px',
-      width: '800px',
+      height: '75%',
+      width: '50%',
       data: {
         name: name,
         items: this.items,
@@ -548,6 +548,7 @@ export class CompanyComponent implements OnInit {
   tableCount: number
 
   getDepartmentsByPlace(){
+    this.selectedDepartment = ""
     this.companyService.getDepartmentsByPlace(this.company.PIB, this.selectedStore).subscribe((data: string[]) => {
       this.departments = data
       this.ctx = this.canvas.nativeElement.getContext('2d')

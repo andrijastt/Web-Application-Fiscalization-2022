@@ -1,42 +1,37 @@
 <h1 mat-dialog-title>Category {{categoryName}}</h1>
 
-<table>
+<table class="items">
     <tr>
-        <td>Item id:</td>
-        <td>Item name:</td>
-        <td>Item producer:</td>
+        <th>Item id:</th>
+        <th>Item name:</th>
+        <th>Item producer:</th>
     </tr>
     <tr *ngFor="let n of myItems">
         <td>{{n.itemId}}</td>
         <td>{{n.itemName}}</td>
         <td>{{n.producer}}</td>
-        <td>
-            <button mat-button (click)="setCategory(n)">Set Category</button>
-        </td>
+        <button mat-button (click)="setCategory(n)">Set Category</button>
     </tr>
 </table>
-<br>
-<div>
-    Item name serach: &nbsp; <input type="text" [(ngModel)]="itemNameSearch"> <button mat-button (click)="serachItem()">Search</button>
-    <table>
-        <tr>
-            <td>Item id:</td>
-            <td>Item name:</td>
-            <td>Item producer:</td>
-        </tr>
-        <tr *ngFor="let n of itemsSearch">
-            <td>{{n.itemId}}</td>
-            <td>{{n.itemName}}</td>
-            <td>{{n.producer}}</td>
-            <td>
-                <button mat-button (click)="setCategory(n)">Set Category</button>
-            </td>
-        </tr>
-    </table>
-</div>
+<br><br>
+<span class="columnText">Item name serach: &nbsp;</span><input type="text" [(ngModel)]="itemNameSearch"> <button mat-button (click)="serachItem()">Search</button>
+<br><br>
+<table class="items">
+    <tr>
+        <th>Item id:</th>
+        <th>Item name:</th>
+        <th>Item producer:</th>
+    </tr>
+    <tr *ngFor="let n of itemsSearch">
+        <td>{{n.itemId}}</td>
+        <td>{{n.itemName}}</td>
+        <td>{{n.producer}}</td>
+        <button mat-button (click)="setCategory(n)">Set Category</button>
+    </tr>
+</table>
 
 <footer>
     <div mat-dialog-actions>
-        <button mat-button (click)="close()">Close</button>
+        <button mat-button mat-dialog-close (click)="close()">Close</button>
     </div>
 </footer>
