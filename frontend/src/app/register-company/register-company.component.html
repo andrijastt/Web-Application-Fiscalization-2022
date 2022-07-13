@@ -1,78 +1,78 @@
-<header>
+<h1>
     Company registration
-</header>
-<table>
+</h1>
+<table id="registerCompanyTable">
     <tr>
-        <td>Firstname:</td>
+        <th class="columnText">Firstname:</th>
         <input type="text" name="firstname" [(ngModel)]="firstname">
     </tr>
     <tr>
-        <td>Lastname:</td>
+        <th class="columnText">Lastname:</th>
         <input type="text" name="lastname" [(ngModel)]="lastname">
     </tr>
     <tr>
-        <td>Username:</td>
+        <th class="columnText">Username:</th>
         <input type="text" name="username" [(ngModel)]="username">
     </tr>
     <tr>
-        <td>Password:</td>
+        <th class="columnText">Password:</th>
         <input type="password" name="password" [(ngModel)]="password" (ngModelChange)="checkPassword()">
         <td class="error">{{passwordCheck}}</td>
     </tr>
     <tr>
-        <td>Confirm Password:</td>
+        <th class="columnText">Confirm Password:</th>
         <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" (ngModelChange)="checkConfirmPassword()">
         <td class="error">{{confirmPasswordCheck}}</td>
     </tr>
     <tr>
-        <td>Telephone number:</td>
+        <th class="columnText">Telephone number:</th>
         <input type="text" name="number" [(ngModel)]="telephoneNumber" (ngModelChange)="checkTelephoneNumber()">
         <td class="error">{{telephoneNumberCheck}}</td>
     </tr>
     <tr>
-        <td>E-mail:</td>
+        <th class="columnText">E-mail:</th>
         <input type="text" name="email" [(ngModel)]="email" (ngModelChange)="checkEmail()">
         <td class="error">{{emailCheck}}</td>
     </tr>
     <tr>
-        <td>Name of company:</td>
+        <th class="columnText">Name of company:</th>
         <input type="text" name="companyName" [(ngModel)]="name">
     </tr>
     <tr>
-        <td>Country:</td>
+        <th class="columnText">Country:</th>
         <input type="text" name="country" [(ngModel)]="country">
     </tr>
     <tr>
-        <td>City:</td>
+        <th class="columnText">City:</th>
         <input type="text" name="city" [(ngModel)]="city">
     </tr>
     <tr>
-        <td>PostNumber:</td>
+        <th class="columnText">PostNumber:</th>
         <input type="number" name="postNumber" [(ngModel)]="postNumber" (ngModelChange)="checkPostNumber()">
         <td class="error">{{checkMailNumber}}</td>
     </tr>
     <tr>
-        <td>Street name:</td>
+        <th class="columnText">Street name:</th>
         <input type="text" name="street" [(ngModel)]="streetName">
     </tr>
     <tr>
-        <td>Street number:</td>
+        <th class="columnText">Street number:</th>
         <input type="number" name="streetNumber" [(ngModel)]="streetNumber" (ngModelChange)="checkStreetNumber()">
         <td class="error">{{streetNumberCheck}}</td>
     </tr>
     <tr>
-        <td>PIB:</td>
+        <th class="columnText">PIB:</th>
         <input type="number" name="PIB" [(ngModel)]="PIB" (ngModelChange)="checkPIB()">
         <td class="error">{{PIBCheck}}</td>
     </tr>
     <tr>
-        <td>Unique number of company:</td>
+        <th class="columnText">Unique number of company:</th>
         <input type="text" name="JMBP" [(ngModel)]="JMBP" (ngModelChange)="checkJMBP()">
         <td class="error">{{JMBPCheck}}</td>
     </tr>
     <tr>
-        <td>Logo of company:</td>
-        <input type="file" id="file" name="logo" (change)="onFileSelected($event)">
+        <th class="columnText">Logo of company:</th>
+        <input type="file" (change)="onFileSelected($event)">
     </tr>
     <tr>
         <td>
@@ -80,7 +80,7 @@
         </td>
     </tr>
 </table>
-<button (click)="register()">Register</button>
+<button  mat-button (click)="register()">Register</button>
 <br>
 <div class="error">{{message}}</div>
 <footer>

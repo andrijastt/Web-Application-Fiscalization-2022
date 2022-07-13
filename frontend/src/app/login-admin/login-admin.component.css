@@ -11,6 +11,14 @@ h2{
     font-size: 25px;
 }
 
+input[type=text]{
+    font-size: 15px;
+}
+
+input[type=password]{
+    font-size: 15px;
+}
+
 table{
     font-size: 20px;
     text-align: center;
