@@ -160,6 +160,7 @@ export class CompanyService {
       description: descriptionForm || null,
       declaration: declarationForm || null,
       category: null,
+      subcategory: null,
       itemStats: itemStatsForm,
       itemStatsStore: itemStatsStoreForm
     }
