@@ -352,7 +352,9 @@
 <!-- *************************************************************************************************************************** -->
 
 <div *ngIf="goodsAndServices">
+    <h2>All items</h2>
     <div class="columnText">Total of {{items.length}} of rows</div>
+    <br>
     <table *ngFor="let n of itemSlice" class="customers">
         <tr>
             <th>Item id:</th>
