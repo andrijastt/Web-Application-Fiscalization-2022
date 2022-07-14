@@ -458,7 +458,8 @@ export class CompanyController{
 
     getMyCategories = (req: express.Request, res: express.Response) => {
         let PIB = req.body.PIB
-        CategoryModel.find({"PIB": PIB}, (err, category)=>{
+        console.log(PIB)
+        CategoryModel.find({"companyPIB": PIB}, (err, category)=>{
             if(err) console.log(err)
             else res.json(category)
         })
@@ -466,7 +467,7 @@ export class CompanyController{
 
     getMySubCategories = (req: express.Request, res: express.Response) => {
         let PIB = req.body.PIB
-        SubCategoryModel.find({"PIB": PIB}, (err, category)=>{
+        SubCategoryModel.find({"companyPIB": PIB}, (err, category)=>{
             if(err) console.log(err)
             else res.json(category)
         })

@@ -483,7 +483,8 @@ class CompanyController {
         };
         this.getMyCategories = (req, res) => {
             let PIB = req.body.PIB;
-            category_1.default.find({ "PIB": PIB }, (err, category) => {
+            console.log(PIB);
+            category_1.default.find({ "companyPIB": PIB }, (err, category) => {
                 if (err)
                     console.log(err);
                 else
@@ -492,7 +493,7 @@ class CompanyController {
         };
         this.getMySubCategories = (req, res) => {
             let PIB = req.body.PIB;
-            subCategory_1.default.find({ "PIB": PIB }, (err, category) => {
+            subCategory_1.default.find({ "companyPIB": PIB }, (err, category) => {
                 if (err)
                     console.log(err);
                 else
