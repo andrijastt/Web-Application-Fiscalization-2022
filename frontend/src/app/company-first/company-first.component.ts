@@ -88,10 +88,14 @@ export class CompanyFirstComponent implements OnInit {
   }
 
   removeBankAccount(i){
-    this.bankAccountsModel.splice(i, 1)
-    this.bankAcc.splice(i, 1)
-    this.bank.splice(i, 1)
-    this.bankErrors.splice(i, 1)
+    if(this.bankAccountsModel.length ==1){
+      alert('You need at least 1 bank account')
+    } else {
+      this.bankAccountsModel.splice(i, 1)
+      this.bankAcc.splice(i, 1)
+      this.bank.splice(i, 1)
+      this.bankErrors.splice(i, 1)
+    }
   }
 
   getActivityCodes(){
@@ -135,7 +139,7 @@ export class CompanyFirstComponent implements OnInit {
 
   removeStore(i){
     if(this.stores.length == 1){
-      alert('You need at least 1 storage')
+      alert('You need at least 1 store')
     } else {
       this.stores.splice(i, 1)
       this.registerTypes.splice(i, 1)
@@ -196,6 +200,14 @@ export class CompanyFirstComponent implements OnInit {
         this.send = false
         break;
       }
+
+      for(let j = 0; j < this.stores[i].numRegisters; j++){
+        if(this.registerTypes[i][j] == ""){
+          this.send = false
+          break;
+        } 
+      }
+
       if(i != this.stores.length){
         for(let j = i + 1; j < this.stores.length; j++){
           if(this.stores[i].id == this.stores[j].id){
@@ -203,13 +215,6 @@ export class CompanyFirstComponent implements OnInit {
             break
           }
         }
-      }
-
-      for(let j = 0; j < this.stores[i].numRegisters; j++){
-        if(this.registerTypes[i][j] == ""){
-          this.send = false
-          break;
-        } 
       }
     }
 

@@ -356,6 +356,14 @@ export class AdminComponent implements OnInit {
         this.send = false
         break;
       }
+
+      for(let j = 0; j < this.stores[i].numRegisters; j++){  
+        if(this.registerTypes[i][j] == ""){
+          this.send = false
+          break;
+        } 
+      }
+
       if(i != this.stores.length){
         for(let j = i + 1; j < this.stores.length; j++){
           if(this.stores[i].id == this.stores[j].id){
@@ -363,13 +371,6 @@ export class AdminComponent implements OnInit {
             break
           }
         }
-      }
-
-      for(let j = 0; j < this.stores[i].numRegisters; j++){  
-        if(this.registerTypes[i][j] == ""){
-          this.send = false
-          break;
-        } 
       }
     }
 
@@ -380,11 +381,13 @@ export class AdminComponent implements OnInit {
           let reg = new Register
           reg.location = this.stores[i].location
           reg.type = this.registerTypes[i][j]
+          console.log(this.registerTypes[i][j])
           reg.companyPIB = this.PIB
           regs.push(reg)
         }
         this.registers[i] = regs
       }
+      console.log(this.registers)
     }
 
     if(!this.category || !this.selectedActivityCodes || !this.PDV) this.send = false
