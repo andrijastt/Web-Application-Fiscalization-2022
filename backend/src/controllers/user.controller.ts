@@ -34,6 +34,11 @@ export class UserController{
                     if(err) console.log(err)
                 })
             }
+            if(user.type == 0){
+                BuyerModel.updateOne({'username': username}, {$set: {'password': password}}, (err, resp)=>{
+                    if(err) console.log(err)
+                })
+            }
             UserModel.updateOne({'username': username}, {$set: {'password': password}}, (err, resp)=>{
                 if(err) console.log(err)
                 else res.json({'message': 'Password changed!'})

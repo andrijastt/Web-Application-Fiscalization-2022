@@ -41,6 +41,12 @@ class UserController {
                             console.log(err);
                     });
                 }
+                if (user.type == 0) {
+                    buyer_1.default.updateOne({ 'username': username }, { $set: { 'password': password } }, (err, resp) => {
+                        if (err)
+                            console.log(err);
+                    });
+                }
                 user_1.default.updateOne({ 'username': username }, { $set: { 'password': password } }, (err, resp) => {
                     if (err)
                         console.log(err);
