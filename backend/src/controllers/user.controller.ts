@@ -20,7 +20,7 @@ export class UserController{
         ReceiptModel.find({}, (err, receipts) => {
             if(err) console.log(err)
             else res.json(receipts)
-        }).sort({date: 1}).limit(5)
+        }).sort({date: -1}).limit(5)
     }
 
     changePassword = (req: express.Request, res: express.Response)=>{

@@ -27,7 +27,7 @@ class UserController {
                     console.log(err);
                 else
                     res.json(receipts);
-            }).sort({ date: 1 }).limit(5);
+            }).sort({ date: -1 }).limit(5);
         };
         this.changePassword = (req, res) => {
             let username = req.body.username;
