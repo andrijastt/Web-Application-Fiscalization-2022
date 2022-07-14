@@ -505,8 +505,11 @@ export class CompanyComponent implements OnInit {
             this.companyService.getMyItems(this.company.PIB).subscribe((data: Item[])=>{
               this.items = data
               this.itemSlice = this.items.slice(0, 10)
-              alert(resp['message'])
               this.addGoods = false
+              this.companyService.getMyPlaces(this.company.name).subscribe((data: string[]) => {
+                this.myPlaces = data
+                alert(resp['message'])
+              })
             })
           }
         }))
