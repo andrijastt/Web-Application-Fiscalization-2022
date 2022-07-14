@@ -502,6 +502,7 @@ export class CompanyComponent implements OnInit {
               this.items = data
               this.itemSlice = this.items.slice(0, 10)
               alert(resp['message'])
+              this.addGoods = false
             })
           }
         }))

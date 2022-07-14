@@ -355,7 +355,7 @@
     <h2>All items</h2>
     <div class="columnText">Total of {{items.length}} of rows</div>
     <br>
-    <table *ngFor="let n of itemSlice" class="customers">
+    <table class="customers">
         <tr>
             <th>Item id:</th>
             <th>Item name:</th>
@@ -363,7 +363,7 @@
             <th>Tax rate:</th>
             <th>Producer:</th>
         </tr>
-        <tr>
+        <tr *ngFor="let n of itemSlice" >
             <td>{{n.itemId}}</td>
             <td>{{n.itemName}}</td>
             <td>{{n.unitOfMeasure}}</td>
@@ -443,7 +443,7 @@
                     <td>
                         <input type="text" [(ngModel)]="itemBarcodeNumber" (ngModelChange)="checkBarcode()">
                     </td>
-                    <td>{{barcodeMessage}}</td>
+                    <td class="error">{{barcodeMessage}}</td>
                 </tr>
                 <tr>
                     <th>Producer name:</th>
