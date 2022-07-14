@@ -328,14 +328,14 @@ export class AdminComponent implements OnInit {
       this.bankAccountsModel[i].bank = this.bank[i]
       this.bankAccountsModel[i].bankAccount = this.bankAcc[i]
 
-      if(!this.bank[i] || !this.bankAcc[i] || this.bankErrors[i] != ""){
+      if(!this.bank[i] || !this.bankAcc[i] || this.bankErrors[i] != "" || this.bank[i] == ""){
         this.send = false
       } 
     }
 
     for(let i = 0; i < this.storageUnits.length; i++){
       this.storageUnits[i].companyPIB = this.PIB
-      if(!this.storageUnits[i].id || !this.storageUnits[i].name){
+      if(!this.storageUnits[i].id || !this.storageUnits[i].name || this.storageUnits[i].name == ""){
         this.send = false;
         break;
       }
@@ -352,7 +352,7 @@ export class AdminComponent implements OnInit {
     for(let i = 0; i < this.stores.length; i++){
       
       this.stores[i].companyPIB = this.PIB
-      if(!this.stores[i].id || !this.stores[i].location || !this.stores[i].name){
+      if(!this.stores[i].id || !this.stores[i].location || !this.stores[i].name || this.stores[i].name == ""){
         this.send = false
         break;
       }
