@@ -1,4 +1,4 @@
 export class Category{
-    companyPIB: number
+    PIB: number
     name: string
 }

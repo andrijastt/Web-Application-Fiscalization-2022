@@ -422,7 +422,7 @@ export class CompanyController{
         let PIB = req.body.PIB
         let name = req.body.name
 
-        CategoryModel.find({'companyPIB': PIB, 'name': name}, (err, category)=>{
+        CategoryModel.find({'PIB': PIB, 'name': name}, (err, category)=>{
             if(err) console.log(err)
             else {
                 if(!category){
@@ -441,7 +441,7 @@ export class CompanyController{
         let PIB = req.body.PIB
         let name = req.body.name
         let subcategory = req.body.subcategory
-        SubCategoryModel.find({'companyPIB': PIB, 'name': subcategory, 'category': name}, (err, subcategory)=>{
+        SubCategoryModel.find({'PIB': PIB, 'name': subcategory, 'category': name}, (err, subcategory)=>{
             if(err) console.log(err)
             else {
                 if(!subcategory){
@@ -458,7 +458,7 @@ export class CompanyController{
 
     getMyCategories = (req: express.Request, res: express.Response) => {
         let PIB = req.body.PIB
-        CategoryModel.find({"companyPIB": PIB}, (err, category)=>{
+        CategoryModel.find({"PIB": PIB}, (err, category)=>{
             if(err) console.log(err)
             else res.json(category)
         })
@@ -466,7 +466,7 @@ export class CompanyController{
 
     getMySubCategories = (req: express.Request, res: express.Response) => {
         let PIB = req.body.PIB
-        SubCategoryModel.find({"companyPIB": PIB}, (err, category)=>{
+        SubCategoryModel.find({"PIB": PIB}, (err, category)=>{
             if(err) console.log(err)
             else res.json(category)
         })

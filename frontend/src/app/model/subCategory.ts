@@ -1,5 +1,5 @@
 export class SubCategory{
-    companyPIB: number
+    PIB: number
     name: string
     subcategory: string
 }

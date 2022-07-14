@@ -441,7 +441,7 @@ class CompanyController {
         this.createCategory = (req, res) => {
             let PIB = req.body.PIB;
             let name = req.body.name;
-            category_1.default.find({ 'companyPIB': PIB, 'name': name }, (err, category) => {
+            category_1.default.find({ 'PIB': PIB, 'name': name }, (err, category) => {
                 if (err)
                     console.log(err);
                 else {
@@ -463,7 +463,7 @@ class CompanyController {
             let PIB = req.body.PIB;
             let name = req.body.name;
             let subcategory = req.body.subcategory;
-            subCategory_1.default.find({ 'companyPIB': PIB, 'name': subcategory, 'category': name }, (err, subcategory) => {
+            subCategory_1.default.find({ 'PIB': PIB, 'name': subcategory, 'category': name }, (err, subcategory) => {
                 if (err)
                     console.log(err);
                 else {
@@ -483,7 +483,7 @@ class CompanyController {
         };
         this.getMyCategories = (req, res) => {
             let PIB = req.body.PIB;
-            category_1.default.find({ "companyPIB": PIB }, (err, category) => {
+            category_1.default.find({ "PIB": PIB }, (err, category) => {
                 if (err)
                     console.log(err);
                 else
@@ -492,7 +492,7 @@ class CompanyController {
         };
         this.getMySubCategories = (req, res) => {
             let PIB = req.body.PIB;
-            subCategory_1.default.find({ "companyPIB": PIB }, (err, category) => {
+            subCategory_1.default.find({ "PIB": PIB }, (err, category) => {
                 if (err)
                     console.log(err);
                 else

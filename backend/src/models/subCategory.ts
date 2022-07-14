@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 let SubCategory = new Schema({
-    companyPIB:{
+    PIB:{
         type: Number
     },
     name: {

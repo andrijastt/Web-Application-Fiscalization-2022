@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 let Category = new Schema({
-    companyPIB:{
+    PIB:{
         type: Number
     },
     name: {
