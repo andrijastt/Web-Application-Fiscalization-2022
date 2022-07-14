@@ -736,7 +736,7 @@
     <h2>Daily reports</h2>
     <div>
         <select [(ngModel)]="dateSearch" (ngModelChange)="getDailyReview()">
-            <option *ngFor="let n of dailyReviewDates">{{n | date:'mediumDate'}}</option>
+            <option *ngFor="let n of dailyReviewDates" value="{{n | date:'mediumDate'}}">{{n | date:'mediumDate'}}</option>
         </select>    
     </div>
     <br>

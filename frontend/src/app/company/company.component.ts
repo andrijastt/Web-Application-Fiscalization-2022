@@ -178,11 +178,8 @@ export class CompanyComponent implements OnInit {
 
     this.companyService.getMyDailyReviews(this.company.PIB).subscribe((data: Date[]) => {
       this.dailyReviewDates = data
-      if(data.length > 0){
-        this.companyService.getDailyReview(this.company.PIB, this.dailyReviewDates[0]).subscribe((data: DailyReview)=>{
-          this.dailyReview = data
-        })
-      }
+      this.dateSearch = ""
+      this.dailyReview = new DailyReview()
     })
   }
 
