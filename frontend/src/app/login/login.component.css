@@ -10,6 +10,8 @@ h1{
 h2{
     font-weight: 400;
     font-size: 25px;
+    font-style: italic;
+    text-decoration: underline;
 }
 
 input[type=text]{
