@@ -585,7 +585,7 @@
     <h2>Form SubCategory</h2>
     <div class="createCategory">
 
-        <table *ngFor="let n of allCategories" class="customerTable">
+        <table *ngFor="let n of allCategories; let i = index" class="customerTable">
             <tr>
                 <th>Category:</th>
                 <td>{{n.name}}</td>
@@ -593,8 +593,8 @@
             <tr>
                 <th>Subcategory name:</th>
                 <td>
-                    <input type="text" [(ngModel)]="subcategory">
-                    <button mat-button (click)="createSubcategory(n.name)">Add</button>
+                    <input type="text" [(ngModel)]="subcategory[i]">
+                    <button mat-button (click)="createSubcategory(n.name, i)">Add</button>
                 </td>
             </tr>
         </table>
@@ -603,12 +603,12 @@
     <br><br>
     <h2>Categories</h2>
     <div class="columnText" *ngFor="let n of allCategories">
-        Add to category: {{n.name}} <button mat-button (click)="openDialog(n)">Add</button>
+        Add to category: {{n.name}} <button mat-button (click)="openDialog(n.name)">Add</button>
     </div>
     <br><br>
     <h2>SubCategories</h2>
     <div class="columnText" *ngFor="let n of allSubCategories">
-        Add to subcategory: {{n.subcategory}} <button mat-button (click)="openDialogSubCategory(n)">Add</button>
+        (Category: {{n.name}}) Add to subcategory: {{n.subcategory}} <button mat-button (click)="openDialogSubCategory(n)">Add</button>
     </div>
 </div>
 

@@ -51,6 +51,9 @@ export class CompanyComponent implements OnInit {
 
     this.companyService.getMyCategories(this.company.PIB).subscribe((data: Category[])=>{
       this.allCategories = data
+      for(let i = 0; i < this.allCategories.length; i++){
+        this.subcategory.push("")
+      }
     })
 
     this.companyService.getMySubCategories(this.company.PIB).subscribe((data: SubCategory[])=>{
@@ -514,7 +517,7 @@ export class CompanyComponent implements OnInit {
   /*********************************************************************************************************/
 
   category: string = ""
-  subcategory: string= ""
+  subcategory: string[] = []
   allCategories: Category[] = []
   allSubCategories: SubCategory[] = []
 
@@ -530,16 +533,16 @@ export class CompanyComponent implements OnInit {
     this.category = ""
   }
 
-  createSubcategory(name){
-    if(this.subcategory != ""){
-      this.companyService.createSubCategory(this.company.PIB, name, this.subcategory).subscribe((resp)=> {
+  createSubcategory(name, i){
+    if(this.subcategory[i] != ""){
+      this.companyService.createSubCategory(this.company.PIB, name, this.subcategory[i]).subscribe((resp)=> {
         this.companyService.getMySubCategories(this.company.PIB).subscribe((data: SubCategory[])=>{
           this.allSubCategories = data
         })
         alert(resp['message'])
       })
     }
-    this.subcategory = ""
+    this.subcategory[i] = ""
   }
 
   openDialog(name){

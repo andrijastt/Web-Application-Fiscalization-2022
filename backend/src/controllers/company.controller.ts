@@ -369,7 +369,9 @@ export class CompanyController{
                 item.maxItems = req.body.maxItems
                 item.description = req.body.description
                 item.declaration = req.body.declaration
-
+                item.category = req.body.category
+                item.subcategory = req.body.subcategory
+                
                 if(item.image == null){
                     CompanyModel.findOne({'PIB': item.companyPIB}, (err, image)=>{
                         if(err) console.log(err)
