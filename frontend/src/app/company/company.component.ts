@@ -62,7 +62,6 @@ export class CompanyComponent implements OnInit {
 
     this.companyService.getMyRegisters(this.company.PIB).subscribe((data: Register[])=>{
       this.myRegisters = data
-      console.log(this.myRegisters)
     })
 
     this.companyService.getMyStores(this.company.PIB).subscribe((data: Store[])=>{
@@ -79,7 +78,6 @@ export class CompanyComponent implements OnInit {
     this.companyService.getDistinctTables(this.company.PIB).subscribe((data: number[]) => {
       this.tableCount = data.length
     })
-
 
   }
 
