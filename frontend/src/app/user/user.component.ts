@@ -95,8 +95,8 @@ export class UserComponent implements OnInit {
 
   openDialog(receipt){
     this.dialog.open(ReceiptDetailsComponent, {
-      height: '800px',
-      width: '800px',
+      height: '75%',
+      width: '50%',
       data: {
         receipt: receipt 
       }
