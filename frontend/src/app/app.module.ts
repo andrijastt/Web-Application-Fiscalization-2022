@@ -66,9 +66,3 @@ export class AppModule { }
 
 // npm install --save @angular/material
 // ng add @angular/material
-// npm install --save @angular/cdk @angular/material
-// npm install craftyjs
-// npm install -g browserify
-// npm install
-// npm install --save ocanvas
-// u assets kod front-a se dodaju js fajlovi, a angular.json kod fronta u scripts deo dodajem scripte koej se 
