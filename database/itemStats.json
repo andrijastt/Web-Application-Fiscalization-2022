@@ -1,0 +1,331 @@
+[{
+  "_id": {
+    "$oid": "62cf3f48b83e28c0fad06348"
+  },
+  "place": "Magacin Centar",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Marija Zdravlje",
+  "itemName": "Coca Cola",
+  "itemProducer": "",
+  "unitOfMeasure": "250ml",
+  "purchasePrice": 120,
+  "sellingPrice": 125,
+  "currentState": 15,
+  "minWantingNumber": 40,
+  "maxWantingNumber": 60
+},{
+  "_id": {
+    "$oid": "62cf3f48b83e28c0fad06349"
+  },
+  "purchasePrice": 120,
+  "sellingPrice": 130,
+  "currentState": 20,
+  "minWantingNumber": 40,
+  "maxWantingNumber": 60,
+  "place": "Magacin Krusik",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Marija Zdravlje",
+  "itemName": "Coca Cola",
+  "itemProducer": "",
+  "unitOfMeasure": "250ml"
+},{
+  "_id": {
+    "$oid": "62cf3f48b83e28c0fad0634b"
+  },
+  "place": "Zdravlje Centar",
+  "typeOfPlace": "store",
+  "companyName": "Marija Zdravlje",
+  "itemName": "Coca Cola",
+  "itemProducer": "",
+  "unitOfMeasure": "250ml",
+  "purchasePrice": 115,
+  "sellingPrice": 120,
+  "currentState": 12,
+  "minWantingNumber": 40,
+  "maxWantingNumber": 60
+},{
+  "_id": {
+    "$oid": "62cf3f48b83e28c0fad0634c"
+  },
+  "purchasePrice": 110,
+  "sellingPrice": 115,
+  "currentState": 20,
+  "minWantingNumber": 46,
+  "maxWantingNumber": 60,
+  "place": "Zdravlje Krusik",
+  "typeOfPlace": "store",
+  "companyName": "Marija Zdravlje",
+  "itemName": "Coca Cola",
+  "itemProducer": "",
+  "unitOfMeasure": "250ml"
+},{
+  "_id": {
+    "$oid": "62cfc89806503a00748f8993"
+  },
+  "purchasePrice": 150,
+  "sellingPrice": 160,
+  "currentState": 8,
+  "minWantingNumber": 15,
+  "maxWantingNumber": 20,
+  "place": "Magacin Aleksinac",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Fokus",
+  "itemName": "Makaze",
+  "itemProducer": "BlaBla",
+  "unitOfMeasure": "Komad"
+},{
+  "_id": {
+    "$oid": "62cfc89806503a00748f8994"
+  },
+  "purchasePrice": 150,
+  "sellingPrice": 175,
+  "currentState": 10,
+  "minWantingNumber": 15,
+  "maxWantingNumber": 20,
+  "place": "Magacin Zitkovac",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Fokus",
+  "itemName": "Makaze",
+  "itemProducer": "BlaBla",
+  "unitOfMeasure": "Komad"
+},{
+  "_id": {
+    "$oid": "62cfc89806503a00748f8996"
+  },
+  "purchasePrice": 150,
+  "sellingPrice": 200,
+  "currentState": 5,
+  "minWantingNumber": 10,
+  "maxWantingNumber": 20,
+  "place": "Fokus Aleksinac",
+  "typeOfPlace": "store",
+  "companyName": "Fokus",
+  "itemName": "Makaze",
+  "itemProducer": "BlaBla",
+  "unitOfMeasure": "Komad"
+},{
+  "_id": {
+    "$oid": "62cfc89806503a00748f8997"
+  },
+  "purchasePrice": 140,
+  "sellingPrice": 150,
+  "currentState": 6,
+  "minWantingNumber": 10,
+  "maxWantingNumber": 15,
+  "place": "Fokus Zitkovac",
+  "typeOfPlace": "store",
+  "companyName": "Fokus",
+  "itemName": "Makaze",
+  "itemProducer": "BlaBla",
+  "unitOfMeasure": "Komad"
+},{
+  "_id": {
+    "$oid": "62cfc90a06503a00748f89a7"
+  },
+  "purchasePrice": 20,
+  "sellingPrice": 30,
+  "currentState": 12,
+  "minWantingNumber": 10,
+  "maxWantingNumber": 50,
+  "place": "Magacin Aleksinac",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Fokus",
+  "itemName": "Hemijska olovka",
+  "itemProducer": "",
+  "unitOfMeasure": "Komad"
+},{
+  "_id": {
+    "$oid": "62cfc90a06503a00748f89a8"
+  },
+  "purchasePrice": 20,
+  "sellingPrice": 40,
+  "currentState": 15,
+  "minWantingNumber": 10,
+  "maxWantingNumber": 50,
+  "place": "Magacin Zitkovac",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Fokus",
+  "itemName": "Hemijska olovka",
+  "itemProducer": "",
+  "unitOfMeasure": "Komad"
+},{
+  "_id": {
+    "$oid": "62cfc90a06503a00748f89aa"
+  },
+  "purchasePrice": 20,
+  "sellingPrice": 35,
+  "currentState": 20,
+  "minWantingNumber": 10,
+  "maxWantingNumber": 70,
+  "place": "Fokus Aleksinac",
+  "typeOfPlace": "store",
+  "companyName": "Fokus",
+  "itemName": "Hemijska olovka",
+  "itemProducer": "",
+  "unitOfMeasure": "Komad"
+},{
+  "_id": {
+    "$oid": "62cfc90a06503a00748f89ab"
+  },
+  "purchasePrice": 20,
+  "sellingPrice": 40,
+  "currentState": 20,
+  "minWantingNumber": 10,
+  "maxWantingNumber": 60,
+  "place": "Fokus Zitkovac",
+  "typeOfPlace": "store",
+  "companyName": "Fokus",
+  "itemName": "Hemijska olovka",
+  "itemProducer": "",
+  "unitOfMeasure": "Komad"
+},{
+  "_id": {
+    "$oid": "62cfe4411fa7b1d189608b4e"
+  },
+  "purchasePrice": 120,
+  "sellingPrice": 130,
+  "currentState": 20,
+  "minWantingNumber": 20,
+  "maxWantingNumber": 60,
+  "place": "Magacin Durlan",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Pekarica",
+  "itemName": "Coca Cola",
+  "itemProducer": "Coca Cola",
+  "unitOfMeasure": "250ml"
+},{
+  "_id": {
+    "$oid": "62cfe4411fa7b1d189608b4f"
+  },
+  "purchasePrice": 120,
+  "sellingPrice": 125,
+  "currentState": 15,
+  "minWantingNumber": 10,
+  "maxWantingNumber": 50,
+  "place": "Magacin BB",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Pekarica",
+  "itemName": "Coca Cola",
+  "itemProducer": "Coca Cola",
+  "unitOfMeasure": "250ml"
+},{
+  "_id": {
+    "$oid": "62cfe4411fa7b1d189608b51"
+  },
+  "purchasePrice": 120,
+  "sellingPrice": 150,
+  "currentState": 12,
+  "minWantingNumber": 20,
+  "maxWantingNumber": 60,
+  "place": "Pekarica Durlan",
+  "typeOfPlace": "store",
+  "companyName": "Pekarica",
+  "itemName": "Coca Cola",
+  "itemProducer": "Coca Cola",
+  "unitOfMeasure": "250ml"
+},{
+  "_id": {
+    "$oid": "62cfe4411fa7b1d189608b52"
+  },
+  "purchasePrice": 125,
+  "sellingPrice": 140,
+  "currentState": 15,
+  "minWantingNumber": 20,
+  "maxWantingNumber": 80,
+  "place": "Pekarica Brzi brod",
+  "typeOfPlace": "store",
+  "companyName": "Pekarica",
+  "itemName": "Coca Cola",
+  "itemProducer": "Coca Cola",
+  "unitOfMeasure": "250ml"
+},{
+  "_id": {
+    "$oid": "62cfe82c1fa7b1d189608ba4"
+  },
+  "purchasePrice": 120,
+  "sellingPrice": 130,
+  "currentState": 50,
+  "minWantingNumber": 50,
+  "maxWantingNumber": 100,
+  "place": "Magacin Surdulica",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Coffee time",
+  "itemName": "Coca Cola",
+  "itemProducer": "Coca Cola",
+  "unitOfMeasure": "250 ml"
+},{
+  "_id": {
+    "$oid": "62cfe82c1fa7b1d189608ba6"
+  },
+  "purchasePrice": 120,
+  "sellingPrice": 150,
+  "currentState": 16,
+  "minWantingNumber": 20,
+  "maxWantingNumber": 100,
+  "place": "Coffee time",
+  "typeOfPlace": "store",
+  "companyName": "Coffee time",
+  "itemName": "Coca Cola",
+  "itemProducer": "Coca Cola",
+  "unitOfMeasure": "250 ml"
+},{
+  "_id": {
+    "$oid": "62cfe82c1fa7b1d189608ba7"
+  },
+  "purchasePrice": 120,
+  "sellingPrice": 120,
+  "currentState": 25,
+  "minWantingNumber": 20,
+  "maxWantingNumber": 100,
+  "place": "Kafica",
+  "typeOfPlace": "store",
+  "companyName": "Coffee time",
+  "itemName": "Coca Cola",
+  "itemProducer": "Coca Cola",
+  "unitOfMeasure": "250 ml"
+},{
+  "_id": {
+    "$oid": "62cfea6c1fa7b1d189608bd2"
+  },
+  "purchasePrice": 200,
+  "sellingPrice": 250,
+  "currentState": 10,
+  "minWantingNumber": 5,
+  "maxWantingNumber": 15,
+  "place": "Magacin Surdulica",
+  "typeOfPlace": "storageUnit",
+  "companyName": "Coffee time",
+  "itemName": "Cheesecake",
+  "itemProducer": "Pekarica",
+  "unitOfMeasure": "porcija"
+},{
+  "_id": {
+    "$oid": "62cfea6c1fa7b1d189608bd4"
+  },
+  "purchasePrice": 200,
+  "sellingPrice": 260,
+  "currentState": 8,
+  "minWantingNumber": 5,
+  "maxWantingNumber": 15,
+  "place": "Coffee time",
+  "typeOfPlace": "store",
+  "companyName": "Coffee time",
+  "itemName": "Cheesecake",
+  "itemProducer": "Pekarica",
+  "unitOfMeasure": "porcija"
+},{
+  "_id": {
+    "$oid": "62cfea6c1fa7b1d189608bd5"
+  },
+  "purchasePrice": 200,
+  "sellingPrice": 240,
+  "currentState": 4,
+  "minWantingNumber": 5,
+  "maxWantingNumber": 15,
+  "place": "Kafica",
+  "typeOfPlace": "store",
+  "companyName": "Coffee time",
+  "itemName": "Cheesecake",
+  "itemProducer": "Pekarica",
+  "unitOfMeasure": "porcija"
+}]

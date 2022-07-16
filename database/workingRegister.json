@@ -1,0 +1,127 @@
+[{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b82757"
+  },
+  "location": "Aleksinac",
+  "type": "GALEB GP-350 Fiskalna kasa",
+  "companyPIB": 123658745
+},{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b82758"
+  },
+  "location": "Aleksinac",
+  "type": "INT RASTER DP150 MX",
+  "companyPIB": 123658745
+},{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b82759"
+  },
+  "location": "Aleksinac",
+  "type": "GALEB GP-450 Fiskalna kasa",
+  "companyPIB": 123658745
+},{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b8275b"
+  },
+  "location": "Zitkovac",
+  "type": "GALEB GP-100 Fiskalna kasa",
+  "companyPIB": 123658745
+},{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b8275c"
+  },
+  "location": "Zitkovac",
+  "type": "INT RASTER DP-25MX",
+  "companyPIB": 123658745
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827aa"
+  },
+  "location": "Centar",
+  "type": "GALEB GP-350 Fiskalna kasa",
+  "companyPIB": 748512369
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827ab"
+  },
+  "location": "Centar",
+  "type": "INT RASTER DP150 MX",
+  "companyPIB": 748512369
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827ac"
+  },
+  "location": "Centar",
+  "type": "GALEB GP-100 Fiskalna kasa",
+  "companyPIB": 748512369
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827ae"
+  },
+  "location": "Krusik",
+  "type": "GALEB GP-450 Fiskalna kasa",
+  "companyPIB": 748512369
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827af"
+  },
+  "location": "Krusik",
+  "type": "INT RASTER DP-25MX",
+  "companyPIB": 748512369
+},{
+  "_id": {
+    "$oid": "62cfe05bd4b8f21d6152dee7"
+  },
+  "location": "Centar",
+  "type": "INT RASTER DP-25MX",
+  "companyPIB": 459861236
+},{
+  "_id": {
+    "$oid": "62cfe05bd4b8f21d6152dee8"
+  },
+  "location": "Centar",
+  "type": "GALEB GP-450 Fiskalna kasa",
+  "companyPIB": 459861236
+},{
+  "_id": {
+    "$oid": "62cfe05bd4b8f21d6152deea"
+  },
+  "location": "Palilula",
+  "type": "GALEB GP-350 Fiskalna kasa",
+  "companyPIB": 459861236
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b35"
+  },
+  "location": "Durlan",
+  "type": "GALEB GP-350 Fiskalna kasa",
+  "companyPIB": 459687120
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b36"
+  },
+  "location": "Durlan",
+  "type": "INT RASTER DP-25MX",
+  "companyPIB": 459687120
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b37"
+  },
+  "location": "Durlan",
+  "type": "INT RASTER DP-25MX",
+  "companyPIB": 459687120
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b39"
+  },
+  "location": "Brzi brod",
+  "type": "INT RASTER DP150 MX",
+  "companyPIB": 459687120
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b3a"
+  },
+  "location": "Brzi brod",
+  "type": "GALEB GP-450 Fiskalna kasa",
+  "companyPIB": 459687120
+}]

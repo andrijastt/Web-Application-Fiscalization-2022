@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "62cf0a159ff7101563fe731f"
+  },
+  "firstname": "Petar",
+  "lastname": "Jovanovic",
+  "username": "pera123",
+  "password": "Pera!123",
+  "telephoneNumber": "0645874125",
+  "idCard": "012452369"
+},{
+  "_id": {
+    "$oid": "62cfd6b0701061da61e613e3"
+  },
+  "firstname": "Danica",
+  "lastname": "Nikolic",
+  "username": "dana123",
+  "password": "Dana`123",
+  "telephoneNumber": "065874123",
+  "idCard": "001478512"
+}]

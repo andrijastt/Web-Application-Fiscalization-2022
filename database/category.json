@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "62cf0b539ff7101563fe733d"
+  },
+  "PIB": 748512369,
+  "name": "Drink"
+},{
+  "_id": {
+    "$oid": "62cfc94e06503a00748f89b8"
+  },
+  "PIB": 123658745,
+  "name": "Alat"
+},{
+  "_id": {
+    "$oid": "62cfc9dbae2a97af309b6d53"
+  },
+  "PIB": 123658745,
+  "name": "Olovka"
+},{
+  "_id": {
+    "$oid": "62cfe8361fa7b1d189608bab"
+  },
+  "PIB": 459861236,
+  "name": "Drink"
+}]

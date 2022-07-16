@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "62b46e16139380e783d9e7d2"
+  },
+  "name": "GALEB GP-350 Fiskalna kasa"
+},{
+  "_id": {
+    "$oid": "62b46e16139380e783d9e7d3"
+  },
+  "name": "GALEB GP-100 Fiskalna kasa"
+},{
+  "_id": {
+    "$oid": "62b46e16139380e783d9e7d4"
+  },
+  "name": "GALEB GP-450 Fiskalna kasa"
+},{
+  "_id": {
+    "$oid": "62b46e16139380e783d9e7d5"
+  },
+  "name": "INT RASTER DP-25MX"
+},{
+  "_id": {
+    "$oid": "62b46e16139380e783d9e7d6"
+  },
+  "name": "INT RASTER DP150 MX"
+}]

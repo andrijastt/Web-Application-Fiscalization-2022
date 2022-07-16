@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "62cf50f319d1035e3cdaf216"
+  },
+  "PIB": 748512369,
+  "name": "Drink",
+  "subcategory": "Soft drink"
+},{
+  "_id": {
+    "$oid": "62cfcaa7ae2a97af309b6d6d"
+  },
+  "PIB": 123658745,
+  "name": "Olovka",
+  "subcategory": "Pisaca"
+},{
+  "_id": {
+    "$oid": "62cfcaafae2a97af309b6d71"
+  },
+  "PIB": 123658745,
+  "name": "Alat",
+  "subcategory": "Za Secenje"
+}]

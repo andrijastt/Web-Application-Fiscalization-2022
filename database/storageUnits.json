@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b82751"
+  },
+  "companyPIB": 123658745,
+  "id": 2,
+  "name": "Magacin Aleksinac"
+},{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b82752"
+  },
+  "id": 1,
+  "name": "Magacin Zitkovac",
+  "companyPIB": 123658745
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827a4"
+  },
+  "companyPIB": 748512369,
+  "id": 1,
+  "name": "Magacin Centar"
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827a5"
+  },
+  "id": 2,
+  "name": "Magacin Krusik",
+  "companyPIB": 748512369
+},{
+  "_id": {
+    "$oid": "62cfe05bd4b8f21d6152dee2"
+  },
+  "id": 1,
+  "name": "Magacin Surdulica",
+  "companyPIB": 459861236
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b2f"
+  },
+  "companyPIB": 459687120,
+  "id": 1,
+  "name": "Magacin Durlan"
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b30"
+  },
+  "id": 2,
+  "name": "Magacin BB",
+  "companyPIB": 459687120
+}]

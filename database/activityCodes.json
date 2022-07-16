@@ -1,0 +1,67 @@
+[{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7bc"
+  },
+  "code": 5610,
+  "name": "Delatnosti restorana i pokretnih ugostiteljskih objekata"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7bd"
+  },
+  "code": 5621,
+  "name": "Ketering"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7be"
+  },
+  "code": 5629,
+  "name": "Ostale usluge pripremanja i posluživanja hrane"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7bf"
+  },
+  "code": 5630,
+  "name": "Usluge pripremanja i posluživanja pića"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7c0"
+  },
+  "code": 4721,
+  "name": "Trgovina na malo voćem i povrćem u specijalizovanim prodavnicama"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7c1"
+  },
+  "code": 4722,
+  "name": "Trgovina na malo mesom i proizvodima od mesa u specijalizovanim prodavnicama"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7c2"
+  },
+  "code": 4723,
+  "name": "Trgovina na malo ribom, ljuskarima i mekušcima u specijalizovanim prodavnicama"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7c3"
+  },
+  "code": 4724,
+  "name": "Trgovina na malo hlebom, testeninom, kolačima i slatkišima u specijalizovanim prodavnicama"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7c4"
+  },
+  "code": 4725,
+  "name": "Trgovina na malo pićima u specijalizovanim prodavnicama"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7c5"
+  },
+  "code": 4726,
+  "name": "Trgovina na malo proizvodima od duvana u specijalizovanim prodavnicama"
+},{
+  "_id": {
+    "$oid": "62b43f3f139380e783d9e7c6"
+  },
+  "code": 4729,
+  "name": "Ostala trgovina na malo hranom u specijalizovanim prodavnicama"
+}]

@@ -1,0 +1,222 @@
+[{
+  "_id": {
+    "$oid": "62cf1f449ff7101563fe78ac"
+  },
+  "selectedItems": [
+    {
+      "itemName": "Coca Cola",
+      "itemProducer": "",
+      "sellingPrice": 150,
+      "currentState": 3,
+      "companyName": "Marija Zdravlje",
+      "place": "Zdravlje Centar"
+    }
+  ],
+  "companyName": "Marija Zdravlje",
+  "companyPIB": 748512369,
+  "paymentType": "cash",
+  "amountToPay": 450,
+  "tax": 75,
+  "idCard": "012452369",
+  "firstNameBuyer": "",
+  "lastNameBuyer": "",
+  "creditCardSlip": "",
+  "virmanCustor": "",
+  "date": {
+    "$date": {
+      "$numberLong": "1657741124457"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cf3a489ff7101563fe78c9"
+  },
+  "selectedItems": [
+    {
+      "itemName": "Coca Cola",
+      "itemProducer": "",
+      "sellingPrice": 150,
+      "currentState": 3,
+      "companyName": "Marija Zdravlje",
+      "place": "Zdravlje Centar"
+    }
+  ],
+  "companyName": "Marija Zdravlje",
+  "companyPIB": 748512369,
+  "paymentType": "moneyCheck",
+  "amountToPay": 450,
+  "tax": 75,
+  "idCard": "012452369",
+  "firstNameBuyer": "Petar",
+  "lastNameBuyer": "Jovanovic",
+  "creditCardSlip": "",
+  "virmanCustor": "",
+  "date": {
+    "$date": {
+      "$numberLong": "1657748040549"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cf3fa3b83e28c0fad0636a"
+  },
+  "selectedItems": [
+    {
+      "itemName": "Coca Cola",
+      "itemProducer": "",
+      "sellingPrice": 120,
+      "currentState": 4,
+      "companyName": "Marija Zdravlje",
+      "unitOfMeasure": "250ml",
+      "place": "Zdravlje Centar"
+    }
+  ],
+  "companyName": "Marija Zdravlje",
+  "companyPIB": 748512369,
+  "paymentType": "creditCard",
+  "amountToPay": 480,
+  "tax": 80,
+  "idCard": "012452369",
+  "firstNameBuyer": "",
+  "lastNameBuyer": "",
+  "creditCardSlip": "145A25A",
+  "virmanCustor": "",
+  "date": {
+    "$date": {
+      "$numberLong": "1657749411365"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cf40c3b83e28c0fad063c1"
+  },
+  "selectedItems": [
+    {
+      "itemName": "Coca Cola",
+      "itemProducer": "",
+      "sellingPrice": 125,
+      "currentState": 5,
+      "companyName": "Marija Zdravlje",
+      "place": "Magacin Centar"
+    }
+  ],
+  "companyName": "Marija Zdravlje",
+  "companyPIB": 748512369,
+  "paymentType": "virman",
+  "amountToPay": 625,
+  "tax": 104.16666666666667,
+  "idCard": "",
+  "firstNameBuyer": "",
+  "lastNameBuyer": "",
+  "creditCardSlip": "",
+  "virmanCustor": "Fokus",
+  "date": {
+    "$date": {
+      "$numberLong": "1657749699159"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cfd467701061da61e613a3"
+  },
+  "selectedItems": [
+    {
+      "itemName": "Makaze",
+      "itemProducer": "BlaBla",
+      "sellingPrice": 160,
+      "currentState": 2,
+      "companyName": "Fokus",
+      "place": "Magacin Aleksinac"
+    },
+    {
+      "itemName": "Hemijska olovka",
+      "itemProducer": "",
+      "sellingPrice": 30,
+      "currentState": 8,
+      "companyName": "Fokus",
+      "place": "Magacin Aleksinac"
+    }
+  ],
+  "companyName": "Fokus",
+  "companyPIB": 123658745,
+  "paymentType": "creditCard",
+  "amountToPay": 560,
+  "tax": 93.33333333333334,
+  "idCard": "012452369",
+  "firstNameBuyer": "",
+  "lastNameBuyer": "",
+  "creditCardSlip": "745AQ84",
+  "virmanCustor": "",
+  "date": {
+    "$date": {
+      "$numberLong": "1657787495163"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cfeab61fa7b1d189608bde"
+  },
+  "selectedItems": [
+    {
+      "itemName": "Coca Cola",
+      "itemProducer": "Coca Cola",
+      "sellingPrice": 120,
+      "currentState": 5,
+      "companyName": "Coffee time",
+      "place": "Kafica"
+    },
+    {
+      "itemName": "Cheesecake",
+      "itemProducer": "Pekarica",
+      "sellingPrice": 240,
+      "currentState": 1,
+      "companyName": "Coffee time",
+      "place": "Kafica"
+    }
+  ],
+  "companyName": "Coffee time",
+  "companyPIB": 459861236,
+  "paymentType": "cash",
+  "amountToPay": 840,
+  "tax": 0,
+  "idCard": "001478512",
+  "firstNameBuyer": "",
+  "lastNameBuyer": "",
+  "creditCardSlip": "",
+  "virmanCustor": "",
+  "date": {
+    "$date": {
+      "$numberLong": "1657793206778"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cfeaef1fa7b1d189608bf1"
+  },
+  "selectedItems": [
+    {
+      "itemName": "Coca Cola",
+      "itemProducer": "Coca Cola",
+      "sellingPrice": 150,
+      "currentState": 2,
+      "companyName": "Coffee time",
+      "unitOfMeasure": "250 ml",
+      "place": "Coffee time"
+    }
+  ],
+  "companyName": "Coffee time",
+  "companyPIB": 459861236,
+  "paymentType": "cash",
+  "amountToPay": 300,
+  "tax": 0,
+  "idCard": "001478512",
+  "firstNameBuyer": "",
+  "lastNameBuyer": "",
+  "creditCardSlip": "",
+  "virmanCustor": "",
+  "date": {
+    "$date": {
+      "$numberLong": "1657793263615"
+    }
+  }
+}]

@@ -1,0 +1,177 @@
+[{
+  "_id": {
+    "$oid": "62cc9ea3a3bf2c1e28a31c40"
+  },
+  "id": 1,
+  "companyPIB": 748512369,
+  "storeName": "Zdravlje Centar",
+  "type": "square",
+  "x": 50,
+  "y": 50,
+  "w": 150,
+  "h": 150,
+  "items": [],
+  "taken": false,
+  "companyName": "Marija Zdravlje",
+  "department": "sala"
+},{
+  "_id": {
+    "$oid": "62cc9ea3a3bf2c1e28a31c41"
+  },
+  "id": 2,
+  "companyPIB": 748512369,
+  "storeName": "Zdravlje Krusik",
+  "type": "square",
+  "x": 250,
+  "y": 50,
+  "w": 150,
+  "h": 150,
+  "items": [],
+  "taken": false,
+  "companyName": "Marija Zdravlje",
+  "department": "basta"
+},{
+  "_id": {
+    "$oid": "62cc9ea3a3bf2c1e28a31c42"
+  },
+  "id": 3,
+  "companyPIB": 748512369,
+  "storeName": "Zdravlje Centar",
+  "type": "circle",
+  "x": 400,
+  "y": 400,
+  "w": 100,
+  "h": 100,
+  "items": [],
+  "taken": false,
+  "companyName": "Marija Zdravlje",
+  "department": "sala"
+},{
+  "_id": {
+    "$oid": "62cc9eb5a3bf2c1e28a31c43"
+  },
+  "id": 4,
+  "companyPIB": 748512369,
+  "storeName": "Zdravlje Krusik",
+  "type": "circle",
+  "x": 250,
+  "y": 250,
+  "w": 100,
+  "h": 100,
+  "items": [],
+  "taken": false,
+  "companyName": "Marija Zdravlje",
+  "department": "sala"
+},{
+  "_id": {
+    "$oid": "62cfe86d0805bce2da15bbc2"
+  },
+  "id": 1,
+  "companyPIB": 459861236,
+  "storeName": "Coffee time",
+  "type": "circle",
+  "x": 300,
+  "y": 250,
+  "w": 75,
+  "h": 75,
+  "items": [],
+  "taken": false,
+  "companyName": "Coffee time",
+  "department": "sala"
+},{
+  "_id": {
+    "$oid": "62cfe8920805bce2da15bbc3"
+  },
+  "id": 2,
+  "companyPIB": 459861236,
+  "storeName": "Coffee time",
+  "type": "square",
+  "x": 500,
+  "y": 450,
+  "w": 150,
+  "h": 200,
+  "items": [],
+  "taken": false,
+  "companyName": "Coffee time",
+  "department": "sala"
+},{
+  "_id": {
+    "$oid": "62cfe8a80805bce2da15bbc4"
+  },
+  "id": 3,
+  "companyPIB": 459861236,
+  "storeName": "Coffee time",
+  "type": "square",
+  "x": 400,
+  "y": 400,
+  "w": 150,
+  "h": 150,
+  "items": [],
+  "taken": false,
+  "companyName": "Coffee time",
+  "department": "basta"
+},{
+  "_id": {
+    "$oid": "62cfe8c00805bce2da15bbc5"
+  },
+  "id": 4,
+  "companyPIB": 459861236,
+  "storeName": "Coffee time",
+  "type": "square",
+  "x": 100,
+  "y": 600,
+  "w": 125,
+  "h": 150,
+  "items": [],
+  "taken": false,
+  "companyName": "Coffee time",
+  "department": "basta"
+},{
+  "_id": {
+    "$oid": "62cfe8f50805bce2da15bbc6"
+  },
+  "id": 5,
+  "companyPIB": 459861236,
+  "storeName": "Kafica",
+  "type": "square",
+  "x": 100,
+  "y": 600,
+  "w": 125,
+  "h": 150,
+  "items": [],
+  "taken": false,
+  "companyName": "Coffee time",
+  "department": "sala"
+},{
+  "_id": {
+    "$oid": "62cfe9040805bce2da15bbc7"
+  },
+  "id": 6,
+  "companyPIB": 459861236,
+  "storeName": "Kafica",
+  "type": "square",
+  "x": 400,
+  "y": 300,
+  "w": 250,
+  "h": 200,
+  "items": [],
+  "taken": false,
+  "companyName": "Coffee time",
+  "department": "sala"
+},{
+  "_id": {
+    "$oid": "62cfe9190805bce2da15bbc8"
+  },
+  "id": 7,
+  "companyPIB": 459861236,
+  "storeName": "Kafica",
+  "type": "circle",
+  "x": 800,
+  "y": 600,
+  "w": 75,
+  "h": 75,
+  "items": [],
+  "taken": false,
+  "companyName": "Coffee time",
+  "department": "sala"
+}]

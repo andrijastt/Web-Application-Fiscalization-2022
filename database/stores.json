@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b82754"
+  },
+  "numRegisters": 3,
+  "companyPIB": 123658745,
+  "id": 2,
+  "name": "Fokus Aleksinac",
+  "location": "Aleksinac"
+},{
+  "_id": {
+    "$oid": "62cee663dfd56445d6b82755"
+  },
+  "numRegisters": 2,
+  "id": 3,
+  "name": "Fokus Zitkovac",
+  "location": "Zitkovac",
+  "companyPIB": 123658745
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827a7"
+  },
+  "numRegisters": 3,
+  "companyPIB": 748512369,
+  "id": 2,
+  "name": "Zdravlje Centar",
+  "location": "Centar"
+},{
+  "_id": {
+    "$oid": "62cee81cdfd56445d6b827a8"
+  },
+  "numRegisters": 2,
+  "id": 3,
+  "name": "Zdravlje Krusik",
+  "location": "Krusik",
+  "companyPIB": 748512369
+},{
+  "_id": {
+    "$oid": "62cfe05bd4b8f21d6152dee4"
+  },
+  "numRegisters": 2,
+  "id": 2,
+  "name": "Coffee time",
+  "location": "Centar",
+  "companyPIB": 459861236
+},{
+  "_id": {
+    "$oid": "62cfe05bd4b8f21d6152dee5"
+  },
+  "numRegisters": 1,
+  "id": 3,
+  "location": "Palilula",
+  "name": "Kafica",
+  "companyPIB": 459861236
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b32"
+  },
+  "numRegisters": 3,
+  "companyPIB": 459687120,
+  "id": 3,
+  "name": "Pekarica Durlan",
+  "location": "Durlan"
+},{
+  "_id": {
+    "$oid": "62cfe3781fa7b1d189608b33"
+  },
+  "numRegisters": 2,
+  "id": 2,
+  "name": "Pekarica Brzi brod",
+  "location": "Brzi brod",
+  "companyPIB": 459687120
+}]

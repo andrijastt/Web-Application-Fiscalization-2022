@@ -1,0 +1,53 @@
+[{
+  "_id": {
+    "$oid": "62cf1f449ff7101563fe78aa"
+  },
+  "companyPIB": 748512369,
+  "companyName": "Marija Zdravlje",
+  "tax": 230,
+  "moneyEarned": 1380,
+  "date": {
+    "$date": {
+      "$numberLong": "1657663200000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cf40c3b83e28c0fad063bf"
+  },
+  "companyPIB": 748512369,
+  "companyName": "Marija Zdravlje",
+  "tax": 104.16666666666667,
+  "moneyEarned": 625,
+  "date": {
+    "$date": {
+      "$numberLong": "1657749600000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cfd467701061da61e613a1"
+  },
+  "companyPIB": 123658745,
+  "companyName": "Fokus",
+  "tax": 93.33333333333334,
+  "moneyEarned": 560,
+  "date": {
+    "$date": {
+      "$numberLong": "1657749600000"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62cfeab61fa7b1d189608bdc"
+  },
+  "companyPIB": 459861236,
+  "companyName": "Coffee time",
+  "tax": 0,
+  "moneyEarned": 1140,
+  "date": {
+    "$date": {
+      "$numberLong": "1657749600000"
+    }
+  }
+}]
